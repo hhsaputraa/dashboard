@@ -15,6 +15,11 @@ class AesEncryption {
     if (text.isEmpty) return '';
 
     final keyStr = customKey ?? AppConstants.aesKey;
+    if (keyStr.isEmpty) {
+      throw StateError(
+        'AES_KEY tidak ditemukan. Pada build Release, injeksikan kunci via --dart-define=AES_KEY=32_karakter_kunci',
+      );
+    }
     if (keyStr.length != 32) {
       throw ArgumentError(
         'AES Key harus tepat 32 karakter (256-bit). Panjang saat ini: ${keyStr.length}',
@@ -52,6 +57,11 @@ class AesEncryption {
     if (hexString.isEmpty) return '';
 
     final keyStr = customKey ?? AppConstants.aesKey;
+    if (keyStr.isEmpty) {
+      throw StateError(
+        'AES_KEY tidak ditemukan. Pada build Release, injeksikan kunci via --dart-define=AES_KEY=32_karakter_kunci',
+      );
+    }
     if (keyStr.length != 32) {
       throw ArgumentError(
         'AES Key harus tepat 32 karakter (256-bit). Panjang saat ini: ${keyStr.length}',

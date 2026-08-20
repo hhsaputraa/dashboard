@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/presentation/server_config_dialog.dart';
@@ -384,15 +385,16 @@ class _LoginHeader extends StatelessWidget {
               ),
             ],
           ),
-          IconButton(
-            onPressed: () => ServerConfigDialog.show(context),
-            icon: const Icon(
-              Icons.tune_rounded,
-              color: Color(0xFF64748B),
-              size: 20,
+          if (kDebugMode)
+            IconButton(
+              onPressed: () => ServerConfigDialog.show(context),
+              icon: const Icon(
+                Icons.tune_rounded,
+                color: Color(0xFF64748B),
+                size: 20,
+              ),
+              tooltip: 'Pengaturan Server',
             ),
-            tooltip: 'Pengaturan Server',
-          ),
         ],
       ),
     );

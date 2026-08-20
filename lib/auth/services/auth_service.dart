@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/network/api_client.dart';
 import '../../../core/security/aes_encryption.dart';
@@ -17,6 +17,9 @@ class AuthService {
   AuthService._internal();
 
   final ApiClient _apiClient = ApiClient();
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
 
   /// State reaktif user dan token login
   final ValueNotifier<UserModel?> currentUser = ValueNotifier<UserModel?>(null);
@@ -26,18 +29,17 @@ class AuthService {
   /// Status apakah user sedang login
   bool get isAuthenticated => currentToken.value != null && currentToken.value!.isNotEmpty;
 
-  /// Memuat token & data user dari local storage saat aplikasi pertama kali dibuka.
+  /// Memuat token & data user dari hardware-backed storage terenkripsi saat aplikasi pertama kali dibuka.
   Future<void> initSession() async {
     isCheckingAuth.value = true;
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString(AppConstants.keyAuthToken);
-      final userJsonStr = prefs.getString(AppConstants.keyUserData);
+      final token = await _secureStorage.read(key: AppConstants.keyAuthToken);
+      final userJsonStr = await _secureStorage.read(key: AppConstants.keyUserData);
 
       if (token != null && token.isNotEmpty) {
         currentToken.value = token;
 
-        // Muat data user dari cache lokal jika ada
+        // Muat data user dari cache lokal terenkripsi jika ada
         if (userJsonStr != null && userJsonStr.isNotEmpty) {
           try {
             currentUser.value = UserModel.fromJson(jsonDecode(userJsonStr));
@@ -94,18 +96,20 @@ class AuthService {
         final token = data['token']?.toString() ?? '';
 
         if (token.isNotEmpty) {
-          // Simpan token ke state & local storage
+          // Simpan token ke state & secure storage terenkripsi (Android KeyStore / iOS Keychain)
           currentToken.value = token;
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString(AppConstants.keyAuthToken, token);
+          await _secureStorage.write(
+            key: AppConstants.keyAuthToken,
+            value: token,
+          );
 
           if (data['user'] != null) {
             try {
               final user = UserModel.fromJson(data['user']);
               currentUser.value = user;
-              await prefs.setString(
-                AppConstants.keyUserData,
-                jsonEncode(user.toJson()),
+              await _secureStorage.write(
+                key: AppConstants.keyUserData,
+                value: jsonEncode(user.toJson()),
               );
             } catch (_) {}
           }
@@ -210,10 +214,9 @@ class AuthService {
           final user = UserModel.fromJson(userData);
           currentUser.value = user;
 
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setString(
-            AppConstants.keyUserData,
-            jsonEncode(user.toJson()),
+          await _secureStorage.write(
+            key: AppConstants.keyUserData,
+            value: jsonEncode(user.toJson()),
           );
           return true;
         }
@@ -225,7 +228,7 @@ class AuthService {
     return false;
   }
 
-  /// Menghapus sesi login di client dan backend.
+  /// Menghapus sesi login di client dan backend secara aman.
   Future<void> logout() async {
     final token = currentToken.value;
     if (token != null && token.isNotEmpty) {
@@ -234,14 +237,13 @@ class AuthService {
       } catch (_) {}
     }
 
-    // Bersihkan state & storage lokal
+    // Bersihkan state & secure storage lokal
     currentToken.value = null;
     currentUser.value = null;
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove(AppConstants.keyAuthToken);
-      await prefs.remove(AppConstants.keyUserData);
+      await _secureStorage.delete(key: AppConstants.keyAuthToken);
+      await _secureStorage.delete(key: AppConstants.keyUserData);
     } catch (_) {}
   }
 }
