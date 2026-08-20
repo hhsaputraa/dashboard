@@ -45,7 +45,7 @@ class DashboardScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Selamat Datang di dashboard',
+              'HELLO DASHBOARD ',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -54,7 +54,7 @@ class DashboardScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Sistem siap untuk diintegrasikan dengan fitur & analitik.',
+              'READY TO DEVELOPMENT',
               style: TextStyle(fontSize: 14, color: Color(0xFF64748B)),
             ),
           ],

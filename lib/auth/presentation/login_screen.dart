@@ -96,211 +96,219 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       // Latar belakang putih bersih (White / Light Mode)
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // --- 1. HEADER ATAS (Brand Monogram & Pengaturan Server) ---
-            const _LoginHeader(),
+      body: Stack(
+        children: [
+          // --- BACKGROUND GAMBAR ONLINE SUPER OPTIMAL ---
+          const _LoginBackground(),
 
-            const Divider(height: 1, color: Color(0xFFF1F5F9)),
+          // --- KONTEN UTAMA LOGIN ---
+          SafeArea(
+            child: Column(
+              children: [
+                // --- 1. HEADER ATAS (Brand Monogram & Pengaturan Server) ---
+                const _LoginHeader(),
 
-            // --- 2. AREA FORM LOGIN UTAMA ---
-            Expanded(
-              child: Center(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 28,
-                    vertical: 20,
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Subtitle Kecil & Judul Utama Khas Mobile Modern
-                        const Text(
-                          'DASHBOARD MONITORING APP',
-                          style: TextStyle(
-                            color: AppTheme.primaryColor,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: 1.5,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        const Text(
-                          'LOGIN',
-                          style: TextStyle(
-                            color: Color(0xFF0F172A),
-                            fontSize: 34,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: -1.0,
-                          ),
-                        ),
+                const Divider(height: 1, color: Color(0xFFF1F5F9)),
 
-                        // Banner Pesan Error jika Login Gagal
-                        if (_errorMessage != null) ...[
-                          Container(
-                            padding: const EdgeInsets.all(14),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFEF2F2),
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: const Color(0xFFFCA5A5),
+                // --- 2. AREA FORM LOGIN UTAMA ---
+                Expanded(
+                  child: Center(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 28,
+                        vertical: 20,
+                      ),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Subtitle Kecil & Judul Utama Khas Mobile Modern
+                            const Text(
+                              'DASHBOARD MONITORING APP',
+                              style: TextStyle(
+                                color: AppTheme.primaryColor,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 1.5,
                               ),
                             ),
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.error_outline_rounded,
-                                  size: 20,
-                                  color: Color(0xFFDC2626),
-                                ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: Text(
-                                    _errorMessage!,
-                                    style: const TextStyle(
-                                      color: Color(0xFF991B1B),
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            const SizedBox(height: 6),
+                            const Text(
+                              'LOGIN',
+                              style: TextStyle(
+                                color: Color(0xFF0F172A),
+                                fontSize: 34,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: -1.0,
+                              ),
+                            ),
+
+                            // Banner Pesan Error jika Login Gagal
+                            if (_errorMessage != null) ...[
+                              Container(
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFEF2F2),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: const Color(0xFFFCA5A5),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                        ],
-
-                        // --- INPUT USERNAME ---
-                        const Text(
-                          'Username',
-                          style: TextStyle(
-                            color: Color(0xFF334155),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        TextFormField(
-                          controller: _usernameController,
-                          textInputAction: TextInputAction.next,
-                          enabled: !_isLoading,
-                          style: const TextStyle(
-                            color: Color(0xFF0F172A),
-                            fontSize: 15,
-                          ),
-                          decoration: _buildInputDecoration(
-                            hintText: 'Username',
-                            prefixIcon: Icons.person_outline_rounded,
-                          ),
-                          validator: (val) {
-                            if (val == null || val.trim().isEmpty) {
-                              return 'Username tidak boleh kosong';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20),
-
-                        // --- INPUT PASSWORD ---
-                        const Text(
-                          'Password',
-                          style: TextStyle(
-                            color: Color(0xFF334155),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        TextFormField(
-                          controller: _passwordController,
-                          obscureText: _obscurePassword,
-                          textInputAction: TextInputAction.done,
-                          enabled: !_isLoading,
-                          style: const TextStyle(
-                            color: Color(0xFF0F172A),
-                            fontSize: 15,
-                          ),
-                          onFieldSubmitted: (_) => _submit(),
-                          decoration: _buildInputDecoration(
-                            hintText: 'Password',
-                            prefixIcon: Icons.lock_outline_rounded,
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _obscurePassword
-                                    ? Icons.visibility_off_outlined
-                                    : Icons.visibility_outlined,
-                                color: const Color(0xFF64748B),
-                                size: 20,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _obscurePassword = !_obscurePassword;
-                                });
-                              },
-                            ),
-                          ),
-                          validator: (val) {
-                            if (val == null || val.isEmpty) {
-                              return 'Password tidak boleh kosong';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 32),
-
-                        // --- TOMBOL UTAMA MASUK ---
-                        SizedBox(
-                          width: double.infinity,
-                          height: 52,
-                          child: ElevatedButton(
-                            onPressed: _isLoading ? null : _submit,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppTheme.primaryColor,
-                              foregroundColor: Colors.white,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                            ),
-                            child: _isLoading
-                                ? const SizedBox(
-                                    height: 22,
-                                    width: 22,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 2.2,
-                                      color: Colors.white,
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.error_outline_rounded,
+                                      size: 20,
+                                      color: Color(0xFFDC2626),
                                     ),
-                                  )
-                                : const Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Masuk',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 0.3,
+                                    const SizedBox(width: 10),
+                                    Expanded(
+                                      child: Text(
+                                        _errorMessage!,
+                                        style: const TextStyle(
+                                          color: Color(0xFF991B1B),
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
-                                      SizedBox(width: 8),
-                                    ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                            ],
+
+                            // --- INPUT USERNAME ---
+                            const Text(
+                              'Username',
+                              style: TextStyle(
+                                color: Color(0xFF334155),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextFormField(
+                              controller: _usernameController,
+                              textInputAction: TextInputAction.next,
+                              enabled: !_isLoading,
+                              style: const TextStyle(
+                                color: Color(0xFF0F172A),
+                                fontSize: 15,
+                              ),
+                              decoration: _buildInputDecoration(
+                                hintText: 'Username',
+                                prefixIcon: Icons.person_outline_rounded,
+                              ),
+                              validator: (val) {
+                                if (val == null || val.trim().isEmpty) {
+                                  return 'Username tidak boleh kosong';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+
+                            // --- INPUT PASSWORD ---
+                            const Text(
+                              'Password',
+                              style: TextStyle(
+                                color: Color(0xFF334155),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            TextFormField(
+                              controller: _passwordController,
+                              obscureText: _obscurePassword,
+                              textInputAction: TextInputAction.done,
+                              enabled: !_isLoading,
+                              style: const TextStyle(
+                                color: Color(0xFF0F172A),
+                                fontSize: 15,
+                              ),
+                              onFieldSubmitted: (_) => _submit(),
+                              decoration: _buildInputDecoration(
+                                hintText: 'Password',
+                                prefixIcon: Icons.lock_outline_rounded,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscurePassword
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                    color: const Color(0xFF64748B),
+                                    size: 20,
                                   ),
-                          ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscurePassword = !_obscurePassword;
+                                    });
+                                  },
+                                ),
+                              ),
+                              validator: (val) {
+                                if (val == null || val.isEmpty) {
+                                  return 'Password tidak boleh kosong';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 32),
+
+                            // --- TOMBOL UTAMA MASUK ---
+                            SizedBox(
+                              width: double.infinity,
+                              height: 52,
+                              child: ElevatedButton(
+                                onPressed: _isLoading ? null : _submit,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppTheme.primaryColor,
+                                  foregroundColor: Colors.white,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                ),
+                                child: _isLoading
+                                    ? const SizedBox(
+                                        height: 22,
+                                        width: 22,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2.2,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : const Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Masuk',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: 0.3,
+                                            ),
+                                          ),
+                                          SizedBox(width: 8),
+                                        ],
+                                      ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
 
-            // --- 3. FOOTER MINIMALIS ---
-            const _LoginFooter(),
-          ],
-        ),
+                // --- 3. FOOTER MINIMALIS ---
+                const _LoginFooter(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -404,6 +412,46 @@ class _LoginFooter extends StatelessWidget {
           fontSize: 12,
           fontWeight: FontWeight.w500,
         ),
+      ),
+    );
+  }
+}
+
+/// Widget background gambar terisolasi dengan RepaintBoundary & Overlay tipis.
+class _LoginBackground extends StatelessWidget {
+  const _LoginBackground();
+
+  // URL gambar latar berformat WebP ringan & optimal dari Unsplash (Arsitektur / Gedung)
+  static const String _imageUrl =
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1080&q=80';
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Gambar background online dengan animasi fade-in halus
+          Image.network(
+            _imageUrl,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) =>
+                const SizedBox.expand(),
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              if (wasSynchronouslyLoaded) return child;
+              return AnimatedOpacity(
+                opacity: frame == null ? 0 : 1,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+                child: child,
+              );
+            },
+          ),
+          // Overlay warna putih murni dengan transparansi 92% agar teks tetap kontras & sangat jelas
+          Container(
+            color: Colors.white.withValues(alpha: 0.92),
+          ),
+        ],
       ),
     );
   }
