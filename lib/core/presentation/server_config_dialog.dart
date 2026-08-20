@@ -98,6 +98,8 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Colors.white,
+      surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       title: const Row(
         children: [
@@ -137,7 +139,7 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   filled: true,
-                  fillColor: const Color(0xFFF8FAFC),
+                  fillColor: Colors.white,
                 ),
               ),
               const SizedBox(height: 12),
@@ -156,6 +158,8 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
                         : const Icon(Icons.network_check_rounded, size: 16),
                     label: const Text('Test Koneksi'),
                     style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF334155),
+                      side: const BorderSide(color: Color(0xFFCBD5E1)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -182,14 +186,12 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
                     vertical: 8,
                   ),
                   decoration: BoxDecoration(
-                    color: _testSuccess == true
-                        ? const Color(0xFFF0FDF4)
-                        : const Color(0xFFFEF2F2),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: _testSuccess == true
                           ? const Color(0xFFBBF7D0)
-                          : const Color(0xFFFECDD3),
+                          : const Color(0xFFE2E8F0),
                     ),
                   ),
                   child: Row(
@@ -227,6 +229,9 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
+          style: TextButton.styleFrom(
+            foregroundColor: const Color(0xFF64748B),
+          ),
           child: const Text('Batal'),
         ),
         ElevatedButton.icon(

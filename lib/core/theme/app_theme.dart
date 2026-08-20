@@ -32,6 +32,10 @@ class AppTheme {
           fontWeight: FontWeight.w600,
         ),
       ),
+      dialogTheme: const DialogThemeData(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
+      ),
       navigationBarTheme: NavigationBarThemeData(
         elevation: 2,
         backgroundColor: Colors.white,

@@ -99,8 +99,19 @@ class AuthService {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString(AppConstants.keyAuthToken, token);
 
-          // 4. Ambil profil lengkap user dari /api/auth/me
-          await fetchProfile();
+          if (data['user'] != null) {
+            try {
+              final user = UserModel.fromJson(data['user']);
+              currentUser.value = user;
+              await prefs.setString(
+                AppConstants.keyUserData,
+                jsonEncode(user.toJson()),
+              );
+            } catch (_) {}
+          }
+
+          // Sinkronkan profil lengkap di background agar tidak menghalangi navigasi UI (1 RTT vs 2 RTT)
+          unawaited(fetchProfile());
 
           return AuthResult.success(
             message: 'Login berhasil.',
