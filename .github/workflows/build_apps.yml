@@ -32,15 +32,19 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Ensure .env.json exists
+      - name: Create .env.json from GitHub Secrets
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          AES_KEY: ${{ secrets.AES_KEY }}
         run: |
-          if [ ! -f .env.json ]; then
-            echo '{"API_BASE_URL":"http://localhost:8097","AES_KEY":"f17ba46472fa64e40ca496d1b4c91e8f"}' > .env.json
-          fi
+          echo "{\"API_BASE_URL\":\"$API_BASE_URL\",\"AES_KEY\":\"$AES_KEY\"}" > .env.json
 
-      - name: Build Release APK
+      - name: Build Obfuscated Release APK
         run: |
-          flutter build apk --release --dart-define-from-file=.env.json
+          flutter build apk --release \
+            --obfuscate \
+            --split-debug-info=build/app/outputs/symbols \
+            --dart-define-from-file=.env.json
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
@@ -69,15 +73,19 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Ensure .env.json exists
+      - name: Create .env.json from GitHub Secrets
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          AES_KEY: ${{ secrets.AES_KEY }}
         run: |
-          if [ ! -f .env.json ]; then
-            echo '{"API_BASE_URL":"http://localhost:8097","AES_KEY":"f17ba46472fa64e40ca496d1b4c91e8f"}' > .env.json
-          fi
+          echo "{\"API_BASE_URL\":\"$API_BASE_URL\",\"AES_KEY\":\"$AES_KEY\"}" > .env.json
 
-      - name: Build iOS (No Codesign)
+      - name: Build Obfuscated iOS (No Codesign)
         run: |
-          flutter build ios --release --no-codesign --dart-define-from-file=.env.json
+          flutter build ios --release --no-codesign \
+            --obfuscate \
+            --split-debug-info=build/app/outputs/symbols \
+            --dart-define-from-file=.env.json
 
       - name: Package into .IPA (Payload structure)
         run: |
