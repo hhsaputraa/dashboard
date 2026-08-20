@@ -114,6 +114,7 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
       content: SizedBox(
         width: 420,
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +123,7 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
                 'URL backend',
                 style: TextStyle(fontSize: 13, color: Color(0xFF64748B)),
               ),
-              const SizedBox(height: 14),
+                const SizedBox(height: 14),
 
               TextField(
                 controller: _urlController,

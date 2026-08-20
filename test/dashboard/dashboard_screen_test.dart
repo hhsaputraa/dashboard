@@ -9,7 +9,7 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: DashboardScreen()));
 
     expect(find.text('BPR SUPRA Sistem Information'), findsOneWidget);
-    expect(find.text('Selamat Datang di dashboard'), findsOneWidget);
+    expect(find.textContaining('HELLO DASHBOARD'), findsOneWidget);
     expect(find.byIcon(Icons.logout_rounded), findsOneWidget);
   });
 }

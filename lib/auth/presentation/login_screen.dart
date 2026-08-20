@@ -101,28 +101,30 @@ class _LoginScreenState extends State<LoginScreen> {
           // --- BACKGROUND GAMBAR ONLINE SUPER OPTIMAL ---
           const _LoginBackground(),
 
-          // --- KONTEN UTAMA LOGIN ---
-          SafeArea(
-            child: Column(
-              children: [
-                // --- 1. HEADER ATAS (Brand Monogram & Pengaturan Server) ---
-                const _LoginHeader(),
+            // --- KONTEN UTAMA LOGIN ---
+            SafeArea(
+              child: Column(
+                children: [
+                  // --- 1. HEADER ATAS (Brand Monogram & Pengaturan Server) ---
+                  const _LoginHeader(),
 
-                const Divider(height: 1, color: Color(0xFFF1F5F9)),
+                  const Divider(height: 1, color: Color(0xFFF1F5F9)),
 
-                // --- 2. AREA FORM LOGIN UTAMA ---
-                Expanded(
-                  child: Center(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 28,
-                        vertical: 20,
-                      ),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                  // --- 2. AREA FORM LOGIN UTAMA ---
+                  Expanded(
+                    child: Center(
+                      child: SingleChildScrollView(
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 28,
+                          vertical: 20,
+                        ),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                             // Subtitle Kecil & Judul Utama Khas Mobile Modern
                             const Text(
                               'DASHBOARD MONITORING APP',

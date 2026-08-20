@@ -20,6 +20,13 @@ class BankDashboardApp extends StatelessWidget {
       title: AppConstants.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
+      builder: (context, child) {
+        return GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          behavior: HitTestBehavior.translucent,
+          child: child,
+        );
+      },
       home: const LoginScreen(),
     );
   }
