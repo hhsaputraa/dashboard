@@ -5,6 +5,10 @@ on:
     branches: [ main, master, dev ]
   workflow_dispatch: # Memungkinkan tombol "Run workflow" manual di tab GitHub Actions
 
+env:
+  # Menghilangkan warning deprecation Node.js 20 yang dipaksa ke Node.js 24
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
+
 jobs:
   # -------------------------------------------------------------
   # 1. BUILD ANDROID APK
@@ -39,9 +43,10 @@ jobs:
         run: |
           echo "{\"API_BASE_URL\":\"$API_BASE_URL\",\"AES_KEY\":\"$AES_KEY\"}" > .env.json
 
-      - name: Build Obfuscated Release APK
+      - name: Build Obfuscated Release APK (Split ABI)
         run: |
           flutter build apk --release \
+            --split-per-abi \
             --obfuscate \
             --split-debug-info=build/app/outputs/symbols \
             --dart-define-from-file=.env.json
@@ -50,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: BPR-SUPRA-Android-APK
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/*.apk
           if-no-files-found: error
 
   # -------------------------------------------------------------
