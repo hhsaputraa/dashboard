@@ -2,6 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Dashboard (Brave Web)",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "chrome",
+      "env": {
+        "CHROME_EXECUTABLE": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+      },
+      "args": [
+        "--dart-define-from-file=.env.json"
+      ]
+    },
+    {
       "name": "Dashboard (Edge Web)",
       "request": "launch",
       "type": "dart",
