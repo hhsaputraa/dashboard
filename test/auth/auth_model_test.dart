@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dashboard/auth/models/auth_result.dart';
-import 'package:dashboard/auth/models/user_model.dart';
+import 'package:dashboard/feature/auth/models/auth_result.dart';
+import 'package:dashboard/feature/auth/models/user_model.dart';
 
 void main() {
   group('UserModel Tests', () {

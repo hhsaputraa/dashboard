@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:dashboard/dashboard/presentation/dashboard_screen.dart';
+import 'package:dashboard/feature/dashboard/presentation/dashboard_screen.dart';
 
 void main() {
   testWidgets('DashboardScreen renders welcome message and logout button', (

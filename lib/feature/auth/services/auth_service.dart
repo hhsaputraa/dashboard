@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import '../../../core/constants/app_constants.dart';
-import '../../../core/network/api_client.dart';
-import '../../../core/security/aes_encryption.dart';
+import 'package:dashboard/core/constants/app_constants.dart';
+import 'package:dashboard/core/network/api_client.dart';
+import 'package:dashboard/core/security/aes_encryption.dart';
 import '../models/auth_result.dart';
 import '../models/user_model.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../auth/presentation/login_screen.dart';
-import '../../core/theme/app_theme.dart';
+import 'package:dashboard/core/theme/app_theme.dart';
+import 'package:dashboard/feature/auth/presentation/login_screen.dart';
 
 /// Screen utama Dashboard Perbankan & AI Assistant
 class DashboardScreen extends StatelessWidget {

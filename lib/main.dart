@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'auth/presentation/login_screen.dart';
 import 'core/constants/app_constants.dart';
 import 'core/network/api_client.dart';
 import 'core/theme/app_theme.dart';
+import 'feature/auth/presentation/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

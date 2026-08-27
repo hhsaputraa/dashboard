@@ -4,7 +4,9 @@ class AppTheme {
   AppTheme._();
 
   // Primary palette (Red / BPR SUPRA Theme)
-  static const Color primaryColor = Color(0xFFDC2626); // Vibrant Bank Crimson Red
+  static const Color primaryColor = Color(
+    0xFFDC2626,
+  ); // Vibrant Bank Crimson Red
   static const Color secondaryColor = Color(0xFF991B1B); // Deep Burgundy Red
   static const Color accentColor = Color(0xFFEF4444); // Bright Coral Red
   static const Color backgroundColor = Color(0xFFF8FAFC);

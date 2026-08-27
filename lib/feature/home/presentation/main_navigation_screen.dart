@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:dashboard/home/presentation/home_screen.dart';
-import 'package:dashboard/transaction/presentation/transaction_screen.dart';
-import 'package:dashboard/report/presentation/report_screen.dart';
-import 'package:dashboard/profile/presentation/profile_screen.dart';
+import 'package:dashboard/feature/home/presentation/home_screen.dart';
+import 'package:dashboard/feature/profile/presentation/profile_screen.dart';
+import 'package:dashboard/feature/report/presentation/report_screen.dart';
+import 'package:dashboard/feature/transaction/presentation/transaction_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
