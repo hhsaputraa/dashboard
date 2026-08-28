@@ -141,24 +141,4 @@ class ApiClient {
         )
         .timeout(timeout);
   }
-
-  /// Send streaming POST request for SSE (Server-Sent Events)
-  Future<http.StreamedResponse> sendStreamed(
-    String endpoint, {
-    Map<String, dynamic>? body,
-    String? token,
-  }) async {
-    final uri = Uri.parse('$baseUrl$endpoint');
-    final request = http.Request('POST', uri);
-    request.headers.addAll({
-      'Content-Type': 'application/json',
-      'Accept': 'text/event-stream, application/json',
-      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
-    });
-    if (body != null) {
-      request.body = jsonEncode(body);
-    }
-
-    return await _httpClient.send(request);
-  }
 }

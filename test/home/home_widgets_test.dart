@@ -181,8 +181,8 @@ void main() {
         ),
       );
 
-      expect(find.text('Mengambil data live dari Database Oracle...'), findsOneWidget);
-      expect(find.text('Gagal Terhubung ke Database Oracle'), findsOneWidget);
+      expect(find.text('Mengambil data...'), findsOneWidget);
+      expect(find.text('Gagal Terhubung ke Server'), findsOneWidget);
       expect(find.text('Koneksi timeout'), findsOneWidget);
 
       await tester.tap(find.text('Coba Lagi'));
