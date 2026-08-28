@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
 import 'package:dashboard/feature/home/services/dashboard_service.dart';
+
 import 'widgets/dashboard_state_views.dart';
 import 'widgets/kantor_filter_chips.dart';
 import 'widgets/kpi_summary_section.dart';
@@ -21,6 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Filter Cabang (0 = Semua Kantor, 1 = Kantor 1, dst)
   int _selectedKantor = 0;
+
+  // Filter Produk Terpilih (Cross-Filtering Power BI Style)
+  String? _selectedProduct;
 
   bool _isLoading = true;
   String? _errorMessage;
@@ -44,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _isLoading = true;
       _errorMessage = null;
+      _selectedProduct = null;
     });
 
     try {
@@ -63,6 +68,71 @@ class _HomeScreenState extends State<HomeScreen> {
         _isLoading = false;
       });
     }
+  }
+
+  /// Menghitung / mengambil data tren bulanan sesuai filter produk aktif
+  List<MonthlyTrendItem> _getActiveTrend(DashboardData data) {
+    if (_selectedProduct == null) {
+      return data.monthlyTrend;
+    }
+
+    final selectedLower = _selectedProduct!.trim().toLowerCase();
+
+    // 1. Hitung agregasi data bulanan riil dari records Oracle DB (Akurat & Dinamis)
+    if (data.records.isNotEmpty) {
+      final matchingRecords = data.records.where((r) {
+        return r.jenisPinjaman.trim().toLowerCase() == selectedLower;
+      }).toList();
+
+      if (matchingRecords.isNotEmpty) {
+        const monthNames = [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'Mei',
+          'Jun',
+          'Jul',
+          'Ags',
+          'Sep',
+          'Okt',
+          'Nov',
+          'Des',
+        ];
+        final monthlySums = List<double>.filled(12, 0.0);
+
+        for (final r in matchingRecords) {
+          for (int i = 0; i < 12 && i < r.bulanan.length; i++) {
+            monthlySums[i] += r.bulanan[i];
+          }
+        }
+
+        return List.generate(12, (i) {
+          return MonthlyTrendItem(month: monthNames[i], total: monthlySums[i]);
+        });
+      }
+    }
+
+    // 2. Jika ada monthly_trend di dalam product breakdown
+    final product = data.productBreakdown
+        .where((p) => p.name.trim().toLowerCase() == selectedLower)
+        .firstOrNull;
+
+    if (product != null &&
+        product.monthlyTrend != null &&
+        product.monthlyTrend!.isNotEmpty) {
+      return product.monthlyTrend!;
+    }
+
+    // 3. Fallback jika hanya ada total agregat
+    if (product != null && data.summary.totalYTD > 0) {
+      final ratio = product.total / data.summary.totalYTD;
+      return data.monthlyTrend
+          .map((m) => MonthlyTrendItem(month: m.month, total: m.total * ratio))
+          .toList();
+    }
+
+    return data.monthlyTrend;
   }
 
   @override
@@ -95,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  'Realtime Oracle DB (${timeFormat.format(_lastFetched)})',
+                  'Update data terakhir pukul ${timeFormat.format(_lastFetched)}',
                   style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
@@ -157,6 +227,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildDashboardContent(DashboardData data) {
+    final activeTrend = _getActiveTrend(data);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -167,18 +239,30 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         const SizedBox(height: 20),
 
-        // --- GRAFIK TREN BULANAN ---
+        // --- GRAFIK TREN BULANAN (Power BI Drilldown) ---
         MonthlyTrendChart(
-          trend: data.monthlyTrend,
+          trend: activeTrend,
           currencyFormat: _currencyFormat,
+          selectedProductName: _selectedProduct,
+          onResetFilter: () {
+            setState(() {
+              _selectedProduct = null;
+            });
+          },
         ),
         const SizedBox(height: 20),
 
-        // --- BREAKDOWN PRODUK PINJAMAN ---
+        // --- BREAKDOWN PRODUK PINJAMAN (Interactive Cross-Filtering) ---
         ProductBreakdownCard(
           breakdown: data.productBreakdown,
           grandTotal: data.summary.totalYTD,
           currencyFormat: _currencyFormat,
+          selectedProductName: _selectedProduct,
+          onProductSelected: (selectedName) {
+            setState(() {
+              _selectedProduct = selectedName;
+            });
+          },
         ),
       ],
     );

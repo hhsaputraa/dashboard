@@ -7,11 +7,15 @@ import 'package:dashboard/feature/home/model/dashboard_data.dart';
 class MonthlyTrendChart extends StatelessWidget {
   final List<MonthlyTrendItem> trend;
   final NumberFormat currencyFormat;
+  final String? selectedProductName;
+  final VoidCallback? onResetFilter;
 
   const MonthlyTrendChart({
     super.key,
     required this.trend,
     required this.currencyFormat,
+    this.selectedProductName,
+    this.onResetFilter,
   });
 
   @override
@@ -32,22 +36,73 @@ class MonthlyTrendChart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Tren Bunga Bulanan (Jan - Des)',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF0F172A),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      selectedProductName != null
+                          ? 'Tren: $selectedProductName'
+                          : 'Tren Bunga Bulanan (Jan - Des)',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF0F172A),
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    if (selectedProductName != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Text(
+                          'Total Bunga: ${currencyFormat.format(trend.fold(0.0, (sum, i) => sum + i.total))}',
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.primaryColor,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
-              Icon(
-                Icons.show_chart_rounded,
-                size: 20,
-                color: AppTheme.primaryColor,
-              ),
+              if (selectedProductName != null)
+                InkWell(
+                  onTap: onResetFilter,
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF1F5F9),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.close_rounded, size: 13, color: Color(0xFF64748B)),
+                        SizedBox(width: 4),
+                        Text(
+                          'Semua',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF64748B),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              else
+                const Icon(
+                  Icons.show_chart_rounded,
+                  size: 20,
+                  color: AppTheme.primaryColor,
+                ),
             ],
           ),
           const SizedBox(height: 20),

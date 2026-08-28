@@ -6,6 +6,7 @@ import 'package:dashboard/feature/home/presentation/widgets/dashboard_state_view
 import 'package:dashboard/feature/home/presentation/widgets/kantor_filter_chips.dart';
 import 'package:dashboard/feature/home/presentation/widgets/kpi_stat_card.dart';
 import 'package:dashboard/feature/home/presentation/widgets/kpi_summary_section.dart';
+import 'package:dashboard/feature/home/presentation/widgets/monthly_trend_chart.dart';
 import 'package:dashboard/feature/home/presentation/widgets/product_breakdown_card.dart';
 
 void main() {
@@ -82,7 +83,8 @@ void main() {
       expect(find.text('MODAL KERJA'), findsOneWidget);
     });
 
-    testWidgets('ProductBreakdownCard renders items sorted descending by total', (tester) async {
+    testWidgets('ProductBreakdownCard renders items sorted descending and supports tap selection', (tester) async {
+      String? selectedProduct;
       const breakdown = [
         ProductBreakdown(name: 'Kredit Konsumtif', total: 100000, percentage: 25.0),
         ProductBreakdown(name: 'Kredit Modal Kerja', total: 300000, percentage: 75.0),
@@ -91,10 +93,18 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ProductBreakdownCard(
-              breakdown: breakdown,
-              grandTotal: 400000,
-              currencyFormat: currencyFormat,
+            body: StatefulBuilder(
+              builder: (context, setState) {
+                return ProductBreakdownCard(
+                  breakdown: breakdown,
+                  grandTotal: 400000,
+                  currencyFormat: currencyFormat,
+                  selectedProductName: selectedProduct,
+                  onProductSelected: (val) {
+                    setState(() => selectedProduct = val);
+                  },
+                );
+              },
             ),
           ),
         ),
@@ -108,6 +118,48 @@ void main() {
       final modalKerjaPos = tester.getTopLeft(find.text('Kredit Modal Kerja'));
       final konsumtifPos = tester.getTopLeft(find.text('Kredit Konsumtif'));
       expect(modalKerjaPos.dy < konsumtifPos.dy, isTrue);
+
+      // Tap on Kredit Modal Kerja to select
+      await tester.tap(find.text('Kredit Modal Kerja'));
+      await tester.pumpAndSettle();
+
+      expect(selectedProduct, 'Kredit Modal Kerja');
+      expect(find.text('Reset'), findsOneWidget);
+
+      // Tap Reset to clear selection
+      await tester.tap(find.text('Reset'));
+      await tester.pumpAndSettle();
+
+      expect(selectedProduct, isNull);
+    });
+
+    testWidgets('MonthlyTrendChart shows custom title and triggers reset', (tester) async {
+      bool resetCalled = false;
+      const trend = [
+        MonthlyTrendItem(month: 'Jan', total: 100000),
+        MonthlyTrendItem(month: 'Feb', total: 150000),
+      ];
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: MonthlyTrendChart(
+              trend: trend,
+              currencyFormat: currencyFormat,
+              selectedProductName: 'Kredit Modal Kerja',
+              onResetFilter: () => resetCalled = true,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Tren: Kredit Modal Kerja'), findsOneWidget);
+      expect(find.text('Semua'), findsOneWidget);
+
+      await tester.tap(find.text('Semua'));
+      await tester.pumpAndSettle();
+
+      expect(resetCalled, isTrue);
     });
 
     testWidgets('DashboardStateViews render loading and error with retry', (tester) async {

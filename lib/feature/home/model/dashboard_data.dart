@@ -1,3 +1,5 @@
+import 'interest_record.dart';
+
 class DashboardSummary {
   final double totalYTD;
   final double monthlyAverage;
@@ -54,11 +56,13 @@ class ProductBreakdown {
   final String name;
   final double total;
   final double percentage;
+  final List<MonthlyTrendItem>? monthlyTrend;
 
   const ProductBreakdown({
     required this.name,
     required this.total,
     required this.percentage,
+    this.monthlyTrend,
   });
 
   factory ProductBreakdown.fromJson(Map<String, dynamic> json) {
@@ -68,10 +72,17 @@ class ProductBreakdown {
       return double.tryParse(v.toString()) ?? 0.0;
     }
 
+    final productTrend = json['monthly_trend'] is List
+        ? (json['monthly_trend'] as List)
+            .map((e) => MonthlyTrendItem.fromJson(e as Map<String, dynamic>))
+            .toList()
+        : null;
+
     return ProductBreakdown(
       name: json['name']?.toString() ?? '-',
       total: parseDouble(json['total']),
       percentage: parseDouble(json['percentage']),
+      monthlyTrend: productTrend,
     );
   }
 }
@@ -80,11 +91,13 @@ class DashboardData {
   final DashboardSummary summary;
   final List<MonthlyTrendItem> monthlyTrend;
   final List<ProductBreakdown> productBreakdown;
+  final List<InterestRecord> records;
 
   const DashboardData({
     required this.summary,
     required this.monthlyTrend,
     required this.productBreakdown,
+    this.records = const [],
   });
 
   factory DashboardData.fromJson(Map<String, dynamic> json) {
@@ -104,10 +117,17 @@ class DashboardData {
             .toList()
         : <ProductBreakdown>[];
 
+    final recordList = json['records'] is List
+        ? (json['records'] as List)
+            .map((e) => InterestRecord.fromJson(e as Map<String, dynamic>))
+            .toList()
+        : <InterestRecord>[];
+
     return DashboardData(
       summary: DashboardSummary.fromJson(summaryObj),
       monthlyTrend: trendList,
       productBreakdown: breakdownList,
+      records: recordList,
     );
   }
 }
