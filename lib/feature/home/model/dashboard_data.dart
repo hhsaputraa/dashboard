@@ -112,9 +112,10 @@ class DashboardData {
         : <MonthlyTrendItem>[];
 
     final breakdownList = json['product_breakdown'] is List
-        ? (json['product_breakdown'] as List)
+        ? ((json['product_breakdown'] as List)
             .map((e) => ProductBreakdown.fromJson(e as Map<String, dynamic>))
             .toList()
+          ..sort((a, b) => b.total.compareTo(a.total)))
         : <ProductBreakdown>[];
 
     final recordList = json['records'] is List

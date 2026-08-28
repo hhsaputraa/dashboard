@@ -83,11 +83,11 @@ void main() {
       expect(find.text('MODAL KERJA'), findsOneWidget);
     });
 
-    testWidgets('ProductBreakdownCard renders items sorted descending and supports tap selection', (tester) async {
+    testWidgets('ProductBreakdownCard renders items and supports tap selection', (tester) async {
       String? selectedProduct;
       const breakdown = [
-        ProductBreakdown(name: 'Kredit Konsumtif', total: 100000, percentage: 25.0),
         ProductBreakdown(name: 'Kredit Modal Kerja', total: 300000, percentage: 75.0),
+        ProductBreakdown(name: 'Kredit Konsumtif', total: 100000, percentage: 25.0),
       ];
 
       await tester.pumpWidget(
@@ -188,6 +188,25 @@ void main() {
       await tester.tap(find.text('Coba Lagi'));
       await tester.pump();
       expect(retried, isTrue);
+    });
+
+    test('DashboardData.fromJson pre-sorts product breakdown descending by total', () {
+      final json = {
+        'summary': {'total_ytd': 400000, 'monthly_average': 33333, 'total_accounts': 10, 'top_product': 'B'},
+        'monthly_trend': [],
+        'product_breakdown': [
+          {'name': 'A', 'total': 100000, 'percentage': 25.0},
+          {'name': 'B', 'total': 300000, 'percentage': 75.0},
+        ],
+        'records': [],
+      };
+
+      final data = DashboardData.fromJson(json);
+      expect(data.productBreakdown.length, 2);
+      expect(data.productBreakdown[0].name, 'B');
+      expect(data.productBreakdown[0].total, 300000);
+      expect(data.productBreakdown[1].name, 'A');
+      expect(data.productBreakdown[1].total, 100000);
     });
   });
 }

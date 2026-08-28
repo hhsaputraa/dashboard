@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:dashboard/core/presentation/server_config_dialog.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
 import 'package:dashboard/feature/home/services/dashboard_service.dart';
 
@@ -20,23 +21,27 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final DashboardService _dashboardService = DashboardService();
 
+  // Formatters statis (diinisialisasi 1 kali, hemat memori & CPU)
+  static final _currencyFormat = NumberFormat.currency(
+    locale: 'id_ID',
+    symbol: 'Rp ',
+    decimalDigits: 0,
+  );
+  static final _timeFormat = DateFormat('HH:mm:ss');
+
   // Filter Cabang (0 = Semua Kantor, 1 = Kantor 1, dst)
   int _selectedKantor = 0;
 
   // Filter Produk Terpilih (Cross-Filtering Power BI Style)
   String? _selectedProduct;
 
+  // Cache data tren aktif (Memoized agar tidak dihitung ulang di setiap frame build)
+  List<MonthlyTrendItem> _activeTrend = const [];
+
   bool _isLoading = true;
   String? _errorMessage;
   DashboardData? _dashboardData;
   DateTime _lastFetched = DateTime.now();
-
-  // Format Rupiah
-  final _currencyFormat = NumberFormat.currency(
-    locale: 'id_ID',
-    symbol: 'Rp ',
-    decimalDigits: 0,
-  );
 
   @override
   void initState() {
@@ -49,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _isLoading = true;
       _errorMessage = null;
       _selectedProduct = null;
+      _activeTrend = const [];
     });
 
     try {
@@ -60,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _dashboardData = data;
         _isLoading = false;
         _lastFetched = DateTime.now();
+        _recomputeActiveTrend();
       });
     } catch (e) {
       if (!mounted) return;
@@ -70,8 +77,25 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  /// Menghitung / mengambil data tren bulanan sesuai filter produk aktif
-  List<MonthlyTrendItem> _getActiveTrend(DashboardData data) {
+  void _setSelectedProduct(String? product) {
+    if (_selectedProduct == product) return;
+    setState(() {
+      _selectedProduct = product;
+      _recomputeActiveTrend();
+    });
+  }
+
+  /// Menghitung ulang cache tren bulanan saat data atau filter produk berubah
+  void _recomputeActiveTrend() {
+    if (_dashboardData == null) {
+      _activeTrend = const [];
+      return;
+    }
+    _activeTrend = _calculateActiveTrend(_dashboardData!);
+  }
+
+  /// Menghitung agregasi data tren bulanan sesuai filter produk aktif
+  List<MonthlyTrendItem> _calculateActiveTrend(DashboardData data) {
     if (_selectedProduct == null) {
       return data.monthlyTrend;
     }
@@ -86,18 +110,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
       if (matchingRecords.isNotEmpty) {
         const monthNames = [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'Mei',
-          'Jun',
-          'Jul',
-          'Ags',
-          'Sep',
-          'Okt',
-          'Nov',
-          'Des',
+          'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
+          'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des',
         ];
         final monthlySums = List<double>.filled(12, 0.0);
 
@@ -108,7 +122,10 @@ class _HomeScreenState extends State<HomeScreen> {
         }
 
         return List.generate(12, (i) {
-          return MonthlyTrendItem(month: monthNames[i], total: monthlySums[i]);
+          return MonthlyTrendItem(
+            month: monthNames[i],
+            total: monthlySums[i],
+          );
         });
       }
     }
@@ -137,8 +154,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final timeFormat = DateFormat('HH:mm:ss');
-
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
@@ -153,30 +168,56 @@ class _HomeScreenState extends State<HomeScreen> {
                 letterSpacing: 1.2,
               ),
             ),
-            Row(
-              children: [
-                Container(
-                  width: 7,
-                  height: 7,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF22C55E),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 5),
-                Text(
-                  'Update data terakhir pukul ${timeFormat.format(_lastFetched)}',
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF64748B),
-                  ),
-                ),
-              ],
+            Builder(
+              builder: (context) {
+                Color statusColor;
+                String statusText;
+                if (_isLoading) {
+                  statusColor = const Color(0xFFEAB308);
+                  statusText = 'Menyinkronkan data...';
+                } else if (_errorMessage != null) {
+                  statusColor = const Color(0xFFEF4444);
+                  statusText = 'Gagal terhubung ke server';
+                } else {
+                  statusColor = const Color(0xFF22C55E);
+                  statusText =
+                      'Update data pukul ${_timeFormat.format(_lastFetched)}';
+                }
+
+                return Row(
+                  children: [
+                    Container(
+                      width: 7,
+                      height: 7,
+                      decoration: BoxDecoration(
+                        color: statusColor,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      statusText,
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF64748B),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: 'Pengaturan Server',
+            onPressed: () async {
+              await ServerConfigDialog.show(context);
+              _loadData();
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded),
             tooltip: 'Perbarui Data Oracle',
@@ -227,8 +268,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildDashboardContent(DashboardData data) {
-    final activeTrend = _getActiveTrend(data);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -241,14 +280,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // --- GRAFIK TREN BULANAN (Power BI Drilldown) ---
         MonthlyTrendChart(
-          trend: activeTrend,
+          trend: _activeTrend,
           currencyFormat: _currencyFormat,
           selectedProductName: _selectedProduct,
-          onResetFilter: () {
-            setState(() {
-              _selectedProduct = null;
-            });
-          },
+          onResetFilter: () => _setSelectedProduct(null),
         ),
         const SizedBox(height: 20),
 
@@ -258,11 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
           grandTotal: data.summary.totalYTD,
           currencyFormat: _currencyFormat,
           selectedProductName: _selectedProduct,
-          onProductSelected: (selectedName) {
-            setState(() {
-              _selectedProduct = selectedName;
-            });
-          },
+          onProductSelected: (selectedName) => _setSelectedProduct(selectedName),
         ),
       ],
     );

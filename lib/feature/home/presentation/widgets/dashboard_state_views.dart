@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:dashboard/core/presentation/server_config_dialog.dart';
 import 'package:dashboard/core/theme/app_theme.dart';
 
 class DashboardLoadingView extends StatelessWidget {
   final String message;
 
-  const DashboardLoadingView({
-    super.key,
-    this.message = 'Mengambil data live dari Database Oracle...',
-  });
+  const DashboardLoadingView({super.key, this.message = 'Mengambil data...'});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,8 @@ class DashboardErrorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: const Color(0xFFFEF2F2),
         borderRadius: BorderRadius.circular(16),
@@ -49,35 +48,73 @@ class DashboardErrorView extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Icon(
-            Icons.cloud_off_rounded,
-            color: Color(0xFFDC2626),
-            size: 40,
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFFDC2626).withValues(alpha: 0.1),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.cloud_off_rounded,
+              color: Color(0xFFDC2626),
+              size: 36,
+            ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
           const Text(
-            'Gagal Terhubung ke Database Oracle',
+            'Gagal Terhubung ke Server',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: 16,
               color: Color(0xFF991B1B),
             ),
           ),
           const SizedBox(height: 6),
           Text(
-            errorMessage ?? 'Terjadi kesalahan saat memuat data',
+            errorMessage ?? 'Terjadi kesalahan saat memuat data.',
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 12, color: Color(0xFFB91C1C)),
-          ),
-          const SizedBox(height: 14),
-          ElevatedButton.icon(
-            onPressed: onRetry,
-            icon: const Icon(Icons.refresh, size: 16),
-            label: const Text('Coba Lagi'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppTheme.primaryColor,
-              foregroundColor: Colors.white,
+            style: const TextStyle(
+              fontSize: 13,
+              color: Color(0xFFB91C1C),
+              height: 1.4,
             ),
+          ),
+          const SizedBox(height: 20),
+          Wrap(
+            spacing: 12,
+            runSpacing: 10,
+            alignment: WrapAlignment.center,
+            children: [
+              ElevatedButton.icon(
+                onPressed: onRetry,
+                icon: const Icon(Icons.refresh_rounded, size: 16),
+                label: const Text('Coba Lagi'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.primaryColor,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              OutlinedButton.icon(
+                onPressed: () async {
+                  await ServerConfigDialog.show(context);
+                  onRetry();
+                },
+                icon: const Icon(Icons.settings_outlined, size: 16),
+                label: const Text('Pengaturan Server'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: const Color(0xFF991B1B),
+                  side: const BorderSide(color: Color(0xFFFCA5A5)),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -21,10 +21,6 @@ class ProductBreakdownCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Urutkan data kontribusi dari nominal/total tertinggi ke terendah secara dinamis
-    final sortedBreakdown = List<ProductBreakdown>.from(breakdown)
-      ..sort((a, b) => b.total.compareTo(a.total));
-
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -81,12 +77,12 @@ class ProductBreakdownCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 14),
-          if (sortedBreakdown.isEmpty)
+          if (breakdown.isEmpty)
             const Text(
               'Tidak ada rincian produk',
               style: TextStyle(fontSize: 12, color: Color(0xFF94A3B8)),
             ),
-          ...sortedBreakdown.map((item) {
+          ...breakdown.map((item) {
             final isSelected = selectedProductName == item.name;
             final percent = grandTotal > 0 ? (item.total / grandTotal) : 0.0;
             return Padding(

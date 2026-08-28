@@ -18,13 +18,35 @@ class MonthlyTrendChart extends StatelessWidget {
     this.onResetFilter,
   });
 
+  static String _formatCompactValue(double value) {
+    if (value <= 0) return '0';
+    if (value >= 1000000000) {
+      final v = value / 1000000000;
+      return '${v.toStringAsFixed(v >= 10 ? 0 : 1)} M';
+    } else if (value >= 1000000) {
+      final v = value / 1000000;
+      return '${v.toStringAsFixed(v >= 10 ? 0 : 1)} jt';
+    } else if (value >= 1000) {
+      final v = value / 1000;
+      return '${v.toStringAsFixed(v >= 10 ? 0 : 1)} rb';
+    }
+    return value.toStringAsFixed(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     double maxY = 0;
-    for (final item in trend) {
-      if (item.total > maxY) maxY = item.total;
+    double totalBunga = 0;
+    final spots = <FlSpot>[];
+    for (int i = 0; i < trend.length; i++) {
+      final val = trend[i].total;
+      if (val > maxY) maxY = val;
+      totalBunga += val;
+      spots.add(FlSpot(i.toDouble(), val));
     }
     if (maxY == 0) maxY = 1000000;
+    final chartMaxY = maxY / 0.93;
+    final yInterval = (chartMaxY / 5).clamp(1.0, double.infinity);
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -40,34 +62,50 @@ class MonthlyTrendChart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      selectedProductName != null
-                          ? 'Tren: $selectedProductName'
-                          : 'Tren Bunga Bulanan (Jan - Des)',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF0F172A),
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(0.0, 0.15),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    if (selectedProductName != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 2),
-                        child: Text(
-                          'Total Bunga: ${currencyFormat.format(trend.fold(0.0, (sum, i) => sum + i.total))}',
-                          style: const TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: AppTheme.primaryColor,
+                    );
+                  },
+                  child: Column(
+                    key: ValueKey<String>(selectedProductName ?? 'all'),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        selectedProductName != null
+                            ? 'Tren: $selectedProductName'
+                            : 'Tren Bunga Bulanan (Jan - Des)',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF0F172A),
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      if (selectedProductName != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                          child: Text(
+                            'Total Bunga: ${currencyFormat.format(totalBunga)}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.primaryColor,
+                            ),
                           ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               if (selectedProductName != null)
@@ -75,7 +113,10 @@ class MonthlyTrendChart extends StatelessWidget {
                   onTap: onResetFilter,
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF1F5F9),
                       borderRadius: BorderRadius.circular(8),
@@ -83,7 +124,11 @@ class MonthlyTrendChart extends StatelessWidget {
                     child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.close_rounded, size: 13, color: Color(0xFF64748B)),
+                        Icon(
+                          Icons.close_rounded,
+                          size: 13,
+                          color: Color(0xFF64748B),
+                        ),
                         SizedBox(width: 4),
                         Text(
                           'Semua',
@@ -122,10 +167,9 @@ class MonthlyTrendChart extends StatelessWidget {
                     getTooltipItems: (List<LineBarSpot> touchedSpots) {
                       return touchedSpots.map((spot) {
                         final index = spot.x.toInt();
-                        final monthName =
-                            index >= 0 && index < trend.length
-                                ? trend[index].month
-                                : '';
+                        final monthName = index >= 0 && index < trend.length
+                            ? trend[index].month
+                            : '';
                         return LineTooltipItem(
                           'Bulan $monthName\n',
                           const TextStyle(
@@ -151,8 +195,12 @@ class MonthlyTrendChart extends StatelessWidget {
                 gridData: FlGridData(
                   show: true,
                   drawVerticalLine: false,
-                  getDrawingHorizontalLine: (value) =>
-                      const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1),
+                  horizontalInterval: yInterval,
+                  getDrawingHorizontalLine: (value) => const FlLine(
+                    color: Color(0xFFF1F5F9),
+                    strokeWidth: 1,
+                    dashArray: [4, 4],
+                  ),
                 ),
                 titlesData: FlTitlesData(
                   rightTitles: const AxisTitles(
@@ -161,8 +209,29 @@ class MonthlyTrendChart extends StatelessWidget {
                   topTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
-                  leftTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
+                  leftTitles: AxisTitles(
+                    sideTitles: SideTitles(
+                      showTitles: true,
+                      reservedSize: 44,
+                      interval: yInterval,
+                      getTitlesWidget: (value, meta) {
+                        if (value < -0.01 || value > chartMaxY + 0.01) {
+                          return const SizedBox.shrink();
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 6),
+                          child: Text(
+                            _formatCompactValue(value),
+                            textAlign: TextAlign.right,
+                            style: const TextStyle(
+                              fontSize: 9,
+                              color: Color(0xFF94A3B8),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
@@ -192,13 +261,10 @@ class MonthlyTrendChart extends StatelessWidget {
                 minX: 0,
                 maxX: (trend.length - 1).toDouble().clamp(0, 11),
                 minY: 0,
-                maxY: maxY * 1.15,
+                maxY: chartMaxY,
                 lineBarsData: [
                   LineChartBarData(
-                    spots: List.generate(
-                      trend.length,
-                      (i) => FlSpot(i.toDouble(), trend[i].total),
-                    ),
+                    spots: spots,
                     isCurved: true,
                     color: AppTheme.primaryColor,
                     barWidth: 3,
@@ -218,6 +284,8 @@ class MonthlyTrendChart extends StatelessWidget {
                   ),
                 ],
               ),
+              duration: const Duration(milliseconds: 450),
+              curve: Curves.easeInOutCubic,
             ),
           ),
         ],
