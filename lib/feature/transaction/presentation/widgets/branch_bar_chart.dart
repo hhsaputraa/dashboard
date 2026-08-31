@@ -48,15 +48,36 @@ class _BranchBarChartState extends State<BranchBarChart> {
     return value.toStringAsFixed(0);
   }
 
+  late double _chartMaxY;
+
+  @override
+  void initState() {
+    super.initState();
+    _computeChartMaxY();
+  }
+
+  @override
+  void didUpdateWidget(BranchBarChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.branches != widget.branches) {
+      _computeChartMaxY();
+    }
+  }
+
+  void _computeChartMaxY() {
+    double maxY = 0.0;
+    for (final b in widget.branches) {
+      if (b.total > maxY) maxY = b.total;
+    }
+    _chartMaxY = maxY > 0 ? maxY * 1.2 : 1200000;
+  }
+
+  static FlLine _getGridHorizontalLine(double value) =>
+      const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1);
+
   @override
   Widget build(BuildContext context) {
     final list = widget.branches;
-    double maxY = 0.0;
-    for (final b in list) {
-      if (b.total > maxY) maxY = b.total;
-    }
-    if (maxY == 0) maxY = 1000000;
-    final chartMaxY = maxY * 1.2;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -115,7 +136,7 @@ class _BranchBarChartState extends State<BranchBarChart> {
             child: BarChart(
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
-                maxY: chartMaxY,
+                maxY: _chartMaxY,
                 barTouchData: BarTouchData(
                   touchTooltipData: BarTouchTooltipData(
                     getTooltipColor: (group) => const Color(0xFF0F172A),
@@ -154,15 +175,17 @@ class _BranchBarChartState extends State<BranchBarChart> {
                     },
                   ),
                   touchCallback: (event, response) {
-                    setState(() {
-                      if (!event.isInterestedForInteractions ||
-                          response == null ||
-                          response.spot == null) {
-                        _touchedIndex = -1;
-                        return;
-                      }
-                      _touchedIndex = response.spot!.touchedBarGroupIndex;
-                    });
+                    final newIndex = (!event.isInterestedForInteractions ||
+                            response == null ||
+                            response.spot == null)
+                        ? -1
+                        : response.spot!.touchedBarGroupIndex;
+
+                    if (_touchedIndex != newIndex) {
+                      setState(() {
+                        _touchedIndex = newIndex;
+                      });
+                    }
                   },
                 ),
                 titlesData: FlTitlesData(
@@ -225,11 +248,10 @@ class _BranchBarChartState extends State<BranchBarChart> {
                     ),
                   ),
                 ),
-                gridData: FlGridData(
+                gridData: const FlGridData(
                   show: true,
                   drawVerticalLine: false,
-                  getDrawingHorizontalLine: (value) =>
-                      const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1),
+                  getDrawingHorizontalLine: _getGridHorizontalLine,
                 ),
                 borderData: FlBorderData(show: false),
                 barGroups: List.generate(list.length, (i) {
@@ -254,7 +276,7 @@ class _BranchBarChartState extends State<BranchBarChart> {
                         ),
                         backDrawRodData: BackgroundBarChartRodData(
                           show: true,
-                          toY: chartMaxY,
+                          toY: _chartMaxY,
                           color: const Color(0xFFF8FAFC),
                         ),
                       ),
@@ -268,17 +290,21 @@ class _BranchBarChartState extends State<BranchBarChart> {
 
           // Cards Mini Komparasi Modern
           Row(
-            children: list.map((b) {
-              final idx = list.indexOf(b);
+            children: list.asMap().entries.map((entry) {
+              final idx = entry.key;
+              final b = entry.value;
               final colors = _branchGradients[idx % _branchGradients.length];
               final isHighlighted = _touchedIndex == idx;
 
               return Expanded(
                 child: InkWell(
                   onTap: () {
-                    setState(() {
-                      _touchedIndex = _touchedIndex == idx ? -1 : idx;
-                    });
+                    final next = _touchedIndex == idx ? -1 : idx;
+                    if (_touchedIndex != next) {
+                      setState(() {
+                        _touchedIndex = next;
+                      });
+                    }
                   },
                   borderRadius: BorderRadius.circular(12),
                   child: AnimatedContainer(

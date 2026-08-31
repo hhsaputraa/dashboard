@@ -96,7 +96,11 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
               ),
               if (_touchedIndex != -1)
                 InkWell(
-                  onTap: () => setState(() => _touchedIndex = -1),
+                  onTap: () {
+                    if (_touchedIndex != -1) {
+                      setState(() => _touchedIndex = -1);
+                    }
+                  },
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -174,19 +178,21 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
                   PieChartData(
                     pieTouchData: PieTouchData(
                       touchCallback: (event, pieTouchResponse) {
-                        setState(() {
-                          if (!event.isInterestedForInteractions ||
-                              pieTouchResponse == null ||
-                              pieTouchResponse.touchedSection == null) {
-                            return;
-                          }
-                          final targetIdx = pieTouchResponse
-                              .touchedSection!
-                              .touchedSectionIndex;
-                          if (targetIdx >= 0 && targetIdx < items.length) {
+                        if (!event.isInterestedForInteractions ||
+                            pieTouchResponse == null ||
+                            pieTouchResponse.touchedSection == null) {
+                          return;
+                        }
+                        final targetIdx = pieTouchResponse
+                            .touchedSection!
+                            .touchedSectionIndex;
+                        if (targetIdx >= 0 &&
+                            targetIdx < items.length &&
+                            _touchedIndex != targetIdx) {
+                          setState(() {
                             _touchedIndex = targetIdx;
-                          }
-                        });
+                          });
+                        }
                       },
                     ),
                     borderData: FlBorderData(show: false),
@@ -205,22 +211,7 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
                             ? '${item.percentage.toStringAsFixed(1)}%'
                             : '',
                         radius: radius,
-                        badgeWidget: isTouched
-                            ? Container(
-                                width: 8,
-                                height: 8,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      blurRadius: 4,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : null,
+                        badgeWidget: isTouched ? const _TouchIndicatorBadge() : null,
                         badgePositionPercentageOffset: 1.15,
                         titleStyle: const TextStyle(
                           fontSize: 11,
@@ -329,9 +320,12 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    setState(() {
-                      _touchedIndex = _touchedIndex == idx ? -1 : idx;
-                    });
+                    final next = _touchedIndex == idx ? -1 : idx;
+                    if (_touchedIndex != next) {
+                      setState(() {
+                        _touchedIndex = next;
+                      });
+                    }
                   },
                   borderRadius: BorderRadius.circular(10),
                   child: AnimatedContainer(
@@ -422,6 +416,28 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
               ),
             );
           }),
+        ],
+      ),
+    );
+  }
+}
+
+class _TouchIndicatorBadge extends StatelessWidget {
+  const _TouchIndicatorBadge();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 8,
+      height: 8,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        shape: BoxShape.circle,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 4,
+          ),
         ],
       ),
     );

@@ -29,18 +29,48 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
     Color(0xFF13D38E),
   ];
 
+  static const List<double> _tierRadii = [92.0, 78.0, 66.0, 54.0];
+  late Map<int, double> _baseRadiusMap;
+  late double _totalQuarters;
+
+  @override
+  void initState() {
+    super.initState();
+    _computeRadiiAndTotal();
+  }
+
+  @override
+  void didUpdateWidget(QuarterlyGrowthChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.quarters != widget.quarters) {
+      _computeRadiiAndTotal();
+    }
+  }
+
+  void _computeRadiiAndTotal() {
+    final list = widget.quarters;
+    double total = 0.0;
+    for (final q in list) {
+      total += q.total;
+    }
+    _totalQuarters = total;
+
+    final sortedIndices = List<int>.generate(list.length, (i) => i)
+      ..sort((a, b) => list[b].total.compareTo(list[a].total));
+
+    final radiusMap = <int, double>{};
+    for (int rank = 0; rank < sortedIndices.length; rank++) {
+      final itemIndex = sortedIndices[rank];
+      radiusMap[itemIndex] = rank < _tierRadii.length ? _tierRadii[rank] : 54.0;
+    }
+    _baseRadiusMap = radiusMap;
+  }
+
   @override
   Widget build(BuildContext context) {
     final list = widget.quarters;
-    double totalQuarters = 0.0;
-    double maxVal = 0.0;
-    for (final q in list) {
-      totalQuarters += q.total;
-      if (q.total > maxVal) maxVal = q.total;
-    }
-    if (maxVal <= 0) maxVal = 1.0;
 
-    if (list.isEmpty || totalQuarters <= 0) {
+    if (list.isEmpty || _totalQuarters <= 0) {
       return Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
@@ -89,7 +119,11 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
               ),
               if (_touchedIndex != -1)
                 InkWell(
-                  onTap: () => setState(() => _touchedIndex = -1),
+                  onTap: () {
+                    if (_touchedIndex != -1) {
+                      setState(() => _touchedIndex = -1);
+                    }
+                  },
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -138,7 +172,7 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
           ),
           const SizedBox(height: 4),
           const Text(
-            'Irisan kuartal dengan nominal lebih tinggi otomatis berukuran lebih besar',
+            'Perbandingan pendapatan per Kuartal',
             style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
           const SizedBox(height: 24),
@@ -150,18 +184,20 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
               PieChartData(
                 pieTouchData: PieTouchData(
                   touchCallback: (event, pieTouchResponse) {
-                    setState(() {
-                      if (!event.isInterestedForInteractions ||
-                          pieTouchResponse == null ||
-                          pieTouchResponse.touchedSection == null) {
-                        return;
-                      }
-                      final targetIdx =
-                          pieTouchResponse.touchedSection!.touchedSectionIndex;
-                      if (targetIdx >= 0 && targetIdx < list.length) {
+                    if (!event.isInterestedForInteractions ||
+                        pieTouchResponse == null ||
+                        pieTouchResponse.touchedSection == null) {
+                      return;
+                    }
+                    final targetIdx =
+                        pieTouchResponse.touchedSection!.touchedSectionIndex;
+                    if (targetIdx >= 0 &&
+                        targetIdx < list.length &&
+                        _touchedIndex != targetIdx) {
+                      setState(() {
                         _touchedIndex = targetIdx;
-                      }
-                    });
+                      });
+                    }
                   },
                 ),
                 startDegreeOffset: 180,
@@ -212,9 +248,12 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          setState(() {
-            _touchedIndex = _touchedIndex == idx ? -1 : idx;
-          });
+          final next = _touchedIndex == idx ? -1 : idx;
+          if (_touchedIndex != next) {
+            setState(() {
+              _touchedIndex = next;
+            });
+          }
         },
         borderRadius: BorderRadius.circular(12),
         child: AnimatedContainer(
@@ -309,24 +348,11 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
   }
 
   List<PieChartSectionData> _buildSections(List<QuarterPerformance> list) {
-    // 1. Urutkan berdasarkan total terbesar ke terendah (Peringkat 1 s/d 4)
-    final sortedIndices = List.generate(list.length, (i) => i)
-      ..sort((a, b) => list[b].total.compareTo(list[a].total));
-
-    // 2. Tetapkan ukuran radius fix bertingkat (Tier Level):
-    // Peringkat 1 (Juara): 92px, Peringkat 2: 78px, Peringkat 3: 66px, Peringkat 4: 54px
-    const tierRadii = [92.0, 78.0, 66.0, 54.0];
-    final radiusMap = <int, double>{};
-    for (int rank = 0; rank < sortedIndices.length; rank++) {
-      final itemIndex = sortedIndices[rank];
-      radiusMap[itemIndex] = rank < tierRadii.length ? tierRadii[rank] : 54.0;
-    }
-
     return List.generate(list.length, (i) {
       final isTouched = i == _touchedIndex;
       final item = list[i];
       final color = _chartColors[i % _chartColors.length];
-      final baseRadius = radiusMap[i] ?? 70.0;
+      final baseRadius = _baseRadiusMap[i] ?? 70.0;
       final radius = isTouched ? baseRadius + 8.0 : baseRadius;
 
       return PieChartSectionData(

@@ -175,31 +175,39 @@ class _TransactionScreenState extends State<TransactionScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AnalyticsLeaderboardCard(
-          analytics: analytics,
-          currencyFormat: _currencyFormat,
+        RepaintBoundary(
+          child: AnalyticsLeaderboardCard(
+            analytics: analytics,
+            currencyFormat: _currencyFormat,
+          ),
         ),
         const SizedBox(height: 20),
 
         // --- 3. PIE / DONUT CHART (Pangsa Pasar Produk) ---
-        PortfolioDonutChart(
-          breakdown: data.productBreakdown,
-          grandTotal: data.summary.totalYTD,
-          currencyFormat: _currencyFormat,
+        RepaintBoundary(
+          child: PortfolioDonutChart(
+            breakdown: data.productBreakdown,
+            grandTotal: data.summary.totalYTD,
+            currencyFormat: _currencyFormat,
+          ),
         ),
         const SizedBox(height: 20),
 
         // --- 4. BAR CHART (Komparasi Kantor 1 vs 2 vs 3) ---
-        BranchBarChart(
-          branches: analytics.branches,
-          currencyFormat: _currencyFormat,
+        RepaintBoundary(
+          child: BranchBarChart(
+            branches: analytics.branches,
+            currencyFormat: _currencyFormat,
+          ),
         ),
         const SizedBox(height: 20),
 
         // --- 5. BAR CHART (Pertumbuhan Kuartalan Q1 - Q4) ---
-        QuarterlyGrowthChart(
-          quarters: analytics.quarters,
-          currencyFormat: _currencyFormat,
+        RepaintBoundary(
+          child: QuarterlyGrowthChart(
+            quarters: analytics.quarters,
+            currencyFormat: _currencyFormat,
+          ),
         ),
       ],
     );

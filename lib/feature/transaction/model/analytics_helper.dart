@@ -56,7 +56,10 @@ class AnalyticsHelper {
     // 1. Agregasi Kantor
     final branchMap = <int, double>{};
     for (final r in data.records) {
-      final rowTotal = r.bulanan.fold(0.0, (sum, val) => sum + val);
+      double rowTotal = 0.0;
+      for (final val in r.bulanan) {
+        rowTotal += val;
+      }
       branchMap[r.idKantor] = (branchMap[r.idKantor] ?? 0.0) + rowTotal;
     }
 
@@ -65,30 +68,28 @@ class AnalyticsHelper {
       branchMap.putIfAbsent(k, () => 0.0);
     }
 
+    BranchPerformance? topBranch;
     final branchList = branchMap.entries.map((e) {
       final pct = grandTotal > 0 ? (e.value / grandTotal) * 100 : 0.0;
-      return BranchPerformance(
+      final perf = BranchPerformance(
         idKantor: e.key,
         label: 'Kantor ${e.key}',
         total: e.value,
         percentage: pct,
       );
+      if (perf.total > 0 && (topBranch == null || perf.total > topBranch!.total)) {
+        topBranch = perf;
+      }
+      return perf;
     }).toList()
       ..sort((a, b) => a.idKantor.compareTo(b.idKantor));
-
-    BranchPerformance? topBranch;
-    if (branchList.isNotEmpty) {
-      final sortedByTotal = List<BranchPerformance>.from(branchList)
-        ..sort((a, b) => b.total.compareTo(a.total));
-      if (sortedByTotal.first.total > 0) {
-        topBranch = sortedByTotal.first;
-      }
-    }
 
     // 2. Agregasi Kuartal (Q1 - Q4) dari monthlyTrend
     double sumTrendRange(int start, int end) {
       double sum = 0.0;
-      for (int i = start; i <= end && i < data.monthlyTrend.length; i++) {
+      final trendLen = data.monthlyTrend.length;
+      final maxIndex = end < trendLen ? end : trendLen - 1;
+      for (int i = start; i <= maxIndex; i++) {
         sum += data.monthlyTrend[i].total;
       }
       return sum;
@@ -131,10 +132,10 @@ class AnalyticsHelper {
     ];
 
     QuarterPerformance? topQuarter;
-    final sortedQuarters = List<QuarterPerformance>.from(quarterList)
-      ..sort((a, b) => b.total.compareTo(a.total));
-    if (sortedQuarters.first.total > 0) {
-      topQuarter = sortedQuarters.first;
+    for (final q in quarterList) {
+      if (q.total > 0 && (topQuarter == null || q.total > topQuarter.total)) {
+        topQuarter = q;
+      }
     }
 
     // 3. Top Product
