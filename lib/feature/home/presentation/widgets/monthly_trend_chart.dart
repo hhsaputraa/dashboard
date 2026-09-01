@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:dashboard/core/theme/app_theme.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
 
-class MonthlyTrendChart extends StatelessWidget {
+class MonthlyTrendChart extends StatefulWidget {
   final List<MonthlyTrendItem> trend;
   final NumberFormat currencyFormat;
   final String? selectedProductName;
@@ -17,6 +17,17 @@ class MonthlyTrendChart extends StatelessWidget {
     this.selectedProductName,
     this.onResetFilter,
   });
+
+  @override
+  State<MonthlyTrendChart> createState() => _MonthlyTrendChartState();
+}
+
+class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
+  List<FlSpot> _cachedSpots = const [];
+  double _cachedChartMaxY = 1000000;
+  double _cachedYInterval = 200000;
+  double _cachedTotalBunga = 0;
+  int? _touchedIndex;
 
   static String _formatCompactValue(double value) {
     if (value <= 0) return '0';
@@ -34,19 +45,67 @@ class MonthlyTrendChart extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    _recomputeSpots();
+  }
+
+  @override
+  void didUpdateWidget(MonthlyTrendChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.trend != widget.trend) {
+      _recomputeSpots();
+    }
+  }
+
+  void _recomputeSpots() {
     double maxY = 0;
     double totalBunga = 0;
     final spots = <FlSpot>[];
-    for (int i = 0; i < trend.length; i++) {
-      final val = trend[i].total;
+
+    for (int i = 0; i < widget.trend.length; i++) {
+      final val = widget.trend[i].total;
       if (val > maxY) maxY = val;
       totalBunga += val;
       spots.add(FlSpot(i.toDouble(), val));
     }
+
     if (maxY == 0) maxY = 1000000;
-    final chartMaxY = maxY / 0.93;
-    final yInterval = (chartMaxY / 5).clamp(1.0, double.infinity);
+    _cachedChartMaxY = maxY / 0.93;
+    _cachedYInterval = (_cachedChartMaxY / 5).clamp(1.0, double.infinity);
+    _cachedTotalBunga = totalBunga;
+    _cachedSpots = spots;
+    _touchedIndex = null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final trend = widget.trend;
+    final chartMaxY = _cachedChartMaxY;
+    final yInterval = _cachedYInterval;
+    final totalBunga = _cachedTotalBunga;
+    final spots = _cachedSpots;
+
+    final lineBarData = LineChartBarData(
+      spots: spots,
+      isCurved: true,
+      color: AppTheme.primaryColor,
+      barWidth: 3,
+      isStrokeCapRound: true,
+      dotData: const FlDotData(show: false),
+      showingIndicators: _touchedIndex != null ? [_touchedIndex!] : const [],
+      belowBarData: BarAreaData(
+        show: true,
+        gradient: LinearGradient(
+          colors: [
+            AppTheme.primaryColor.withValues(alpha: 0.25),
+            AppTheme.primaryColor.withValues(alpha: 0.0),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+    );
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -77,12 +136,12 @@ class MonthlyTrendChart extends StatelessWidget {
                     );
                   },
                   child: Column(
-                    key: ValueKey<String>(selectedProductName ?? 'all'),
+                    key: ValueKey<String>(widget.selectedProductName ?? 'all'),
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        selectedProductName != null
-                            ? 'Tren: $selectedProductName'
+                        widget.selectedProductName != null
+                            ? 'Tren: ${widget.selectedProductName}'
                             : 'Tren Bunga Bulanan (Jan - Des)',
                         style: const TextStyle(
                           fontSize: 14,
@@ -92,11 +151,11 @@ class MonthlyTrendChart extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      if (selectedProductName != null)
+                      if (widget.selectedProductName != null)
                         Padding(
                           padding: const EdgeInsets.only(top: 2),
                           child: Text(
-                            'Total Bunga: ${currencyFormat.format(totalBunga)}',
+                            'Total Bunga: ${widget.currencyFormat.format(totalBunga)}',
                             style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
@@ -108,9 +167,9 @@ class MonthlyTrendChart extends StatelessWidget {
                   ),
                 ),
               ),
-              if (selectedProductName != null)
+              if (widget.selectedProductName != null)
                 InkWell(
-                  onTap: onResetFilter,
+                  onTap: widget.onResetFilter,
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -157,8 +216,27 @@ class MonthlyTrendChart extends StatelessWidget {
               LineChartData(
                 lineTouchData: LineTouchData(
                   enabled: true,
-                  handleBuiltInTouches: true,
+                  handleBuiltInTouches: false,
+                  touchCallback: (event, response) {
+                    final spots = response?.lineBarSpots;
+                    if (!event.isInterestedForInteractions ||
+                        event is FlTapUpEvent ||
+                        event is FlPanEndEvent ||
+                        spots == null ||
+                        spots.isEmpty) {
+                      if (_touchedIndex != null) {
+                        setState(() => _touchedIndex = null);
+                      }
+                      return;
+                    }
+                    final idx = spots.first.spotIndex;
+                    if (_touchedIndex != idx) {
+                      setState(() => _touchedIndex = idx);
+                    }
+                  },
                   touchTooltipData: LineTouchTooltipData(
+                    fitInsideHorizontally: true,
+                    fitInsideVertically: false,
                     getTooltipColor: (touchedSpot) => const Color(0xFF0F172A),
                     tooltipPadding: const EdgeInsets.symmetric(
                       horizontal: 12,
@@ -179,7 +257,7 @@ class MonthlyTrendChart extends StatelessWidget {
                           ),
                           children: [
                             TextSpan(
-                              text: currencyFormat.format(spot.y),
+                              text: widget.currencyFormat.format(spot.y),
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 13,
@@ -191,6 +269,28 @@ class MonthlyTrendChart extends StatelessWidget {
                       }).toList();
                     },
                   ),
+                  getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
+                    return spotIndexes.map((index) {
+                      return TouchedSpotIndicatorData(
+                        const FlLine(
+                          color: Color(0xFF94A3B8),
+                          strokeWidth: 1.5,
+                          dashArray: [4, 4],
+                        ),
+                        FlDotData(
+                          show: true,
+                          getDotPainter: (spot, percent, barData, index) {
+                            return FlDotCirclePainter(
+                              radius: 4.5,
+                              color: Colors.white,
+                              strokeWidth: 2.5,
+                              strokeColor: barData.color ?? AppTheme.primaryColor,
+                            );
+                          },
+                        ),
+                      );
+                    }).toList();
+                  },
                 ),
                 gridData: FlGridData(
                   show: true,
@@ -262,27 +362,20 @@ class MonthlyTrendChart extends StatelessWidget {
                 maxX: (trend.length - 1).toDouble().clamp(0, 11),
                 minY: 0,
                 maxY: chartMaxY,
-                lineBarsData: [
-                  LineChartBarData(
-                    spots: spots,
-                    isCurved: true,
-                    color: AppTheme.primaryColor,
-                    barWidth: 3,
-                    isStrokeCapRound: true,
-                    dotData: const FlDotData(show: true),
-                    belowBarData: BarAreaData(
-                      show: true,
-                      gradient: LinearGradient(
-                        colors: [
-                          AppTheme.primaryColor.withValues(alpha: 0.25),
-                          AppTheme.primaryColor.withValues(alpha: 0.0),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                  ),
-                ],
+                lineBarsData: [lineBarData],
+                showingTooltipIndicators: _touchedIndex != null &&
+                        _touchedIndex! >= 0 &&
+                        _touchedIndex! < spots.length
+                    ? [
+                        ShowingTooltipIndicators([
+                          LineBarSpot(
+                            lineBarData,
+                            0,
+                            spots[_touchedIndex!],
+                          ),
+                        ]),
+                      ]
+                    : const [],
               ),
               duration: const Duration(milliseconds: 450),
               curve: Curves.easeInOutCubic,

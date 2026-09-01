@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
+import 'package:dashboard/feature/home/model/executive_analytics_helper.dart';
 import 'package:dashboard/feature/home/presentation/widgets/dashboard_state_views.dart';
+import 'package:dashboard/feature/home/presentation/widgets/hhi_concentration_card.dart';
+import 'package:dashboard/feature/home/presentation/widgets/home_branch_comparison_card.dart';
 import 'package:dashboard/feature/home/presentation/widgets/kantor_filter_chips.dart';
 import 'package:dashboard/feature/home/presentation/widgets/kpi_stat_card.dart';
 import 'package:dashboard/feature/home/presentation/widgets/kpi_summary_section.dart';
@@ -207,6 +210,110 @@ void main() {
       expect(data.productBreakdown[0].total, 300000);
       expect(data.productBreakdown[1].name, 'A');
       expect(data.productBreakdown[1].total, 100000);
+    });
+
+    test('ExecutiveAnalyticsHelper computes HHI and branch comparison correctly', () {
+      const summary = DashboardSummary(
+        totalYTD: 1000000,
+        monthlyAverage: 83333,
+        totalAccounts: 10,
+        topProduct: 'KREDIT A',
+      );
+      const breakdown = [
+        ProductBreakdown(name: 'Kredit A', total: 600000, percentage: 60.0),
+        ProductBreakdown(name: 'Kredit B', total: 400000, percentage: 40.0),
+      ];
+      final data = DashboardData(
+        summary: summary,
+        monthlyTrend: const [],
+        productBreakdown: breakdown,
+        records: const [],
+      );
+
+      final result = ExecutiveAnalyticsHelper.compute(data);
+      // HHI = 60^2 + 40^2 = 3600 + 1600 = 5200 (High Risk)
+      expect(result.hhi.score, 5200.0);
+      expect(result.hhi.riskLevel, HhiRiskLevel.highRisk);
+      expect(result.hhi.label, 'Konsentrasi Tinggi');
+      expect(result.branches.length, 3);
+    });
+
+    testWidgets('HhiConcentrationCard renders HHI score and status badge', (tester) async {
+      const hhi = HhiResult(
+        score: 1850.0,
+        riskLevel: HhiRiskLevel.moderate,
+        label: 'Konsentrasi Sedang',
+        dominantProduct: 'MODAL KERJA',
+        dominantPercentage: 35.0,
+        description: 'Portofolio cukup terdiversifikasi.',
+      );
+
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: HhiConcentrationCard(hhi: hhi),
+          ),
+        ),
+      );
+
+      expect(find.text('Diversifikasi Portofolio (HHI)'), findsOneWidget);
+      expect(find.text('Konsentrasi Sedang'), findsOneWidget);
+      expect(find.text('1850'), findsOneWidget);
+      expect(find.text('/ 10.000 poin'), findsOneWidget);
+    });
+
+    testWidgets('HomeBranchComparisonCard renders multi-line branch chart and chips', (tester) async {
+      final branches = [
+        const ExecutiveBranchItem(
+          idKantor: 1,
+          label: 'Kantor 1',
+          total: 500000,
+          percentage: 50.0,
+          monthlyTrend: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+        ),
+        const ExecutiveBranchItem(
+          idKantor: 2,
+          label: 'Kantor 2',
+          total: 300000,
+          percentage: 30.0,
+          monthlyTrend: [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115],
+        ),
+        const ExecutiveBranchItem(
+          idKantor: 3,
+          label: 'Kantor 3',
+          total: 200000,
+          percentage: 20.0,
+          monthlyTrend: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24],
+        ),
+      ];
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: HomeBranchComparisonCard(
+                branches: branches,
+                topBranch: branches[0],
+                bankAverageMonthlyTrend: const [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+                bankAverageTotal: 333333,
+                currencyFormat: currencyFormat,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Komparasi Tren Cabang'), findsOneWidget);
+      expect(find.text('Top 3'), findsOneWidget);
+      expect(find.text('3 Terendah'), findsOneWidget);
+      expect(find.text('Benchmark Rata-rata'), findsOneWidget);
+      expect(find.text('Kantor 1'), findsAtLeast(1));
+      expect(find.text('Kantor 2'), findsAtLeast(1));
+      expect(find.text('Kantor 3'), findsAtLeast(1));
+
+      // Tap 3 Terendah mode
+      await tester.tap(find.text('3 Terendah'));
+      await tester.pumpAndSettle();
     });
   });
 }

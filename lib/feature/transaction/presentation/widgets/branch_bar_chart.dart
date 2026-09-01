@@ -139,6 +139,8 @@ class _BranchBarChartState extends State<BranchBarChart> {
                 maxY: _chartMaxY,
                 barTouchData: BarTouchData(
                   touchTooltipData: BarTouchTooltipData(
+                    fitInsideHorizontally: true,
+                    fitInsideVertically: true,
                     getTooltipColor: (group) => const Color(0xFF0F172A),
                     tooltipPadding: const EdgeInsets.symmetric(
                       horizontal: 14,

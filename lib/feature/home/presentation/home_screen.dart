@@ -3,9 +3,12 @@ import 'package:intl/intl.dart';
 
 import 'package:dashboard/core/presentation/server_config_dialog.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
+import 'package:dashboard/feature/home/model/executive_analytics_helper.dart';
 import 'package:dashboard/feature/home/services/dashboard_service.dart';
 
 import 'widgets/dashboard_state_views.dart';
+import 'widgets/hhi_concentration_card.dart';
+import 'widgets/home_branch_comparison_card.dart';
 import 'widgets/kantor_filter_chips.dart';
 import 'widgets/kpi_summary_section.dart';
 import 'widgets/monthly_trend_chart.dart';
@@ -41,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoading = true;
   String? _errorMessage;
   DashboardData? _dashboardData;
+  ExecutiveAnalyticsResult? _executiveResult;
   DateTime _lastFetched = DateTime.now();
 
   @override
@@ -61,9 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
       final data = await _dashboardService.fetchDashboardData(
         idKantor: _selectedKantor,
       );
+      final execResult = ExecutiveAnalyticsHelper.compute(data);
+
       if (!mounted) return;
       setState(() {
         _dashboardData = data;
+        _executiveResult = execResult;
         _isLoading = false;
         _lastFetched = DateTime.now();
         _recomputeActiveTrend();
@@ -271,29 +278,63 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // --- METRIC KPI CARDS ---
-        KpiSummarySection(
-          summary: data.summary,
-          currencyFormat: _currencyFormat,
+        // --- 1. METRIC KPI CARDS ---
+        RepaintBoundary(
+          child: KpiSummarySection(
+            summary: data.summary,
+            currencyFormat: _currencyFormat,
+          ),
         ),
         const SizedBox(height: 20),
 
-        // --- GRAFIK TREN BULANAN (Power BI Drilldown) ---
-        MonthlyTrendChart(
-          trend: _activeTrend,
-          currencyFormat: _currencyFormat,
-          selectedProductName: _selectedProduct,
-          onResetFilter: () => _setSelectedProduct(null),
+        // --- 2. HHI CONCENTRATION & DIVERSIFICATION RISK CARD ---
+        if (_executiveResult != null) ...[
+          RepaintBoundary(
+            child: HhiConcentrationCard(
+              hhi: _executiveResult!.hhi,
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
+
+        // --- 3. KOMPARASI KANTOR CABANG (Tampil saat Semua Kantor Terpilih) ---
+        if (_selectedKantor == 0 &&
+            _executiveResult != null &&
+            _executiveResult!.branches.isNotEmpty) ...[
+          RepaintBoundary(
+            child: HomeBranchComparisonCard(
+              branches: _executiveResult!.branches,
+              topBranch: _executiveResult!.topBranch,
+              bankAverageMonthlyTrend:
+                  _executiveResult!.bankAverageMonthlyTrend,
+              bankAverageTotal: _executiveResult!.bankAverageTotal,
+              currencyFormat: _currencyFormat,
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
+
+        // --- 4. GRAFIK TREN BULANAN (Power BI Drilldown) ---
+        RepaintBoundary(
+          child: MonthlyTrendChart(
+            trend: _activeTrend,
+            currencyFormat: _currencyFormat,
+            selectedProductName: _selectedProduct,
+            onResetFilter: () => _setSelectedProduct(null),
+          ),
         ),
         const SizedBox(height: 20),
 
-        // --- BREAKDOWN PRODUK PINJAMAN (Interactive Cross-Filtering) ---
-        ProductBreakdownCard(
-          breakdown: data.productBreakdown,
-          grandTotal: data.summary.totalYTD,
-          currencyFormat: _currencyFormat,
-          selectedProductName: _selectedProduct,
-          onProductSelected: (selectedName) => _setSelectedProduct(selectedName),
+        // --- 5. BREAKDOWN PRODUK PINJAMAN (Interactive Cross-Filtering) ---
+        RepaintBoundary(
+          child: ProductBreakdownCard(
+            breakdown: data.productBreakdown,
+            grandTotal: data.summary.totalYTD,
+            currencyFormat: _currencyFormat,
+            selectedProductName: _selectedProduct,
+            onProductSelected: (selectedName) =>
+                _setSelectedProduct(selectedName),
+          ),
         ),
       ],
     );
