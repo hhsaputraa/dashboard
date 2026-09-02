@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:dashboard/feature/transaction/model/analytics_helper.dart';
+import 'package:dashboard/feature/revenue/model/analytics_helper.dart';
 
 class AnalyticsLeaderboardCard extends StatelessWidget {
   final AnalyticsResult analytics;

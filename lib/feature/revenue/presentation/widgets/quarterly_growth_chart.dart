@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
-import 'package:dashboard/feature/transaction/model/analytics_helper.dart';
+import 'package:dashboard/feature/revenue/model/analytics_helper.dart';
 
 class QuarterlyGrowthChart extends StatefulWidget {
   final List<QuarterPerformance> quarters;

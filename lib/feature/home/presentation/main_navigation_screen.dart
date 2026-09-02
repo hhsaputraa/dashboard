@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dashboard/feature/home/presentation/home_screen.dart';
 import 'package:dashboard/feature/profile/presentation/profile_screen.dart';
 import 'package:dashboard/feature/report/presentation/report_screen.dart';
-import 'package:dashboard/feature/transaction/presentation/transaction_screen.dart';
+import 'package:dashboard/feature/revenue/presentation/revenue_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -16,7 +16,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   static const List<Widget> _pages = [
     HomeScreen(),
-    TransactionScreen(),
+    RevenueScreen(),
     ReportScreen(),
     ProfileScreen(),
   ];
@@ -30,7 +30,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     NavigationDestination(
       icon: Icon(Icons.receipt_long_outlined),
       selectedIcon: Icon(Icons.receipt_long),
-      label: 'Transaksi',
+      label: 'Pendapatan',
     ),
     NavigationDestination(
       icon: Icon(Icons.analytics_outlined),

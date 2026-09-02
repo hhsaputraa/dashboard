@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     symbol: 'Rp ',
     decimalDigits: 0,
   );
-  static final _timeFormat = DateFormat('HH:mm:ss');
+  static final _dateTimeFormat = DateFormat('dd/MM/yyyy HH:mm');
 
   static const List<String> _monthNames = [
     'Jan',
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
       statusText = 'Gagal terhubung ke server';
     } else {
       statusColor = _statusSuccessColor;
-      statusText = 'Update data pukul ${_timeFormat.format(_lastFetched)}';
+      statusText = 'Update data: ${_dateTimeFormat.format(_lastFetched)}';
     }
 
     return Row(

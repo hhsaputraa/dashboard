@@ -5,21 +5,21 @@ import 'package:dashboard/core/presentation/server_config_dialog.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
 import 'package:dashboard/feature/home/presentation/widgets/dashboard_state_views.dart';
 import 'package:dashboard/feature/home/services/dashboard_service.dart';
-import 'package:dashboard/feature/transaction/model/analytics_helper.dart';
+import 'package:dashboard/feature/revenue/model/analytics_helper.dart';
 
 import 'widgets/analytics_leaderboard_card.dart';
 import 'widgets/branch_bar_chart.dart';
 import 'widgets/portfolio_donut_chart.dart';
 import 'widgets/quarterly_growth_chart.dart';
 
-class TransactionScreen extends StatefulWidget {
-  const TransactionScreen({super.key});
+class RevenueScreen extends StatefulWidget {
+  const RevenueScreen({super.key});
 
   @override
-  State<TransactionScreen> createState() => _TransactionScreenState();
+  State<RevenueScreen> createState() => _RevenueScreenState();
 }
 
-class _TransactionScreenState extends State<TransactionScreen> {
+class _RevenueScreenState extends State<RevenueScreen> {
   final DashboardService _dashboardService = DashboardService();
 
   static final _currencyFormat = NumberFormat.currency(
@@ -27,7 +27,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
     symbol: 'Rp ',
     decimalDigits: 0,
   );
-  static final _timeFormat = DateFormat('HH:mm:ss');
+  static final _dateTimeFormat = DateFormat('dd/MM/yyyy HH:mm');
 
   bool _isLoading = true;
   String? _errorMessage;
@@ -96,7 +96,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 } else {
                   statusColor = const Color(0xFF22C55E);
                   statusText =
-                      'Update data pukul ${_timeFormat.format(_lastFetched)}';
+                      'Update data: ${_dateTimeFormat.format(_lastFetched)}';
                 }
 
                 return Row(
