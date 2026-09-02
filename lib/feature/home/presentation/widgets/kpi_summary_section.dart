@@ -7,6 +7,41 @@ class KpiSummarySection extends StatelessWidget {
   final DashboardSummary summary;
   final NumberFormat currencyFormat;
 
+  static const BoxDecoration _mainCardDecoration = BoxDecoration(
+    gradient: LinearGradient(
+      colors: [Color(0xFFDC2626), Color(0xFF991B1B)],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.all(Radius.circular(16)),
+    boxShadow: [
+      BoxShadow(
+        color: Color(0x40DC2626),
+        blurRadius: 12,
+        offset: Offset(0, 4),
+      ),
+    ],
+  );
+
+  static const TextStyle _headerTitleStyle = TextStyle(
+    color: Colors.white70,
+    fontSize: 11,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.8,
+  );
+
+  static const TextStyle _totalAmountStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 24,
+    fontWeight: FontWeight.w900,
+    letterSpacing: -0.5,
+  );
+
+  static const TextStyle _averageTextStyle = TextStyle(
+    color: Colors.white70,
+    fontSize: 11,
+  );
+
   const KpiSummarySection({
     super.key,
     required this.summary,
@@ -21,32 +56,13 @@ class KpiSummarySection extends StatelessWidget {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(18),
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color(0xFFDC2626), Color(0xFF991B1B)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFFDC2626).withValues(alpha: 0.25),
-                blurRadius: 12,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
+          decoration: _mainCardDecoration,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
                 'TOTAL PENDAPATAN BUNGA',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.8,
-                ),
+                style: _headerTitleStyle,
               ),
               const SizedBox(height: 8),
               FittedBox(
@@ -54,12 +70,7 @@ class KpiSummarySection extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   currencyFormat.format(summary.totalYTD),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -0.5,
-                  ),
+                  style: _totalAmountStyle,
                 ),
               ),
               const SizedBox(height: 10),
@@ -77,10 +88,7 @@ class KpiSummarySection extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Rata-rata/bln: ${currencyFormat.format(summary.monthlyAverage)}',
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 11,
-                        ),
+                        style: _averageTextStyle,
                       ),
                     ),
                   ),

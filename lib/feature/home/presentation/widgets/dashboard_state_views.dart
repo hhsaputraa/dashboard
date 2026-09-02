@@ -5,7 +5,10 @@ import 'package:dashboard/core/theme/app_theme.dart';
 class DashboardLoadingView extends StatelessWidget {
   final String message;
 
-  const DashboardLoadingView({super.key, this.message = 'Mengambil data...'});
+  const DashboardLoadingView({
+    super.key,
+    this.message = 'Mengambil data...',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +16,12 @@ class DashboardLoadingView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 60),
       alignment: Alignment.center,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          const CircularProgressIndicator(color: AppTheme.primaryColor),
+          const CircularProgressIndicator(
+            strokeWidth: 3,
+            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.primaryColor),
+          ),
           const SizedBox(height: 16),
           Text(
             message,
@@ -36,6 +43,24 @@ class DashboardErrorView extends StatelessWidget {
     required this.onRetry,
   });
 
+  static final ButtonStyle _retryButtonStyle = ElevatedButton.styleFrom(
+    backgroundColor: AppTheme.primaryColor,
+    foregroundColor: Colors.white,
+    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
+
+  static final ButtonStyle _configButtonStyle = OutlinedButton.styleFrom(
+    foregroundColor: const Color(0xFF991B1B),
+    side: const BorderSide(color: Color(0xFFFCA5A5)),
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,6 +72,7 @@ class DashboardErrorView extends StatelessWidget {
         border: Border.all(color: const Color(0xFFFECACA)),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             padding: const EdgeInsets.all(12),
@@ -89,30 +115,17 @@ class DashboardErrorView extends StatelessWidget {
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh_rounded, size: 16),
                 label: const Text('Coba Lagi'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.primaryColor,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+                style: _retryButtonStyle,
               ),
               OutlinedButton.icon(
                 onPressed: () async {
                   await ServerConfigDialog.show(context);
+                  if (!context.mounted) return;
                   onRetry();
                 },
                 icon: const Icon(Icons.settings_outlined, size: 16),
                 label: const Text('Pengaturan Server'),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: const Color(0xFF991B1B),
-                  side: const BorderSide(color: Color(0xFFFCA5A5)),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+                style: _configButtonStyle,
               ),
             ],
           ),

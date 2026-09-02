@@ -6,6 +6,26 @@ class KpiStatCard extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
 
+  static const BoxDecoration _cardDecoration = BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.all(Radius.circular(14)),
+    border: Border.fromBorderSide(BorderSide(color: Color(0xFFE2E8F0))),
+  );
+
+  static const BorderRadius _iconBorderRadius = BorderRadius.all(Radius.circular(10));
+
+  static const TextStyle _titleStyle = TextStyle(
+    fontSize: 10,
+    color: Color(0xFF64748B),
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle _valueStyle = TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.bold,
+    color: Color(0xFF0F172A),
+  );
+
   const KpiStatCard({
     super.key,
     required this.title,
@@ -18,18 +38,14 @@ class KpiStatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-      ),
+      decoration: _cardDecoration,
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: iconColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: _iconBorderRadius,
             ),
             child: Icon(icon, color: iconColor, size: 20),
           ),
@@ -37,14 +53,11 @@ class KpiStatCard extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    color: Color(0xFF64748B),
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: _titleStyle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -54,11 +67,7 @@ class KpiStatCard extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     value,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0F172A),
-                    ),
+                    style: _valueStyle,
                   ),
                 ),
               ],

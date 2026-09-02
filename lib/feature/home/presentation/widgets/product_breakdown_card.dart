@@ -10,6 +10,49 @@ class ProductBreakdownCard extends StatelessWidget {
   final String? selectedProductName;
   final ValueChanged<String?>? onProductSelected;
 
+  static const BoxDecoration _cardDecoration = BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.all(Radius.circular(16)),
+    border: Border.fromBorderSide(BorderSide(color: Color(0xFFE2E8F0))),
+  );
+
+  static const BoxDecoration _resetBtnDecoration = BoxDecoration(
+    color: Color(0x1ADC2626), // AppTheme.primaryColor 10% alpha
+    borderRadius: BorderRadius.all(Radius.circular(8)),
+  );
+
+  static const BorderRadius _itemBorderRadius = BorderRadius.all(Radius.circular(10));
+  static const BorderRadius _progressBorderRadius = BorderRadius.all(Radius.circular(6));
+
+  static const Color _selectedItemBgColor = Color(0x14DC2626); // AppTheme.primaryColor 8% alpha
+
+  static const AlwaysStoppedAnimation<Color> _selectedProgressAnimation =
+      AlwaysStoppedAnimation<Color>(AppTheme.primaryColor);
+  static const AlwaysStoppedAnimation<Color> _unselectedProgressAnimation =
+      AlwaysStoppedAnimation<Color>(Color(0xA6DC2626)); // AppTheme.primaryColor 65% alpha
+
+  static const TextStyle _cardHeaderStyle = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: Color(0xFF0F172A),
+  );
+
+  static const TextStyle _resetTextStyle = TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.bold,
+    color: AppTheme.primaryColor,
+  );
+
+  static const TextStyle _hintTextStyle = TextStyle(
+    fontSize: 11,
+    color: Color(0xFF94A3B8),
+  );
+
+  static const TextStyle _emptyTextStyle = TextStyle(
+    fontSize: 12,
+    color: Color(0xFF94A3B8),
+  );
+
   const ProductBreakdownCard({
     super.key,
     required this.breakdown,
@@ -23,11 +66,7 @@ class ProductBreakdownCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-      ),
+      decoration: _cardDecoration,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -36,11 +75,7 @@ class ProductBreakdownCard extends StatelessWidget {
             children: [
               const Text(
                 'Kontribusi Berdasarkan Jenis Kredit',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF0F172A),
-                ),
+                style: _cardHeaderStyle,
               ),
               if (selectedProductName != null)
                 InkWell(
@@ -48,10 +83,7 @@ class ProductBreakdownCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: AppTheme.primaryColor.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                    decoration: _resetBtnDecoration,
                     child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -59,11 +91,7 @@ class ProductBreakdownCard extends StatelessWidget {
                         SizedBox(width: 4),
                         Text(
                           'Reset',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.primaryColor,
-                          ),
+                          style: _resetTextStyle,
                         ),
                       ],
                     ),
@@ -72,7 +100,7 @@ class ProductBreakdownCard extends StatelessWidget {
               else
                 const Text(
                   'Tap untuk filter grafik',
-                  style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+                  style: _hintTextStyle,
                 ),
             ],
           ),
@@ -80,7 +108,7 @@ class ProductBreakdownCard extends StatelessWidget {
           if (breakdown.isEmpty)
             const Text(
               'Tidak ada rincian produk',
-              style: TextStyle(fontSize: 12, color: Color(0xFF94A3B8)),
+              style: _emptyTextStyle,
             ),
           ...breakdown.map((item) {
             final isSelected = selectedProductName == item.name;
@@ -88,21 +116,19 @@ class ProductBreakdownCard extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Material(
-                color: isSelected
-                    ? AppTheme.primaryColor.withValues(alpha: 0.08)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(10),
+                color: isSelected ? _selectedItemBgColor : Colors.transparent,
+                borderRadius: _itemBorderRadius,
                 child: InkWell(
                   onTap: () {
                     if (onProductSelected != null) {
                       onProductSelected!(isSelected ? null : item.name);
                     }
                   },
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: _itemBorderRadius,
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: _itemBorderRadius,
                       border: Border.all(
                         color: isSelected
                             ? AppTheme.primaryColor
@@ -162,16 +188,14 @@ class ProductBreakdownCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 6),
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(6),
+                          borderRadius: _progressBorderRadius,
                           child: LinearProgressIndicator(
                             value: percent.clamp(0.0, 1.0),
                             minHeight: 6,
                             backgroundColor: const Color(0xFFF1F5F9),
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              isSelected
-                                  ? AppTheme.primaryColor
-                                  : AppTheme.primaryColor.withValues(alpha: 0.65),
-                            ),
+                            valueColor: isSelected
+                                ? _selectedProgressAnimation
+                                : _unselectedProgressAnimation,
                           ),
                         ),
                       ],

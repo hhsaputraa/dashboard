@@ -32,6 +32,25 @@ class _HomeScreenState extends State<HomeScreen> {
   );
   static final _timeFormat = DateFormat('HH:mm:ss');
 
+  static const List<String> _monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Mei',
+    'Jun',
+    'Jul',
+    'Ags',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Des',
+  ];
+
+  static const Color _statusLoadingColor = Color(0xFFEAB308);
+  static const Color _statusErrorColor = Color(0xFFEF4444);
+  static const Color _statusSuccessColor = Color(0xFF22C55E);
+
   // Filter Cabang (0 = Semua Kantor, 1 = Kantor 1, dst)
   int _selectedKantor = 0;
 
@@ -111,26 +130,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // 1. Hitung agregasi data bulanan riil dari records Oracle DB (Akurat & Dinamis)
     if (data.records.isNotEmpty) {
-      final matchingRecords = data.records.where((r) {
-        return r.jenisPinjaman.trim().toLowerCase() == selectedLower;
-      }).toList();
+      final monthlySums = List<double>.filled(12, 0.0);
+      bool hasMatch = false;
 
-      if (matchingRecords.isNotEmpty) {
-        const monthNames = [
-          'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
-          'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des',
-        ];
-        final monthlySums = List<double>.filled(12, 0.0);
-
-        for (final r in matchingRecords) {
+      for (final r in data.records) {
+        if (r.jenisPinjaman.trim().toLowerCase() == selectedLower) {
+          hasMatch = true;
           for (int i = 0; i < 12 && i < r.bulanan.length; i++) {
             monthlySums[i] += r.bulanan[i];
           }
         }
+      }
 
+      if (hasMatch) {
         return List.generate(12, (i) {
           return MonthlyTrendItem(
-            month: monthNames[i],
+            month: _monthNames[i],
             total: monthlySums[i],
           );
         });
@@ -138,25 +153,59 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     // 2. Jika ada monthly_trend di dalam product breakdown
-    final product = data.productBreakdown
-        .where((p) => p.name.trim().toLowerCase() == selectedLower)
-        .firstOrNull;
-
-    if (product != null &&
-        product.monthlyTrend != null &&
-        product.monthlyTrend!.isNotEmpty) {
-      return product.monthlyTrend!;
-    }
-
-    // 3. Fallback jika hanya ada total agregat
-    if (product != null && data.summary.totalYTD > 0) {
-      final ratio = product.total / data.summary.totalYTD;
-      return data.monthlyTrend
-          .map((m) => MonthlyTrendItem(month: m.month, total: m.total * ratio))
-          .toList();
+    for (final p in data.productBreakdown) {
+      if (p.name.trim().toLowerCase() == selectedLower) {
+        if (p.monthlyTrend != null && p.monthlyTrend!.isNotEmpty) {
+          return p.monthlyTrend!;
+        }
+        if (data.summary.totalYTD > 0) {
+          final ratio = p.total / data.summary.totalYTD;
+          return data.monthlyTrend
+              .map((m) => MonthlyTrendItem(month: m.month, total: m.total * ratio))
+              .toList();
+        }
+        break;
+      }
     }
 
     return data.monthlyTrend;
+  }
+
+  Widget _buildStatusIndicator() {
+    Color statusColor;
+    String statusText;
+    if (_isLoading) {
+      statusColor = _statusLoadingColor;
+      statusText = 'Menyinkronkan data...';
+    } else if (_errorMessage != null) {
+      statusColor = _statusErrorColor;
+      statusText = 'Gagal terhubung ke server';
+    } else {
+      statusColor = _statusSuccessColor;
+      statusText = 'Update data pukul ${_timeFormat.format(_lastFetched)}';
+    }
+
+    return Row(
+      children: [
+        Container(
+          width: 7,
+          height: 7,
+          decoration: BoxDecoration(
+            color: statusColor,
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 5),
+        Text(
+          statusText,
+          style: const TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF64748B),
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -175,45 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 letterSpacing: 1.2,
               ),
             ),
-            Builder(
-              builder: (context) {
-                Color statusColor;
-                String statusText;
-                if (_isLoading) {
-                  statusColor = const Color(0xFFEAB308);
-                  statusText = 'Menyinkronkan data...';
-                } else if (_errorMessage != null) {
-                  statusColor = const Color(0xFFEF4444);
-                  statusText = 'Gagal terhubung ke server';
-                } else {
-                  statusColor = const Color(0xFF22C55E);
-                  statusText =
-                      'Update data pukul ${_timeFormat.format(_lastFetched)}';
-                }
-
-                return Row(
-                  children: [
-                    Container(
-                      width: 7,
-                      height: 7,
-                      decoration: BoxDecoration(
-                        color: statusColor,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      statusText,
-                      style: const TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF64748B),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+            _buildStatusIndicator(),
           ],
         ),
         actions: [
@@ -222,6 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
             tooltip: 'Pengaturan Server',
             onPressed: () async {
               await ServerConfigDialog.show(context);
+              if (!mounted) return;
               _loadData();
             },
           ),
@@ -245,9 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
               KantorFilterChips(
                 selectedKantor: _selectedKantor,
                 onKantorChanged: (newKantor) {
-                  setState(() {
-                    _selectedKantor = newKantor;
-                  });
+                  _selectedKantor = newKantor;
                   _loadData();
                 },
               ),

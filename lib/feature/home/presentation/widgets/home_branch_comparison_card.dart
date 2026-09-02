@@ -68,6 +68,26 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
     'Des',
   ];
 
+  static const BoxDecoration _cardDecoration = BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.all(Radius.circular(18)),
+    border: Border.fromBorderSide(BorderSide(color: Color(0xFFE2E8F0))),
+    boxShadow: [
+      BoxShadow(color: Color(0x080F172A), blurRadius: 12, offset: Offset(0, 4)),
+    ],
+  );
+
+  static const FlLine _touchIndicatorLine = FlLine(
+    color: Color(0xFF94A3B8),
+    strokeWidth: 1.5,
+    dashArray: [4, 4],
+  );
+
+  static const FlLine _gridLine = FlLine(
+    color: Color(0xFFF1F5F9),
+    strokeWidth: 1,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -90,8 +110,10 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
 
   void _applyPreset(BranchViewMode mode, {required bool ascending}) {
     final sorted = List<ExecutiveBranchItem>.from(widget.branches)
-      ..sort((a, b) =>
-          ascending ? a.total.compareTo(b.total) : b.total.compareTo(a.total));
+      ..sort(
+        (a, b) =>
+            ascending ? a.total.compareTo(b.total) : b.total.compareTo(a.total),
+      );
 
     setState(() {
       _viewMode = mode;
@@ -115,7 +137,10 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
     for (final b in _cachedActiveBranches) {
       _cachedBranchSpots[b.idKantor] = List<FlSpot>.generate(
         12,
-        (m) => FlSpot(m.toDouble(), m < b.monthlyTrend.length ? b.monthlyTrend[m] : 0.0),
+        (m) => FlSpot(
+          m.toDouble(),
+          m < b.monthlyTrend.length ? b.monthlyTrend[m] : 0.0,
+        ),
       );
       for (final val in b.monthlyTrend) {
         if (val > peakY) peakY = val;
@@ -126,7 +151,9 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
       12,
       (m) => FlSpot(
         m.toDouble(),
-        m < widget.bankAverageMonthlyTrend.length ? widget.bankAverageMonthlyTrend[m] : 0.0,
+        m < widget.bankAverageMonthlyTrend.length
+            ? widget.bankAverageMonthlyTrend[m]
+            : 0.0,
       ),
     );
 
@@ -166,20 +193,28 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
 
   static String _formatCompact(double value) {
     if (value <= 0) return '0';
-    if (value >= 1000000000) return '${(value / 1000000000).toStringAsFixed(1)} M';
-    if (value >= 1000000) return '${(value / 1000000).toStringAsFixed(value >= 10000000 ? 0 : 1)} jt';
+    if (value >= 1000000000)
+      return '${(value / 1000000000).toStringAsFixed(1)} M';
+    if (value >= 1000000)
+      return '${(value / 1000000).toStringAsFixed(value >= 10000000 ? 0 : 1)} jt';
     if (value >= 1000) return '${(value / 1000).toStringAsFixed(0)} rb';
     return value.toStringAsFixed(0);
   }
 
   List<LineTooltipItem> _buildTooltipItems(List<LineBarSpot> touchedSpots) {
     return touchedSpots.map((spot) {
-      final isBenchmark = _showBenchmark && spot.barIndex == _cachedActiveBranches.length;
-      final branch = !isBenchmark && spot.barIndex < _cachedActiveBranches.length
+      final isBenchmark =
+          _showBenchmark && spot.barIndex == _cachedActiveBranches.length;
+      final branch =
+          !isBenchmark && spot.barIndex < _cachedActiveBranches.length
           ? _cachedActiveBranches[spot.barIndex]
           : null;
-      final title = isBenchmark ? 'Rata-rata Bank' : (branch?.label ?? 'Kantor');
-      final color = isBenchmark ? _benchmarkColor : _palette[spot.barIndex % _palette.length];
+      final title = isBenchmark
+          ? 'Rata-rata Bank'
+          : (branch?.label ?? 'Kantor');
+      final color = isBenchmark
+          ? _benchmarkColor
+          : _palette[spot.barIndex % _palette.length];
       final monthName = _monthLabels[spot.x.toInt()];
 
       return LineTooltipItem(
@@ -188,7 +223,11 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
         children: [
           TextSpan(
             text: widget.currencyFormat.format(spot.y),
-            style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       );
@@ -206,21 +245,31 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
     final isDirectlyFocused = _focusedBranchId == id;
     final isDimmed = _focusedBranchId != null && !isDirectlyFocused;
 
+    final Color badgeBgColor = isDirectlyFocused
+        ? color.withValues(alpha: 0.12)
+        : (isDimmed ? const Color(0xFFF8FAFC) : color.withValues(alpha: 0.05));
+
+    final Color badgeBorderColor = isDirectlyFocused
+        ? color
+        : (isDimmed ? const Color(0xFFE2E8F0) : color.withValues(alpha: 0.25));
+
+    final Color labelColor = isDimmed ? const Color(0xFF94A3B8) : color;
+    final Color valueColor = isDimmed
+        ? const Color(0xFF94A3B8)
+        : (isBenchmark ? const Color(0xFF475569) : const Color(0xFF0F172A));
+
     return InkWell(
-      onTap: () => setState(() => _focusedBranchId = isDirectlyFocused ? null : id),
+      onTap: () =>
+          setState(() => _focusedBranchId = isDirectlyFocused ? null : id),
       borderRadius: BorderRadius.circular(10),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         decoration: BoxDecoration(
-          color: isDirectlyFocused
-              ? color.withValues(alpha: 0.12)
-              : (isDimmed ? const Color(0xFFF8FAFC) : color.withValues(alpha: 0.05)),
+          color: badgeBgColor,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: isDirectlyFocused
-                ? color
-                : (isDimmed ? const Color(0xFFE2E8F0) : color.withValues(alpha: 0.25)),
+            color: badgeBorderColor,
             width: isDirectlyFocused ? 1.5 : 1.0,
           ),
         ),
@@ -248,7 +297,7 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                     style: TextStyle(
                       fontSize: isBenchmark ? 9.5 : 10,
                       fontWeight: FontWeight.bold,
-                      color: isDimmed ? const Color(0xFF94A3B8) : color,
+                      color: labelColor,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -260,7 +309,7 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                     style: TextStyle(
                       fontSize: 9,
                       fontWeight: FontWeight.w800,
-                      color: isDimmed ? const Color(0xFF94A3B8) : color,
+                      color: labelColor,
                     ),
                   ),
               ],
@@ -274,9 +323,7 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.bold,
-                  color: isDimmed
-                      ? const Color(0xFF94A3B8)
-                      : (isBenchmark ? const Color(0xFF475569) : const Color(0xFF0F172A)),
+                  color: valueColor,
                 ),
               ),
             ),
@@ -316,24 +363,56 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
     );
   }
 
+  List<LineChartBarData> _buildLineBarsData() {
+    return <LineChartBarData>[
+      ..._cachedActiveBranches.asMap().entries.map((entry) {
+        final idx = entry.key;
+        final b = entry.value;
+        final color = _palette[idx % _palette.length];
+        final isHighlighted =
+            _focusedBranchId == null || _focusedBranchId == b.idKantor;
+
+        return LineChartBarData(
+          spots: _cachedBranchSpots[b.idKantor] ?? const [],
+          isCurved: true,
+          curveSmoothness: 0.35,
+          preventCurveOverShooting: true,
+          color: isHighlighted ? color : color.withValues(alpha: 0.35),
+          barWidth: 2.5,
+          isStrokeCapRound: true,
+          dotData: const FlDotData(show: false),
+          showingIndicators: _touchedIndex != null
+              ? [_touchedIndex!]
+              : const [],
+          belowBarData: BarAreaData(show: false),
+        );
+      }),
+      if (_showBenchmark)
+        LineChartBarData(
+          spots: _cachedBenchmarkSpots,
+          isCurved: true,
+          curveSmoothness: 0.35,
+          dashArray: [6, 4],
+          color: (_focusedBranchId == null || _focusedBranchId == -1)
+              ? _benchmarkColor.withValues(alpha: 0.85)
+              : _benchmarkColor.withValues(alpha: 0.35),
+          barWidth: 2.5,
+          dotData: const FlDotData(show: false),
+          showingIndicators: _touchedIndex != null
+              ? [_touchedIndex!]
+              : const [],
+          belowBarData: BarAreaData(show: false),
+        ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.branches.isEmpty) return const SizedBox.shrink();
 
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF0F172A).withValues(alpha: 0.03),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+      decoration: _cardDecoration,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -352,7 +431,8 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                         Container(
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF2563EB).withValues(alpha: 0.1),
+                            color: const Color(0xFF2563EB)
+                                .withValues(alpha: 0.1),
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
@@ -392,10 +472,14 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                         },
                         borderRadius: BorderRadius.circular(16),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 3,
+                          ),
                           decoration: BoxDecoration(
                             color: _showBenchmark
-                                ? const Color(0xFF64748B).withValues(alpha: 0.12)
+                                ? const Color(0xFF64748B)
+                                      .withValues(alpha: 0.12)
                                 : const Color(0xFFF1F5F9),
                             borderRadius: BorderRadius.circular(16),
                           ),
@@ -454,7 +538,10 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                         const SizedBox(height: 12),
                         Text(
                           'Komparasi multi-garis performa 12 bulan (Total ${widget.branches.length} Kantor Cabang)',
-                          style: const TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF94A3B8),
+                          ),
                         ),
                         const SizedBox(height: 14),
 
@@ -466,13 +553,19 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                               _buildModeTab(
                                 label: 'Top 3',
                                 isActive: _viewMode == BranchViewMode.top3,
-                                onTap: () => _applyPreset(BranchViewMode.top3, ascending: false),
+                                onTap: () => _applyPreset(
+                                  BranchViewMode.top3,
+                                  ascending: false,
+                                ),
                               ),
                               const SizedBox(width: 6),
                               _buildModeTab(
                                 label: '3 Terendah',
                                 isActive: _viewMode == BranchViewMode.bottom3,
-                                onTap: () => _applyPreset(BranchViewMode.bottom3, ascending: true),
+                                onTap: () => _applyPreset(
+                                  BranchViewMode.bottom3,
+                                  ascending: true,
+                                ),
                               ),
                               const SizedBox(width: 6),
                               _buildModeTab(
@@ -490,42 +583,7 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                         // Multi-Line Chart Canvas
                         Builder(
                           builder: (context) {
-                            final lineBarsDataList = <LineChartBarData>[
-                              ..._cachedActiveBranches.asMap().entries.map((entry) {
-                                final idx = entry.key;
-                                final b = entry.value;
-                                final color = _palette[idx % _palette.length];
-                                final isHighlighted =
-                                    _focusedBranchId == null || _focusedBranchId == b.idKantor;
-
-                                return LineChartBarData(
-                                  spots: _cachedBranchSpots[b.idKantor] ?? const [],
-                                  isCurved: true,
-                                  curveSmoothness: 0.35,
-                                  preventCurveOverShooting: true,
-                                  color: isHighlighted ? color : color.withValues(alpha: 0.35),
-                                  barWidth: 2.5,
-                                  isStrokeCapRound: true,
-                                  dotData: const FlDotData(show: false),
-                                  showingIndicators: _touchedIndex != null ? [_touchedIndex!] : const [],
-                                  belowBarData: BarAreaData(show: false),
-                                );
-                              }),
-                              if (_showBenchmark)
-                                LineChartBarData(
-                                  spots: _cachedBenchmarkSpots,
-                                  isCurved: true,
-                                  curveSmoothness: 0.35,
-                                  dashArray: [6, 4],
-                                  color: (_focusedBranchId == null || _focusedBranchId == -1)
-                                      ? _benchmarkColor.withValues(alpha: 0.85)
-                                      : _benchmarkColor.withValues(alpha: 0.35),
-                                  barWidth: 2.5,
-                                  dotData: const FlDotData(show: false),
-                                  showingIndicators: _touchedIndex != null ? [_touchedIndex!] : const [],
-                                  belowBarData: BarAreaData(show: false),
-                                ),
-                            ];
+                            final lineBarsDataList = _buildLineBarsData();
 
                             return SizedBox(
                               height: 220,
@@ -558,51 +616,71 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                                     touchTooltipData: LineTouchTooltipData(
                                       fitInsideHorizontally: true,
                                       fitInsideVertically: false,
-                                      getTooltipColor: (_) => const Color(0xFF0F172A),
-                                      tooltipPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                      getTooltipColor: (_) =>
+                                          const Color(0xFF0F172A),
+                                      tooltipPadding:
+                                          const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 8,
+                                          ),
                                       getTooltipItems: _buildTooltipItems,
                                     ),
-                                    getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
-                                      return spotIndexes.map((index) {
-                                        return TouchedSpotIndicatorData(
-                                          const FlLine(
-                                            color: Color(0xFF94A3B8),
-                                            strokeWidth: 1.5,
-                                            dashArray: [4, 4],
-                                          ),
-                                          FlDotData(
-                                            show: true,
-                                            getDotPainter: (spot, percent, barData, index) {
-                                              return FlDotCirclePainter(
-                                                radius: 4.5,
-                                                color: Colors.white,
-                                                strokeWidth: 2.5,
-                                                strokeColor: barData.color ?? const Color(0xFF2563EB),
-                                              );
-                                            },
-                                          ),
-                                        );
-                                      }).toList();
-                                    },
+                                    getTouchedSpotIndicator:
+                                        (
+                                          LineChartBarData barData,
+                                          List<int> spotIndexes,
+                                        ) {
+                                          return spotIndexes.map((index) {
+                                            return TouchedSpotIndicatorData(
+                                              _touchIndicatorLine,
+                                              FlDotData(
+                                                show: true,
+                                                getDotPainter:
+                                                    (
+                                                      spot,
+                                                      percent,
+                                                      barData,
+                                                      index,
+                                                    ) {
+                                                      return FlDotCirclePainter(
+                                                        radius: 4.5,
+                                                        color: Colors.white,
+                                                        strokeWidth: 2.5,
+                                                        strokeColor:
+                                                            barData.color ??
+                                                            const Color(
+                                                              0xFF2563EB,
+                                                            ),
+                                                      );
+                                                    },
+                                              ),
+                                            );
+                                          }).toList();
+                                        },
                                   ),
                                   gridData: FlGridData(
                                     show: true,
                                     drawVerticalLine: false,
                                     horizontalInterval: _cachedYInterval,
-                                    getDrawingHorizontalLine: (_) =>
-                                        const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1),
+                                    getDrawingHorizontalLine: (_) => _gridLine,
                                   ),
                                   titlesData: FlTitlesData(
                                     show: true,
-                                    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                                    topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                                    rightTitles: const AxisTitles(
+                                      sideTitles: SideTitles(showTitles: false),
+                                    ),
+                                    topTitles: const AxisTitles(
+                                      sideTitles: SideTitles(showTitles: false),
+                                    ),
                                     leftTitles: AxisTitles(
                                       sideTitles: SideTitles(
                                         showTitles: true,
                                         reservedSize: 42,
                                         interval: _cachedYInterval,
                                         getTitlesWidget: (value, meta) {
-                                          if (value == meta.max || value == meta.min) return const SizedBox.shrink();
+                                          if (value == meta.max ||
+                                              value == meta.min)
+                                            return const SizedBox.shrink();
                                           return SideTitleWidget(
                                             meta: meta,
                                             space: 4,
@@ -625,9 +703,12 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                                         interval: 1,
                                         getTitlesWidget: (value, meta) {
                                           final idx = value.toInt();
-                                          if (idx >= 0 && idx < _monthLabels.length) {
+                                          if (idx >= 0 &&
+                                              idx < _monthLabels.length) {
                                             return Padding(
-                                              padding: const EdgeInsets.only(top: 6),
+                                              padding: const EdgeInsets.only(
+                                                top: 6,
+                                              ),
                                               child: Text(
                                                 _monthLabels[idx],
                                                 style: const TextStyle(
@@ -645,18 +726,33 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                                   ),
                                   borderData: FlBorderData(show: false),
                                   lineBarsData: lineBarsDataList,
-                                  showingTooltipIndicators: _touchedIndex != null &&
+                                  showingTooltipIndicators:
+                                      _touchedIndex != null &&
                                           _touchedIndex! >= 0 &&
                                           _touchedIndex! < 12
                                       ? [
                                           ShowingTooltipIndicators(
-                                            List.generate(lineBarsDataList.length, (barIdx) {
-                                              final bar = lineBarsDataList[barIdx];
-                                              final spot = _touchedIndex! < bar.spots.length
-                                                  ? bar.spots[_touchedIndex!]
-                                                  : FlSpot(_touchedIndex!.toDouble(), 0);
-                                              return LineBarSpot(bar, barIdx, spot);
-                                            }),
+                                            List.generate(
+                                              lineBarsDataList.length,
+                                              (barIdx) {
+                                                final bar =
+                                                    lineBarsDataList[barIdx];
+                                                final spot =
+                                                    _touchedIndex! <
+                                                        bar.spots.length
+                                                    ? bar.spots[_touchedIndex!]
+                                                    : FlSpot(
+                                                        _touchedIndex!
+                                                            .toDouble(),
+                                                        0,
+                                                      );
+                                                return LineBarSpot(
+                                                  bar,
+                                                  barIdx,
+                                                  spot,
+                                                );
+                                              },
+                                            ),
                                           ),
                                         ]
                                       : const [],
@@ -667,35 +763,51 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                         ),
                         const SizedBox(height: 18),
 
-                        // 3-Column Grid Legend Badges
-                        GridView.count(
-                          crossAxisCount: 3,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          mainAxisSpacing: 6,
-                          crossAxisSpacing: 6,
-                          childAspectRatio: 1.9,
-                          children: [
-                            ..._cachedActiveBranches.asMap().entries.map((entry) {
-                              final idx = entry.key;
-                              final b = entry.value;
-                              return _buildLegendBadge(
-                                id: b.idKantor,
-                                label: b.label,
-                                valueText: widget.currencyFormat.format(b.total),
-                                color: _palette[idx % _palette.length],
-                                subtitle: '${b.percentage.toStringAsFixed(1)}%',
-                              );
-                            }),
-                            if (_showBenchmark)
-                              _buildLegendBadge(
-                                id: -1,
-                                label: 'Rata-rata Bank',
-                                valueText: widget.currencyFormat.format(widget.bankAverageTotal),
-                                color: _benchmarkColor,
-                                isBenchmark: true,
-                              ),
-                          ],
+                        // 3-Column Grid Legend Badges (High-performance Wrap without GridView/Sliver overhead)
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            final itemWidth = (constraints.maxWidth - 12) / 3;
+                            return Wrap(
+                              spacing: 6,
+                              runSpacing: 6,
+                              children: [
+                                ..._cachedActiveBranches.asMap().entries.map((
+                                  entry,
+                                ) {
+                                  final idx = entry.key;
+                                  final b = entry.value;
+                                  return SizedBox(
+                                    width: itemWidth,
+                                    height: 52,
+                                    child: _buildLegendBadge(
+                                      id: b.idKantor,
+                                      label: b.label,
+                                      valueText: widget.currencyFormat.format(
+                                        b.total,
+                                      ),
+                                      color: _palette[idx % _palette.length],
+                                      subtitle:
+                                          '${b.percentage.toStringAsFixed(1)}%',
+                                    ),
+                                  );
+                                }),
+                                if (_showBenchmark)
+                                  SizedBox(
+                                    width: itemWidth,
+                                    height: 52,
+                                    child: _buildLegendBadge(
+                                      id: -1,
+                                      label: 'Rata-rata Bank',
+                                      valueText: widget.currencyFormat.format(
+                                        widget.bankAverageTotal,
+                                      ),
+                                      color: _benchmarkColor,
+                                      isBenchmark: true,
+                                    ),
+                                  ),
+                              ],
+                            );
+                          },
                         ),
                       ],
                     ),

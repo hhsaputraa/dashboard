@@ -18,26 +18,30 @@ class HhiConcentrationCard extends StatefulWidget {
 class _HhiConcentrationCardState extends State<HhiConcentrationCard> {
   late bool _isExpanded;
 
+  static const Color _healthyColor = Color(0xFF16A34A); // Emerald Green
+  static const Color _moderateColor = Color(0xFFD97706); // Amber Gold
+  static const Color _highRiskColor = Color(0xFFDC2626); // Crimson Red
+
   @override
   void initState() {
     super.initState();
     _isExpanded = widget.initiallyExpanded;
   }
 
-  Color _getStatusColor() {
-    switch (widget.hhi.riskLevel) {
+  static Color _resolveStatusColor(HhiRiskLevel riskLevel) {
+    switch (riskLevel) {
       case HhiRiskLevel.healthy:
-        return const Color(0xFF16A34A); // Emerald Green
+        return _healthyColor;
       case HhiRiskLevel.moderate:
-        return const Color(0xFFD97706); // Amber Gold
+        return _moderateColor;
       case HhiRiskLevel.highRisk:
-        return const Color(0xFFDC2626); // Crimson Red
+        return _highRiskColor;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = _getStatusColor();
+    final statusColor = _resolveStatusColor(widget.hhi.riskLevel);
     final clampedScore = widget.hhi.score.clamp(0.0, 10000.0);
     final scoreRatio = clampedScore / 10000.0;
 
@@ -47,11 +51,11 @@ class _HhiConcentrationCardState extends State<HhiConcentrationCard> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: const Color(0xFFE2E8F0)),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: const Color(0xFF0F172A).withValues(alpha: 0.03),
+            color: Color(0x080F172A),
             blurRadius: 10,
-            offset: const Offset(0, 3),
+            offset: Offset(0, 3),
           ),
         ],
       ),

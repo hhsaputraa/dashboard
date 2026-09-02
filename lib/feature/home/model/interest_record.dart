@@ -13,6 +13,21 @@ class InterestRecord {
     required this.bulanan,
   });
 
+  static const List<String> _monthKeys = [
+    'januari',
+    'februari',
+    'maret',
+    'april',
+    'mei',
+    'juni',
+    'juli',
+    'agustus',
+    'september',
+    'oktober',
+    'november',
+    'desember',
+  ];
+
   factory InterestRecord.fromJson(Map<String, dynamic> json) {
     double parseDouble(dynamic v) {
       if (v == null) return 0.0;
@@ -20,27 +35,12 @@ class InterestRecord {
       return double.tryParse(v.toString()) ?? 0.0;
     }
 
-    final monthKeys = [
-      'januari',
-      'februari',
-      'maret',
-      'april',
-      'mei',
-      'juni',
-      'juli',
-      'agustus',
-      'september',
-      'oktober',
-      'november',
-      'desember',
-    ];
-
     return InterestRecord(
       idTrxBunga: int.tryParse(json['id_trx_bunga']?.toString() ?? '') ?? 0,
       idKantor: int.tryParse(json['id_kantor']?.toString() ?? '') ?? 0,
       idPinjaman: int.tryParse(json['id_pinjaman']?.toString() ?? '') ?? 0,
       jenisPinjaman: json['jenis_pinjaman']?.toString() ?? '-',
-      bulanan: monthKeys.map((k) => parseDouble(json[k])).toList(),
+      bulanan: _monthKeys.map((k) => parseDouble(json[k])).toList(),
     );
   }
 }

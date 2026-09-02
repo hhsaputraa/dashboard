@@ -29,6 +29,56 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
   double _cachedTotalBunga = 0;
   int? _touchedIndex;
 
+  static const BoxDecoration _cardDecoration = BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.all(Radius.circular(16)),
+    border: Border.fromBorderSide(BorderSide(color: Color(0xFFE2E8F0))),
+  );
+
+  static const LinearGradient _belowBarGradient = LinearGradient(
+    colors: [
+      Color(0x40DC2626), // AppTheme.primaryColor with 25% alpha
+      Color(0x00DC2626), // AppTheme.primaryColor with 0% alpha
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  static const FlLine _gridLine = FlLine(
+    color: Color(0xFFF1F5F9),
+    strokeWidth: 1,
+    dashArray: [4, 4],
+  );
+
+  static const FlLine _touchIndicatorLine = FlLine(
+    color: Color(0xFF94A3B8),
+    strokeWidth: 1.5,
+    dashArray: [4, 4],
+  );
+
+  static const TextStyle _tooltipMonthStyle = TextStyle(
+    color: Color(0xFF94A3B8),
+    fontSize: 11,
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle _tooltipValueStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 13,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle _yAxisTitleStyle = TextStyle(
+    fontSize: 9,
+    color: Color(0xFF94A3B8),
+    fontWeight: FontWeight.w500,
+  );
+
+  static const TextStyle _xAxisTitleStyle = TextStyle(
+    fontSize: 10,
+    color: Color(0xFF64748B),
+  );
+
   static String _formatCompactValue(double value) {
     if (value <= 0) return '0';
     if (value >= 1000000000) {
@@ -96,24 +146,13 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
       showingIndicators: _touchedIndex != null ? [_touchedIndex!] : const [],
       belowBarData: BarAreaData(
         show: true,
-        gradient: LinearGradient(
-          colors: [
-            AppTheme.primaryColor.withValues(alpha: 0.25),
-            AppTheme.primaryColor.withValues(alpha: 0.0),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+        gradient: _belowBarGradient,
       ),
     );
 
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-      ),
+      decoration: _cardDecoration,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -250,19 +289,11 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                             : '';
                         return LineTooltipItem(
                           'Bulan $monthName\n',
-                          const TextStyle(
-                            color: Color(0xFF94A3B8),
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          _tooltipMonthStyle,
                           children: [
                             TextSpan(
                               text: widget.currencyFormat.format(spot.y),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: _tooltipValueStyle,
                             ),
                           ],
                         );
@@ -272,11 +303,7 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                   getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
                     return spotIndexes.map((index) {
                       return TouchedSpotIndicatorData(
-                        const FlLine(
-                          color: Color(0xFF94A3B8),
-                          strokeWidth: 1.5,
-                          dashArray: [4, 4],
-                        ),
+                        _touchIndicatorLine,
                         FlDotData(
                           show: true,
                           getDotPainter: (spot, percent, barData, index) {
@@ -296,11 +323,7 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                   show: true,
                   drawVerticalLine: false,
                   horizontalInterval: yInterval,
-                  getDrawingHorizontalLine: (value) => const FlLine(
-                    color: Color(0xFFF1F5F9),
-                    strokeWidth: 1,
-                    dashArray: [4, 4],
-                  ),
+                  getDrawingHorizontalLine: (value) => _gridLine,
                 ),
                 titlesData: FlTitlesData(
                   rightTitles: const AxisTitles(
@@ -323,11 +346,7 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                           child: Text(
                             _formatCompactValue(value),
                             textAlign: TextAlign.right,
-                            style: const TextStyle(
-                              fontSize: 9,
-                              color: Color(0xFF94A3B8),
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: _yAxisTitleStyle,
                           ),
                         );
                       },
@@ -345,10 +364,7 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                             padding: const EdgeInsets.only(top: 6),
                             child: Text(
                               trend[index].month,
-                              style: const TextStyle(
-                                fontSize: 10,
-                                color: Color(0xFF64748B),
-                              ),
+                              style: _xAxisTitleStyle,
                             ),
                           );
                         }
