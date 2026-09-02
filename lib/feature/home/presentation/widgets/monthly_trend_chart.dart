@@ -144,10 +144,7 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
       isStrokeCapRound: true,
       dotData: const FlDotData(show: false),
       showingIndicators: _touchedIndex != null ? [_touchedIndex!] : const [],
-      belowBarData: BarAreaData(
-        show: true,
-        gradient: _belowBarGradient,
-      ),
+      belowBarData: BarAreaData(show: true, gradient: _belowBarGradient),
     );
 
     return Container(
@@ -181,7 +178,7 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                       Text(
                         widget.selectedProductName != null
                             ? 'Tren: ${widget.selectedProductName}'
-                            : 'Tren Bunga Bulanan (Jan - Des)',
+                            : 'Tren Bulanan (Jan - Des)',
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -194,7 +191,7 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                         Padding(
                           padding: const EdgeInsets.only(top: 2),
                           child: Text(
-                            'Total Bunga: ${widget.currencyFormat.format(totalBunga)}',
+                            'Total: ${widget.currencyFormat.format(totalBunga)}',
                             style: const TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
@@ -300,24 +297,26 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                       }).toList();
                     },
                   ),
-                  getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
-                    return spotIndexes.map((index) {
-                      return TouchedSpotIndicatorData(
-                        _touchIndicatorLine,
-                        FlDotData(
-                          show: true,
-                          getDotPainter: (spot, percent, barData, index) {
-                            return FlDotCirclePainter(
-                              radius: 4.5,
-                              color: Colors.white,
-                              strokeWidth: 2.5,
-                              strokeColor: barData.color ?? AppTheme.primaryColor,
-                            );
-                          },
-                        ),
-                      );
-                    }).toList();
-                  },
+                  getTouchedSpotIndicator:
+                      (LineChartBarData barData, List<int> spotIndexes) {
+                        return spotIndexes.map((index) {
+                          return TouchedSpotIndicatorData(
+                            _touchIndicatorLine,
+                            FlDotData(
+                              show: true,
+                              getDotPainter: (spot, percent, barData, index) {
+                                return FlDotCirclePainter(
+                                  radius: 4.5,
+                                  color: Colors.white,
+                                  strokeWidth: 2.5,
+                                  strokeColor:
+                                      barData.color ?? AppTheme.primaryColor,
+                                );
+                              },
+                            ),
+                          );
+                        }).toList();
+                      },
                 ),
                 gridData: FlGridData(
                   show: true,
@@ -379,16 +378,13 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                 minY: 0,
                 maxY: chartMaxY,
                 lineBarsData: [lineBarData],
-                showingTooltipIndicators: _touchedIndex != null &&
+                showingTooltipIndicators:
+                    _touchedIndex != null &&
                         _touchedIndex! >= 0 &&
                         _touchedIndex! < spots.length
                     ? [
                         ShowingTooltipIndicators([
-                          LineBarSpot(
-                            lineBarData,
-                            0,
-                            spots[_touchedIndex!],
-                          ),
+                          LineBarSpot(lineBarData, 0, spots[_touchedIndex!]),
                         ]),
                       ]
                     : const [],

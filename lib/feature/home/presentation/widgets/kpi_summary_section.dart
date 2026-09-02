@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
+
 import 'kpi_stat_card.dart';
 
 class KpiSummarySection extends StatelessWidget {
@@ -15,11 +16,7 @@ class KpiSummarySection extends StatelessWidget {
     ),
     borderRadius: BorderRadius.all(Radius.circular(16)),
     boxShadow: [
-      BoxShadow(
-        color: Color(0x40DC2626),
-        blurRadius: 12,
-        offset: Offset(0, 4),
-      ),
+      BoxShadow(color: Color(0x40DC2626), blurRadius: 12, offset: Offset(0, 4)),
     ],
   );
 
@@ -60,10 +57,7 @@ class KpiSummarySection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'TOTAL PENDAPATAN BUNGA',
-                style: _headerTitleStyle,
-              ),
+              const Text('TOTAL PENDAPATAN', style: _headerTitleStyle),
               const SizedBox(height: 8),
               FittedBox(
                 fit: BoxFit.scaleDown,
@@ -104,7 +98,7 @@ class KpiSummarySection extends StatelessWidget {
           children: [
             Expanded(
               child: KpiStatCard(
-                title: 'Total Data Bunga',
+                title: 'Total Data',
                 value: '${summary.totalAccounts} Data',
                 icon: Icons.table_chart_outlined,
                 iconColor: const Color(0xFF0284C7),

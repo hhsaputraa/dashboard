@@ -87,8 +87,8 @@ void main() {
         ),
       );
 
-      expect(find.text('TOTAL PENDAPATAN BUNGA'), findsOneWidget);
-      expect(find.text('Total Data Bunga'), findsOneWidget);
+      expect(find.text('TOTAL PENDAPATAN'), findsOneWidget);
+      expect(find.text('Total Data'), findsOneWidget);
       expect(find.text('120 Data'), findsOneWidget);
       expect(find.text('MODAL KERJA'), findsOneWidget);
     });
