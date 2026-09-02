@@ -37,6 +37,7 @@ class BranchProductSeries {
 
 class BranchProductComparisonHelper {
   static List<BranchInfo> getAvailableBranches(List<InterestRecord> records) {
+    if (records.isEmpty) return const [];
     final map = <int, double>{};
     for (final r in records) {
       double sum = 0.0;
@@ -46,18 +47,20 @@ class BranchProductComparisonHelper {
       map[r.idKantor] = (map[r.idKantor] ?? 0.0) + sum;
     }
 
-    final list = map.entries.map((e) {
-      return BranchInfo(
-        idKantor: e.key,
-        label: 'Kantor ${e.key}',
-        total: e.value,
-      );
-    }).toList()..sort((a, b) => a.idKantor.compareTo(b.idKantor));
-
+    final list = <BranchInfo>[];
+    for (final entry in map.entries) {
+      list.add(BranchInfo(
+        idKantor: entry.key,
+        label: 'Kantor ${entry.key}',
+        total: entry.value,
+      ));
+    }
+    list.sort((a, b) => a.idKantor.compareTo(b.idKantor));
     return list;
   }
 
   static List<ProductInfo> getAvailableProducts(List<InterestRecord> records) {
+    if (records.isEmpty) return const [];
     final map = <String, double>{};
     for (final r in records) {
       final name = r.jenisPinjaman.trim();
@@ -69,10 +72,11 @@ class BranchProductComparisonHelper {
       map[name] = (map[name] ?? 0.0) + sum;
     }
 
-    final list = map.entries.map((e) {
-      return ProductInfo(name: e.key, total: e.value);
-    }).toList()..sort((a, b) => b.total.compareTo(a.total));
-
+    final list = <ProductInfo>[];
+    for (final entry in map.entries) {
+      list.add(ProductInfo(name: entry.key, total: entry.value));
+    }
+    list.sort((a, b) => b.total.compareTo(a.total));
     return list;
   }
 
@@ -91,53 +95,67 @@ class BranchProductComparisonHelper {
     required Set<int> selectedBranchIds,
     required Set<String> selectedProducts,
   }) {
-    final result = <int, Map<String, BranchProductSeries>>{};
+    if (records.isEmpty || selectedBranchIds.isEmpty || selectedProducts.isEmpty) {
+      return const {};
+    }
+
+    final accumulators = <int, Map<String, _SeriesAccumulator>>{};
 
     for (final r in records) {
       if (!selectedBranchIds.contains(r.idKantor)) continue;
-      if (!selectedProducts.contains(r.jenisPinjaman)) continue;
+      final jenis = r.jenisPinjaman;
+      if (!selectedProducts.contains(jenis)) continue;
 
-      final branchMap = result[r.idKantor] ??= <String, BranchProductSeries>{};
+      final branchMap = accumulators[r.idKantor] ??= <String, _SeriesAccumulator>{};
+      final acc = branchMap[jenis] ??= _SeriesAccumulator(
+        idKantor: r.idKantor,
+        branchLabel: 'Kantor ${r.idKantor}',
+        jenisPinjaman: jenis,
+      );
 
-      final existing = branchMap[r.jenisPinjaman];
-      if (existing == null) {
-        double rowTotal = 0.0;
-        final monthlyCopy = List<double>.from(r.bulanan);
-        while (monthlyCopy.length < 12) {
-          monthlyCopy.add(0.0);
-        }
-        for (final v in monthlyCopy) {
-          rowTotal += v;
-        }
+      acc.addMonthly(r.bulanan);
+    }
 
-        branchMap[r.jenisPinjaman] = BranchProductSeries(
-          idKantor: r.idKantor,
-          branchLabel: 'Kantor ${r.idKantor}',
-          jenisPinjaman: r.jenisPinjaman,
-          total: rowTotal,
-          monthly: monthlyCopy,
-        );
-      } else {
-        final newMonthly = List<double>.filled(12, 0.0);
-        for (int i = 0; i < 12; i++) {
-          final m1 = i < existing.monthly.length ? existing.monthly[i] : 0.0;
-          final m2 = i < r.bulanan.length ? r.bulanan[i] : 0.0;
-          newMonthly[i] = m1 + m2;
-        }
-        double newTotal = 0.0;
-        for (final v in newMonthly) {
-          newTotal += v;
-        }
-        branchMap[r.jenisPinjaman] = BranchProductSeries(
-          idKantor: r.idKantor,
-          branchLabel: 'Kantor ${r.idKantor}',
-          jenisPinjaman: r.jenisPinjaman,
-          total: newTotal,
-          monthly: newMonthly,
-        );
+    final result = <int, Map<String, BranchProductSeries>>{};
+    for (final bEntry in accumulators.entries) {
+      final pMap = <String, BranchProductSeries>{};
+      for (final pEntry in bEntry.value.entries) {
+        pMap[pEntry.key] = pEntry.value.toSeries();
       }
+      result[bEntry.key] = pMap;
     }
 
     return result;
   }
+}
+
+class _SeriesAccumulator {
+  final int idKantor;
+  final String branchLabel;
+  final String jenisPinjaman;
+  double total = 0.0;
+  final List<double> monthly = List<double>.filled(12, 0.0);
+
+  _SeriesAccumulator({
+    required this.idKantor,
+    required this.branchLabel,
+    required this.jenisPinjaman,
+  });
+
+  void addMonthly(List<double> values) {
+    final len = values.length < 12 ? values.length : 12;
+    for (int i = 0; i < len; i++) {
+      final v = values[i];
+      monthly[i] += v;
+      total += v;
+    }
+  }
+
+  BranchProductSeries toSeries() => BranchProductSeries(
+    idKantor: idKantor,
+    branchLabel: branchLabel,
+    jenisPinjaman: jenisPinjaman,
+    total: total,
+    monthly: monthly,
+  );
 }

@@ -56,25 +56,64 @@ class _BranchProductComparisonCardState
     'Des',
   ];
 
+  // Cached data to eliminate heavy re-computations on build/touch
+  List<BranchInfo> _availableBranches = const [];
+  List<ProductInfo> _availableProducts = const [];
+  List<BranchInfo> _selectedBranchesList = const [];
+  List<ProductInfo> _selectedProductsList = const [];
+  Map<int, Map<String, BranchProductSeries>> _seriesMap = const {};
+
   @override
   void initState() {
     super.initState();
-    _initDefaultSelections();
+    _initData();
   }
 
   @override
   void didUpdateWidget(BranchProductComparisonCard oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.records != oldWidget.records) {
-      _initDefaultSelections();
+      _initData();
     }
   }
 
-  void _initDefaultSelections() {
+  void _initData() {
     _selectedBranchIds.clear();
     _selectedProducts.clear();
     _focusedBranchIdForLine = null;
     _touchedBarY = null;
+    _updateAvailableBranches();
+    _updateAvailableProducts();
+    _recomputeSeries();
+  }
+
+  void _updateAvailableBranches() {
+    _availableBranches =
+        BranchProductComparisonHelper.getAvailableBranches(widget.records);
+  }
+
+  void _updateAvailableProducts() {
+    final branchFilteredRecords = _selectedBranchIds.isNotEmpty
+        ? widget.records
+            .where((r) => _selectedBranchIds.contains(r.idKantor))
+            .toList()
+        : widget.records;
+    _availableProducts =
+        BranchProductComparisonHelper.getAvailableProducts(branchFilteredRecords);
+  }
+
+  void _recomputeSeries() {
+    _selectedBranchesList = _availableBranches
+        .where((b) => _selectedBranchIds.contains(b.idKantor))
+        .toList();
+    _selectedProductsList = _availableProducts
+        .where((p) => _selectedProducts.contains(p.name))
+        .toList();
+    _seriesMap = BranchProductComparisonHelper.buildSeriesMap(
+      records: widget.records,
+      selectedBranchIds: _selectedBranchIds,
+      selectedProducts: _selectedProducts,
+    );
   }
 
   void _openBranchPickerModal(
@@ -101,6 +140,8 @@ class _BranchProductComparisonCardState
             if (_selectedBranchIds.isEmpty) {
               _selectedProducts.clear();
             }
+            _updateAvailableProducts();
+            _recomputeSeries();
           });
         },
       ),
@@ -124,6 +165,7 @@ class _BranchProductComparisonCardState
             _selectedProducts
               ..clear()
               ..addAll(newSelection);
+            _recomputeSeries();
           });
         },
       ),
@@ -139,6 +181,7 @@ class _BranchProductComparisonCardState
       _selectedProducts
         ..clear()
         ..addAll(top);
+      _recomputeSeries();
     });
   }
 
@@ -158,31 +201,12 @@ class _BranchProductComparisonCardState
 
   @override
   Widget build(BuildContext context) {
-    final availableBranches =
-        BranchProductComparisonHelper.getAvailableBranches(widget.records);
-    final branchFilteredRecords = _selectedBranchIds.isNotEmpty
-        ? widget.records
-            .where((r) => _selectedBranchIds.contains(r.idKantor))
-            .toList()
-        : widget.records;
-    final availableProducts =
-        BranchProductComparisonHelper.getAvailableProducts(branchFilteredRecords);
-
-    final selectedBranchesList = (availableBranches
-        .where((b) => _selectedBranchIds.contains(b.idKantor))
-        .toList())
-      ..sort((a, b) => a.idKantor.compareTo(b.idKantor));
-    final selectedProductsList = availableProducts
-        .where((p) => _selectedProducts.contains(p.name))
-        .toList();
-
+    final availableBranches = _availableBranches;
+    final availableProducts = _availableProducts;
+    final selectedBranchesList = _selectedBranchesList;
+    final selectedProductsList = _selectedProductsList;
+    final seriesMap = _seriesMap;
     final isProductEnabled = _selectedBranchIds.isNotEmpty;
-
-    final seriesMap = BranchProductComparisonHelper.buildSeriesMap(
-      records: widget.records,
-      selectedBranchIds: _selectedBranchIds,
-      selectedProducts: _selectedProducts,
-    );
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -825,7 +849,7 @@ class _BranchProductComparisonCardState
                 y: _touchedBarY!,
                 color: const Color(0xFF94A3B8), // Abu-abu
                 strokeWidth: 1.5,
-                dashArray: [4, 4], // Garis lurus putus-putus bantuan
+                dashArray: const [4, 4], // Garis lurus putus-putus bantuan
               ),
           ],
         ),
@@ -890,7 +914,6 @@ class _BranchProductComparisonCardState
           getDrawingVerticalLine: (value) => const FlLine(
             color: Color(0xFFF1F5F9),
             strokeWidth: 1,
-            dashArray: [3, 3],
           ),
         ),
         borderData: FlBorderData(show: false),
@@ -952,7 +975,7 @@ class _BranchProductComparisonCardState
         LineChartBarData(
           spots: spots,
           isCurved: true,
-          curveSmoothness: 0.3,
+          curveSmoothness: 0.25,
           color: color,
           barWidth: 2.5,
           isStrokeCapRound: true,
@@ -1049,7 +1072,6 @@ class _BranchProductComparisonCardState
           getDrawingVerticalLine: (_) => const FlLine(
             color: Color(0xFFE2E8F0), // Garis bantu abu-abu
             strokeWidth: 1,
-            dashArray: [3, 3], // Putus-putus
           ),
         ),
         titlesData: FlTitlesData(
@@ -1308,7 +1330,7 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
               // Daftar Checkbox
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.45,
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.45,
                 ),
                 child: filtered.isEmpty
                     ? const Padding(
@@ -1625,7 +1647,7 @@ class _ProductPickerBottomSheetState extends State<_ProductPickerBottomSheet> {
               // Daftar Checkbox
               ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.45,
+                  maxHeight: MediaQuery.sizeOf(context).height * 0.45,
                 ),
                 child: filtered.isEmpty
                     ? const Padding(
