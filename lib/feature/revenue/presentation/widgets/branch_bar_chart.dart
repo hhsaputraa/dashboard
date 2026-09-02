@@ -179,7 +179,8 @@ class _BranchBarChartState extends State<BranchBarChart> {
                     },
                   ),
                   touchCallback: (event, response) {
-                    final newIndex = (!event.isInterestedForInteractions ||
+                    final newIndex =
+                        (!event.isInterestedForInteractions ||
                             response == null ||
                             response.spot == null)
                         ? -1

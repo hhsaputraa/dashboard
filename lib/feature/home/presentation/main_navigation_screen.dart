@@ -45,7 +45,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           const HomeScreen(),
           RevenueScreen(isActive: _selectedIndex == 1),
-          const ReportScreen(),
+          const KodeKolScreen(),
           const ProfileScreen(),
         ],
       ),

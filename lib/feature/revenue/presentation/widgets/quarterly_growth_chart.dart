@@ -21,7 +21,6 @@ class QuarterlyGrowthChart extends StatefulWidget {
 class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
   int _touchedIndex = -1;
 
-  // Warna persis seperti fl_chart sample 1
   static const List<Color> _chartColors = [
     Color(0xFF0293EE),
     Color(0xFFF8B250),
@@ -104,7 +103,6 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header Kartu
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -357,7 +355,7 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
 
       return PieChartSectionData(
         color: color,
-        value: 25, // 4 kuadran sama besar 25% (90 derajat)
+        value: 25,
         title: isTouched
             ? '${item.quarter}\n${item.percentage.toStringAsFixed(1)}%'
             : item.quarter,

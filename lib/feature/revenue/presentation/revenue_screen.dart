@@ -9,16 +9,14 @@ import 'package:dashboard/feature/revenue/model/analytics_helper.dart';
 
 import 'widgets/analytics_leaderboard_card.dart';
 import 'widgets/branch_bar_chart.dart';
+import 'widgets/branch_product_comparison_card.dart';
 import 'widgets/portfolio_donut_chart.dart';
 import 'widgets/quarterly_growth_chart.dart';
 
 class RevenueScreen extends StatefulWidget {
   final bool isActive;
 
-  const RevenueScreen({
-    super.key,
-    this.isActive = true,
-  });
+  const RevenueScreen({super.key, this.isActive = true});
 
   @override
   State<RevenueScreen> createState() => _RevenueScreenState();
@@ -220,7 +218,16 @@ class _RevenueScreenState extends State<RevenueScreen> {
         ),
         const SizedBox(height: 20),
 
-        // --- 5. BAR CHART (Pertumbuhan Kuartalan Q1 - Q4) ---
+        // --- 5. KOMPARASI CABANG BERDASARKAN JENIS PINJAMAN ---
+        RepaintBoundary(
+          child: BranchProductComparisonCard(
+            records: data.records,
+            currencyFormat: _currencyFormat,
+          ),
+        ),
+        const SizedBox(height: 20),
+
+        // --- 6. BAR CHART (Pertumbuhan Kuartalan Q1 - Q4) ---
         RepaintBoundary(
           child: QuarterlyGrowthChart(
             quarters: analytics.quarters,

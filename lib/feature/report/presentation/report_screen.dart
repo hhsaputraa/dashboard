@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ReportScreen extends StatelessWidget {
-  const ReportScreen({super.key});
+class KodeKolScreen extends StatelessWidget {
+  const KodeKolScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
         child: Text(
-          'Halaman report',
+          'Kode KOL',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
