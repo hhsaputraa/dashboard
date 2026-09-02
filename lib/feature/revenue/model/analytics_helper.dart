@@ -36,6 +36,10 @@ class AnalyticsResult {
   final BranchPerformance? topBranch;
   final QuarterPerformance? topQuarter;
   final ProductBreakdown? topProduct;
+  final List<ProductBreakdown>? topProducts;
+
+  List<ProductBreakdown> get safeTopProducts => topProducts ?? const [];
+  List<BranchPerformance> get safeTopBranches => branches.take(3).toList();
 
   const AnalyticsResult({
     required this.branches,
@@ -43,6 +47,7 @@ class AnalyticsResult {
     required this.topBranch,
     required this.topQuarter,
     required this.topProduct,
+    this.topProducts = const [],
   });
 }
 
@@ -69,7 +74,7 @@ class AnalyticsHelper {
     }
 
     BranchPerformance? topBranch;
-    final branchList = branchMap.entries.map((e) {
+    final allBranches = branchMap.entries.map((e) {
       final pct = grandTotal > 0 ? (e.value / grandTotal) * 100 : 0.0;
       final perf = BranchPerformance(
         idKantor: e.key,
@@ -82,7 +87,9 @@ class AnalyticsHelper {
       }
       return perf;
     }).toList()
-      ..sort((a, b) => a.idKantor.compareTo(b.idKantor));
+      ..sort((a, b) => b.total.compareTo(a.total)); // Urutkan dari total pendapatan tertinggi
+
+    final top3Branches = allBranches.take(3).toList();
 
     // 2. Agregasi Kuartal (Q1 - Q4) dari monthlyTrend
     double sumTrendRange(int start, int end) {
@@ -138,18 +145,20 @@ class AnalyticsHelper {
       }
     }
 
-    // 3. Top Product
+    // 3. Top Products (Ambil Top 5 jenis pinjaman dengan nominal tertinggi)
     ProductBreakdown? topProduct;
-    if (data.productBreakdown.isNotEmpty) {
-      topProduct = data.productBreakdown.first;
+    final topProducts = data.productBreakdown.take(5).toList();
+    if (topProducts.isNotEmpty) {
+      topProduct = topProducts.first;
     }
 
     return AnalyticsResult(
-      branches: branchList,
+      branches: top3Branches,
       quarters: quarterList,
       topBranch: topBranch,
       topQuarter: topQuarter,
       topProduct: topProduct,
+      topProducts: topProducts,
     );
   }
 }

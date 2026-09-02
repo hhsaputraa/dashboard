@@ -13,7 +13,12 @@ import 'widgets/portfolio_donut_chart.dart';
 import 'widgets/quarterly_growth_chart.dart';
 
 class RevenueScreen extends StatefulWidget {
-  const RevenueScreen({super.key});
+  final bool isActive;
+
+  const RevenueScreen({
+    super.key,
+    this.isActive = true,
+  });
 
   @override
   State<RevenueScreen> createState() => _RevenueScreenState();
@@ -38,7 +43,17 @@ class _RevenueScreenState extends State<RevenueScreen> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    if (widget.isActive) {
+      _loadData();
+    }
+  }
+
+  @override
+  void didUpdateWidget(RevenueScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isActive && !oldWidget.isActive) {
+      _loadData();
+    }
   }
 
   Future<void> _loadData() async {
@@ -183,20 +198,23 @@ class _RevenueScreenState extends State<RevenueScreen> {
         ),
         const SizedBox(height: 20),
 
-        // --- 3. PIE / DONUT CHART (Pangsa Pasar Produk) ---
+        // --- 3. PIE / DONUT CHART (Pangsa Pasar Produk - Top 5) ---
         RepaintBoundary(
           child: PortfolioDonutChart(
-            breakdown: data.productBreakdown,
+            breakdown: analytics.safeTopProducts.isNotEmpty
+                ? analytics.safeTopProducts
+                : data.productBreakdown.take(5).toList(),
+            allProducts: data.productBreakdown,
             grandTotal: data.summary.totalYTD,
             currencyFormat: _currencyFormat,
           ),
         ),
         const SizedBox(height: 20),
 
-        // --- 4. BAR CHART (Komparasi Kantor 1 vs 2 vs 3) ---
+        // --- 4. BAR CHART (Komparasi Top 3 Kantor Cabang) ---
         RepaintBoundary(
           child: BranchBarChart(
-            branches: analytics.branches,
+            branches: analytics.safeTopBranches,
             currencyFormat: _currencyFormat,
           ),
         ),

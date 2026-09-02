@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:dashboard/feature/revenue/model/analytics_helper.dart';
 
 class BranchBarChart extends StatefulWidget {
-  final List<BranchPerformance> branches;
+  final List<BranchPerformance>? branches;
   final NumberFormat currencyFormat;
 
   const BranchBarChart({
@@ -66,7 +66,8 @@ class _BranchBarChartState extends State<BranchBarChart> {
 
   void _computeChartMaxY() {
     double maxY = 0.0;
-    for (final b in widget.branches) {
+    final branches = (widget.branches ?? const <BranchPerformance>[]).take(3);
+    for (final b in branches) {
       if (b.total > maxY) maxY = b.total;
     }
     _chartMaxY = maxY > 0 ? maxY * 1.2 : 1200000;
@@ -77,7 +78,8 @@ class _BranchBarChartState extends State<BranchBarChart> {
 
   @override
   Widget build(BuildContext context) {
-    final list = widget.branches;
+    final rawList = widget.branches ?? const <BranchPerformance>[];
+    final list = rawList.length > 3 ? rawList.take(3).toList() : rawList;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -101,7 +103,7 @@ class _BranchBarChartState extends State<BranchBarChart> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Performa Kantor Cabang',
+                'Top 3 Performa Kantor Cabang',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -125,7 +127,7 @@ class _BranchBarChartState extends State<BranchBarChart> {
           ),
           const SizedBox(height: 4),
           const Text(
-            'Perbandingan total pendapatan kantor cabang',
+            '3 kantor cabang dengan total pendapatan tertinggi',
             style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
           const SizedBox(height: 26),

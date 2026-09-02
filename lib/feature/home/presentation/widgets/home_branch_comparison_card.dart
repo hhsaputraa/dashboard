@@ -444,7 +444,7 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                         const SizedBox(width: 8),
                         const Expanded(
                           child: Text(
-                            'Komparasi Tren Cabang',
+                            'Komparasi Total Cabang',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,

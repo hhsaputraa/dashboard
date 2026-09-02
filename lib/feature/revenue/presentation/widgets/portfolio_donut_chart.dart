@@ -4,15 +4,18 @@ import 'package:intl/intl.dart';
 
 import 'package:dashboard/core/theme/app_theme.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
+import 'package:dashboard/feature/revenue/presentation/all_loan_products_screen.dart';
 
 class PortfolioDonutChart extends StatefulWidget {
-  final List<ProductBreakdown> breakdown;
+  final List<ProductBreakdown>? breakdown;
+  final List<ProductBreakdown>? allProducts;
   final double grandTotal;
   final NumberFormat currencyFormat;
 
   const PortfolioDonutChart({
     super.key,
     required this.breakdown,
+    this.allProducts,
     required this.grandTotal,
     required this.currencyFormat,
   });
@@ -23,6 +26,21 @@ class PortfolioDonutChart extends StatefulWidget {
 
 class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
   int _touchedIndex = -1;
+
+  void _navigateToAllProducts(BuildContext context) {
+    final all = widget.allProducts ?? widget.breakdown ?? const <ProductBreakdown>[];
+    if (all.isEmpty) return;
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => AllLoanProductsScreen(
+          products: all,
+          grandTotal: widget.grandTotal,
+          currencyFormat: widget.currencyFormat,
+        ),
+      ),
+    );
+  }
 
   // Palet warna modern bergaya FinTech & Executive Dashboard
   static const List<Color> _chartColors = [
@@ -38,7 +56,10 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
 
   @override
   Widget build(BuildContext context) {
-    final items = widget.breakdown;
+    final rawItems = widget.breakdown ?? const <ProductBreakdown>[];
+    final items = rawItems.length > 5
+        ? rawItems.take(5).toList()
+        : rawItems;
 
     if (items.isEmpty || widget.grandTotal <= 0) {
       return Container(
@@ -86,7 +107,7 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Portofolio Produk Kredit',
+                'Top 5 Portofolio Produk',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -94,62 +115,80 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
                   letterSpacing: -0.2,
                 ),
               ),
-              if (_touchedIndex != -1)
-                InkWell(
-                  onTap: () {
-                    if (_touchedIndex != -1) {
-                      setState(() => _touchedIndex = -1);
-                    }
-                  },
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 3,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF1F5F9),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (_touchedIndex != -1) ...[
+                    InkWell(
+                      onTap: () {
+                        setState(() => _touchedIndex = -1);
+                      },
                       borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.close_rounded,
-                          size: 12,
-                          color: Color(0xFF64748B),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
                         ),
-                        SizedBox(width: 4),
-                        Text(
-                          'Reset',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF64748B),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF1F5F9),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.close_rounded,
+                              size: 12,
+                              color: Color(0xFF64748B),
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              'Reset',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF64748B),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
+                  InkWell(
+                    onTap: () => _navigateToAllProducts(context),
+                    borderRadius: BorderRadius.circular(8),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Lihat Semua',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF2563EB),
+                            ),
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 2),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            size: 16,
+                            color: Color(0xFF2563EB),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                )
-              else
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE11D48).withValues(alpha: 0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.pie_chart_rounded,
-                    size: 16,
-                    color: Color(0xFFE11D48),
-                  ),
-                ),
+                ],
+              ),
             ],
           ),
           const SizedBox(height: 4),
           const Text(
-            'Ketuk grafik melihat rincian',
+            '5 jenis pinjaman tertinggi · Ketuk grafik untuk rincian',
             style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
           const SizedBox(height: 24),

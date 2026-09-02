@@ -14,13 +14,6 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = [
-    HomeScreen(),
-    RevenueScreen(),
-    ReportScreen(),
-    ProfileScreen(),
-  ];
-
   static const List<NavigationDestination> _destinations = [
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
@@ -49,7 +42,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: _pages,
+        children: [
+          const HomeScreen(),
+          RevenueScreen(isActive: _selectedIndex == 1),
+          const ReportScreen(),
+          const ProfileScreen(),
+        ],
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,

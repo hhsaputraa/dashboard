@@ -21,15 +21,23 @@ class ProductBreakdownCard extends StatelessWidget {
     borderRadius: BorderRadius.all(Radius.circular(8)),
   );
 
-  static const BorderRadius _itemBorderRadius = BorderRadius.all(Radius.circular(10));
-  static const BorderRadius _progressBorderRadius = BorderRadius.all(Radius.circular(6));
+  static const BorderRadius _itemBorderRadius = BorderRadius.all(
+    Radius.circular(10),
+  );
+  static const BorderRadius _progressBorderRadius = BorderRadius.all(
+    Radius.circular(6),
+  );
 
-  static const Color _selectedItemBgColor = Color(0x14DC2626); // AppTheme.primaryColor 8% alpha
+  static const Color _selectedItemBgColor = Color(
+    0x14DC2626,
+  ); // AppTheme.primaryColor 8% alpha
 
   static const AlwaysStoppedAnimation<Color> _selectedProgressAnimation =
       AlwaysStoppedAnimation<Color>(AppTheme.primaryColor);
   static const AlwaysStoppedAnimation<Color> _unselectedProgressAnimation =
-      AlwaysStoppedAnimation<Color>(Color(0xA6DC2626)); // AppTheme.primaryColor 65% alpha
+      AlwaysStoppedAnimation<Color>(
+        Color(0xA6DC2626),
+      ); // AppTheme.primaryColor 65% alpha
 
   static const TextStyle _cardHeaderStyle = TextStyle(
     fontSize: 14,
@@ -73,43 +81,43 @@ class ProductBreakdownCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Kontribusi Berdasarkan Jenis Kredit',
-                style: _cardHeaderStyle,
+              const Expanded(
+                child: Text(
+                  'Kontribusi Berdasarkan Jenis Pinjaman',
+                  style: _cardHeaderStyle,
+                ),
               ),
               if (selectedProductName != null)
                 InkWell(
                   onTap: () => onProductSelected?.call(null),
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: _resetBtnDecoration,
                     child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.clear_rounded, size: 12, color: AppTheme.primaryColor),
-                        SizedBox(width: 4),
-                        Text(
-                          'Reset',
-                          style: _resetTextStyle,
+                        Icon(
+                          Icons.clear_rounded,
+                          size: 12,
+                          color: AppTheme.primaryColor,
                         ),
+                        SizedBox(width: 4),
+                        Text('Reset', style: _resetTextStyle),
                       ],
                     ),
                   ),
                 )
               else
-                const Text(
-                  'Tap untuk filter grafik',
-                  style: _hintTextStyle,
-                ),
+                const Text('Tap untuk filter grafik', style: _hintTextStyle),
             ],
           ),
           const SizedBox(height: 14),
           if (breakdown.isEmpty)
-            const Text(
-              'Tidak ada rincian produk',
-              style: _emptyTextStyle,
-            ),
+            const Text('Tidak ada rincian produk', style: _emptyTextStyle),
           ...breakdown.map((item) {
             final isSelected = selectedProductName == item.name;
             final percent = grandTotal > 0 ? (item.total / grandTotal) : 0.0;
@@ -126,7 +134,10 @@ class ProductBreakdownCard extends StatelessWidget {
                   },
                   borderRadius: _itemBorderRadius,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: _itemBorderRadius,
                       border: Border.all(
