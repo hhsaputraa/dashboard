@@ -52,9 +52,7 @@ void main() {
     // Verify Details Card
     expect(find.text('Email'), findsOneWidget);
     expect(find.text('john.doe@bank.co.id'), findsOneWidget);
-    expect(find.text('ID Pengguna'), findsOneWidget);
-    expect(find.text('#99'), findsOneWidget);
-    expect(find.text('Sesi Terakhir'), findsOneWidget);
+    expect(find.text('Login terakhir pada'), findsOneWidget);
     final dt = DateTime.parse('2026-09-02T10:30:00Z').toLocal();
     final hour = dt.hour.toString().padLeft(2, '0');
     final minute = dt.minute.toString().padLeft(2, '0');

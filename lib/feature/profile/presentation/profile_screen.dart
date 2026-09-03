@@ -4,9 +4,6 @@ import 'package:dashboard/feature/auth/models/user_model.dart';
 import 'package:dashboard/feature/auth/presentation/login_screen.dart';
 import 'package:dashboard/feature/auth/services/auth_service.dart';
 
-/// Halaman Profil Sederhana, Bersih, dan Elegan.
-/// Menampilkan informasi pengguna yang saat ini sedang login dengan desain minimalis
-/// dan aksi logout yang aman.
 class ProfileScreen extends StatelessWidget {
   final ValueNotifier<UserModel?>? userNotifier;
   final Future<void> Function()? onLogout;

@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:dashboard/feature/auth/presentation/login_screen.dart';
 import 'package:dashboard/main.dart';
 
 void main() {
   testWidgets('App renders Mobile LoginScreen smoke test', (
     WidgetTester tester,
   ) async {
-    // Build app and trigger frame.
-    await tester.pumpWidget(const BankDashboardApp());
+    // Build app with LoginScreen directly to bypass splash timer
+    await tester.pumpWidget(const BankDashboardApp(home: LoginScreen()));
     await tester.pumpAndSettle();
 
     // Verify that Login Screen elements are rendered cleanly.

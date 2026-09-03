@@ -193,10 +193,12 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
 
   static String _formatCompact(double value) {
     if (value <= 0) return '0';
-    if (value >= 1000000000)
+    if (value >= 1000000000) {
       return '${(value / 1000000000).toStringAsFixed(1)} M';
-    if (value >= 1000000)
+    }
+    if (value >= 1000000) {
       return '${(value / 1000000).toStringAsFixed(value >= 10000000 ? 0 : 1)} jt';
+    }
     if (value >= 1000) return '${(value / 1000).toStringAsFixed(0)} rb';
     return value.toStringAsFixed(0);
   }
@@ -679,8 +681,9 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                                         interval: _cachedYInterval,
                                         getTitlesWidget: (value, meta) {
                                           if (value == meta.max ||
-                                              value == meta.min)
+                                              value == meta.min) {
                                             return const SizedBox.shrink();
+                                          }
                                           return SideTitleWidget(
                                             meta: meta,
                                             space: 4,
