@@ -124,10 +124,26 @@ class _BranchProductComparisonCardState
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => _BranchPickerBottomSheet(
-        branches: availableBranches,
-        initiallySelectedIds: _selectedBranchIds,
-        currencyFormat: widget.currencyFormat,
+      builder: (context) => _ItemPickerBottomSheet<BranchInfo, int>(
+        title: 'Pilih Kantor Cabang',
+        unitLabel: 'kantor',
+        applySuffix: 'Cabang',
+        emptyMessage: 'Kantor cabang tidak ditemukan',
+        searchHint: 'Cari kantor cabang...',
+        limitExceededMessage: 'Maksimal memilih 5 kantor cabang!',
+        maxSelect: 5,
+        activeColor: const Color(0xFF0F172A),
+        items: availableBranches,
+        initiallySelected: _selectedBranchIds,
+        getId: (b) => b.idKantor,
+        getLabel: (b) => b.label,
+        matchesQuery: (b, q) =>
+            b.label.toLowerCase().contains(q) ||
+            b.idKantor.toString().contains(q),
+        quickSelectLabel:
+            availableBranches.length > 5 ? 'Pilih 5 Teratas' : null,
+        onQuickSelect: () =>
+            availableBranches.take(5).map((b) => b.idKantor).toSet(),
         onApply: (newSelection) {
           setState(() {
             _selectedBranchIds
@@ -156,10 +172,24 @@ class _BranchProductComparisonCardState
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => _ProductPickerBottomSheet(
-        products: availableProducts,
-        initiallySelectedNames: _selectedProducts,
-        currencyFormat: widget.currencyFormat,
+      builder: (context) => _ItemPickerBottomSheet<ProductInfo, String>(
+        title: 'Pilih Jenis Pinjaman',
+        unitLabel: 'jenis pinjaman',
+        applySuffix: 'Pinjaman',
+        emptyMessage: 'Jenis pinjaman tidak ditemukan',
+        searchHint: 'Cari jenis pinjaman...',
+        limitExceededMessage: 'Maksimal memilih 3 jenis pinjaman!',
+        maxSelect: 3,
+        activeColor: const Color(0xFFE11D48),
+        items: availableProducts,
+        initiallySelected: _selectedProducts,
+        getId: (p) => p.name,
+        getLabel: (p) => p.name,
+        matchesQuery: (p, q) => p.name.toLowerCase().contains(q),
+        quickSelectLabel: 'Pilih Top 3 Pinjaman',
+        quickSelectColor: const Color(0xFFE11D48),
+        onQuickSelect: () =>
+            availableProducts.take(3).map((p) => p.name).toSet(),
         onApply: (newSelection) {
           setState(() {
             _selectedProducts
@@ -283,76 +313,23 @@ class _BranchProductComparisonCardState
           // Action Buttons: Pilih Cabang & Pilih Pinjaman (Flow Popup Checkbox)
           Row(
             children: [
-              // Button Pilih Cabang
               Expanded(
-                child: InkWell(
+                child: _buildPickerButton(
                   onTap: () =>
                       _openBranchPickerModal(context, availableBranches),
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 9,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF8FAFC),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: const Color(0xFFE2E8F0)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.storefront_rounded,
-                          size: 16,
-                          color: Color(0xFF2563EB),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Pilih Cabang',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Color(0xFF64748B),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Text(
-                                _selectedBranchIds.isEmpty
-                                    ? '0 Cabang Dipilih'
-                                    : '${_selectedBranchIds.length} Cabang Dipilih',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: _selectedBranchIds.isNotEmpty
-                                      ? FontWeight.bold
-                                      : FontWeight.w500,
-                                  color: _selectedBranchIds.isNotEmpty
-                                      ? const Color(0xFF0F172A)
-                                      : const Color(0xFF94A3B8),
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          size: 18,
-                          color: Color(0xFF64748B),
-                        ),
-                      ],
-                    ),
-                  ),
+                  isEnabled: true,
+                  icon: Icons.storefront_rounded,
+                  iconColor: const Color(0xFF2563EB),
+                  title: 'Pilih Cabang',
+                  subtitle: _selectedBranchIds.isEmpty
+                      ? '0 Cabang Dipilih'
+                      : '${_selectedBranchIds.length} Cabang Dipilih',
+                  hasSelection: _selectedBranchIds.isNotEmpty,
                 ),
               ),
               const SizedBox(width: 10),
-
-              // Button Pilih Pinjaman (Blocked jika belum pilih cabang)
               Expanded(
-                child: InkWell(
+                child: _buildPickerButton(
                   onTap: isProductEnabled
                       ? () =>
                           _openProductPickerModal(context, availableProducts)
@@ -365,84 +342,21 @@ class _BranchProductComparisonCardState
                             ),
                           );
                         },
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 9,
-                    ),
-                    decoration: BoxDecoration(
-                      color: isProductEnabled
-                          ? const Color(0xFFF8FAFC)
-                          : const Color(0xFFF1F5F9).withValues(alpha: 0.6),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: isProductEnabled
-                            ? const Color(0xFFE2E8F0)
-                            : const Color(0xFFE2E8F0).withValues(alpha: 0.6),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          isProductEnabled
-                              ? Icons.account_balance_wallet_rounded
-                              : Icons.lock_outline_rounded,
-                          size: 16,
-                          color: isProductEnabled
-                              ? const Color(0xFFE11D48)
-                              : const Color(0xFF94A3B8),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Pilih Pinjaman',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: isProductEnabled
-                                      ? const Color(0xFF64748B)
-                                      : const Color(0xFF94A3B8),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Text(
-                                !isProductEnabled
-                                    ? 'Pilih cabang dulu'
-                                    : _selectedProducts.isEmpty
-                                        ? '0 Pinjaman Dipilih'
-                                        : '${_selectedProducts.length} Pinjaman Dipilih',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: isProductEnabled &&
-                                          _selectedProducts.isNotEmpty
-                                      ? FontWeight.bold
-                                      : FontWeight.w500,
-                                  color: isProductEnabled &&
-                                          _selectedProducts.isNotEmpty
-                                      ? const Color(0xFF0F172A)
-                                      : const Color(0xFF94A3B8),
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Icon(
-                          isProductEnabled
-                              ? Icons.keyboard_arrow_down_rounded
-                              : Icons.lock_outline_rounded,
-                          size: isProductEnabled ? 18 : 14,
-                          color: isProductEnabled
-                              ? const Color(0xFF64748B)
-                              : const Color(0xFFCBD5E1),
-                        ),
-                      ],
-                    ),
-                  ),
+                  isEnabled: isProductEnabled,
+                  icon: isProductEnabled
+                      ? Icons.account_balance_wallet_rounded
+                      : Icons.lock_outline_rounded,
+                  iconColor: isProductEnabled
+                      ? const Color(0xFFE11D48)
+                      : const Color(0xFF94A3B8),
+                  title: 'Pilih Pinjaman',
+                  subtitle: !isProductEnabled
+                      ? 'Pilih cabang dulu'
+                      : _selectedProducts.isEmpty
+                          ? '0 Pinjaman Dipilih'
+                          : '${_selectedProducts.length} Pinjaman Dipilih',
+                  hasSelection:
+                      isProductEnabled && _selectedProducts.isNotEmpty,
                 ),
               ),
             ],
@@ -708,6 +622,80 @@ class _BranchProductComparisonCardState
                     ? const Color(0xFF0F172A)
                     : const Color(0xFF64748B),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPickerButton({
+    required VoidCallback onTap,
+    required bool isEnabled,
+    required IconData icon,
+    required Color iconColor,
+    required String title,
+    required String subtitle,
+    required bool hasSelection,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+        decoration: BoxDecoration(
+          color: isEnabled
+              ? const Color(0xFFF8FAFC)
+              : const Color(0xFFF1F5F9).withValues(alpha: 0.6),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: isEnabled
+                ? const Color(0xFFE2E8F0)
+                : const Color(0xFFE2E8F0).withValues(alpha: 0.6),
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, size: 16, color: iconColor),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: isEnabled
+                          ? const Color(0xFF64748B)
+                          : const Color(0xFF94A3B8),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight:
+                          hasSelection ? FontWeight.bold : FontWeight.w500,
+                      color: hasSelection
+                          ? const Color(0xFF0F172A)
+                          : const Color(0xFF94A3B8),
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              isEnabled
+                  ? Icons.keyboard_arrow_down_rounded
+                  : Icons.lock_outline_rounded,
+              size: isEnabled ? 18 : 14,
+              color: isEnabled
+                  ? const Color(0xFF64748B)
+                  : const Color(0xFFCBD5E1),
             ),
           ],
         ),
@@ -1136,51 +1124,82 @@ class _BranchProductComparisonCardState
 }
 
 // -------------------------------------------------------------
-// MODAL BOTTOM SHEET: PILIH KANTOR CABANG (CHECKBOX POPUP)
+// REUSABLE MODAL BOTTOM SHEET: ITEM PICKER (CABANG / PINJAMAN)
 // -------------------------------------------------------------
-class _BranchPickerBottomSheet extends StatefulWidget {
-  final List<BranchInfo> branches;
-  final Set<int> initiallySelectedIds;
-  final NumberFormat currencyFormat;
-  final ValueChanged<Set<int>> onApply;
+class _ItemPickerBottomSheet<T, K> extends StatefulWidget {
+  final String title;
+  final String unitLabel;
+  final String applySuffix;
+  final String emptyMessage;
+  final String searchHint;
+  final String limitExceededMessage;
+  final int maxSelect;
+  final Color activeColor;
+  final List<T> items;
+  final Set<K> initiallySelected;
+  final K Function(T item) getId;
+  final String Function(T item) getLabel;
+  final bool Function(T item, String query) matchesQuery;
+  final String? quickSelectLabel;
+  final Color? quickSelectColor;
+  final Set<K>? Function()? onQuickSelect;
+  final ValueChanged<Set<K>> onApply;
 
-  const _BranchPickerBottomSheet({
-    required this.branches,
-    required this.initiallySelectedIds,
-    required this.currencyFormat,
+  const _ItemPickerBottomSheet({
+    required this.title,
+    required this.unitLabel,
+    required this.applySuffix,
+    required this.emptyMessage,
+    required this.searchHint,
+    required this.limitExceededMessage,
+    required this.maxSelect,
+    required this.activeColor,
+    required this.items,
+    required this.initiallySelected,
+    required this.getId,
+    required this.getLabel,
+    required this.matchesQuery,
+    this.quickSelectLabel,
+    this.quickSelectColor,
+    this.onQuickSelect,
     required this.onApply,
   });
 
   @override
-  State<_BranchPickerBottomSheet> createState() =>
-      _BranchPickerBottomSheetState();
+  State<_ItemPickerBottomSheet<T, K>> createState() =>
+      _ItemPickerBottomSheetState<T, K>();
 }
 
-class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
-  late final Set<int> _tempSelected;
+class _ItemPickerBottomSheetState<T, K>
+    extends State<_ItemPickerBottomSheet<T, K>> {
+  late final Set<K> _tempSelected;
   String _searchQuery = '';
 
   @override
   void initState() {
     super.initState();
-    _tempSelected = Set<int>.from(widget.initiallySelectedIds);
+    _tempSelected = Set<K>.from(widget.initiallySelected);
   }
 
-  void _selectTop5() {
-    setState(() {
-      _tempSelected
-        ..clear()
-        ..addAll(widget.branches.take(5).map((b) => b.idKantor));
-    });
+  void _handleQuickSelect() {
+    if (widget.onQuickSelect != null) {
+      final selected = widget.onQuickSelect!();
+      if (selected != null) {
+        setState(() {
+          _tempSelected
+            ..clear()
+            ..addAll(selected);
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final query = _searchQuery.trim().toLowerCase();
-    final filtered = widget.branches.where((b) {
+    final filtered = widget.items.where((item) {
       if (query.isEmpty) return true;
-      return b.label.toLowerCase().contains(query) ||
-          b.idKantor.toString().contains(query);
+      return widget.matchesQuery(item, query);
     }).toList();
 
     return Material(
@@ -1213,9 +1232,9 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Pilih Kantor Cabang',
-                        style: TextStyle(
+                      Text(
+                        widget.title,
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF0F172A),
@@ -1223,7 +1242,7 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
                       ),
                       const SizedBox(height: 2),
                       Text(
-                        'Maksimal 5 kantor (${_tempSelected.length}/5 dipilih)',
+                        'Maksimal ${widget.maxSelect} ${widget.unitLabel} (${_tempSelected.length}/${widget.maxSelect} dipilih)',
                         style: const TextStyle(
                           fontSize: 11,
                           color: Color(0xFF64748B),
@@ -1247,11 +1266,11 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
               const SizedBox(height: 12),
 
               // Action Quick Selection
-              if (widget.branches.length > 5) ...[
+              if (widget.quickSelectLabel != null) ...[
                 Align(
                   alignment: Alignment.centerLeft,
                   child: InkWell(
-                    onTap: _selectTop5,
+                    onTap: _handleQuickSelect,
                     borderRadius: BorderRadius.circular(6),
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -1259,24 +1278,29 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
                         vertical: 5,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF2563EB).withValues(alpha: 0.1),
+                        color: (widget.quickSelectColor ?? widget.activeColor)
+                            .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
-                            Icons.check_circle_outline_rounded,
+                            widget.quickSelectColor != null
+                                ? Icons.bolt_rounded
+                                : Icons.check_circle_outline_rounded,
                             size: 14,
-                            color: Color(0xFF2563EB),
+                            color:
+                                widget.quickSelectColor ?? widget.activeColor,
                           ),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           Text(
-                            'Pilih 5 Teratas',
+                            widget.quickSelectLabel!,
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF2563EB),
+                              color:
+                                  widget.quickSelectColor ?? widget.activeColor,
                             ),
                           ),
                         ],
@@ -1291,7 +1315,7 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
               TextField(
                 onChanged: (val) => setState(() => _searchQuery = val),
                 decoration: InputDecoration(
-                  hintText: 'Cari kantor cabang...',
+                  hintText: widget.searchHint,
                   hintStyle: const TextStyle(
                     color: Color(0xFF94A3B8),
                     fontSize: 13,
@@ -1333,12 +1357,12 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
                   maxHeight: MediaQuery.sizeOf(context).height * 0.45,
                 ),
                 child: filtered.isEmpty
-                    ? const Padding(
-                        padding: EdgeInsets.all(24),
+                    ? Padding(
+                        padding: const EdgeInsets.all(24),
                         child: Center(
                           child: Text(
-                            'Kantor cabang tidak ditemukan',
-                            style: TextStyle(
+                            widget.emptyMessage,
+                            style: const TextStyle(
                               fontSize: 12,
                               color: Color(0xFF94A3B8),
                             ),
@@ -1351,19 +1375,21 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
                         separatorBuilder: (_, _) =>
                             const Divider(height: 1, color: Color(0xFFF1F5F9)),
                         itemBuilder: (context, idx) {
-                          final b = filtered[idx];
-                          final isChecked = _tempSelected.contains(b.idKantor);
-                          final canCheckMore = _tempSelected.length < 5;
+                          final item = filtered[idx];
+                          final id = widget.getId(item);
+                          final isChecked = _tempSelected.contains(id);
+                          final canCheckMore =
+                              _tempSelected.length < widget.maxSelect;
 
                           return CheckboxListTile(
                             value: isChecked,
-                            activeColor: const Color(0xFF0F172A),
+                            activeColor: widget.activeColor,
                             dense: true,
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 4,
                             ),
                             title: Text(
-                              b.label,
+                              widget.getLabel(item),
                               style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
@@ -1374,19 +1400,19 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
                               setState(() {
                                 if (val == true) {
                                   if (canCheckMore) {
-                                    _tempSelected.add(b.idKantor);
+                                    _tempSelected.add(id);
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
+                                      SnackBar(
                                         content: Text(
-                                          'Maksimal memilih 5 kantor cabang!',
+                                          widget.limitExceededMessage,
                                         ),
-                                        duration: Duration(seconds: 2),
+                                        duration: const Duration(seconds: 2),
                                       ),
                                     );
                                   }
                                 } else {
-                                  _tempSelected.remove(b.idKantor);
+                                  _tempSelected.remove(id);
                                 }
                               });
                             },
@@ -1436,324 +1462,7 @@ class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
                         ),
                       ),
                       child: Text(
-                        'Terapkan (${_tempSelected.length} Cabang)',
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// -------------------------------------------------------------
-// MODAL BOTTOM SHEET: PILIH JENIS PINJAMAN (CHECKBOX POPUP)
-// -------------------------------------------------------------
-class _ProductPickerBottomSheet extends StatefulWidget {
-  final List<ProductInfo> products;
-  final Set<String> initiallySelectedNames;
-  final NumberFormat currencyFormat;
-  final ValueChanged<Set<String>> onApply;
-
-  const _ProductPickerBottomSheet({
-    required this.products,
-    required this.initiallySelectedNames,
-    required this.currencyFormat,
-    required this.onApply,
-  });
-
-  @override
-  State<_ProductPickerBottomSheet> createState() =>
-      _ProductPickerBottomSheetState();
-}
-
-class _ProductPickerBottomSheetState extends State<_ProductPickerBottomSheet> {
-  late final Set<String> _tempSelected;
-  String _searchQuery = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _tempSelected = Set<String>.from(widget.initiallySelectedNames);
-  }
-
-  void _selectTop3() {
-    setState(() {
-      _tempSelected
-        ..clear()
-        ..addAll(widget.products.take(3).map((p) => p.name));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final query = _searchQuery.trim().toLowerCase();
-    final filtered = widget.products.where((p) {
-      if (query.isEmpty) return true;
-      return p.name.toLowerCase().contains(query);
-    }).toList();
-
-    return Material(
-      color: Colors.white,
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Handle Bar
-              Center(
-                child: Container(
-                  width: 36,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFCBD5E1),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-
-              // Header Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Pilih Jenis Pinjaman',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF0F172A),
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        'Maksimal 3 jenis pinjaman (${_tempSelected.length}/3 dipilih)',
-                        style: const TextStyle(
-                          fontSize: 11,
-                          color: Color(0xFF64748B),
-                        ),
-                      ),
-                    ],
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.close_rounded,
-                      size: 20,
-                      color: Color(0xFF64748B),
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                    style: IconButton.styleFrom(
-                      backgroundColor: const Color(0xFFF1F5F9),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-
-              // Action Quick Selection Top 3
-              Align(
-                alignment: Alignment.centerLeft,
-                child: InkWell(
-                  onTap: _selectTop3,
-                  borderRadius: BorderRadius.circular(6),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 5,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFE11D48).withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.bolt_rounded,
-                          size: 14,
-                          color: Color(0xFFE11D48),
-                        ),
-                        SizedBox(width: 4),
-                        Text(
-                          'Pilih Top 3 Pinjaman',
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFE11D48),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-
-              // Search Bar
-              TextField(
-                onChanged: (val) => setState(() => _searchQuery = val),
-                decoration: InputDecoration(
-                  hintText: 'Cari jenis pinjaman...',
-                  hintStyle: const TextStyle(
-                    color: Color(0xFF94A3B8),
-                    fontSize: 13,
-                  ),
-                  prefixIcon: const Icon(
-                    Icons.search_rounded,
-                    color: Color(0xFF94A3B8),
-                    size: 18,
-                  ),
-                  isDense: true,
-                  filled: true,
-                  fillColor: const Color(0xFFF8FAFC),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 10,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Color(0xFF0F172A),
-                      width: 1.2,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-
-              // Daftar Checkbox
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: MediaQuery.sizeOf(context).height * 0.45,
-                ),
-                child: filtered.isEmpty
-                    ? const Padding(
-                        padding: EdgeInsets.all(24),
-                        child: Center(
-                          child: Text(
-                            'Jenis pinjaman tidak ditemukan',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF94A3B8),
-                            ),
-                          ),
-                        ),
-                      )
-                    : ListView.separated(
-                        shrinkWrap: true,
-                        itemCount: filtered.length,
-                        separatorBuilder: (_, _) =>
-                            const Divider(height: 1, color: Color(0xFFF1F5F9)),
-                        itemBuilder: (context, idx) {
-                          final p = filtered[idx];
-                          final isChecked = _tempSelected.contains(p.name);
-                          final canCheckMore = _tempSelected.length < 3;
-
-                          return CheckboxListTile(
-                            value: isChecked,
-                            activeColor: const Color(0xFFE11D48),
-                            dense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 4,
-                            ),
-                            title: Text(
-                              p.name,
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFF0F172A),
-                              ),
-                            ),
-                            onChanged: (val) {
-                              setState(() {
-                                if (val == true) {
-                                  if (canCheckMore) {
-                                    _tempSelected.add(p.name);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          'Maksimal memilih 3 jenis pinjaman!',
-                                        ),
-                                        duration: Duration(seconds: 2),
-                                      ),
-                                    );
-                                  }
-                                } else {
-                                  _tempSelected.remove(p.name);
-                                }
-                              });
-                            },
-                          );
-                        },
-                      ),
-              ),
-              const SizedBox(height: 16),
-
-              // Footer Buttons: Batal & Terapkan
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () => Navigator.pop(context),
-                      style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        side: const BorderSide(color: Color(0xFFE2E8F0)),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: const Text(
-                        'Batal',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF64748B),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    flex: 2,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        widget.onApply(_tempSelected);
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF0F172A),
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        'Terapkan (${_tempSelected.length} Pinjaman)',
+                        'Terapkan (${_tempSelected.length} ${widget.applySuffix})',
                         style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
