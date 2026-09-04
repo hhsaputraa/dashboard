@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:dashboard/core/routes/app_routes.dart';
 import 'package:dashboard/core/theme/app_theme.dart';
 import 'package:dashboard/feature/auth/services/auth_service.dart';
 import 'package:dashboard/feature/auth/presentation/login_screen.dart';
@@ -40,25 +42,31 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> _checkSessionAndNavigate() async {
     // Beri jeda minimal 2 detik agar animasi splash sempat terlihat
     final minDelay = Future.delayed(const Duration(milliseconds: 2000));
-    final initAuth = AuthService().initSession();
+    final authService =
+        Get.isRegistered<AuthService>() ? Get.find<AuthService>() : AuthService();
+    final initAuth = authService.initSession();
 
     await Future.wait([minDelay, initAuth]);
 
     if (!mounted) return;
 
-    final isAuthenticated = AuthService().isAuthenticated;
+    final isAuthenticated = authService.isAuthenticated;
 
-    Navigator.of(context).pushReplacement(
-      PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 600),
-        pageBuilder: (context, animation, secondaryAnimation) => isAuthenticated
-            ? const MainNavigationScreen()
-            : const LoginScreen(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(opacity: animation, child: child);
-        },
-      ),
-    );
+    if (Get.routeTree.routes.isNotEmpty) {
+      Get.offNamed(isAuthenticated ? AppRoutes.main : AppRoutes.login);
+    } else {
+      Navigator.of(context).pushReplacement(
+        PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 600),
+          pageBuilder: (context, animation, secondaryAnimation) => isAuthenticated
+              ? const MainNavigationScreen()
+              : const LoginScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        ),
+      );
+    }
   }
 
   @override

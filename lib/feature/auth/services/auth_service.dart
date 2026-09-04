@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:dashboard/core/constants/app_constants.dart';
 import 'package:dashboard/core/network/api_client.dart';
@@ -10,39 +11,68 @@ import '../models/auth_result.dart';
 import '../models/user_model.dart';
 
 /// Service untuk mengelola autentikasi, enkripsi kredensial, dan persistensi sesi user.
-/// Menggunakan pola Singleton sederhana agar state user & token dapat diakses di seluruh aplikasi.
-class AuthService {
+/// Berbasis GetxService dengan dependency injection Get.find() & Get.put().
+class AuthService extends GetxService {
   static final AuthService _instance = AuthService._internal();
-  factory AuthService() => _instance;
+  factory AuthService() => Get.isRegistered<AuthService>() ? Get.find<AuthService>() : _instance;
   AuthService._internal();
 
-  final ApiClient _apiClient = ApiClient();
+  static AuthService get to => Get.find<AuthService>();
+
+  ApiClient get _apiClient => Get.isRegistered<ApiClient>() ? Get.find<ApiClient>() : ApiClient();
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage(
     aOptions: AndroidOptions(encryptedSharedPreferences: true),
   );
 
-  /// State reaktif user dan token login
+  /// State reaktif GetX
+  final Rxn<UserModel> rxUser = Rxn<UserModel>();
+  final Rxn<String> rxToken = Rxn<String>();
+  final RxBool rxIsCheckingAuth = true.obs;
+
+  /// Getters untuk state GetX
+  UserModel? get user => rxUser.value;
+  String? get token => rxToken.value;
+
+  /// ValueNotifier bridge untuk kompatibilitas mundur dengan widget existing
+  @Deprecated('Gunakan rxUser atau getter user di AuthService')
   final ValueNotifier<UserModel?> currentUser = ValueNotifier<UserModel?>(null);
+  @Deprecated('Gunakan rxToken atau getter token di AuthService')
   final ValueNotifier<String?> currentToken = ValueNotifier<String?>(null);
+  @Deprecated('Gunakan rxIsCheckingAuth di AuthService')
   final ValueNotifier<bool> isCheckingAuth = ValueNotifier<bool>(true);
 
+  void _setUser(UserModel? u) {
+    rxUser.value = u;
+    currentUser.value = u;
+  }
+
+  void _setToken(String? t) {
+    rxToken.value = t;
+    currentToken.value = t;
+  }
+
+  void _setCheckingAuth(bool checking) {
+    rxIsCheckingAuth.value = checking;
+    isCheckingAuth.value = checking;
+  }
+
   /// Status apakah user sedang login
-  bool get isAuthenticated => currentToken.value != null && currentToken.value!.isNotEmpty;
+  bool get isAuthenticated => rxToken.value != null && rxToken.value!.isNotEmpty;
 
   /// Memuat token & data user dari hardware-backed storage terenkripsi saat aplikasi pertama kali dibuka.
   Future<void> initSession() async {
-    isCheckingAuth.value = true;
+    _setCheckingAuth(true);
     try {
       final token = await _secureStorage.read(key: AppConstants.keyAuthToken);
       final userJsonStr = await _secureStorage.read(key: AppConstants.keyUserData);
 
       if (token != null && token.isNotEmpty) {
-        currentToken.value = token;
+        _setToken(token);
 
         // Muat data user dari cache lokal terenkripsi jika ada
         if (userJsonStr != null && userJsonStr.isNotEmpty) {
           try {
-            currentUser.value = UserModel.fromJson(jsonDecode(userJsonStr));
+            _setUser(UserModel.fromJson(jsonDecode(userJsonStr)));
           } catch (_) {}
         }
 
@@ -52,7 +82,7 @@ class AuthService {
     } catch (_) {
       // Jika terjadi error lokal, biarkan user tetap di halaman login
     } finally {
-      isCheckingAuth.value = false;
+      _setCheckingAuth(false);
     }
   }
 
@@ -97,7 +127,7 @@ class AuthService {
 
         if (token.isNotEmpty) {
           // Simpan token ke state & secure storage terenkripsi (Android KeyStore / iOS Keychain)
-          currentToken.value = token;
+          _setToken(token);
           await _secureStorage.write(
             key: AppConstants.keyAuthToken,
             value: token,
@@ -106,7 +136,7 @@ class AuthService {
           if (data['user'] != null) {
             try {
               final user = UserModel.fromJson(data['user']);
-              currentUser.value = user;
+              _setUser(user);
               await _secureStorage.write(
                 key: AppConstants.keyUserData,
                 value: jsonEncode(user.toJson()),
@@ -198,13 +228,13 @@ class AuthService {
 
   /// Mengambil profil user terbaru dari `GET /api/auth/me`.
   Future<bool> fetchProfile() async {
-    final token = currentToken.value;
-    if (token == null || token.isEmpty) return false;
+    final activeToken = token;
+    if (activeToken == null || activeToken.isEmpty) return false;
 
     try {
       final response = await _apiClient.get(
         '/api/auth/me',
-        token: token,
+        token: activeToken,
       );
 
       if (response.statusCode == 200) {
@@ -212,7 +242,7 @@ class AuthService {
         final userData = decoded['data']?['user'] ?? decoded['user'];
         if (userData != null) {
           final user = UserModel.fromJson(userData);
-          currentUser.value = user;
+          _setUser(user);
 
           await _secureStorage.write(
             key: AppConstants.keyUserData,
@@ -230,16 +260,16 @@ class AuthService {
 
   /// Menghapus sesi login di client dan backend secara aman.
   Future<void> logout() async {
-    final token = currentToken.value;
-    if (token != null && token.isNotEmpty) {
+    final activeToken = token;
+    if (activeToken != null && activeToken.isNotEmpty) {
       try {
-        await _apiClient.post('/api/auth/logout', token: token);
+        await _apiClient.post('/api/auth/logout', token: activeToken);
       } catch (_) {}
     }
 
     // Bersihkan state & secure storage lokal
-    currentToken.value = null;
-    currentUser.value = null;
+    _setToken(null);
+    _setUser(null);
 
     try {
       await _secureStorage.delete(key: AppConstants.keyAuthToken);

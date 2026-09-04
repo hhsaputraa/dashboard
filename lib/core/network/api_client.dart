@@ -1,16 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/app_constants.dart';
 
-class ApiClient {
+class ApiClient extends GetxService {
   static final ApiClient _instance = ApiClient._internal();
-  factory ApiClient() => _instance;
+  factory ApiClient() => Get.isRegistered<ApiClient>() ? Get.find<ApiClient>() : _instance;
   ApiClient._internal();
 
+  static ApiClient get to => Get.find<ApiClient>();
+
   final http.Client _httpClient = http.Client();
-  final ValueNotifier<String> baseUrlNotifier = ValueNotifier<String>('');
+  final RxString rxBaseUrl = ''.obs;
 
   String? _customBaseUrl;
 
@@ -53,14 +56,14 @@ class ApiClient {
     } catch (_) {
       _customBaseUrl = null;
     }
-    baseUrlNotifier.value = baseUrl;
+    rxBaseUrl.value = baseUrl;
   }
 
   /// Update the Base URL dynamically at runtime
   Future<void> setBaseUrl(String newUrl) async {
     final cleaned = _cleanUrl(newUrl);
     _customBaseUrl = cleaned;
-    baseUrlNotifier.value = cleaned;
+    rxBaseUrl.value = cleaned;
 
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -71,7 +74,7 @@ class ApiClient {
   /// Reset to the default Base URL from build environment
   Future<void> resetToDefault() async {
     _customBaseUrl = null;
-    baseUrlNotifier.value = defaultBaseUrl;
+    rxBaseUrl.value = defaultBaseUrl;
 
     try {
       final prefs = await SharedPreferences.getInstance();

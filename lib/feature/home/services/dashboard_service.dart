@@ -19,7 +19,7 @@ class DashboardService {
       'Accept': 'application/json',
     };
 
-    final token = _authService.currentToken.value;
+    final token = _authService.token;
     if (token != null && token.isNotEmpty) {
       headers['Authorization'] = 'Bearer $token';
     }

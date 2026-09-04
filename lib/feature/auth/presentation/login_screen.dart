@@ -1,73 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:dashboard/core/presentation/server_config_dialog.dart';
 import 'package:dashboard/core/theme/app_theme.dart';
-import 'package:dashboard/feature/home/presentation/main_navigation_screen.dart';
-import '../services/auth_service.dart';
+import '../controllers/login_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  // Key untuk mengontrol validasi form
-  final _formKey = GlobalKey<FormState>();
-
-  // Service autentikasi login
-  final AuthService _authService = AuthService();
-
-  // Controller input teks
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  // State tampilan
-  bool _obscurePassword = true;
-  bool _isLoading = false;
-  String? _errorMessage;
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  /// Memproses login saat pengguna menekan tombol "Masuk"
-  Future<void> _submit() async {
-    if (!_formKey.currentState!.validate() || _isLoading) return;
-
-    FocusScope.of(context).unfocus();
-
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
-    final result = await _authService.login(
-      username: _usernameController.text,
-      password: _passwordController.text,
-    );
-
-    if (!mounted) return;
-
-    setState(() {
-      _isLoading = false;
-    });
-
-    if (result.isSuccess) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const MainNavigationScreen()),
-      );
-    } else {
-      setState(() {
-        _errorMessage = result.message;
-      });
-    }
-  }
+  LoginController get _controller =>
+      Get.isRegistered<LoginController>() ? Get.find<LoginController>() : Get.put(LoginController());
 
   // Static cached borders for InputDecoration to avoid object allocation during builds/rebuilds
   static final OutlineInputBorder _defaultBorder = OutlineInputBorder(
@@ -121,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         vertical: 20,
                       ),
                       child: Form(
-                        key: _formKey,
+                        key: _controller.formKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -147,39 +89,45 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
 
                             // Banner Pesan Error jika Login Gagal
-                            if (_errorMessage != null) ...[
-                              Container(
-                                padding: const EdgeInsets.all(14),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFFEF2F2),
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: const Color(0xFFFCA5A5),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.error_outline_rounded,
-                                      size: 20,
-                                      color: Color(0xFFDC2626),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Expanded(
-                                      child: Text(
-                                        _errorMessage!,
-                                        style: const TextStyle(
-                                          color: Color(0xFF991B1B),
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                        ),
+                            Obx(() {
+                              final error = _controller.errorMessage.value;
+                              if (error == null) return const SizedBox.shrink();
+                              return Column(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(14),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFEF2F2),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color: const Color(0xFFFCA5A5),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 24),
-                            ],
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.error_outline_rounded,
+                                          size: 20,
+                                          color: Color(0xFFDC2626),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: Text(
+                                            error,
+                                            style: const TextStyle(
+                                              color: Color(0xFF991B1B),
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
+                                ],
+                              );
+                            }),
 
                             // --- INPUT USERNAME ---
                             const Text(
@@ -191,10 +139,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             const SizedBox(height: 8),
-                            TextFormField(
-                              controller: _usernameController,
+                            Obx(() => TextFormField(
+                              controller: _controller.usernameController,
                               textInputAction: TextInputAction.next,
-                              enabled: !_isLoading,
+                              enabled: !_controller.isLoading.value,
                               style: const TextStyle(
                                 color: Color(0xFF0F172A),
                                 fontSize: 15,
@@ -209,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 }
                                 return null;
                               },
-                            ),
+                            )),
                             const SizedBox(height: 20),
 
                             // --- INPUT PASSWORD ---
@@ -222,32 +170,28 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             const SizedBox(height: 8),
-                            TextFormField(
-                              controller: _passwordController,
-                              obscureText: _obscurePassword,
+                            Obx(() => TextFormField(
+                              controller: _controller.passwordController,
+                              obscureText: _controller.obscurePassword.value,
                               textInputAction: TextInputAction.done,
-                              enabled: !_isLoading,
+                              enabled: !_controller.isLoading.value,
                               style: const TextStyle(
                                 color: Color(0xFF0F172A),
                                 fontSize: 15,
                               ),
-                              onFieldSubmitted: (_) => _submit(),
+                              onFieldSubmitted: (_) => _controller.submitLogin(),
                               decoration: _buildInputDecoration(
                                 hintText: 'Password',
                                 prefixIcon: Icons.lock_outline_rounded,
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscurePassword
+                                    _controller.obscurePassword.value
                                         ? Icons.visibility_off_outlined
                                         : Icons.visibility_outlined,
                                     color: const Color(0xFF64748B),
                                     size: 20,
                                   ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscurePassword = !_obscurePassword;
-                                    });
-                                  },
+                                  onPressed: _controller.togglePasswordVisibility,
                                 ),
                               ),
                               validator: (val) {
@@ -256,49 +200,52 @@ class _LoginScreenState extends State<LoginScreen> {
                                 }
                                 return null;
                               },
-                            ),
+                            )),
                             const SizedBox(height: 32),
 
                             // --- TOMBOL UTAMA MASUK ---
-                            SizedBox(
-                              width: double.infinity,
-                              height: 52,
-                              child: ElevatedButton(
-                                onPressed: _isLoading ? null : _submit,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppTheme.primaryColor,
-                                  foregroundColor: Colors.white,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
+                            Obx(() {
+                              final loading = _controller.isLoading.value;
+                              return SizedBox(
+                                width: double.infinity,
+                                height: 52,
+                                child: ElevatedButton(
+                                  onPressed: loading ? null : _controller.submitLogin,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppTheme.primaryColor,
+                                    foregroundColor: Colors.white,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(14),
+                                    ),
                                   ),
-                                ),
-                                child: _isLoading
-                                    ? const SizedBox(
-                                        height: 22,
-                                        width: 22,
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: 2.2,
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    : const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Masuk',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: 0.3,
-                                            ),
+                                  child: loading
+                                      ? const SizedBox(
+                                          height: 22,
+                                          width: 22,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2.2,
+                                            color: Colors.white,
                                           ),
-                                          SizedBox(width: 8),
-                                        ],
-                                      ),
-                              ),
-                            ),
+                                        )
+                                      : const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Masuk',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700,
+                                                letterSpacing: 0.3,
+                                              ),
+                                            ),
+                                            SizedBox(width: 8),
+                                          ],
+                                        ),
+                                ),
+                              );
+                            }),
                           ],
                         ),
                       ),
