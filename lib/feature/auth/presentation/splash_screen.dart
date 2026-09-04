@@ -51,10 +51,9 @@ class _SplashScreenState extends State<SplashScreen>
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 600),
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            isAuthenticated
-                ? const MainNavigationScreen()
-                : const LoginScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) => isAuthenticated
+            ? const MainNavigationScreen()
+            : const LoginScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: animation, child: child);
         },
@@ -82,25 +81,10 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: AppTheme.primaryColor,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppTheme.primaryColor.withValues(alpha: 0.3),
-                            blurRadius: 20,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.account_balance_rounded,
-                        size: 44,
-                        color: Colors.white,
-                      ),
+                    Image.asset(
+                      'assets/images/bpr_emblem_red.png',
+                      width: 105,
+                      fit: BoxFit.contain,
                     ),
                     const SizedBox(height: 20),
                     const Text(
