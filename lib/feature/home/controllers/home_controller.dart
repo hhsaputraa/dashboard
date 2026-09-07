@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../model/dashboard_data.dart';
 import '../model/executive_analytics_helper.dart';
+import '../presentation/widgets/kantor_filter_chips.dart';
 import '../services/dashboard_service.dart';
 
 /// Controller untuk mengelola data dashboard eksekutif, filter kantor, cross-filtering produk,
@@ -29,6 +30,9 @@ class HomeController extends GetxController {
   static const Color statusSuccessColor = Color(0xFF22C55E);
 
   final RxInt selectedKantor = 0.obs;
+  final RxList<OfficeOption> availableOffices = <OfficeOption>[
+    const OfficeOption(0, 'Semua Kantor'),
+  ].obs;
   final RxnString selectedProduct = RxnString();
   final RxList<MonthlyTrendItem> activeTrend = <MonthlyTrendItem>[].obs;
 
@@ -58,6 +62,24 @@ class HomeController extends GetxController {
 
       dashboardData.value = data;
       executiveResult.value = execResult;
+
+      // Update daftar kantor dinamis dari records yang ditemukan
+      final currentKnownIds = availableOffices
+          .where((o) => o.id > 0)
+          .map((o) => o.id)
+          .toSet();
+      final newIds = data.records
+          .map((r) => r.idKantor)
+          .where((id) => id > 0)
+          .toSet();
+      final allIds = (currentKnownIds..addAll(newIds)).toList()..sort();
+      if (allIds.isNotEmpty) {
+        availableOffices.assignAll([
+          const OfficeOption(0, 'Semua Kantor'),
+          ...allIds.map((id) => OfficeOption(id, 'Kantor $id')),
+        ]);
+      }
+
       isLoading.value = false;
       lastFetched.value = DateTime.now();
       recomputeActiveTrend();

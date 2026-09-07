@@ -112,15 +112,12 @@ class ExecutiveAnalyticsHelper {
       description: description,
     );
 
-    // 2. Agregasi Komparasi Multi-Line Tren Kantor 1 vs 2 vs 3 dst
+    // 2. Agregasi Komparasi Multi-Line Tren Seluruh Kantor Cabang
     final branchTotals = <int, double>{};
-    final branchMonthly = <int, List<double>>{
-      1: List<double>.filled(12, 0.0),
-      2: List<double>.filled(12, 0.0),
-      3: List<double>.filled(12, 0.0),
-    };
+    final branchMonthly = <int, List<double>>{};
 
     for (final r in data.records) {
+      if (r.idKantor <= 0) continue;
       double rowTotal = 0.0;
       final monthly = branchMonthly[r.idKantor] ??= List<double>.filled(12, 0.0);
       for (int i = 0; i < 12 && i < r.bulanan.length; i++) {
@@ -131,8 +128,11 @@ class ExecutiveAnalyticsHelper {
       branchTotals[r.idKantor] = (branchTotals[r.idKantor] ?? 0.0) + rowTotal;
     }
 
-    for (int k = 1; k <= 3; k++) {
-      branchTotals[k] ??= 0.0;
+    // Fallback jika tidak ada records sama sekali
+    if (branchTotals.isEmpty) {
+      for (int k = 1; k <= 3; k++) {
+        branchTotals[k] = 0.0;
+      }
     }
 
     ExecutiveBranchItem? topBranch;

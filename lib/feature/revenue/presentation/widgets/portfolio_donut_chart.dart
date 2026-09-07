@@ -411,8 +411,9 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
                                       ? FontWeight.bold
                                       : FontWeight.w600,
                                   color: const Color(0xFF1E293B),
+                                  height: 1.25,
                                 ),
-                                maxLines: 1,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 1),

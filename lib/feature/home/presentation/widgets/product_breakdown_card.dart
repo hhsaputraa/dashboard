@@ -151,14 +151,16 @@ class ProductBreakdownCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   if (isSelected)
                                     const Padding(
-                                      padding: EdgeInsets.only(right: 6),
+                                      padding: EdgeInsets.only(right: 6, top: 2),
                                       child: Icon(
                                         Icons.check_circle_rounded,
                                         size: 14,
@@ -176,8 +178,9 @@ class ProductBreakdownCard extends StatelessWidget {
                                         color: isSelected
                                             ? AppTheme.primaryColor
                                             : const Color(0xFF1E293B),
+                                        height: 1.25,
                                       ),
-                                      maxLines: 1,
+                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
@@ -188,7 +191,7 @@ class ProductBreakdownCard extends StatelessWidget {
                             Text(
                               '${currencyFormat.format(item.total)} (${item.percentage.toStringAsFixed(1)}%)',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 11.5,
                                 fontWeight: FontWeight.bold,
                                 color: isSelected
                                     ? AppTheme.primaryColor

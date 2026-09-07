@@ -183,8 +183,9 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF0F172A),
+                          height: 1.25,
                         ),
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       if (widget.selectedProductName != null)

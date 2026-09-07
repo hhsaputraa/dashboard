@@ -96,6 +96,7 @@ class AnalyticsLeaderboardCard extends StatelessWidget {
     required Color color,
   }) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: Column(
@@ -117,23 +118,27 @@ class AnalyticsLeaderboardCard extends StatelessWidget {
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF0F172A),
+                  height: 1.25,
                 ),
-                maxLines: 1,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
         ),
         const SizedBox(width: 8),
-        FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.centerRight,
-          child: Text(
-            subtitle,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: color,
+        Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerRight,
+            child: Text(
+              subtitle,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: color,
+              ),
             ),
           ),
         ),

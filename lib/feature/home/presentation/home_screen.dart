@@ -106,6 +106,7 @@ class HomeScreen extends StatelessWidget {
               // --- 1. FILTER KANTOR / CABANG ---
               Obx(() => KantorFilterChips(
                     selectedKantor: _controller.selectedKantor.value,
+                    offices: _controller.availableOffices.toList(),
                     onKantorChanged: _controller.changeKantor,
                   )),
               const SizedBox(height: 16),

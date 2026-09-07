@@ -68,9 +68,11 @@ class AnalyticsHelper {
       branchMap[r.idKantor] = (branchMap[r.idKantor] ?? 0.0) + rowTotal;
     }
 
-    // Pastikan Kantor 1, 2, 3 ada
-    for (int k = 1; k <= 3; k++) {
-      branchMap.putIfAbsent(k, () => 0.0);
+    // Fallback kantor hanya jika tidak ada record sama sekali
+    if (branchMap.isEmpty) {
+      for (int k = 1; k <= 3; k++) {
+        branchMap[k] = 0.0;
+      }
     }
 
     BranchPerformance? topBranch;

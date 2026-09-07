@@ -94,26 +94,29 @@ class KpiSummarySection extends StatelessWidget {
         const SizedBox(height: 12),
 
         // 2 Sub-card Kecil
-        Row(
-          children: [
-            Expanded(
-              child: KpiStatCard(
-                title: 'Total Data',
-                value: '${summary.totalAccounts} Data',
-                icon: Icons.table_chart_outlined,
-                iconColor: const Color(0xFF0284C7),
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                child: KpiStatCard(
+                  title: 'Total Data',
+                  value: '${summary.totalAccounts} Data',
+                  icon: Icons.table_chart_outlined,
+                  iconColor: const Color(0xFF0284C7),
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: KpiStatCard(
-                title: 'Produk Terbanyak',
-                value: summary.topProduct.replaceAll('KREDIT ', ''),
-                icon: Icons.trending_up_rounded,
-                iconColor: const Color(0xFF16A34A),
+              const SizedBox(width: 12),
+              Expanded(
+                child: KpiStatCard(
+                  title: 'Produk Terbanyak',
+                  value: summary.topProduct.replaceAll('KREDIT ', ''),
+                  icon: Icons.trending_up_rounded,
+                  iconColor: const Color(0xFF16A34A),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );

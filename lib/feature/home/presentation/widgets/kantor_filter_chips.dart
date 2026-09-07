@@ -11,15 +11,9 @@ class OfficeOption {
 class KantorFilterChips extends StatelessWidget {
   final int selectedKantor;
   final ValueChanged<int> onKantorChanged;
+  final List<OfficeOption> offices;
 
-  static const List<Map<String, dynamic>> defaultOffices = [
-    {'id': 0, 'label': 'Semua Kantor'},
-    {'id': 1, 'label': 'Kantor 1'},
-    {'id': 2, 'label': 'Kantor 2'},
-    {'id': 3, 'label': 'Kantor 3'},
-  ];
-
-  static const List<OfficeOption> _typedOffices = [
+  static const List<OfficeOption> defaultOffices = [
     OfficeOption(0, 'Semua Kantor'),
     OfficeOption(1, 'Kantor 1'),
     OfficeOption(2, 'Kantor 2'),
@@ -52,15 +46,18 @@ class KantorFilterChips extends StatelessWidget {
     super.key,
     required this.selectedKantor,
     required this.onKantorChanged,
+    this.offices = defaultOffices,
   });
 
   @override
   Widget build(BuildContext context) {
+    final displayOffices = offices.isNotEmpty ? offices : defaultOffices;
+
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       child: Row(
-        children: _typedOffices.map((off) {
+        children: displayOffices.map((off) {
           final isSelected = selectedKantor == off.id;
           return Padding(
             padding: const EdgeInsets.only(right: 8),

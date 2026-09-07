@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
@@ -453,12 +454,19 @@ class _BranchProductComparisonCardState
                         ),
                       ),
                       const SizedBox(width: 4),
-                      Text(
-                        prod.name,
-                        style: const TextStyle(
-                          fontSize: 11,
-                          color: Color(0xFF475569),
-                          fontWeight: FontWeight.w500,
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.sizeOf(context).width * 0.65,
+                        ),
+                        child: Text(
+                          prod.name,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF475569),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -740,20 +748,28 @@ class _BranchProductComparisonCardState
     );
   }
 
+  static double _computeAdaptiveVisualY(double total, double rawMaxY) {
+    if (total <= 0 || rawMaxY <= 0) return 0.0;
+    final ratio = (total / rawMaxY).clamp(0.0, 1.0);
+    // 8% baseline height agar cabang kecil tetap terlihat jelas + kurva kompresi pangkat 0.55
+    final visualRatio = 0.08 + 0.92 * math.pow(ratio, 0.55);
+    return visualRatio * rawMaxY;
+  }
+
   Widget _buildBarChart({
     required List<BranchInfo> branches,
     required List<ProductInfo> products,
     required Map<int, Map<String, BranchProductSeries>> seriesMap,
   }) {
-    double maxY = 0.0;
+    double rawMaxY = 0.0;
     for (final b in branches) {
       for (final p in products) {
         final val = seriesMap[b.idKantor]?[p.name]?.total ?? 0.0;
-        if (val > maxY) maxY = val;
+        if (val > rawMaxY) rawMaxY = val;
       }
     }
-    if (maxY <= 0) maxY = 1000000;
-    maxY *= 1.25;
+    if (rawMaxY <= 0) rawMaxY = 1000000;
+    final chartMaxY = rawMaxY * 1.25;
 
     final rodWidth = products.length == 1
         ? 20.0
@@ -761,173 +777,216 @@ class _BranchProductComparisonCardState
         ? 12.0
         : 8.5;
 
-    return BarChart(
-      BarChartData(
-        alignment: BarChartAlignment.spaceAround,
-        maxY: maxY,
-        minY: 0,
-        barTouchData: BarTouchData(
-          touchCallback: (FlTouchEvent event, BarTouchResponse? response) {
-            if (!event.isInterestedForInteractions ||
-                response == null ||
-                response.spot == null) {
-              if (_touchedBarY != null) {
-                setState(() {
-                  _touchedBarY = null;
-                });
-              }
-              return;
-            }
-            final newY = response.spot!.touchedRodData.toY;
-            if (_touchedBarY != newY) {
-              setState(() {
-                _touchedBarY = newY;
-              });
-            }
-          },
-          touchTooltipData: BarTouchTooltipData(
-            getTooltipColor: (_) => const Color(0xFF0F172A),
-            fitInsideHorizontally: true,
-            fitInsideVertically: true,
-            tooltipPadding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-              if (groupIndex < 0 || groupIndex >= branches.length) return null;
-              if (rodIndex < 0 || rodIndex >= products.length) return null;
-
-              final branch = branches[groupIndex];
-              final prod = products[rodIndex];
-              final nominal = widget.currencyFormat.format(rod.toY);
-              final color = _productColors[rodIndex % _productColors.length];
-
-              return BarTooltipItem(
-                '${branch.label}\n',
-                TextStyle(
-                  color: color, // Sesuai warna dot
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Indikator Skala Adaptif
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8, left: 4),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2563EB).withValues(alpha: 0.1),
+                  shape: BoxShape.circle,
                 ),
-                children: [
-                  TextSpan(
-                    text: '${prod.name}\n',
-                    style: TextStyle(
-                      color: color.withValues(alpha: 0.9), // Sesuai warna dot
-                      fontSize: 10.5,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  TextSpan(
-                    text: nominal,
-                    style: const TextStyle(
-                      color: Colors.white, // Text angka warna putih
-                      fontSize: 12,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-        extraLinesData: ExtraLinesData(
-          extraLinesOnTop: true,
-          horizontalLines: [
-            if (_touchedBarY != null)
-              HorizontalLine(
-                y: _touchedBarY!,
-                color: const Color(0xFF94A3B8), // Abu-abu
-                strokeWidth: 1.5,
-                dashArray: const [4, 4], // Garis lurus putus-putus bantuan
+                child: const Icon(
+                  Icons.auto_awesome_rounded,
+                  size: 11,
+                  color: Color(0xFF2563EB),
+                ),
               ),
-          ],
-        ),
-        titlesData: FlTitlesData(
-          topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          rightTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
-          ),
-          leftTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 46,
-              getTitlesWidget: (value, meta) {
-                if (value == 0 || value == meta.max) {
-                  return const SizedBox.shrink();
-                }
-                return SideTitleWidget(
-                  meta: meta,
-                  child: Text(
-                    _formatCompact(value),
-                    style: const TextStyle(
-                      fontSize: 9,
-                      color: Color(0xFF94A3B8),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          bottomTitles: AxisTitles(
-            sideTitles: SideTitles(
-              showTitles: true,
-              getTitlesWidget: (value, meta) {
-                final index = value.toInt();
-                if (index < 0 || index >= branches.length) {
-                  return const SizedBox.shrink();
-                }
-                return SideTitleWidget(
-                  meta: meta,
-                  child: Text(
-                    branches[index].label,
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF64748B),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-        gridData: FlGridData(
-          show: true,
-          drawVerticalLine: true,
-          horizontalInterval: maxY / 4,
-          getDrawingHorizontalLine: (value) =>
-              const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1),
-          getDrawingVerticalLine: (value) => const FlLine(
-            color: Color(0xFFF1F5F9),
-            strokeWidth: 1,
-          ),
-        ),
-        borderData: FlBorderData(show: false),
-        barGroups: List.generate(branches.length, (bIndex) {
-          final branch = branches[bIndex];
-          return BarChartGroupData(
-            x: bIndex,
-            barsSpace: 4,
-            barRods: List.generate(products.length, (pIndex) {
-              final prod = products[pIndex];
-              final total =
-                  seriesMap[branch.idKantor]?[prod.name]?.total ?? 0.0;
-              final color = _productColors[pIndex % _productColors.length];
-
-              return BarChartRodData(
-                toY: total,
-                color: color,
-                width: rodWidth,
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(4),
+              const SizedBox(width: 5),
+              const Text(
+                'Skala visual adaptif aktif · Nominal pada tooltip 100% riil',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Color(0xFF64748B),
+                  fontWeight: FontWeight.w500,
                 ),
-              );
-            }),
-          );
-        }),
-      ),
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: BarChart(
+            BarChartData(
+              alignment: BarChartAlignment.spaceAround,
+              maxY: chartMaxY,
+              minY: 0,
+              barTouchData: BarTouchData(
+                touchCallback: (FlTouchEvent event, BarTouchResponse? response) {
+                  if (!event.isInterestedForInteractions ||
+                      response == null ||
+                      response.spot == null) {
+                    if (_touchedBarY != null) {
+                      setState(() {
+                        _touchedBarY = null;
+                      });
+                    }
+                    return;
+                  }
+                  final newY = response.spot!.touchedRodData.toY;
+                  if (_touchedBarY != newY) {
+                    setState(() {
+                      _touchedBarY = newY;
+                    });
+                  }
+                },
+                touchTooltipData: BarTouchTooltipData(
+                  getTooltipColor: (_) => const Color(0xFF0F172A),
+                  fitInsideHorizontally: true,
+                  fitInsideVertically: true,
+                  tooltipPadding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                    if (groupIndex < 0 || groupIndex >= branches.length) return null;
+                    if (rodIndex < 0 || rodIndex >= products.length) return null;
+
+                    final branch = branches[groupIndex];
+                    final prod = products[rodIndex];
+                    final actualTotal =
+                        seriesMap[branch.idKantor]?[prod.name]?.total ?? 0.0;
+                    final nominal = widget.currencyFormat.format(actualTotal);
+                    final color = _productColors[rodIndex % _productColors.length];
+
+                    return BarTooltipItem(
+                      '${branch.label}\n',
+                      TextStyle(
+                        color: color,
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: '${prod.name}\n',
+                          style: TextStyle(
+                            color: color.withValues(alpha: 0.9),
+                            fontSize: 10.5,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        TextSpan(
+                          text: nominal,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              extraLinesData: ExtraLinesData(
+                extraLinesOnTop: true,
+                horizontalLines: [
+                  if (_touchedBarY != null)
+                    HorizontalLine(
+                      y: _touchedBarY!,
+                      color: const Color(0xFF94A3B8),
+                      strokeWidth: 1.5,
+                      dashArray: const [4, 4],
+                    ),
+                ],
+              ),
+              titlesData: FlTitlesData(
+                topTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                rightTitles: const AxisTitles(
+                  sideTitles: SideTitles(showTitles: false),
+                ),
+                leftTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    reservedSize: 46,
+                    interval: chartMaxY / 4,
+                    getTitlesWidget: (value, meta) {
+                      if (value == 0 || value == meta.max) {
+                        return const SizedBox.shrink();
+                      }
+                      return SideTitleWidget(
+                        meta: meta,
+                        child: Text(
+                          _formatCompact(value),
+                          style: const TextStyle(
+                            fontSize: 9,
+                            color: Color(0xFF94A3B8),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    getTitlesWidget: (value, meta) {
+                      final index = value.toInt();
+                      if (index < 0 || index >= branches.length) {
+                        return const SizedBox.shrink();
+                      }
+                      return SideTitleWidget(
+                        meta: meta,
+                        child: Text(
+                          branches[index].label,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF64748B),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              gridData: FlGridData(
+                show: true,
+                drawVerticalLine: true,
+                horizontalInterval: chartMaxY / 4,
+                getDrawingHorizontalLine: (value) =>
+                    const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1),
+                getDrawingVerticalLine: (value) => const FlLine(
+                  color: Color(0xFFF1F5F9),
+                  strokeWidth: 1,
+                ),
+              ),
+              borderData: FlBorderData(show: false),
+              barGroups: List.generate(branches.length, (bIndex) {
+                final branch = branches[bIndex];
+                return BarChartGroupData(
+                  x: bIndex,
+                  barsSpace: 4,
+                  barRods: List.generate(products.length, (pIndex) {
+                    final prod = products[pIndex];
+                    final actualTotal =
+                        seriesMap[branch.idKantor]?[prod.name]?.total ?? 0.0;
+                    final visualY =
+                        _computeAdaptiveVisualY(actualTotal, rawMaxY);
+                    final color = _productColors[pIndex % _productColors.length];
+
+                    return BarChartRodData(
+                      toY: visualY,
+                      color: color,
+                      width: rodWidth,
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(4),
+                      ),
+                    );
+                  }),
+                );
+              }),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -1394,7 +1453,10 @@ class _ItemPickerBottomSheetState<T, K>
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                                 color: Color(0xFF0F172A),
+                                height: 1.25,
                               ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                             onChanged: (val) {
                               setState(() {
