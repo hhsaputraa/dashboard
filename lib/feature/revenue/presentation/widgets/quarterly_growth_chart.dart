@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
 import 'package:dashboard/feature/revenue/model/analytics_helper.dart';
+import 'package:dashboard/feature/revenue/model/quarterly_growth_calculator.dart';
 
 class QuarterlyGrowthChart extends StatefulWidget {
   final List<QuarterPerformance> quarters;
@@ -28,7 +29,6 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
     Color(0xFF13D38E),
   ];
 
-  static const List<double> _tierRadii = [92.0, 78.0, 66.0, 54.0];
   late Map<int, double> _baseRadiusMap;
   late double _totalQuarters;
 
@@ -47,22 +47,11 @@ class _QuarterlyGrowthChartState extends State<QuarterlyGrowthChart> {
   }
 
   void _computeRadiiAndTotal() {
-    final list = widget.quarters;
-    double total = 0.0;
-    for (final q in list) {
-      total += q.total;
-    }
-    _totalQuarters = total;
-
-    final sortedIndices = List<int>.generate(list.length, (i) => i)
-      ..sort((a, b) => list[b].total.compareTo(list[a].total));
-
-    final radiusMap = <int, double>{};
-    for (int rank = 0; rank < sortedIndices.length; rank++) {
-      final itemIndex = sortedIndices[rank];
-      radiusMap[itemIndex] = rank < _tierRadii.length ? _tierRadii[rank] : 54.0;
-    }
-    _baseRadiusMap = radiusMap;
+    final result = QuarterlyGrowthCalculator.computeRadiiAndTotal(
+      quarters: widget.quarters,
+    );
+    _totalQuarters = result.totalQuarters;
+    _baseRadiusMap = result.baseRadiusMap;
   }
 
   @override

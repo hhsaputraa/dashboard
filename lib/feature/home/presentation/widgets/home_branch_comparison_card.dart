@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dashboard/feature/home/model/executive_analytics_helper.dart';
+import 'package:dashboard/core/presentation/widgets/item_picker_bottom_sheet.dart';
 
 enum BranchViewMode { top3, bottom3, custom }
 
@@ -174,9 +175,23 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => _BranchPickerBottomSheet(
-        branches: widget.branches,
-        initiallySelectedIds: _selectedBranchIds,
+      builder: (context) => ItemPickerBottomSheet<ExecutiveBranchItem, int>(
+        title: 'Pilih Cabang untuk Komparasi',
+        unitLabel: 'kantor cabang',
+        applySuffix: 'Terpilih',
+        emptyMessage: 'Kantor cabang tidak ditemukan',
+        searchHint: 'Cari kantor cabang...',
+        limitExceededMessage: 'Maksimal memilih 5 cabang!',
+        maxSelect: 5,
+        activeColor: const Color(0xFF0F172A),
+        items: widget.branches,
+        initiallySelected: _selectedBranchIds,
+        getId: (b) => b.idKantor,
+        getLabel: (b) => b.label,
+        getSubtitle: (b) => 'Kontribusi: ${b.percentage.toStringAsFixed(1)}%',
+        matchesQuery: (b, q) =>
+            b.label.toLowerCase().contains(q) ||
+            b.idKantor.toString().contains(q),
         onApply: (newSelection) {
           setState(() {
             _viewMode = BranchViewMode.custom;
@@ -823,154 +838,3 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
   }
 }
 
-class _BranchPickerBottomSheet extends StatefulWidget {
-  final List<ExecutiveBranchItem> branches;
-  final Set<int> initiallySelectedIds;
-  final ValueChanged<Set<int>> onApply;
-
-  const _BranchPickerBottomSheet({
-    required this.branches,
-    required this.initiallySelectedIds,
-    required this.onApply,
-  });
-
-  @override
-  State<_BranchPickerBottomSheet> createState() =>
-      _BranchPickerBottomSheetState();
-}
-
-class _BranchPickerBottomSheetState extends State<_BranchPickerBottomSheet> {
-  late final Set<int> _tempSelected;
-  String _searchQuery = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _tempSelected = Set<int>.from(widget.initiallySelectedIds);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final query = _searchQuery.trim().toLowerCase();
-    final filtered = widget.branches.where((b) {
-      if (query.isEmpty) return true;
-      return b.label.toLowerCase().contains(query) ||
-          b.idKantor.toString().contains(query);
-    }).toList();
-
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Pilih Cabang untuk Komparasi',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.close, size: 20),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ],
-            ),
-            const Text(
-              'Maksimal 5 kantor cabang',
-              style: TextStyle(fontSize: 11, color: Color(0xFF64748B)),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Cari kantor cabang...',
-                prefixIcon: const Icon(Icons.search, size: 18),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                ),
-              ),
-              onChanged: (val) => setState(() => _searchQuery = val),
-            ),
-            const SizedBox(height: 12),
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 250),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: filtered.length,
-                itemBuilder: (context, idx) {
-                  final b = filtered[idx];
-                  final isChecked = _tempSelected.contains(b.idKantor);
-
-                  return CheckboxListTile(
-                    value: isChecked,
-                    title: Text(
-                      b.label,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    subtitle: Text(
-                      'Kontribusi: ${b.percentage.toStringAsFixed(1)}%',
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                    onChanged: (val) {
-                      setState(() {
-                        if (val == true) {
-                          if (_tempSelected.length < 5) {
-                            _tempSelected.add(b.idKantor);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Maksimal memilih 5 cabang!'),
-                                duration: Duration(seconds: 2),
-                              ),
-                            );
-                          }
-                        } else if (_tempSelected.length > 1) {
-                          _tempSelected.remove(b.idKantor);
-                        }
-                      });
-                    },
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 14),
-            SizedBox(
-              width: double.infinity,
-              height: 44,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF0F172A),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: () {
-                  widget.onApply(_tempSelected);
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Terapkan (${_tempSelected.length} Terpilih)',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

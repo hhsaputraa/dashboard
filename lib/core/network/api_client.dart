@@ -107,6 +107,18 @@ class ApiClient extends GetxService {
     }
   }
 
+  /// Helper to build standard headers with optional bearer token
+  static Map<String, String> authHeaders(
+    String? token, {
+    Map<String, String>? extraHeaders,
+  }) {
+    return {
+      'Accept': 'application/json',
+      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
+      ...?extraHeaders,
+    };
+  }
+
   /// Send GET request
   Future<http.Response> get(
     String endpoint, {
@@ -114,10 +126,7 @@ class ApiClient extends GetxService {
     Duration timeout = const Duration(seconds: 15),
   }) async {
     final uri = Uri.parse('$baseUrl$endpoint');
-    final headers = {
-      'Accept': 'application/json',
-      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
-    };
+    final headers = authHeaders(token);
 
     return await _httpClient.get(uri, headers: headers).timeout(timeout);
   }

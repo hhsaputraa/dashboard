@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:dashboard/core/presentation/server_config_dialog.dart';
+import 'package:dashboard/core/presentation/widgets/sync_status_indicator.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
 import 'package:dashboard/feature/home/presentation/widgets/dashboard_state_views.dart';
 import 'package:dashboard/feature/revenue/controllers/revenue_controller.dart';
@@ -24,43 +25,16 @@ class RevenueScreen extends StatelessWidget {
           : Get.put(RevenueController());
 
   Widget _buildStatusIndicator() {
-    return Obx(() {
-      Color statusColor;
-      String statusText;
-      if (_controller.isLoading.value) {
-        statusColor = const Color(0xFFEAB308);
-        statusText = 'Menyinkronkan analitik...';
-      } else if (_controller.errorMessage.value != null) {
-        statusColor = const Color(0xFFEF4444);
-        statusText = 'Gagal terhubung ke server';
-      } else {
-        statusColor = const Color(0xFF22C55E);
-        statusText =
-            'Update data: ${RevenueController.dateTimeFormat.format(_controller.lastFetched.value)}';
-      }
-
-      return Row(
-        children: [
-          Container(
-            width: 7,
-            height: 7,
-            decoration: BoxDecoration(
-              color: statusColor,
-              shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(width: 5),
-          Text(
-            statusText,
-            style: const TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF64748B),
-            ),
-          ),
-        ],
-      );
-    });
+    return Obx(
+      () => SyncStatusIndicator(
+        isLoading: _controller.isLoading.value,
+        errorMessage: _controller.errorMessage.value,
+        lastFetched: _controller.lastFetched.value,
+        dateFormat: RevenueController.dateTimeFormat,
+        syncingText: 'Menyinkronkan analitik...',
+        errorText: 'Gagal terhubung ke server',
+      ),
+    );
   }
 
   @override

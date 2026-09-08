@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:dashboard/core/presentation/server_config_dialog.dart';
+import 'package:dashboard/core/presentation/widgets/sync_status_indicator.dart';
 import 'package:dashboard/feature/home/controllers/home_controller.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
 
@@ -20,43 +21,16 @@ class HomeScreen extends StatelessWidget {
       Get.isRegistered<HomeController>() ? Get.find<HomeController>() : Get.put(HomeController());
 
   Widget _buildStatusIndicator() {
-    return Obx(() {
-      Color statusColor;
-      String statusText;
-      if (_controller.isLoading.value) {
-        statusColor = HomeController.statusLoadingColor;
-        statusText = 'Menyinkronkan data...';
-      } else if (_controller.errorMessage.value != null) {
-        statusColor = HomeController.statusErrorColor;
-        statusText = 'Gagal terhubung ke server';
-      } else {
-        statusColor = HomeController.statusSuccessColor;
-        statusText =
-            'Update data: ${HomeController.dateTimeFormat.format(_controller.lastFetched.value)}';
-      }
-
-      return Row(
-        children: [
-          Container(
-            width: 7,
-            height: 7,
-            decoration: BoxDecoration(
-              color: statusColor,
-              shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(width: 5),
-          Text(
-            statusText,
-            style: const TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF64748B),
-            ),
-          ),
-        ],
-      );
-    });
+    return Obx(
+      () => SyncStatusIndicator(
+        isLoading: _controller.isLoading.value,
+        errorMessage: _controller.errorMessage.value,
+        lastFetched: _controller.lastFetched.value,
+        dateFormat: HomeController.dateTimeFormat,
+        syncingText: 'Menyinkronkan data...',
+        errorText: 'Gagal terhubung ke server',
+      ),
+    );
   }
 
   @override

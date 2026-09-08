@@ -60,9 +60,9 @@
     "semantic_hash": "2c290d96183725ff394b8f2aa730efff"
   },
   "lib/core/network/api_client.dart": {
-    "mtime": 1788863854.7986178,
-    "ast_hash": "dc02e8752f91cc888eaec11c9a9b586a",
-    "semantic_hash": ""
+    "mtime": 1788494922.273547,
+    "ast_hash": "9a45f8036bc585d2c73e8b125bd5bdd0",
+    "semantic_hash": "9a45f8036bc585d2c73e8b125bd5bdd0"
   },
   "lib/core/presentation/server_config_dialog.dart": {
     "mtime": 1787218155.5400655,
@@ -245,9 +245,9 @@
     "semantic_hash": "e9e235e759adabde9ba91ac9e53753c9"
   },
   "lib/feature/home/presentation/home_screen.dart": {
-    "mtime": 1788863579.8305323,
-    "ast_hash": "d2de22c74650e6afde1be87c1d0db662",
-    "semantic_hash": ""
+    "mtime": 1788513070.2692468,
+    "ast_hash": "de20185c209e16f9b7ef946ec9274755",
+    "semantic_hash": "de20185c209e16f9b7ef946ec9274755"
   },
   "lib/feature/home/presentation/main_navigation_screen.dart": {
     "mtime": 1788491898.2234385,
@@ -265,8 +265,8 @@
     "semantic_hash": "6340d4bb846a2dad7c8421bbfebe420c"
   },
   "lib/feature/home/presentation/widgets/home_branch_comparison_card.dart": {
-    "mtime": 1788863483.7990987,
-    "ast_hash": "634702d4ba9ad24dc4177f10ed57c662",
+    "mtime": 1788854656.9577777,
+    "ast_hash": "edaa6d96a683d33a62c5454615b761b2",
     "semantic_hash": ""
   },
   "lib/feature/home/presentation/widgets/kantor_filter_chips.dart": {
@@ -295,8 +295,8 @@
     "semantic_hash": "e55833e15c73179ca3ceceda9e5de9e1"
   },
   "lib/feature/home/services/dashboard_service.dart": {
-    "mtime": 1788863845.0901816,
-    "ast_hash": "bdd7dda8c0da1ce9bf46abe36c17d417",
+    "mtime": 1788854561.777289,
+    "ast_hash": "8bbd68ca6d0225f4697dd38fd5f85986",
     "semantic_hash": ""
   },
   "lib/feature/profile/presentation/profile_screen.dart": {
@@ -390,9 +390,9 @@
     "semantic_hash": "88f3728d1d75bc7f232be470e4c0fd96"
   },
   "lib/feature/home/controllers/home_controller.dart": {
-    "mtime": 1788863656.1172147,
-    "ast_hash": "2034bc945f2d0095b7a11f6a8c4afa91",
-    "semantic_hash": ""
+    "mtime": 1788513065.1038475,
+    "ast_hash": "d038d22007ee85ce9318749c252a0aeb",
+    "semantic_hash": "d038d22007ee85ce9318749c252a0aeb"
   },
   "lib/feature/home/controllers/navigation_controller.dart": {
     "mtime": 1788491879.8825648,
@@ -450,9 +450,9 @@
     "semantic_hash": "094fedb1834008cab8ecf9bd317b3b3b"
   },
   "lib/feature/revenue/presentation/revenue_screen.dart": {
-    "mtime": 1788863584.7139537,
-    "ast_hash": "888b5dfb2e096b410d46ce11a6a51b71",
-    "semantic_hash": ""
+    "mtime": 1788492213.7922328,
+    "ast_hash": "93ebeea7139be5d102dd4585ab4fa9c1",
+    "semantic_hash": "93ebeea7139be5d102dd4585ab4fa9c1"
   },
   "lib/feature/revenue/presentation/widgets/analytics_leaderboard_card.dart": {
     "mtime": 1788513165.874061,
@@ -465,8 +465,8 @@
     "semantic_hash": "d997a8956d43c21c138c6a8ad51382f8"
   },
   "lib/feature/revenue/presentation/widgets/branch_product_comparison_card.dart": {
-    "mtime": 1788863460.1147704,
-    "ast_hash": "b68459ada314a0d9dfecb47185840d81",
+    "mtime": 1788854792.2413657,
+    "ast_hash": "cb615491e7c194f6adfab3f8006a1acf",
     "semantic_hash": ""
   },
   "lib/feature/revenue/presentation/widgets/portfolio_donut_chart.dart": {
@@ -475,9 +475,9 @@
     "semantic_hash": "c5aa8e91e7c52a1cd19e43159dd0424d"
   },
   "lib/feature/revenue/presentation/widgets/quarterly_growth_chart.dart": {
-    "mtime": 1788863748.3137252,
-    "ast_hash": "4fce0b97a2f7951cd26f9d52760fb5dd",
-    "semantic_hash": ""
+    "mtime": 1788335867.9407542,
+    "ast_hash": "380ada15b73af0d4e5557933a21d004a",
+    "semantic_hash": "380ada15b73af0d4e5557933a21d004a"
   },
   "test/auth/login_controller_test.dart": {
     "mtime": 1788491776.2013698,
@@ -1074,49 +1074,24 @@
     "ast_hash": "db3ad019396bdf636ea6849426ddce3c",
     "semantic_hash": ""
   },
+  "lib/feature/home/presentation/widgets/branch_picker_bottom_sheet.dart": {
+    "mtime": 1788854624.8720722,
+    "ast_hash": "42e60a3c4450b8e674508a7125221ca6",
+    "semantic_hash": ""
+  },
+  "lib/feature/revenue/presentation/widgets/item_picker_bottom_sheet.dart": {
+    "mtime": 1788854895.6423821,
+    "ast_hash": "8a5794a829de31a6404196d96d307fdc",
+    "semantic_hash": ""
+  },
   "test/home/monthly_trend_calculator_test.dart": {
     "mtime": 1788855102.9610064,
     "ast_hash": "86cd874123724b44bc960993c9be0711",
     "semantic_hash": ""
   },
   "plans/god_nodes_refactor_tasklist.md": {
-    "mtime": 1788855219.858442,
-    "ast_hash": "79a4dbef6f7f3fd44cdc503138bfe1f9",
-    "semantic_hash": ""
-  },
-  "lib/core/presentation/widgets/item_picker_bottom_sheet.dart": {
-    "mtime": 1788863450.517217,
-    "ast_hash": "485d685ae9bcde51a78aee360ae97291",
-    "semantic_hash": ""
-  },
-  "lib/core/presentation/widgets/sync_status_indicator.dart": {
-    "mtime": 1788863573.869524,
-    "ast_hash": "fc8442bb6e06a6fbfa4bdad18d8d2af7",
-    "semantic_hash": ""
-  },
-  "lib/feature/home/model/home_product_trend_helper.dart": {
-    "mtime": 1788863650.068881,
-    "ast_hash": "f4c270472d8209917f7e210cb2ce5f67",
-    "semantic_hash": ""
-  },
-  "lib/feature/revenue/model/quarterly_growth_calculator.dart": {
-    "mtime": 1788863744.731694,
-    "ast_hash": "98d4f3d37af8f49ed7308e99e1385281",
-    "semantic_hash": ""
-  },
-  "test/home/home_product_trend_helper_test.dart": {
-    "mtime": 1788863678.7951536,
-    "ast_hash": "2f5824fee337f88458055d1ffe9de537",
-    "semantic_hash": ""
-  },
-  "test/revenue/quarterly_growth_calculator_test.dart": {
-    "mtime": 1788863763.2768166,
-    "ast_hash": "5f64d24f1d0bf00d8dd29cf225e9bf39",
-    "semantic_hash": ""
-  },
-  "plans/phase2_refactor_and_improvement_tasklist.md": {
-    "mtime": 1788863903.6091511,
-    "ast_hash": "31d77422691ca762801dae8a819a23d2",
+    "mtime": 1788855168.199847,
+    "ast_hash": "05146cffa5e21d6462e33b2b7b9d8f40",
     "semantic_hash": ""
   }
 }

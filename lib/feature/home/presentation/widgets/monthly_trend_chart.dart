@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dashboard/core/theme/app_theme.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
+import 'package:dashboard/feature/home/model/monthly_trend_calculator.dart';
 
 class MonthlyTrendChart extends StatefulWidget {
   final List<MonthlyTrendItem> trend;
@@ -23,10 +24,13 @@ class MonthlyTrendChart extends StatefulWidget {
 }
 
 class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
-  List<FlSpot> _cachedSpots = const [];
-  double _cachedChartMaxY = 1000000;
-  double _cachedYInterval = 200000;
-  double _cachedTotalBunga = 0;
+  MonthlyTrendCalculationResult _calculationResult =
+      const MonthlyTrendCalculationResult(
+    spots: [],
+    chartMaxY: 1000000,
+    yInterval: 200000,
+    totalBunga: 0,
+  );
   int? _touchedIndex;
 
   static const BoxDecoration _cardDecoration = BoxDecoration(
@@ -79,20 +83,8 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
     color: Color(0xFF64748B),
   );
 
-  static String _formatCompactValue(double value) {
-    if (value <= 0) return '0';
-    if (value >= 1000000000) {
-      final v = value / 1000000000;
-      return '${v.toStringAsFixed(v >= 10 ? 0 : 1)} M';
-    } else if (value >= 1000000) {
-      final v = value / 1000000;
-      return '${v.toStringAsFixed(v >= 10 ? 0 : 1)} jt';
-    } else if (value >= 1000) {
-      final v = value / 1000;
-      return '${v.toStringAsFixed(v >= 10 ? 0 : 1)} rb';
-    }
-    return value.toStringAsFixed(0);
-  }
+  static String _formatCompactValue(double value) =>
+      MonthlyTrendCalculationResult.formatCompactValue(value);
 
   @override
   void initState() {
@@ -109,32 +101,17 @@ class _MonthlyTrendChartState extends State<MonthlyTrendChart> {
   }
 
   void _recomputeSpots() {
-    double maxY = 0;
-    double totalBunga = 0;
-    final spots = <FlSpot>[];
-
-    for (int i = 0; i < widget.trend.length; i++) {
-      final val = widget.trend[i].total;
-      if (val > maxY) maxY = val;
-      totalBunga += val;
-      spots.add(FlSpot(i.toDouble(), val));
-    }
-
-    if (maxY == 0) maxY = 1000000;
-    _cachedChartMaxY = maxY / 0.93;
-    _cachedYInterval = (_cachedChartMaxY / 5).clamp(1.0, double.infinity);
-    _cachedTotalBunga = totalBunga;
-    _cachedSpots = spots;
+    _calculationResult = MonthlyTrendCalculationResult.compute(widget.trend);
     _touchedIndex = null;
   }
 
   @override
   Widget build(BuildContext context) {
     final trend = widget.trend;
-    final chartMaxY = _cachedChartMaxY;
-    final yInterval = _cachedYInterval;
-    final totalBunga = _cachedTotalBunga;
-    final spots = _cachedSpots;
+    final chartMaxY = _calculationResult.chartMaxY;
+    final yInterval = _calculationResult.yInterval;
+    final totalBunga = _calculationResult.totalBunga;
+    final spots = _calculationResult.spots;
 
     final lineBarData = LineChartBarData(
       spots: spots,

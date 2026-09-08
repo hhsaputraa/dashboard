@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../model/dashboard_data.dart';
 import '../model/executive_analytics_helper.dart';
+import '../model/home_product_trend_helper.dart';
 import '../presentation/widgets/kantor_filter_chips.dart';
 import '../services/dashboard_service.dart';
 
@@ -112,50 +113,10 @@ class HomeController extends GetxController {
   }
 
   List<MonthlyTrendItem> _calculateActiveTrend(DashboardData data) {
-    if (selectedProduct.value == null) {
-      return data.monthlyTrend;
-    }
-
-    final selectedLower = selectedProduct.value!.trim().toLowerCase();
-
-    if (data.records.isNotEmpty) {
-      final monthlySums = List<double>.filled(12, 0.0);
-      bool hasMatch = false;
-
-      for (final r in data.records) {
-        if (r.jenisPinjaman.trim().toLowerCase() == selectedLower) {
-          hasMatch = true;
-          for (int i = 0; i < 12 && i < r.bulanan.length; i++) {
-            monthlySums[i] += r.bulanan[i];
-          }
-        }
-      }
-
-      if (hasMatch) {
-        return List.generate(12, (i) {
-          return MonthlyTrendItem(
-            month: monthNames[i],
-            total: monthlySums[i],
-          );
-        });
-      }
-    }
-
-    for (final p in data.productBreakdown) {
-      if (p.name.trim().toLowerCase() == selectedLower) {
-        if (p.monthlyTrend != null && p.monthlyTrend!.isNotEmpty) {
-          return p.monthlyTrend!;
-        }
-        if (data.summary.totalYTD > 0) {
-          final ratio = p.total / data.summary.totalYTD;
-          return data.monthlyTrend
-              .map((m) => MonthlyTrendItem(month: m.month, total: m.total * ratio))
-              .toList();
-        }
-        break;
-      }
-    }
-
-    return data.monthlyTrend;
+    return HomeProductTrendHelper.calculateActiveTrend(
+      data: data,
+      selectedProduct: selectedProduct.value,
+      monthNames: monthNames,
+    );
   }
 }
