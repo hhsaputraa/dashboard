@@ -159,6 +159,132 @@ void main() {
       },
     );
 
+    testWidgets(
+      'ProductBreakdownCard filters items using search input and clears query',
+      (tester) async {
+        const breakdown = [
+          ProductBreakdown(
+            name: 'Kredit Modal Kerja',
+            total: 300000,
+            percentage: 60.0,
+          ),
+          ProductBreakdown(
+            name: 'Kredit Konsumtif',
+            total: 100000,
+            percentage: 20.0,
+          ),
+          ProductBreakdown(
+            name: 'Kredit Investasi',
+            total: 100000,
+            percentage: 20.0,
+          ),
+        ];
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ProductBreakdownCard(
+                breakdown: breakdown,
+                grandTotal: 500000,
+                currencyFormat: currencyFormat,
+              ),
+            ),
+          ),
+        );
+
+        // All 3 items initially visible
+        expect(find.text('Kredit Modal Kerja'), findsOneWidget);
+        expect(find.text('Kredit Konsumtif'), findsOneWidget);
+        expect(find.text('Kredit Investasi'), findsOneWidget);
+        expect(find.byType(Scrollbar), findsOneWidget);
+
+        // Search for 'Konsumtif'
+        await tester.enterText(find.byType(TextField), 'Konsumtif');
+        await tester.pumpAndSettle();
+
+        expect(find.text('Kredit Konsumtif'), findsOneWidget);
+        expect(find.text('Kredit Modal Kerja'), findsNothing);
+        expect(find.text('Kredit Investasi'), findsNothing);
+
+        // Tap clear button on search field
+        await tester.tap(find.byIcon(Icons.clear_rounded));
+        await tester.pumpAndSettle();
+
+        // All 3 items should reappear
+        expect(find.text('Kredit Modal Kerja'), findsOneWidget);
+        expect(find.text('Kredit Konsumtif'), findsOneWidget);
+        expect(find.text('Kredit Investasi'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'ProductBreakdownCard displays empty state when search finds no match',
+      (tester) async {
+        const breakdown = [
+          ProductBreakdown(
+            name: 'Kredit Modal Kerja',
+            total: 300000,
+            percentage: 100.0,
+          ),
+        ];
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ProductBreakdownCard(
+                breakdown: breakdown,
+                grandTotal: 300000,
+                currencyFormat: currencyFormat,
+              ),
+            ),
+          ),
+        );
+
+        await tester.enterText(find.byType(TextField), 'Tidak Ada');
+        await tester.pumpAndSettle();
+
+        expect(find.text('Kredit Modal Kerja'), findsNothing);
+        expect(
+          find.text('Tidak ada jenis pinjaman yang cocok'),
+          findsOneWidget,
+        );
+      },
+    );
+
+    testWidgets(
+      'ProductBreakdownCard renders very long product names completely without overflow or truncation',
+      (tester) async {
+        const longName =
+            'KREDIT MODAL KERJA USAHA MIKRO KECIL DAN MENENGAH SEKTOR PERTANIAN DAN PERKEBUNAN TIPE KHUSUS';
+        const breakdown = [
+          ProductBreakdown(
+            name: longName,
+            total: 250000000,
+            percentage: 100.0,
+          ),
+        ];
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: ProductBreakdownCard(
+                breakdown: breakdown,
+                grandTotal: 250000000,
+                currencyFormat: currencyFormat,
+              ),
+            ),
+          ),
+        );
+
+        // Verify full text is rendered in the widget tree
+        final textWidget = tester.widget<Text>(find.text(longName));
+        expect(textWidget.softWrap, isTrue);
+        expect(textWidget.overflow, isNull);
+        expect(find.text(longName), findsOneWidget);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
     testWidgets('MonthlyTrendChart shows custom title and triggers reset', (
       tester,
     ) async {
@@ -457,6 +583,61 @@ void main() {
       ); // in search field and filtered card
       expect(find.text('Produk 6'), findsNothing);
     });
+
+    testWidgets(
+      'PortfolioDonutChart shows percentage in center, Rp below donut, and only product name in card',
+      (tester) async {
+        final breakdown = [
+          const ProductBreakdown(name: 'Produk A', total: 400.0, percentage: 4.0),
+          const ProductBreakdown(name: 'Produk B', total: 300.0, percentage: 3.0),
+          const ProductBreakdown(name: 'Produk C', total: 200.0, percentage: 2.0),
+          const ProductBreakdown(name: 'Produk D', total: 100.0, percentage: 1.0),
+          // Total Top 5 = 1000.0 (even though grandTotal = 10000.0)
+          // Default center: 100%
+          // Default Rp below donut: currencyFormat.format(1000.0) -> 'Rp 1.000'
+        ];
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: SingleChildScrollView(
+                child: PortfolioDonutChart(
+                  breakdown: breakdown,
+                  allProducts: breakdown,
+                  grandTotal: 10000,
+                  currencyFormat: currencyFormat,
+                ),
+              ),
+            ),
+          ),
+        );
+
+        // Donut center should display '100%' in default state
+        expect(find.text('100%'), findsOneWidget);
+
+        // Rp value should be shown directly below donut (formatted top 5 total)
+        expect(find.text(currencyFormat.format(1000.0)), findsOneWidget);
+
+        // Cards display only product name
+        expect(find.text('Produk A'), findsOneWidget);
+        expect(find.text('Produk B'), findsOneWidget);
+        expect(find.text('Produk C'), findsOneWidget);
+        expect(find.text('Produk D'), findsOneWidget);
+
+        // No pills with individual percentages in default state
+        expect(find.text('40.0%'), findsNothing);
+        expect(find.text('4.0%'), findsNothing);
+
+        // Tap Produk A to select it
+        await tester.tap(find.text('Produk A'));
+        await tester.pumpAndSettle();
+
+        // When Produk A is selected, center shows its proportional percentage: 40.0%
+        expect(find.text('40.0%'), findsOneWidget);
+        // And below donut shows Produk A's nominal directly: 'Rp 400'
+        expect(find.text(currencyFormat.format(400.0)), findsOneWidget);
+      },
+    );
 
     test(
       'AnalyticsHelper extracts top 3 branches sorted by revenue descending',

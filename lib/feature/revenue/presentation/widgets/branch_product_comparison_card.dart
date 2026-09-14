@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
@@ -90,18 +91,20 @@ class _BranchProductComparisonCardState
   }
 
   void _updateAvailableBranches() {
-    _availableBranches =
-        BranchProductComparisonHelper.getAvailableBranches(widget.records);
+    _availableBranches = BranchProductComparisonHelper.getAvailableBranches(
+      widget.records,
+    );
   }
 
   void _updateAvailableProducts() {
     final branchFilteredRecords = _selectedBranchIds.isNotEmpty
         ? widget.records
-            .where((r) => _selectedBranchIds.contains(r.idKantor))
-            .toList()
+              .where((r) => _selectedBranchIds.contains(r.idKantor))
+              .toList()
         : widget.records;
-    _availableProducts =
-        BranchProductComparisonHelper.getAvailableProducts(branchFilteredRecords);
+    _availableProducts = BranchProductComparisonHelper.getAvailableProducts(
+      branchFilteredRecords,
+    );
   }
 
   void _recomputeSeries() {
@@ -142,8 +145,9 @@ class _BranchProductComparisonCardState
         matchesQuery: (b, q) =>
             b.label.toLowerCase().contains(q) ||
             b.idKantor.toString().contains(q),
-        quickSelectLabel:
-            availableBranches.length > 5 ? 'Pilih 5 Teratas' : null,
+        quickSelectLabel: availableBranches.length > 5
+            ? 'Pilih 5 Teratas'
+            : null,
         onQuickSelect: () =>
             availableBranches.take(5).map((b) => b.idKantor).toSet(),
         onApply: (newSelection) {
@@ -334,12 +338,13 @@ class _BranchProductComparisonCardState
                 child: _buildPickerButton(
                   onTap: isProductEnabled
                       ? () =>
-                          _openProductPickerModal(context, availableProducts)
+                            _openProductPickerModal(context, availableProducts)
                       : () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content:
-                                  Text('Pilih kantor cabang terlebih dahulu!'),
+                              content: Text(
+                                'Pilih kantor cabang terlebih dahulu!',
+                              ),
                               duration: Duration(seconds: 1),
                             ),
                           );
@@ -355,8 +360,8 @@ class _BranchProductComparisonCardState
                   subtitle: !isProductEnabled
                       ? 'Pilih cabang dulu'
                       : _selectedProducts.isEmpty
-                          ? '0 Pinjaman Dipilih'
-                          : '${_selectedProducts.length} Pinjaman Dipilih',
+                      ? '0 Pinjaman Dipilih'
+                      : '${_selectedProducts.length} Pinjaman Dipilih',
                   hasSelection:
                       isProductEnabled && _selectedProducts.isNotEmpty,
                 ),
@@ -685,8 +690,9 @@ class _BranchProductComparisonCardState
                     subtitle,
                     style: TextStyle(
                       fontSize: 12,
-                      fontWeight:
-                          hasSelection ? FontWeight.bold : FontWeight.w500,
+                      fontWeight: hasSelection
+                          ? FontWeight.bold
+                          : FontWeight.w500,
                       color: hasSelection
                           ? const Color(0xFF0F172A)
                           : const Color(0xFF94A3B8),
@@ -801,14 +807,6 @@ class _BranchProductComparisonCardState
                 ),
               ),
               const SizedBox(width: 5),
-              const Text(
-                'Skala visual adaptif aktif · Nominal pada tooltip 100% riil',
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Color(0xFF64748B),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
             ],
           ),
         ),
@@ -819,40 +817,46 @@ class _BranchProductComparisonCardState
               maxY: chartMaxY,
               minY: 0,
               barTouchData: BarTouchData(
-                touchCallback: (FlTouchEvent event, BarTouchResponse? response) {
-                  if (!event.isInterestedForInteractions ||
-                      response == null ||
-                      response.spot == null) {
-                    if (_touchedBarY != null) {
-                      setState(() {
-                        _touchedBarY = null;
-                      });
-                    }
-                    return;
-                  }
-                  final newY = response.spot!.touchedRodData.toY;
-                  if (_touchedBarY != newY) {
-                    setState(() {
-                      _touchedBarY = newY;
-                    });
-                  }
-                },
+                touchCallback:
+                    (FlTouchEvent event, BarTouchResponse? response) {
+                      if (!event.isInterestedForInteractions ||
+                          response == null ||
+                          response.spot == null) {
+                        if (_touchedBarY != null) {
+                          setState(() {
+                            _touchedBarY = null;
+                          });
+                        }
+                        return;
+                      }
+                      final newY = response.spot!.touchedRodData.toY;
+                      if (_touchedBarY != newY) {
+                        setState(() {
+                          _touchedBarY = newY;
+                        });
+                      }
+                    },
                 touchTooltipData: BarTouchTooltipData(
                   getTooltipColor: (_) => const Color(0xFF0F172A),
                   fitInsideHorizontally: true,
                   fitInsideVertically: true,
-                  tooltipPadding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  tooltipPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
                   getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                    if (groupIndex < 0 || groupIndex >= branches.length) return null;
-                    if (rodIndex < 0 || rodIndex >= products.length) return null;
+                    if (groupIndex < 0 || groupIndex >= branches.length)
+                      return null;
+                    if (rodIndex < 0 || rodIndex >= products.length)
+                      return null;
 
                     final branch = branches[groupIndex];
                     final prod = products[rodIndex];
                     final actualTotal =
                         seriesMap[branch.idKantor]?[prod.name]?.total ?? 0.0;
                     final nominal = widget.currencyFormat.format(actualTotal);
-                    final color = _productColors[rodIndex % _productColors.length];
+                    final color =
+                        _productColors[rodIndex % _productColors.length];
 
                     return BarTooltipItem(
                       '${branch.label}\n',
@@ -954,10 +958,8 @@ class _BranchProductComparisonCardState
                 horizontalInterval: chartMaxY / 4,
                 getDrawingHorizontalLine: (value) =>
                     const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1),
-                getDrawingVerticalLine: (value) => const FlLine(
-                  color: Color(0xFFF1F5F9),
-                  strokeWidth: 1,
-                ),
+                getDrawingVerticalLine: (value) =>
+                    const FlLine(color: Color(0xFFF1F5F9), strokeWidth: 1),
               ),
               borderData: FlBorderData(show: false),
               barGroups: List.generate(branches.length, (bIndex) {
@@ -969,9 +971,12 @@ class _BranchProductComparisonCardState
                     final prod = products[pIndex];
                     final actualTotal =
                         seriesMap[branch.idKantor]?[prod.name]?.total ?? 0.0;
-                    final visualY =
-                        _computeAdaptiveVisualY(actualTotal, rawMaxY);
-                    final color = _productColors[pIndex % _productColors.length];
+                    final visualY = _computeAdaptiveVisualY(
+                      actualTotal,
+                      rawMaxY,
+                    );
+                    final color =
+                        _productColors[pIndex % _productColors.length];
 
                     return BarChartRodData(
                       toY: visualY,
@@ -1048,33 +1053,37 @@ class _BranchProductComparisonCardState
         lineTouchData: LineTouchData(
           getTouchedSpotIndicator:
               (LineChartBarData barData, List<int> spotIndexes) {
-            return spotIndexes.map((spotIndex) {
-              return TouchedSpotIndicatorData(
-                const FlLine(
-                  color: Color(0xFF94A3B8), // Garis bantu abu-abu ke sumbu bulan
-                  strokeWidth: 1.5,
-                  dashArray: [4, 4], // Putus-putus
-                ),
-                FlDotData(
-                  show: true,
-                  getDotPainter: (spot, percent, barData, index) {
-                    return FlDotCirclePainter(
-                      radius: 4,
-                      color: Colors.white,
-                      strokeWidth: 2.5,
-                      strokeColor: barData.color ?? const Color(0xFF0F172A),
-                    );
-                  },
-                ),
-              );
-            }).toList();
-          },
+                return spotIndexes.map((spotIndex) {
+                  return TouchedSpotIndicatorData(
+                    const FlLine(
+                      color: Color(
+                        0xFF94A3B8,
+                      ), // Garis bantu abu-abu ke sumbu bulan
+                      strokeWidth: 1.5,
+                      dashArray: [4, 4], // Putus-putus
+                    ),
+                    FlDotData(
+                      show: true,
+                      getDotPainter: (spot, percent, barData, index) {
+                        return FlDotCirclePainter(
+                          radius: 4,
+                          color: Colors.white,
+                          strokeWidth: 2.5,
+                          strokeColor: barData.color ?? const Color(0xFF0F172A),
+                        );
+                      },
+                    ),
+                  );
+                }).toList();
+              },
           touchTooltipData: LineTouchTooltipData(
             getTooltipColor: (_) => const Color(0xFF0F172A),
             fitInsideHorizontally: true,
             fitInsideVertically: true,
-            tooltipPadding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            tooltipPadding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 8,
+            ),
             getTooltipItems: (touchedSpots) {
               return touchedSpots.map((spot) {
                 final pIndex = spot.barIndex;
@@ -1084,8 +1093,8 @@ class _BranchProductComparisonCardState
                 final monthIdx = spot.x.toInt();
                 final monthName =
                     (monthIdx >= 0 && monthIdx < _monthLabels.length)
-                        ? _monthLabels[monthIdx]
-                        : '';
+                    ? _monthLabels[monthIdx]
+                    : '';
 
                 return LineTooltipItem(
                   '${prod.name} ($monthName)\n',
@@ -1182,4 +1191,3 @@ class _BranchProductComparisonCardState
     );
   }
 }
-

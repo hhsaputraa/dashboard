@@ -7,7 +7,7 @@ import 'package:dashboard/feature/home/controllers/home_controller.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
 
 import 'widgets/dashboard_state_views.dart';
-import 'widgets/hhi_concentration_card.dart';
+// import 'widgets/hhi_concentration_card.dart';
 import 'widgets/home_branch_comparison_card.dart';
 import 'widgets/kantor_filter_chips.dart';
 import 'widgets/kpi_summary_section.dart';
@@ -128,15 +128,15 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // --- 2. HHI CONCENTRATION & DIVERSIFICATION RISK CARD ---
-          if (execResult != null) ...[
-            RepaintBoundary(
-              child: HhiConcentrationCard(
-                hhi: execResult.hhi,
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
+          // --- 2. HHI CONCENTRATION & DIVERSIFICATION RISK CARD (HIDDEN) ---
+          // if (execResult != null) ...[
+          //   RepaintBoundary(
+          //     child: HhiConcentrationCard(
+          //       hhi: execResult.hhi,
+          //     ),
+          //   ),
+          //   const SizedBox(height: 20),
+          // ],
 
           // --- 3. KOMPARASI KANTOR CABANG (Tampil saat Semua Kantor Terpilih) ---
           if (selectedKantor == 0 &&

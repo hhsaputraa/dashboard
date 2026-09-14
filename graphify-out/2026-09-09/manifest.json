@@ -80,9 +80,9 @@
     "semantic_hash": "b5a0623f95e322429b7fdfa03d73a9a1"
   },
   "lib/main.dart": {
-    "mtime": 1789031441.1266623,
-    "ast_hash": "ef05be9863b582a4cb44d4dc528070fb",
-    "semantic_hash": ""
+    "mtime": 1788491485.0954802,
+    "ast_hash": "346a8cba23b2c3f2af0f7cc4281423e0",
+    "semantic_hash": "346a8cba23b2c3f2af0f7cc4281423e0"
   },
   "linux/flutter/generated_plugin_registrant.cc": {
     "mtime": 1787219793.6434424,
@@ -310,8 +310,8 @@
     "semantic_hash": "f5d94f69bffdfac931d7039f01651c49"
   },
   "test/home/home_widgets_test.dart": {
-    "mtime": 1789032222.8296587,
-    "ast_hash": "1c829d179594febac8d74a4ceefabb70",
+    "mtime": 1788920879.1455004,
+    "ast_hash": "67d5e70ac8ef327f1189c5ed0e3a54ed",
     "semantic_hash": ""
   },
   "AGENTS.md": {
@@ -470,9 +470,9 @@
     "semantic_hash": ""
   },
   "lib/feature/revenue/presentation/widgets/portfolio_donut_chart.dart": {
-    "mtime": 1789032214.9784007,
-    "ast_hash": "fe79231cbfc154e2b4a526435271d33b",
-    "semantic_hash": ""
+    "mtime": 1788513152.3930619,
+    "ast_hash": "c5aa8e91e7c52a1cd19e43159dd0424d",
+    "semantic_hash": "c5aa8e91e7c52a1cd19e43159dd0424d"
   },
   "lib/feature/revenue/presentation/widgets/quarterly_growth_chart.dart": {
     "mtime": 1788863748.3137252,
@@ -1142,21 +1142,6 @@
   "test/home/product_breakdown_benchmark_test.dart": {
     "mtime": 1788919888.3884268,
     "ast_hash": "fe317623a673d5b041a5efe2989a43f6",
-    "semantic_hash": ""
-  },
-  "plans/top_5_donut_chart_redesign_spec.md": {
-    "mtime": 1788938919.5559707,
-    "ast_hash": "f6b3b9b89d51c43539ff9716e5adc744",
-    "semantic_hash": ""
-  },
-  "lib/feature/learning/belajar_screen.dart": {
-    "mtime": 1789032290.8745859,
-    "ast_hash": "c03e48a2a090db51ad6989f01202fcaf",
-    "semantic_hash": ""
-  },
-  "plans/top_5_donut_chart_layout_refinement_spec.md": {
-    "mtime": 1789032198.8564062,
-    "ast_hash": "0809f89eb9f5f7036ff4e8940432ca65",
     "semantic_hash": ""
   }
 }

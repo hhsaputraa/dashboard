@@ -41,4 +41,3 @@ class BankDashboardApp extends StatelessWidget {
     );
   }
 }
-

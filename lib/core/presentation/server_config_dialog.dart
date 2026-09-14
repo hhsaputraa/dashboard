@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../network/api_client.dart';
+import '../security/url_security_validator.dart';
 import '../theme/app_theme.dart';
 
 class ServerConfigDialog extends StatefulWidget {
@@ -41,6 +42,16 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
     final inputUrl = _urlController.text.trim();
     if (inputUrl.isEmpty) return;
 
+    final validation = UrlSecurityValidator.validate(inputUrl);
+    if (!validation.isValid) {
+      setState(() {
+        _isTesting = false;
+        _testSuccess = false;
+        _testMessage = validation.errorMessage;
+      });
+      return;
+    }
+
     setState(() {
       _isTesting = true;
       _testSuccess = null;
@@ -61,6 +72,18 @@ class _ServerConfigDialogState extends State<ServerConfigDialog> {
   Future<void> _saveUrl() async {
     final inputUrl = _urlController.text.trim();
     if (inputUrl.isEmpty) return;
+
+    final validation = UrlSecurityValidator.validate(inputUrl);
+    if (!validation.isValid) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(validation.errorMessage ?? 'URL tidak aman.'),
+          backgroundColor: const Color(0xFFEF4444),
+          duration: const Duration(seconds: 3),
+        ),
+      );
+      return;
+    }
 
     await _apiClient.setBaseUrl(inputUrl);
 

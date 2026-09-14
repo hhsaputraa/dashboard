@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
-import 'package:dashboard/core/theme/app_theme.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
 import 'package:dashboard/feature/revenue/presentation/all_loan_products_screen.dart';
 
@@ -28,7 +27,8 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
   int _touchedIndex = -1;
 
   void _navigateToAllProducts(BuildContext context) {
-    final all = widget.allProducts ?? widget.breakdown ?? const <ProductBreakdown>[];
+    final all =
+        widget.allProducts ?? widget.breakdown ?? const <ProductBreakdown>[];
     if (all.isEmpty) return;
 
     Navigator.of(context).push(
@@ -57,9 +57,7 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
   @override
   Widget build(BuildContext context) {
     final rawItems = widget.breakdown ?? const <ProductBreakdown>[];
-    final items = rawItems.length > 5
-        ? rawItems.take(5).toList()
-        : rawItems;
+    final items = rawItems.length > 5 ? rawItems.take(5).toList() : rawItems;
 
     if (items.isEmpty || widget.grandTotal <= 0) {
       return Container(
@@ -78,12 +76,20 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
       );
     }
 
+    final top5Total = items.fold<double>(0.0, (sum, item) => sum + item.total);
+
     final activeProduct = (_touchedIndex >= 0 && _touchedIndex < items.length)
         ? items[_touchedIndex]
         : null;
     final activeColor = activeProduct != null
         ? _chartColors[_touchedIndex % _chartColors.length]
-        : AppTheme.primaryColor;
+        : const Color(0xFF0F172A);
+    final activePercentage = activeProduct != null
+        ? (top5Total > 0 ? (activeProduct.total / top5Total) * 100.0 : 0.0)
+        : 100.0;
+    final activeNominal = activeProduct != null
+        ? activeProduct.total
+        : top5Total;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -107,7 +113,7 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Top 5 Portofolio Produk',
+                'Top 5 Produk Pinjaman',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -191,28 +197,14 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
             '5 jenis pinjaman tertinggi · Ketuk grafik untuk rincian',
             style: TextStyle(fontSize: 11, color: Color(0xFF94A3B8)),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
 
-          // Donut Chart Modern dengan Center Display
+          // Donut Chart dengan Persentase di Tengah
           SizedBox(
-            height: 230,
+            height: 210,
             child: Stack(
               alignment: Alignment.center,
               children: [
-                // Background Center Glow Circle
-                Container(
-                  width: 125,
-                  height: 125,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: const Color(0xFFF8FAFC),
-                    border: Border.all(
-                      color: const Color(0xFFF1F5F9),
-                      width: 1.5,
-                    ),
-                  ),
-                ),
-
                 PieChart(
                   PieChartData(
                     pieTouchData: PieTouchData(
@@ -241,109 +233,61 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
                       final isTouched = i == _touchedIndex;
                       final item = items[i];
                       final color = _chartColors[i % _chartColors.length];
-                      final radius = isTouched ? 44.0 : 34.0;
+                      final radius = isTouched ? 42.0 : 34.0;
 
                       return PieChartSectionData(
                         color: color,
                         value: item.total,
-                        title: isTouched
-                            ? '${item.percentage.toStringAsFixed(1)}%'
-                            : '',
+                        showTitle: false,
+                        title: '',
                         radius: radius,
-                        badgeWidget: isTouched ? const _TouchIndicatorBadge() : null,
+                        badgeWidget: isTouched
+                            ? const _TouchIndicatorBadge()
+                            : null,
                         badgePositionPercentageOffset: 1.15,
-                        titleStyle: const TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
                       );
                     }),
                   ),
                 ),
 
-                // Center Display Info
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (activeProduct != null) ...[
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: activeColor.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            activeProduct.name.replaceAll('KREDIT ', ''),
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: activeColor,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '${activeProduct.percentage.toStringAsFixed(1)}%',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: activeColor,
-                            letterSpacing: -0.5,
-                          ),
-                        ),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            widget.currencyFormat.format(activeProduct.total),
-                            style: const TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF64748B),
-                            ),
-                          ),
-                        ),
-                      ] else ...[
-                        const Text(
-                          'TOTAL PORTOFOLIO',
-                          style: TextStyle(
-                            fontSize: 9,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF94A3B8),
-                            letterSpacing: 0.6,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            widget.currencyFormat.format(widget.grandTotal),
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w900,
-                              color: Color(0xFF0F172A),
-                              letterSpacing: -0.5,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                      ],
-                    ],
+                // Center Persentase Tunggal Bersih
+                AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 200),
+                  style: TextStyle(
+                    fontSize: _touchedIndex != -1 ? 26 : 28,
+                    fontWeight: FontWeight.w900,
+                    color: activeColor,
+                    letterSpacing: -0.5,
+                  ),
+                  child: Text(
+                    _touchedIndex != -1
+                        ? '${activePercentage.toStringAsFixed(1)}%'
+                        : '100%',
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 12),
 
-          // Legend Rinci Modern Card Pills
+          // Nilai Rupiah Langsung di Bawah Donut Chart
+          Center(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                widget.currencyFormat.format(activeNominal),
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800,
+                  color: Color(0xFF0F172A),
+                  letterSpacing: -0.2,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 18),
+
+          // Legend Card Hanya Menampilkan Nama Produk
           const Divider(height: 1, color: Color(0xFFF1F5F9)),
           const SizedBox(height: 12),
 
@@ -370,8 +314,8 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 8,
+                      horizontal: 12,
+                      vertical: 10,
                     ),
                     decoration: BoxDecoration(
                       color: isHighlighted
@@ -390,63 +334,30 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
                         // Left Colored Capsule Indicator
                         Container(
                           width: 4,
-                          height: 24,
+                          height: 20,
                           decoration: BoxDecoration(
                             color: color,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 12),
 
-                        // Nama Produk
+                        // Nama Produk Saja
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.name,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: isHighlighted
-                                      ? FontWeight.bold
-                                      : FontWeight.w600,
-                                  color: const Color(0xFF1E293B),
-                                  height: 1.25,
-                                ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 1),
-                              Text(
-                                widget.currencyFormat.format(item.total),
-                                style: const TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFF64748B),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-
-                        // Badge Persentase Pill
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 3,
-                          ),
-                          decoration: BoxDecoration(
-                            color: color.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
                           child: Text(
-                            '${item.percentage.toStringAsFixed(1)}%',
+                            item.name,
                             style: TextStyle(
                               fontSize: 12,
-                              fontWeight: FontWeight.w800,
-                              color: color,
+                              fontWeight: isHighlighted
+                                  ? FontWeight.bold
+                                  : FontWeight.w600,
+                              color: isHighlighted
+                                  ? color
+                                  : const Color(0xFF1E293B),
+                              height: 1.25,
                             ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -473,12 +384,7 @@ class _TouchIndicatorBadge extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 4,
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 4)],
       ),
     );
   }
