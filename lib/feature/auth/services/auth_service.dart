@@ -59,28 +59,27 @@ class AuthService extends GetxService {
   /// Status apakah user sedang login
   bool get isAuthenticated => rxToken.value != null && rxToken.value!.isNotEmpty;
 
-  /// Memuat token & data user dari hardware-backed storage terenkripsi saat aplikasi pertama kali dibuka.
+  /// Memuat sesi saat aplikasi pertama kali dibuka.
+  /// Standar Keamanan Perbankan: Sesi aktif bersifat In-Memory. Saat aplikasi di-close / swipe up,
+  /// token otomatis musnah dari memori sehingga user selalu diarahkan login kembali.
   Future<void> initSession() async {
     _setCheckingAuth(true);
     try {
-      final token = await _secureStorage.read(key: AppConstants.keyAuthToken);
+      // Hapus token persisten lama dari secure storage agar tidak bocor lintas restart aplikasi
+      await _secureStorage.delete(key: AppConstants.keyAuthToken);
+
+      // Muat data profil user non-sensitif (nama/username) dari cache lokal jika tersedia untuk autofill/greeting
       final userJsonStr = await _secureStorage.read(key: AppConstants.keyUserData);
-
-      if (token != null && token.isNotEmpty) {
-        _setToken(token);
-
-        // Muat data user dari cache lokal terenkripsi jika ada
-        if (userJsonStr != null && userJsonStr.isNotEmpty) {
-          try {
-            _setUser(UserModel.fromJson(jsonDecode(userJsonStr)));
-          } catch (_) {}
-        }
-
-        // Sinkronisasi data user terbaru dengan backend di background tanpa memblokir startup
-        unawaited(fetchProfile());
+      if (userJsonStr != null && userJsonStr.isNotEmpty) {
+        try {
+          _setUser(UserModel.fromJson(jsonDecode(userJsonStr)));
+        } catch (_) {}
       }
+
+      // Pastikan token selalu null saat cold start aplikasi
+      _setToken(null);
     } catch (_) {
-      // Jika terjadi error lokal, biarkan user tetap di halaman login
+      _setToken(null);
     } finally {
       _setCheckingAuth(false);
     }
@@ -126,12 +125,9 @@ class AuthService extends GetxService {
         final token = data['token']?.toString() ?? '';
 
         if (token.isNotEmpty) {
-          // Simpan token ke state & secure storage terenkripsi (Android KeyStore / iOS Keychain)
+          // Simpan token hanya di runtime state (In-Memory RAM) sesuai standar perbankan.
+          // Saat aplikasi di-close/swipe up, RAM dibersihkan otomatis oleh OS.
           _setToken(token);
-          await _secureStorage.write(
-            key: AppConstants.keyAuthToken,
-            value: token,
-          );
 
           if (data['user'] != null) {
             try {

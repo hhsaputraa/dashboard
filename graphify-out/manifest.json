@@ -225,8 +225,8 @@
     "semantic_hash": "79b4e923898b1de715f3dd7c11bf79b8"
   },
   "lib/feature/auth/services/auth_service.dart": {
-    "mtime": 1789349710.5822687,
-    "ast_hash": "1c308fb5525289fd2889079074d3054d",
+    "mtime": 1789353444.2101684,
+    "ast_hash": "86a73fe259eda292389ed24241dce400",
     "semantic_hash": ""
   },
   "lib/feature/home/model/dashboard_data.dart": {
@@ -1167,6 +1167,16 @@
   "plans/startup_splash_performance_spec.md": {
     "mtime": 1789349706.1002994,
     "ast_hash": "cf74f6dba151c5bd56d13fedf734aa69",
+    "semantic_hash": ""
+  },
+  "test/auth/auth_service_test.dart": {
+    "mtime": 1789353449.8220005,
+    "ast_hash": "1fed407573e95cc6e8351570b1180314",
+    "semantic_hash": ""
+  },
+  "plans/strict_banking_session_spec.md": {
+    "mtime": 1789353433.2875483,
+    "ast_hash": "67b870dd2d7a549c9005442e9b49ee2d",
     "semantic_hash": ""
   }
 }

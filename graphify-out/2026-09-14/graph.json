@@ -68,7 +68,7 @@
       "_origin": "ast",
       "id": "android_settings_gradle",
       "community": 83,
-      "community_name": "description",
+      "community_name": "my_application.h",
       "norm_label": "settings.gradle.kts"
     },
     {
@@ -78,8 +78,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ios_runnertests_runnertests",
-      "community": 76,
-      "community_name": "ios/RunnerTests/RunnerTests.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "ios/runnertests/runnertests.swift"
     },
     {
@@ -102,8 +102,8 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "uikit",
-      "community": 84,
-      "community_name": "ios/Runner/AppDelegate.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "uikit"
     },
     {
@@ -114,8 +114,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "xctest",
-      "community": 76,
-      "community_name": "ios/RunnerTests/RunnerTests.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "xctest"
     },
     {
@@ -127,8 +127,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "ios_runnertests_runnertests_runnertests",
-      "community": 76,
-      "community_name": "ios/RunnerTests/RunnerTests.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "runnertests"
     },
     {
@@ -138,8 +138,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "xctestcase",
-      "community": 76,
-      "community_name": "ios/RunnerTests/RunnerTests.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "xctestcase"
     },
     {
@@ -150,8 +150,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "ios_runnertests_runnertests_runnertests_testexample",
-      "community": 76,
-      "community_name": "ios/RunnerTests/RunnerTests.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": ".testexample()"
     },
     {
@@ -161,8 +161,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ios_runner_appdelegate",
-      "community": 84,
-      "community_name": "ios/Runner/AppDelegate.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "ios/runner/appdelegate.swift"
     },
     {
@@ -174,8 +174,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "ios_runner_appdelegate_appdelegate",
-      "community": 42,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "appdelegate"
     },
     {
@@ -185,8 +185,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "flutterappdelegate",
-      "community": 81,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "flutterappdelegate"
     },
     {
@@ -196,8 +196,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "flutterimplicitenginedelegate",
-      "community": 42,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "flutterimplicitenginedelegate"
     },
     {
@@ -208,8 +208,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "ios_runner_appdelegate_appdelegate_application",
-      "community": 42,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": ".application()"
     },
     {
@@ -219,8 +219,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "uiapplication",
-      "community": 42,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "uiapplication"
     },
     {
@@ -230,8 +230,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "any",
-      "community": 42,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "any"
     },
     {
@@ -241,8 +241,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "ios_runner_appdelegate_swift_bool",
-      "community": 42,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "bool"
     },
     {
@@ -253,8 +253,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "ios_runner_appdelegate_appdelegate_didinitializeimplicitflutterengine",
-      "community": 42,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": ".didinitializeimplicitflutterengine()"
     },
     {
@@ -264,8 +264,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "flutterimplicitenginebridge",
-      "community": 42,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "flutterimplicitenginebridge"
     },
     {
@@ -275,8 +275,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ios_runner_runner_bridging_header",
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "runner-bridging-header.h"
     },
     {
@@ -286,8 +286,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "ios_runner_scenedelegate",
-      "community": 84,
-      "community_name": "ios/Runner/AppDelegate.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "scenedelegate.swift"
     },
     {
@@ -299,8 +299,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "ios_runner_scenedelegate_scenedelegate",
-      "community": 84,
-      "community_name": "ios/Runner/AppDelegate.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "scenedelegate"
     },
     {
@@ -310,8 +310,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "flutterscenedelegate",
-      "community": 84,
-      "community_name": "ios/Runner/AppDelegate.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "flutterscenedelegate"
     },
     {
@@ -321,8 +321,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_bindings_initial_binding",
-      "community": 33,
-      "community_name": "dashboard_service.dart",
+      "community": 142,
+      "community_name": "initial_binding.dart",
       "norm_label": "initial_binding.dart"
     },
     {
@@ -332,8 +332,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_bindings_initial_binding_initialbinding",
-      "community": 12,
-      "community_name": "Bindings",
+      "community": 142,
+      "community_name": "initial_binding.dart",
       "norm_label": "initialbinding"
     },
     {
@@ -343,8 +343,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "bindings",
-      "community": 12,
-      "community_name": "Bindings",
+      "community": 142,
+      "community_name": "initial_binding.dart",
       "norm_label": "bindings"
     },
     {
@@ -354,8 +354,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_bindings_initial_binding_dependencies",
-      "community": 33,
-      "community_name": "dashboard_service.dart",
+      "community": 142,
+      "community_name": "initial_binding.dart",
       "norm_label": "dependencies"
     },
     {
@@ -365,7 +365,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_get_get_dart",
-      "community": 79,
+      "community": 12,
       "community_name": "package:get/get.dart",
       "norm_label": "package:get/get.dart"
     },
@@ -376,8 +376,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "network_api_client_dart",
-      "community": 33,
-      "community_name": "dashboard_service.dart",
+      "community": 142,
+      "community_name": "initial_binding.dart",
       "norm_label": "../network/api_client.dart"
     },
     {
@@ -387,8 +387,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "feature_auth_services_auth_service_dart",
-      "community": 33,
-      "community_name": "dashboard_service.dart",
+      "community": 142,
+      "community_name": "initial_binding.dart",
       "norm_label": "feature/auth/services/auth_service.dart"
     },
     {
@@ -398,8 +398,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "app_constants.dart"
     },
     {
@@ -409,8 +409,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_appconstants",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "appconstants"
     },
     {
@@ -421,7 +421,7 @@
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_appname",
       "community": 83,
-      "community_name": "description",
+      "community_name": "my_application.h",
       "norm_label": "appname"
     },
     {
@@ -431,8 +431,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "static_const_string",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "static const string"
     },
     {
@@ -442,8 +442,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_apptagline",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "apptagline"
     },
     {
@@ -453,8 +453,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_baseurllocal",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "baseurllocal"
     },
     {
@@ -464,8 +464,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_baseurlandroidemulator",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "baseurlandroidemulator"
     },
     {
@@ -475,8 +475,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_aeskey",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "aeskey"
     },
     {
@@ -486,8 +486,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_keyauthtoken",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "keyauthtoken"
     },
     {
@@ -497,8 +497,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_keyuserdata",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "keyuserdata"
     },
     {
@@ -508,8 +508,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_constants_app_constants_keycustombaseurl",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "keycustombaseurl"
     },
     {
@@ -519,8 +519,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_foundation_dart",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 76,
+      "community_name": "app_constants.dart",
       "norm_label": "package:flutter/foundation.dart"
     },
     {
@@ -618,8 +618,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "client",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 140,
+      "community_name": "Agent Guidelines for Dashboard Project",
       "norm_label": "client"
     },
     {
@@ -761,8 +761,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dart_convert",
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "dart:convert"
     },
     {
@@ -794,8 +794,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "constants_app_constants_dart",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 77,
+      "community_name": "aes_encryption.dart",
       "norm_label": "../constants/app_constants.dart"
     },
     {
@@ -1025,7 +1025,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_material_dart",
-      "community": 38,
+      "community": 79,
       "community_name": "package:flutter/material.dart",
       "norm_label": "package:flutter/material.dart"
     },
@@ -1069,8 +1069,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_item_picker_bottom_sheet_itempickerbottomsheet",
-      "community": 29,
-      "community_name": "item_picker_bottom_sheet.dart",
+      "community": 51,
+      "community_name": "State",
       "norm_label": "itempickerbottomsheet"
     },
     {
@@ -1080,8 +1080,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_item_picker_bottom_sheet_itempickerbottomsheetstate",
-      "community": 29,
-      "community_name": "item_picker_bottom_sheet.dart",
+      "community": 51,
+      "community_name": "State",
       "norm_label": "_itempickerbottomsheetstate"
     },
     {
@@ -1179,8 +1179,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "color",
-      "community": 64,
-      "community_name": "dashboard_state_views.dart",
+      "community": 38,
+      "community_name": "splash_screen.dart",
       "norm_label": "color"
     },
     {
@@ -1201,8 +1201,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "list",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "list"
     },
     {
@@ -1344,8 +1344,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "sync_status_indicator.dart"
     },
     {
@@ -1355,8 +1355,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_syncstatusindicator",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "syncstatusindicator"
     },
     {
@@ -1367,7 +1367,7 @@
       "_origin": "ast",
       "id": "statelesswidget",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "statelesswidget"
     },
     {
@@ -1377,8 +1377,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_isloading",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "isloading"
     },
     {
@@ -1388,8 +1388,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_errormessage",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "errormessage"
     },
     {
@@ -1399,8 +1399,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_lastfetched",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "lastfetched"
     },
     {
@@ -1410,8 +1410,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "datetime",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "datetime"
     },
     {
@@ -1421,8 +1421,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_dateformat",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "dateformat"
     },
     {
@@ -1432,8 +1432,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dateformat",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "dateformat?"
     },
     {
@@ -1443,8 +1443,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_syncingtext",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "syncingtext"
     },
     {
@@ -1454,8 +1454,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_errortext",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "errortext"
     },
     {
@@ -1465,8 +1465,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_defaultdateformat",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "defaultdateformat"
     },
     {
@@ -1476,8 +1476,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "static_final_dateformat",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "static final dateformat"
     },
     {
@@ -1487,8 +1487,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_loadingcolor",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "loadingcolor"
     },
     {
@@ -1498,8 +1498,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "static_const_color",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "static const color"
     },
     {
@@ -1509,8 +1509,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_errorcolor",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "errorcolor"
     },
     {
@@ -1520,8 +1520,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_successcolor",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "successcolor"
     },
     {
@@ -1531,8 +1531,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_presentation_widgets_sync_status_indicator_build",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "build"
     },
     {
@@ -1553,7 +1553,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_routes_app_pages",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "app_pages.dart"
     },
@@ -1564,7 +1564,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_routes_app_pages_apppages",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "apppages"
     },
@@ -1597,7 +1597,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_routes_app_pages_routes",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "routes"
     },
@@ -1608,7 +1608,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "static_final_list",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "static final list"
     },
@@ -1619,8 +1619,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_core_routes_app_routes_dart",
-      "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community": 58,
+      "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/core/routes/app_routes.dart"
     },
     {
@@ -1630,7 +1630,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_auth_bindings_auth_binding_dart",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/auth/bindings/auth_binding.dart"
     },
@@ -1641,7 +1641,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_auth_presentation_login_screen_dart",
-      "community": 38,
+      "community": 79,
       "community_name": "package:flutter/material.dart",
       "norm_label": "package:dashboard/feature/auth/presentation/login_screen.dart"
     },
@@ -1652,8 +1652,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_auth_presentation_splash_screen_dart",
-      "community": 14,
-      "community_name": "app_pages.dart",
+      "community": 79,
+      "community_name": "package:flutter/material.dart",
       "norm_label": "package:dashboard/feature/auth/presentation/splash_screen.dart"
     },
     {
@@ -1663,7 +1663,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_home_bindings_home_binding_dart",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/home/bindings/home_binding.dart"
     },
@@ -1686,7 +1686,7 @@
       "_origin": "ast",
       "id": "package_dashboard_feature_home_presentation_home_screen_dart",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/home/presentation/home_screen.dart"
     },
     {
@@ -1697,7 +1697,7 @@
       "_origin": "ast",
       "id": "package_dashboard_feature_home_presentation_main_navigation_screen_dart",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/home/presentation/main_navigation_screen.dart"
     },
     {
@@ -1707,7 +1707,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_profile_bindings_profile_binding_dart",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/profile/bindings/profile_binding.dart"
     },
@@ -1729,7 +1729,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_report_bindings_report_binding_dart",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/report/bindings/report_binding.dart"
     },
@@ -1741,7 +1741,7 @@
       "_origin": "ast",
       "id": "package_dashboard_feature_report_presentation_report_screen_dart",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "package:dashboard/feature/report/presentation/report_screen.dart"
     },
     {
@@ -1751,7 +1751,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_revenue_bindings_revenue_binding_dart",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/revenue/bindings/revenue_binding.dart"
     },
@@ -1762,7 +1762,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_revenue_presentation_all_loan_products_screen_dart",
-      "community": 14,
+      "community": 58,
       "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/revenue/presentation/all_loan_products_screen.dart"
     },
@@ -1774,7 +1774,7 @@
       "_origin": "ast",
       "id": "package_dashboard_feature_revenue_presentation_revenue_screen_dart",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/revenue/presentation/revenue_screen.dart"
     },
     {
@@ -1894,8 +1894,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_routes_app_routes_profile",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "profile"
     },
     {
@@ -1905,8 +1905,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_security_aes_encryption",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 77,
+      "community_name": "aes_encryption.dart",
       "norm_label": "aes_encryption.dart"
     },
     {
@@ -1916,8 +1916,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_security_aes_encryption_aesencryption",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 77,
+      "community_name": "aes_encryption.dart",
       "norm_label": "aesencryption"
     },
     {
@@ -1927,8 +1927,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_security_aes_encryption_encrypt",
-      "community": 83,
-      "community_name": "description",
+      "community": 24,
+      "community_name": "Flutter",
       "norm_label": "encrypt"
     },
     {
@@ -1938,8 +1938,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_security_aes_encryption_decrypt",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 77,
+      "community_name": "aes_encryption.dart",
       "norm_label": "decrypt"
     },
     {
@@ -1949,8 +1949,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dart_math",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 77,
+      "community_name": "aes_encryption.dart",
       "norm_label": "dart:math"
     },
     {
@@ -1960,8 +1960,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dart_typed_data",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 77,
+      "community_name": "aes_encryption.dart",
       "norm_label": "dart:typed_data"
     },
     {
@@ -1971,8 +1971,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_convert_convert_dart",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 77,
+      "community_name": "aes_encryption.dart",
       "norm_label": "package:convert/convert.dart"
     },
     {
@@ -1982,8 +1982,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_encrypt_encrypt_dart",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 77,
+      "community_name": "aes_encryption.dart",
       "norm_label": "package:encrypt/encrypt.dart"
     },
     {
@@ -1994,7 +1994,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "url_security_validator.dart"
     },
     {
@@ -2005,7 +2005,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_urlsecurityvalidationresult",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "urlsecurityvalidationresult"
     },
     {
@@ -2016,7 +2016,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_urlsecurityvalidator",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "urlsecurityvalidator"
     },
     {
@@ -2027,7 +2027,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_isvalid",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "isvalid"
     },
     {
@@ -2038,7 +2038,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_errormessage",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "errormessage"
     },
     {
@@ -2049,7 +2049,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_issecurehttps",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "issecurehttps"
     },
     {
@@ -2060,7 +2060,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_validhttps",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "validhttps"
     },
     {
@@ -2071,7 +2071,7 @@
       "_origin": "ast",
       "id": "static_const_urlsecurityvalidationresult",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "static const urlsecurityvalidationresult"
     },
     {
@@ -2082,7 +2082,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_localhosts",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "localhosts"
     },
     {
@@ -2092,7 +2092,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "static_const_list",
-      "community": 67,
+      "community": 86,
       "community_name": "static const List",
       "norm_label": "static const list"
     },
@@ -2104,7 +2104,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_validate",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "validate"
     },
     {
@@ -2115,7 +2115,7 @@
       "_origin": "ast",
       "id": "lib_core_security_url_security_validator_islocalhost",
       "community": 67,
-      "community_name": "static const List",
+      "community_name": "url_security_validator.dart",
       "norm_label": "islocalhost"
     },
     {
@@ -2148,7 +2148,7 @@
       "_origin": "ast",
       "id": "lib_core_theme_app_theme_primarycolor",
       "community": 83,
-      "community_name": "description",
+      "community_name": "my_application.h",
       "norm_label": "primarycolor"
     },
     {
@@ -2203,7 +2203,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_bindings_auth_binding",
       "community": 12,
-      "community_name": "Bindings",
+      "community_name": "package:get/get.dart",
       "norm_label": "auth_binding.dart"
     },
     {
@@ -2214,7 +2214,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_bindings_auth_binding_authbinding",
       "community": 12,
-      "community_name": "Bindings",
+      "community_name": "package:get/get.dart",
       "norm_label": "authbinding"
     },
     {
@@ -2225,7 +2225,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_bindings_auth_binding_dependencies",
       "community": 12,
-      "community_name": "Bindings",
+      "community_name": "package:get/get.dart",
       "norm_label": "dependencies"
     },
     {
@@ -2236,7 +2236,7 @@
       "_origin": "ast",
       "id": "controllers_login_controller_dart",
       "community": 12,
-      "community_name": "Bindings",
+      "community_name": "package:get/get.dart",
       "norm_label": "../controllers/login_controller.dart"
     },
     {
@@ -2258,7 +2258,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_controllers_login_controller_logincontroller",
       "community": 12,
-      "community_name": "Bindings",
+      "community_name": "package:get/get.dart",
       "norm_label": "logincontroller"
     },
     {
@@ -2466,8 +2466,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_auth_result",
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "auth_result.dart"
     },
     {
@@ -2477,8 +2477,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_auth_result_authresult",
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "authresult"
     },
     {
@@ -2488,8 +2488,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_auth_result_issuccess",
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "issuccess"
     },
     {
@@ -2499,8 +2499,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_auth_result_message",
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "message"
     },
     {
@@ -2510,8 +2510,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_auth_result_user",
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "user"
     },
     {
@@ -2521,8 +2521,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_auth_result_success",
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "success"
     },
     {
@@ -2532,8 +2532,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_auth_result_failure",
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "failure"
     },
     {
@@ -2543,8 +2543,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "user_model_dart",
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "user_model.dart"
     },
     {
@@ -2565,8 +2565,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_user_model_usermodel",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "usermodel"
     },
     {
@@ -2587,8 +2587,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_user_model_username",
-      "community": 1,
-      "community_name": "user_model.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "username"
     },
     {
@@ -2664,8 +2664,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_models_user_model_tojson",
-      "community": 86,
-      "community_name": "Project Rules & Architectural Guidelines",
+      "community": 48,
+      "community_name": "Serializing JSON Manually in Flutter",
       "norm_label": "tojson"
     },
     {
@@ -2675,7 +2675,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "login_screen.dart"
     },
@@ -2686,8 +2686,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_loginscreen",
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "loginscreen"
     },
     {
@@ -2698,7 +2698,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_loginheader",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "_loginheader"
     },
     {
@@ -2709,7 +2709,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_loginfooter",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "_loginfooter"
     },
     {
@@ -2720,7 +2720,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_loginbackground",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "_loginbackground"
     },
     {
@@ -2730,7 +2730,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_controller",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "_controller"
     },
@@ -2741,7 +2741,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "logincontroller_get",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "logincontroller get"
     },
@@ -2752,7 +2752,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_defaultborder",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "_defaultborder"
     },
@@ -2763,7 +2763,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "static_final_outlineinputborder",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "static final outlineinputborder"
     },
@@ -2774,7 +2774,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_enabledborder",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "_enabledborder"
     },
@@ -2785,7 +2785,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_focusedborder",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "_focusedborder"
     },
@@ -2796,7 +2796,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_errorborder",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "_errorborder"
     },
@@ -2807,7 +2807,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_focusederrorborder",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "_focusederrorborder"
     },
@@ -2818,7 +2818,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_imageurl",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "_imageurl"
     },
@@ -2829,7 +2829,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_build",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "build"
     },
@@ -2840,7 +2840,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_login_screen_buildinputdecoration",
-      "community": 43,
+      "community": 30,
       "community_name": "login_screen.dart",
       "norm_label": "_buildinputdecoration"
     },
@@ -2851,8 +2851,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_core_presentation_server_config_dialog_dart",
-      "community": 52,
-      "community_name": "revenue_screen.dart",
+      "community": 39,
+      "community_name": "home_screen.dart",
       "norm_label": "package:dashboard/core/presentation/server_config_dialog.dart"
     },
     {
@@ -2874,7 +2874,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "splash_screen.dart"
     },
     {
@@ -2884,8 +2884,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_splashscreen",
-      "community": 51,
-      "community_name": "State",
+      "community": 38,
+      "community_name": "splash_screen.dart",
       "norm_label": "splashscreen"
     },
     {
@@ -2895,8 +2895,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_splashscreenstate",
-      "community": 51,
-      "community_name": "State",
+      "community": 38,
+      "community_name": "splash_screen.dart",
       "norm_label": "_splashscreenstate"
     },
     {
@@ -2906,8 +2906,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "singletickerproviderstatemixin",
-      "community": 51,
-      "community_name": "State",
+      "community": 38,
+      "community_name": "splash_screen.dart",
       "norm_label": "singletickerproviderstatemixin"
     },
     {
@@ -2918,7 +2918,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_controller",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "_controller"
     },
     {
@@ -2929,7 +2929,7 @@
       "_origin": "ast",
       "id": "animationcontroller",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "animationcontroller"
     },
     {
@@ -2940,7 +2940,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_fadeanimation",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "_fadeanimation"
     },
     {
@@ -2962,7 +2962,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_scaleanimation",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "_scaleanimation"
     },
     {
@@ -2973,7 +2973,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_createstate",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "createstate"
     },
     {
@@ -2984,7 +2984,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_initstate",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "initstate"
     },
     {
@@ -2995,7 +2995,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_checksessionandnavigate",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "_checksessionandnavigate"
     },
     {
@@ -3006,7 +3006,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_dispose",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "dispose"
     },
     {
@@ -3017,7 +3017,7 @@
       "_origin": "ast",
       "id": "lib_feature_auth_presentation_splash_screen_build",
       "community": 38,
-      "community_name": "package:flutter/material.dart",
+      "community_name": "splash_screen.dart",
       "norm_label": "build"
     },
     {
@@ -3214,8 +3214,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_services_auth_service_token",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 40,
+      "community_name": "graphify reference: extra exports and benchmark",
       "norm_label": "token"
     },
     {
@@ -3346,8 +3346,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_auth_services_auth_service_login",
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "login"
     },
     {
@@ -3390,8 +3390,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dart_async",
-      "community": 63,
-      "community_name": "Testing Dart and Flutter Applications",
+      "community": 141,
+      "community_name": "dart:async",
       "norm_label": "dart:async"
     },
     {
@@ -3478,8 +3478,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_bindings_home_binding_homebinding",
-      "community": 12,
-      "community_name": "Bindings",
+      "community": 142,
+      "community_name": "initial_binding.dart",
       "norm_label": "homebinding"
     },
     {
@@ -3534,7 +3534,7 @@
       "_origin": "ast",
       "id": "package_dashboard_feature_report_controllers_report_controller_dart",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "package:dashboard/feature/report/controllers/report_controller.dart"
     },
     {
@@ -3852,7 +3852,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "model_dashboard_data_dart",
-      "community": 67,
+      "community": 86,
       "community_name": "static const List",
       "norm_label": "../model/dashboard_data.dart"
     },
@@ -4193,8 +4193,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_executive_analytics_helper_hhiresult",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "hhiresult"
     },
     {
@@ -4402,7 +4402,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_executive_analytics_helper_compute",
-      "community": 70,
+      "community": 17,
       "community_name": "Implementing Flutter Networking",
       "norm_label": "compute"
     },
@@ -4413,7 +4413,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_home_product_trend_helper",
-      "community": 67,
+      "community": 86,
       "community_name": "static const List",
       "norm_label": "home_product_trend_helper.dart"
     },
@@ -4424,7 +4424,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_home_product_trend_helper_homeproducttrendhelper",
-      "community": 67,
+      "community": 86,
       "community_name": "static const List",
       "norm_label": "homeproducttrendhelper"
     },
@@ -4435,7 +4435,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_home_product_trend_helper_defaultmonthnames",
-      "community": 67,
+      "community": 86,
       "community_name": "static const List",
       "norm_label": "defaultmonthnames"
     },
@@ -4446,7 +4446,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_home_product_trend_helper_calculateactivetrend",
-      "community": 67,
+      "community": 86,
       "community_name": "static const List",
       "norm_label": "calculateactivetrend"
     },
@@ -4458,7 +4458,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "interest_record.dart"
     },
     {
@@ -4469,7 +4469,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record_interestrecord",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "interestrecord"
     },
     {
@@ -4480,7 +4480,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record_idtrxbunga",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "idtrxbunga"
     },
     {
@@ -4491,7 +4491,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record_idkantor",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "idkantor"
     },
     {
@@ -4502,7 +4502,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record_idpinjaman",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "idpinjaman"
     },
     {
@@ -4513,7 +4513,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record_jenispinjaman",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "jenispinjaman"
     },
     {
@@ -4524,7 +4524,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record_bulanan",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "bulanan"
     },
     {
@@ -4535,7 +4535,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record_monthkeys",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "_monthkeys"
     },
     {
@@ -4545,8 +4545,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_interest_record_fromjson",
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "fromjson"
     },
     {
@@ -4556,8 +4556,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_monthly_trend_calculator",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "monthly_trend_calculator.dart"
     },
     {
@@ -4567,8 +4567,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_monthly_trend_calculator_monthlytrendcalculationresult",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "monthlytrendcalculationresult"
     },
     {
@@ -4578,8 +4578,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_monthly_trend_calculator_spots",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "spots"
     },
     {
@@ -4589,8 +4589,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_monthly_trend_calculator_chartmaxy",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "chartmaxy"
     },
     {
@@ -4600,8 +4600,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_monthly_trend_calculator_yinterval",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "yinterval"
     },
     {
@@ -4611,8 +4611,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_monthly_trend_calculator_totalbunga",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "totalbunga"
     },
     {
@@ -4622,8 +4622,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_monthly_trend_calculator_compute",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "compute"
     },
     {
@@ -4633,8 +4633,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_model_monthly_trend_calculator_formatcompactvalue",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "formatcompactvalue"
     },
     {
@@ -4655,8 +4655,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dashboard_data_dart",
-      "community": 37,
-      "community_name": "List",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "dashboard_data.dart"
     },
     {
@@ -4678,7 +4678,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_home_screen_homescreen",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "homescreen"
     },
     {
@@ -4743,8 +4743,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_core_presentation_widgets_sync_status_indicator_dart",
-      "community": 39,
-      "community_name": "home_screen.dart",
+      "community": 52,
+      "community_name": "revenue_screen.dart",
       "norm_label": "package:dashboard/core/presentation/widgets/sync_status_indicator.dart"
     },
     {
@@ -4832,7 +4832,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_main_navigation_screen",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "main_navigation_screen.dart"
     },
     {
@@ -4843,7 +4843,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_main_navigation_screen_mainnavigationscreen",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "mainnavigationscreen"
     },
     {
@@ -4854,7 +4854,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_main_navigation_screen_controller",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "_controller"
     },
     {
@@ -4865,7 +4865,7 @@
       "_origin": "ast",
       "id": "navigationcontroller_get",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "navigationcontroller get"
     },
     {
@@ -4876,7 +4876,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_main_navigation_screen_destinations",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "_destinations"
     },
     {
@@ -4887,7 +4887,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_main_navigation_screen_build",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "build"
     },
     {
@@ -4898,7 +4898,7 @@
       "_origin": "ast",
       "id": "package_dashboard_feature_home_controllers_navigation_controller_dart",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "package:dashboard/feature/home/controllers/navigation_controller.dart"
     },
     {
@@ -4930,8 +4930,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_dashboard_state_views_dashboarderrorview",
-      "community": 30,
-      "community_name": "StatelessWidget",
+      "community": 64,
+      "community_name": "dashboard_state_views.dart",
       "norm_label": "dashboarderrorview"
     },
     {
@@ -5029,8 +5029,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "hhi_concentration_card.dart"
     },
     {
@@ -5062,8 +5062,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_hhi",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "hhi"
     },
     {
@@ -5073,8 +5073,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_initiallyexpanded",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "initiallyexpanded"
     },
     {
@@ -5084,8 +5084,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_isexpanded",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "_isexpanded"
     },
     {
@@ -5095,8 +5095,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_healthycolor",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "_healthycolor"
     },
     {
@@ -5106,8 +5106,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_moderatecolor",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "_moderatecolor"
     },
     {
@@ -5117,8 +5117,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_highriskcolor",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "_highriskcolor"
     },
     {
@@ -5128,8 +5128,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_createstate",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "createstate"
     },
     {
@@ -5139,8 +5139,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_initstate",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "initstate"
     },
     {
@@ -5150,8 +5150,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_resolvestatuscolor",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "_resolvestatuscolor"
     },
     {
@@ -5161,8 +5161,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_hhi_concentration_card_build",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "build"
     },
     {
@@ -5172,8 +5172,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_home_model_executive_analytics_helper_dart",
-      "community": 25,
-      "community_name": "app_theme.dart",
+      "community": 43,
+      "community_name": "hhi_concentration_card.dart",
       "norm_label": "package:dashboard/feature/home/model/executive_analytics_helper.dart"
     },
     {
@@ -5205,8 +5205,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_home_branch_comparison_card_homebranchcomparisoncard",
-      "community": 4,
-      "community_name": "home_branch_comparison_card.dart",
+      "community": 51,
+      "community_name": "State",
       "norm_label": "homebranchcomparisoncard"
     },
     {
@@ -5216,8 +5216,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_home_branch_comparison_card_homebranchcomparisoncardstate",
-      "community": 4,
-      "community_name": "home_branch_comparison_card.dart",
+      "community": 51,
+      "community_name": "State",
       "norm_label": "_homebranchcomparisoncardstate"
     },
     {
@@ -5282,8 +5282,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "numberformat",
-      "community": 31,
-      "community_name": "quarterly_growth_chart.dart",
+      "community": 84,
+      "community_name": "analytics_leaderboard_card.dart",
       "norm_label": "numberformat"
     },
     {
@@ -5712,7 +5712,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_kantor_filter_chips_kantorfilterchips",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "kantorfilterchips"
     },
     {
@@ -5877,7 +5877,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_kpi_stat_card_kpistatcard",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "kpistatcard"
     },
     {
@@ -6020,7 +6020,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_kpi_summary_section_kpisummarysection",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "kpisummarysection"
     },
     {
@@ -6129,8 +6129,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_monthly_trend_chart_monthlytrendchart",
-      "community": 51,
-      "community_name": "State",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "monthlytrendchart"
     },
     {
@@ -6140,8 +6140,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_monthly_trend_chart_monthlytrendchartstate",
-      "community": 51,
-      "community_name": "State",
+      "community": 9,
+      "community_name": "monthly_trend_chart.dart",
       "norm_label": "_monthlytrendchartstate"
     },
     {
@@ -6438,7 +6438,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_presentation_widgets_product_breakdown_card_fastprogressbar",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "_fastprogressbar"
     },
     {
@@ -6812,7 +6812,7 @@
       "_origin": "ast",
       "id": "lib_feature_home_services_dashboard_service_fetchdashboarddata",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "fetchdashboarddata"
     },
     {
@@ -6910,8 +6910,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_profile_bindings_profile_binding",
-      "community": 142,
-      "community_name": "profile_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "profile_binding.dart"
     },
     {
@@ -6922,7 +6922,7 @@
       "_origin": "ast",
       "id": "lib_feature_profile_bindings_profile_binding_profilebinding",
       "community": 142,
-      "community_name": "profile_binding.dart",
+      "community_name": "initial_binding.dart",
       "norm_label": "profilebinding"
     },
     {
@@ -6932,8 +6932,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_profile_bindings_profile_binding_dependencies",
-      "community": 142,
-      "community_name": "profile_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "dependencies"
     },
     {
@@ -6943,8 +6943,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "controllers_profile_controller_dart",
-      "community": 142,
-      "community_name": "profile_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "../controllers/profile_controller.dart"
     },
     {
@@ -6965,8 +6965,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_profile_controllers_profile_controller_profilecontroller",
-      "community": 142,
-      "community_name": "profile_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "profilecontroller"
     },
     {
@@ -7174,8 +7174,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "annotation_deprecated",
-      "community": 86,
-      "community_name": "Project Rules & Architectural Guidelines",
+      "community": 48,
+      "community_name": "Serializing JSON Manually in Flutter",
       "norm_label": "@deprecated"
     },
     {
@@ -7273,8 +7273,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_report_bindings_report_binding_reportbinding",
-      "community": 12,
-      "community_name": "Bindings",
+      "community": 142,
+      "community_name": "initial_binding.dart",
       "norm_label": "reportbinding"
     },
     {
@@ -7361,8 +7361,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_report_controllers_report_controller_status",
-      "community": 59,
-      "community_name": "Building Dart CLI Applications",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "status"
     },
     {
@@ -7647,8 +7647,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_bindings_revenue_binding",
-      "community": 141,
-      "community_name": "revenue_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "revenue_binding.dart"
     },
     {
@@ -7658,8 +7658,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_bindings_revenue_binding_revenuebinding",
-      "community": 141,
-      "community_name": "revenue_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "revenuebinding"
     },
     {
@@ -7680,8 +7680,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "controllers_branch_product_comparison_controller_dart",
-      "community": 141,
-      "community_name": "revenue_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "../controllers/branch_product_comparison_controller.dart"
     },
     {
@@ -7691,8 +7691,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "controllers_revenue_controller_dart",
-      "community": 141,
-      "community_name": "revenue_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "../controllers/revenue_controller.dart"
     },
     {
@@ -8054,8 +8054,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_controllers_revenue_controller_revenuecontroller",
-      "community": 141,
-      "community_name": "revenue_binding.dart",
+      "community": 85,
+      "community_name": "home_binding.dart",
       "norm_label": "revenuecontroller"
     },
     {
@@ -8121,7 +8121,7 @@
       "_origin": "ast",
       "id": "lib_feature_revenue_controllers_revenue_controller_dashboarddata",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "dashboarddata"
     },
     {
@@ -8230,8 +8230,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_analytics_helper_analyticsresult",
-      "community": 31,
-      "community_name": "quarterly_growth_chart.dart",
+      "community": 84,
+      "community_name": "analytics_leaderboard_card.dart",
       "norm_label": "analyticsresult"
     },
     {
@@ -8428,8 +8428,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "branch_product_comparison_helper.dart"
     },
     {
@@ -8439,8 +8439,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_branchinfo",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "branchinfo"
     },
     {
@@ -8450,8 +8450,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_productinfo",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "productinfo"
     },
     {
@@ -8461,8 +8461,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_branchproductseries",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "branchproductseries"
     },
     {
@@ -8472,8 +8472,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_branchproductcomparisonhelper",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "branchproductcomparisonhelper"
     },
     {
@@ -8483,8 +8483,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_seriesaccumulator",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "_seriesaccumulator"
     },
     {
@@ -8495,7 +8495,7 @@
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_idkantor",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "idkantor"
     },
     {
@@ -8505,8 +8505,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_label",
-      "community": 30,
-      "community_name": "StatelessWidget",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "label"
     },
     {
@@ -8516,8 +8516,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_total",
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "total"
     },
     {
@@ -8527,8 +8527,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_name",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "name"
     },
     {
@@ -8538,8 +8538,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_branchlabel",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "branchlabel"
     },
     {
@@ -8549,8 +8549,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_jenispinjaman",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "jenispinjaman"
     },
     {
@@ -8560,8 +8560,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_monthly",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "monthly"
     },
     {
@@ -8571,8 +8571,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_getavailablebranches",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "getavailablebranches"
     },
     {
@@ -8582,8 +8582,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_getavailableproducts",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "getavailableproducts"
     },
     {
@@ -8593,8 +8593,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_gettopproducts",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "gettopproducts"
     },
     {
@@ -8604,8 +8604,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_buildseriesmap",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "buildseriesmap"
     },
     {
@@ -8615,8 +8615,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_addmonthly",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "addmonthly"
     },
     {
@@ -8626,8 +8626,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_model_branch_product_comparison_helper_toseries",
-      "community": 13,
-      "community_name": "branch_product_comparison_helper.dart",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "toseries"
     },
     {
@@ -8913,7 +8913,7 @@
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_revenue_screen_revenuescreen",
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "revenuescreen"
     },
     {
@@ -9000,8 +9000,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_revenue_controllers_revenue_controller_dart",
-      "community": 79,
-      "community_name": "package:get/get.dart",
+      "community": 78,
+      "community_name": "package:dashboard/feature/home/model/interest_record.dart",
       "norm_label": "package:dashboard/feature/revenue/controllers/revenue_controller.dart"
     },
     {
@@ -9066,8 +9066,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_analytics_leaderboard_card",
-      "community": 31,
-      "community_name": "quarterly_growth_chart.dart",
+      "community": 84,
+      "community_name": "analytics_leaderboard_card.dart",
       "norm_label": "analytics_leaderboard_card.dart"
     },
     {
@@ -9078,7 +9078,7 @@
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_analytics_leaderboard_card_analyticsleaderboardcard",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "analyticsleaderboardcard"
     },
     {
@@ -9088,8 +9088,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_analytics_leaderboard_card_analytics",
-      "community": 31,
-      "community_name": "quarterly_growth_chart.dart",
+      "community": 84,
+      "community_name": "analytics_leaderboard_card.dart",
       "norm_label": "analytics"
     },
     {
@@ -9099,8 +9099,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_analytics_leaderboard_card_currencyformat",
-      "community": 31,
-      "community_name": "quarterly_growth_chart.dart",
+      "community": 84,
+      "community_name": "analytics_leaderboard_card.dart",
       "norm_label": "currencyformat"
     },
     {
@@ -9110,8 +9110,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_analytics_leaderboard_card_build",
-      "community": 31,
-      "community_name": "quarterly_growth_chart.dart",
+      "community": 84,
+      "community_name": "analytics_leaderboard_card.dart",
       "norm_label": "build"
     },
     {
@@ -9121,8 +9121,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_analytics_leaderboard_card_buildpodiumrow",
-      "community": 31,
-      "community_name": "quarterly_growth_chart.dart",
+      "community": 84,
+      "community_name": "analytics_leaderboard_card.dart",
       "norm_label": "_buildpodiumrow"
     },
     {
@@ -9143,8 +9143,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_branch_bar_chart_branchbarchart",
-      "community": 51,
-      "community_name": "State",
+      "community": 53,
+      "community_name": "branch_bar_chart.dart",
       "norm_label": "branchbarchart"
     },
     {
@@ -9154,8 +9154,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_branch_bar_chart_branchbarchartstate",
-      "community": 51,
-      "community_name": "State",
+      "community": 53,
+      "community_name": "branch_bar_chart.dart",
       "norm_label": "_branchbarchartstate"
     },
     {
@@ -9341,8 +9341,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_branch_product_comparison_card_records",
-      "community": 140,
-      "community_name": "graphify reference: query, path, explain",
+      "community": 61,
+      "community_name": "performance_benchmark_test.dart",
       "norm_label": "records"
     },
     {
@@ -9363,8 +9363,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "class",
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "class"
     },
     {
@@ -9440,8 +9440,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "double",
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "double?"
     },
     {
@@ -9770,8 +9770,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_portfolio_donut_chart_touchindicatorbadge",
-      "community": 36,
-      "community_name": "portfolio_donut_chart.dart",
+      "community": 30,
+      "community_name": "login_screen.dart",
       "norm_label": "_touchindicatorbadge"
     },
     {
@@ -9902,8 +9902,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_quarterly_growth_chart_quarterlygrowthchart",
-      "community": 51,
-      "community_name": "State",
+      "community": 31,
+      "community_name": "quarterly_growth_chart.dart",
       "norm_label": "quarterlygrowthchart"
     },
     {
@@ -9913,8 +9913,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_feature_revenue_presentation_widgets_quarterly_growth_chart_quarterlygrowthchartstate",
-      "community": 51,
-      "community_name": "State",
+      "community": 31,
+      "community_name": "quarterly_growth_chart.dart",
       "norm_label": "_quarterlygrowthchartstate"
     },
     {
@@ -10111,8 +10111,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "widget",
-      "community": 86,
-      "community_name": "Project Rules & Architectural Guidelines",
+      "community": 48,
+      "community_name": "Serializing JSON Manually in Flutter",
       "norm_label": "widget?"
     },
     {
@@ -10210,8 +10210,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "linux_flutter_generated_plugin_registrant_cc_linux_flutter_generated_plugin_registrant",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "linux/flutter/generated_plugin_registrant.cc"
     },
     {
@@ -10222,8 +10222,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_flutter_generated_plugin_registrant_fl_register_plugins",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "fl_register_plugins()"
     },
     {
@@ -10233,8 +10233,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "flpluginregistry",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "flpluginregistry"
     },
     {
@@ -10244,8 +10244,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "linux_flutter_generated_plugin_registrant_h_linux_flutter_generated_plugin_registrant",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "linux/flutter/generated_plugin_registrant.h"
     },
     {
@@ -10255,8 +10255,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "linux_runner_main",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "main.cc"
     },
     {
@@ -10267,8 +10267,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_main_main",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "main()"
     },
     {
@@ -10278,8 +10278,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "linux_runner_my_application_cc_linux_runner_my_application",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application.cc"
     },
     {
@@ -10291,8 +10291,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_myapplication",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "_myapplication"
     },
     {
@@ -10302,8 +10302,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "gtkapplication",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "gtkapplication"
     },
     {
@@ -10313,8 +10313,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "linux_runner_my_application_myapplication_parent_instance",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "parent_instance"
     },
     {
@@ -10324,8 +10324,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "linux_runner_my_application_myapplication_dart_entrypoint_arguments",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "dart_entrypoint_arguments"
     },
     {
@@ -10336,8 +10336,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_first_frame_cb",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "first_frame_cb()"
     },
     {
@@ -10347,8 +10347,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "flview",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "flview"
     },
     {
@@ -10359,8 +10359,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_my_application_activate",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application_activate()"
     },
     {
@@ -10370,8 +10370,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "gapplication",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "gapplication"
     },
     {
@@ -10382,8 +10382,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_my_application_local_command_line",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application_local_command_line()"
     },
     {
@@ -10393,8 +10393,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "gboolean",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "gboolean"
     },
     {
@@ -10404,8 +10404,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "gchar",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "gchar"
     },
     {
@@ -10416,8 +10416,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_my_application_startup",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application_startup()"
     },
     {
@@ -10428,8 +10428,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_my_application_shutdown",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application_shutdown()"
     },
     {
@@ -10440,8 +10440,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_my_application_dispose",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application_dispose()"
     },
     {
@@ -10451,8 +10451,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "gobject",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "gobject"
     },
     {
@@ -10463,8 +10463,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_my_application_class_init",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application_class_init()"
     },
     {
@@ -10474,8 +10474,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "myapplicationclass",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "myapplicationclass"
     },
     {
@@ -10486,8 +10486,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_my_application_init",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application_init()"
     },
     {
@@ -10498,8 +10498,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "linux_runner_my_application_my_application_new",
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 13,
+      "community_name": "my_application.cc",
       "norm_label": "my_application_new()"
     },
     {
@@ -10509,8 +10509,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "linux_runner_my_application_h_linux_runner_my_application",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "my_application.h"
     },
     {
@@ -10521,7 +10521,7 @@
       "_origin": "ast",
       "id": "macos_flutter_generatedpluginregistrant",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "generatedpluginregistrant.swift"
     },
     {
@@ -10533,7 +10533,7 @@
       "_origin": "ast",
       "id": "fluttermacos",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "fluttermacos"
     },
     {
@@ -10545,7 +10545,7 @@
       "_origin": "ast",
       "id": "foundation",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "foundation"
     },
     {
@@ -10569,7 +10569,7 @@
       "_origin": "ast",
       "id": "shared_preferences_foundation",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "shared_preferences_foundation"
     },
     {
@@ -10581,7 +10581,7 @@
       "_origin": "ast",
       "id": "macos_flutter_generatedpluginregistrant_registergeneratedplugins",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "registergeneratedplugins()"
     },
     {
@@ -10592,7 +10592,7 @@
       "_origin": "ast",
       "id": "flutterpluginregistry",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "flutterpluginregistry"
     },
     {
@@ -10602,8 +10602,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "macos_runnertests_runnertests",
-      "community": 76,
-      "community_name": "ios/RunnerTests/RunnerTests.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "macos/runnertests/runnertests.swift"
     },
     {
@@ -10615,7 +10615,7 @@
       "_origin": "ast",
       "id": "cocoa",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "cocoa"
     },
     {
@@ -10627,8 +10627,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "macos_runnertests_runnertests_runnertests",
-      "community": 76,
-      "community_name": "ios/RunnerTests/RunnerTests.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "runnertests"
     },
     {
@@ -10639,8 +10639,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "macos_runnertests_runnertests_runnertests_testexample",
-      "community": 76,
-      "community_name": "ios/RunnerTests/RunnerTests.swift",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": ".testexample()"
     },
     {
@@ -10651,7 +10651,7 @@
       "_origin": "ast",
       "id": "macos_runner_appdelegate",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "macos/runner/appdelegate.swift"
     },
     {
@@ -10663,8 +10663,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "macos_runner_appdelegate_appdelegate",
-      "community": 81,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "appdelegate"
     },
     {
@@ -10675,8 +10675,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "macos_runner_appdelegate_appdelegate_applicationshouldterminateafterlastwindowclosed",
-      "community": 81,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": ".applicationshouldterminateafterlastwindowclosed()"
     },
     {
@@ -10686,8 +10686,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "nsapplication",
-      "community": 81,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "nsapplication"
     },
     {
@@ -10697,8 +10697,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "macos_runner_appdelegate_swift_bool",
-      "community": 81,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "bool"
     },
     {
@@ -10709,8 +10709,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "macos_runner_appdelegate_appdelegate_applicationsupportssecurerestorablestate",
-      "community": 81,
-      "community_name": "AppDelegate",
+      "community": 17,
+      "community_name": "Implementing Flutter Networking",
       "norm_label": ".applicationsupportssecurerestorablestate()"
     },
     {
@@ -10721,7 +10721,7 @@
       "_origin": "ast",
       "id": "macos_runner_mainflutterwindow",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "mainflutterwindow.swift"
     },
     {
@@ -10734,7 +10734,7 @@
       "_origin": "ast",
       "id": "macos_runner_mainflutterwindow_mainflutterwindow",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "mainflutterwindow"
     },
     {
@@ -10745,7 +10745,7 @@
       "_origin": "ast",
       "id": "nswindow",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "nswindow"
     },
     {
@@ -10757,7 +10757,7 @@
       "_origin": "ast",
       "id": "macos_runner_mainflutterwindow_mainflutterwindow_awakefromnib",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": ".awakefromnib()"
     },
     {
@@ -10790,7 +10790,7 @@
       "_origin": "ast",
       "id": "package_flutter_test_flutter_test_dart",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "package:flutter_test/flutter_test.dart"
     },
     {
@@ -10811,7 +10811,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_auth_login_controller_test",
-      "community": 79,
+      "community": 12,
       "community_name": "package:get/get.dart",
       "norm_label": "login_controller_test.dart"
     },
@@ -10822,7 +10822,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_auth_login_controller_test_main",
-      "community": 79,
+      "community": 12,
       "community_name": "package:get/get.dart",
       "norm_label": "main"
     },
@@ -10833,7 +10833,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_auth_controllers_login_controller_dart",
-      "community": 79,
+      "community": 12,
       "community_name": "package:get/get.dart",
       "norm_label": "package:dashboard/feature/auth/controllers/login_controller.dart"
     },
@@ -10844,7 +10844,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_auth_login_screen_test",
-      "community": 38,
+      "community": 79,
       "community_name": "package:flutter/material.dart",
       "norm_label": "login_screen_test.dart"
     },
@@ -10855,7 +10855,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_auth_login_screen_test_main",
-      "community": 38,
+      "community": 79,
       "community_name": "package:flutter/material.dart",
       "norm_label": "main"
     },
@@ -10866,7 +10866,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_auth_login_screen_test_createwidgetundertest",
-      "community": 38,
+      "community": 79,
       "community_name": "package:flutter/material.dart",
       "norm_label": "createwidgetundertest"
     },
@@ -10877,8 +10877,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_auth_splash_screen_test",
-      "community": 14,
-      "community_name": "app_pages.dart",
+      "community": 79,
+      "community_name": "package:flutter/material.dart",
       "norm_label": "splash_screen_test.dart"
     },
     {
@@ -10888,8 +10888,30 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_auth_splash_screen_test_main",
-      "community": 14,
-      "community_name": "app_pages.dart",
+      "community": 79,
+      "community_name": "package:flutter/material.dart",
+      "norm_label": "main"
+    },
+    {
+      "label": "startup_benchmark_test.dart",
+      "file_type": "code",
+      "source_file": "test/auth/startup_benchmark_test.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "test_auth_startup_benchmark_test",
+      "community": 141,
+      "community_name": "dart:async",
+      "norm_label": "startup_benchmark_test.dart"
+    },
+    {
+      "label": "main",
+      "file_type": "code",
+      "source_file": "test/auth/startup_benchmark_test.dart",
+      "source_location": null,
+      "_origin": "ast",
+      "id": "test_auth_startup_benchmark_test_main",
+      "community": 141,
+      "community_name": "dart:async",
       "norm_label": "main"
     },
     {
@@ -10933,7 +10955,7 @@
       "_origin": "ast",
       "id": "test_core_url_security_validator_test",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "url_security_validator_test.dart"
     },
     {
@@ -10944,7 +10966,7 @@
       "_origin": "ast",
       "id": "test_core_url_security_validator_test_main",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "main"
     },
     {
@@ -10955,7 +10977,7 @@
       "_origin": "ast",
       "id": "package_dashboard_core_security_url_security_validator_dart",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "package:dashboard/core/security/url_security_validator.dart"
     },
     {
@@ -11186,7 +11208,7 @@
       "_origin": "ast",
       "id": "test_home_navigation_controller_test",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "navigation_controller_test.dart"
     },
     {
@@ -11197,7 +11219,7 @@
       "_origin": "ast",
       "id": "test_home_navigation_controller_test_main",
       "community": 58,
-      "community_name": "main_navigation_screen.dart",
+      "community_name": "app_pages.dart",
       "norm_label": "main"
     },
     {
@@ -11230,7 +11252,7 @@
       "_origin": "ast",
       "id": "test_home_product_breakdown_benchmark_test_fastprogressbar",
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "fastprogressbar"
     },
     {
@@ -11251,8 +11273,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "return",
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "return"
     },
     {
@@ -11516,7 +11538,7 @@
       "_origin": "ast",
       "id": "test_report_report_controller_test",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "report_controller_test.dart"
     },
     {
@@ -11527,7 +11549,7 @@
       "_origin": "ast",
       "id": "test_report_report_controller_test_main",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "main"
     },
     {
@@ -11538,7 +11560,7 @@
       "_origin": "ast",
       "id": "test_report_report_screen_test",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "report_screen_test.dart"
     },
     {
@@ -11549,7 +11571,7 @@
       "_origin": "ast",
       "id": "test_report_report_screen_test_main",
       "community": 79,
-      "community_name": "package:get/get.dart",
+      "community_name": "package:flutter/material.dart",
       "norm_label": "main"
     },
     {
@@ -11625,8 +11647,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_revenue_performance_benchmark_test_result",
-      "community": 140,
-      "community_name": "graphify reference: query, path, explain",
+      "community": 61,
+      "community_name": "performance_benchmark_test.dart",
       "norm_label": "result"
     },
     {
@@ -11746,8 +11768,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_revenue_revenue_controller_test",
-      "community": 79,
-      "community_name": "package:get/get.dart",
+      "community": 78,
+      "community_name": "package:dashboard/feature/home/model/interest_record.dart",
       "norm_label": "revenue_controller_test.dart"
     },
     {
@@ -11757,8 +11779,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_revenue_revenue_controller_test_main",
-      "community": 79,
-      "community_name": "package:get/get.dart",
+      "community": 78,
+      "community_name": "package:dashboard/feature/home/model/interest_record.dart",
       "norm_label": "main"
     },
     {
@@ -11768,8 +11790,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_feature_revenue_controllers_branch_product_comparison_controller_dart",
-      "community": 79,
-      "community_name": "package:get/get.dart",
+      "community": 78,
+      "community_name": "package:dashboard/feature/home/model/interest_record.dart",
       "norm_label": "package:dashboard/feature/revenue/controllers/branch_product_comparison_controller.dart"
     },
     {
@@ -11779,7 +11801,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_widget_test",
-      "community": 38,
+      "community": 79,
       "community_name": "package:flutter/material.dart",
       "norm_label": "widget_test.dart"
     },
@@ -11790,7 +11812,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "test_widget_test_main",
-      "community": 38,
+      "community": 79,
       "community_name": "package:flutter/material.dart",
       "norm_label": "main"
     },
@@ -11801,7 +11823,7 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dashboard_main_dart",
-      "community": 38,
+      "community": 79,
       "community_name": "package:flutter/material.dart",
       "norm_label": "package:dashboard/main.dart"
     },
@@ -11856,8 +11878,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "web_manifest_display",
-      "community": 63,
-      "community_name": "Testing Dart and Flutter Applications",
+      "community": 50,
+      "community_name": "/graphify",
       "norm_label": "display"
     },
     {
@@ -11878,8 +11900,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "web_manifest_theme_color",
-      "community": 83,
-      "community_name": "description",
+      "community": 24,
+      "community_name": "Flutter",
       "norm_label": "theme_color"
     },
     {
@@ -11889,7 +11911,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "web_manifest_description",
-      "community": 83,
+      "community": 37,
       "community_name": "description",
       "norm_label": "description"
     },
@@ -11933,8 +11955,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "windows_flutter_generated_plugin_registrant_cc_windows_flutter_generated_plugin_registrant",
-      "community": 143,
-      "community_name": "RegisterPlugins",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "windows/flutter/generated_plugin_registrant.cc"
     },
     {
@@ -11945,8 +11967,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "windows_flutter_generated_plugin_registrant_registerplugins",
-      "community": 143,
-      "community_name": "RegisterPlugins",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "registerplugins()"
     },
     {
@@ -11956,8 +11978,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "pluginregistry",
-      "community": 143,
-      "community_name": "RegisterPlugins",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "pluginregistry"
     },
     {
@@ -11967,8 +11989,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "windows_flutter_generated_plugin_registrant_h_windows_flutter_generated_plugin_registrant",
-      "community": 143,
-      "community_name": "RegisterPlugins",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "windows/flutter/generated_plugin_registrant.h"
     },
     {
@@ -11979,7 +12001,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_cpp_windows_runner_flutter_window",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "flutter_window.cpp"
     },
     {
@@ -11991,7 +12013,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_flutterwindow_flutterwindow",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "flutterwindow::flutterwindow()"
     },
     {
@@ -12002,7 +12024,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_cpp_dartproject",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "dartproject"
     },
     {
@@ -12013,7 +12035,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_cpp_lresult",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "lresult"
     },
     {
@@ -12024,7 +12046,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_cpp_hwnd",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "hwnd"
     },
     {
@@ -12035,7 +12057,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_cpp_uint",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "uint"
     },
     {
@@ -12046,7 +12068,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_cpp_wparam",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "wparam"
     },
     {
@@ -12057,7 +12079,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_cpp_lparam",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "lparam"
     },
     {
@@ -12068,7 +12090,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_h_windows_runner_flutter_window",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "flutter_window.h"
     },
     {
@@ -12081,7 +12103,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_flutterwindow",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "flutterwindow"
     },
     {
@@ -12091,8 +12113,8 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "windows_runner_flutter_window_flutterwindow_oncreate",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "oncreate"
     },
     {
@@ -12103,7 +12125,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_flutterwindow_ondestroy",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "ondestroy"
     },
     {
@@ -12114,7 +12136,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_flutterwindow_messagehandler",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "messagehandler"
     },
     {
@@ -12125,7 +12147,7 @@
       "_origin": "ast",
       "id": "windows_runner_flutter_window_h_dartproject",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "dartproject"
     },
     {
@@ -12135,8 +12157,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "windows_runner_flutter_window_flutterwindow_project",
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "project_"
     },
     {
@@ -12147,7 +12169,7 @@
       "_origin": "ast",
       "id": "unique_ptr",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "unique_ptr"
     },
     {
@@ -12158,7 +12180,7 @@
       "_origin": "ast",
       "id": "flutterviewcontroller",
       "community": 17,
-      "community_name": "GeneratedPluginRegistrant.swift",
+      "community_name": "Implementing Flutter Networking",
       "norm_label": "flutterviewcontroller"
     },
     {
@@ -12168,8 +12190,8 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "windows_runner_flutter_window_flutterwindow_flutter_controller",
-      "community": 0,
-      "community_name": "FlutterWindow",
+      "community": 80,
+      "community_name": "Writing Flutter Widget Tests",
       "norm_label": "flutter_controller_"
     },
     {
@@ -12179,8 +12201,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "windows_runner_main",
-      "community": 0,
-      "community_name": "FlutterWindow",
+      "community": 65,
+      "community_name": "string",
       "norm_label": "main.cpp"
     },
     {
@@ -12326,8 +12348,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "windows_runner_win32_window_cpp_windows_runner_win32_window",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "win32_window.cpp"
     },
     {
@@ -12338,7 +12360,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_scale",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "scale()"
     },
@@ -12350,8 +12372,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_enablefulldpisupportifavailable",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "enablefulldpisupportifavailable()"
     },
     {
@@ -12361,8 +12383,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "windows_runner_win32_window_cpp_hwnd",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "hwnd"
     },
     {
@@ -12374,7 +12396,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_windowclassregistrar",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "windowclassregistrar"
     },
@@ -12386,7 +12408,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_windowclassregistrar_windowclassregistrar",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": ".~windowclassregistrar()"
     },
@@ -12398,7 +12420,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_windowclassregistrar_getinstance",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": ".getinstance()"
     },
@@ -12410,7 +12432,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_windowclassregistrar_getwindowclass",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "getwindowclass"
     },
@@ -12422,7 +12444,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_windowclassregistrar_unregisterwindowclass",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "unregisterwindowclass"
     },
@@ -12434,7 +12456,7 @@
       "_origin": "ast",
       "id": "windows_runner_win32_window_windowclassregistrar_instance",
       "community": 40,
-      "community_name": "Create",
+      "community_name": "graphify reference: extra exports and benchmark",
       "norm_label": "instance_"
     },
     {
@@ -12444,7 +12466,7 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "windows_runner_win32_window_windowclassregistrar_class_registered",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "class_registered_"
     },
@@ -12455,7 +12477,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "windows_runner_win32_window_cpp_wchar_t",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "wchar_t"
     },
@@ -12467,7 +12489,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_win32window",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "win32window::win32window()"
     },
@@ -12478,7 +12500,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "wstring",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "wstring"
     },
@@ -12489,8 +12511,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "point",
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "point"
     },
     {
@@ -12500,7 +12522,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "size",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "size"
     },
@@ -12511,8 +12533,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "windows_runner_win32_window_cpp_lresult",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "lresult"
     },
     {
@@ -12522,8 +12544,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "windows_runner_win32_window_cpp_uint",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "uint"
     },
     {
@@ -12533,8 +12555,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "windows_runner_win32_window_cpp_wparam",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "wparam"
     },
     {
@@ -12544,8 +12566,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "windows_runner_win32_window_cpp_lparam",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "lparam"
     },
     {
@@ -12555,8 +12577,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "rect",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "rect"
     },
     {
@@ -12567,7 +12589,7 @@
       "_origin": "ast",
       "id": "windows_runner_win32_window_h_windows_runner_win32_window",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "win32_window.h"
     },
     {
@@ -12579,8 +12601,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "win32window"
     },
     {
@@ -12590,7 +12612,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_create",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "create"
     },
@@ -12601,8 +12623,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_show",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "show"
     },
     {
@@ -12612,7 +12634,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_destroy",
-      "community": 40,
+      "community": 0,
       "community_name": "Create",
       "norm_label": "destroy"
     },
@@ -12623,8 +12645,8 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_setchildcontent",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "setchildcontent"
     },
     {
@@ -12634,8 +12656,8 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_gethandle",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "gethandle"
     },
     {
@@ -12645,8 +12667,8 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_setquitonclose",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "setquitonclose"
     },
     {
@@ -12656,8 +12678,8 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_getclientarea",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "getclientarea"
     },
     {
@@ -12667,8 +12689,8 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_messagehandler",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "messagehandler"
     },
     {
@@ -12678,8 +12700,8 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_oncreate",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "oncreate"
     },
     {
@@ -12690,7 +12712,7 @@
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_ondestroy",
       "community": 0,
-      "community_name": "FlutterWindow",
+      "community_name": "Create",
       "norm_label": "ondestroy"
     },
     {
@@ -12700,8 +12722,8 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_wndproc",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "wndproc"
     },
     {
@@ -12711,8 +12733,8 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_getthisfromhandle",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "getthisfromhandle"
     },
     {
@@ -12722,8 +12744,8 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_updatetheme",
-      "community": 46,
-      "community_name": "win32_window.cpp",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "updatetheme"
     },
     {
@@ -12733,8 +12755,8 @@
       "source_location": "L93",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_quit_on_close",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 6,
+      "community_name": "Migrating Dart Tests to Package Checks",
       "norm_label": "quit_on_close_"
     },
     {
@@ -12744,8 +12766,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "windows_runner_win32_window_h_hwnd",
-      "community": 77,
-      "community_name": "Win32Window",
+      "community": 0,
+      "community_name": "Create",
       "norm_label": "hwnd"
     },
     {
@@ -12755,8 +12777,8 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "windows_runner_win32_window_win32window_window_handle",
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "window_handle_"
     },
     {
@@ -12936,6 +12958,94 @@
       "norm_label": "tasks"
     },
     {
+      "label": "startup_splash_performance_spec.md",
+      "file_type": "document",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "plans_startup_splash_performance_spec",
+      "community": 81,
+      "community_name": "Tasks",
+      "norm_label": "startup_splash_performance_spec.md"
+    },
+    {
+      "label": "App Startup & Splash Screen Performance Optimization Plan",
+      "file_type": "document",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "plans_startup_splash_performance_spec_app_startup_splash_screen_performance_optimization_plan",
+      "community": 81,
+      "community_name": "Tasks",
+      "norm_label": "app startup & splash screen performance optimization plan"
+    },
+    {
+      "label": "Global Constraints",
+      "file_type": "document",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "plans_startup_splash_performance_spec_global_constraints",
+      "community": 81,
+      "community_name": "Tasks",
+      "norm_label": "global constraints"
+    },
+    {
+      "label": "Tasks",
+      "file_type": "document",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "plans_startup_splash_performance_spec_tasks",
+      "community": 81,
+      "community_name": "Tasks",
+      "norm_label": "tasks"
+    },
+    {
+      "label": "Task 1: Optimize `AuthService.initSession` (Non-blocking network sync)",
+      "file_type": "document",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "plans_startup_splash_performance_spec_task_1_optimize_authservice_initsession_non_blocking_network_sync",
+      "community": 81,
+      "community_name": "Tasks",
+      "norm_label": "task 1: optimize `authservice.initsession` (non-blocking network sync)"
+    },
+    {
+      "label": "Task 2: Optimize `SplashScreen` Latency & Transitions",
+      "file_type": "document",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "plans_startup_splash_performance_spec_task_2_optimize_splashscreen_latency_transitions",
+      "community": 81,
+      "community_name": "Tasks",
+      "norm_label": "task 2: optimize `splashscreen` latency & transitions"
+    },
+    {
+      "label": "Task 3: Update & Add Startup Benchmarks / Tests",
+      "file_type": "document",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "plans_startup_splash_performance_spec_task_3_update_add_startup_benchmarks_tests",
+      "community": 81,
+      "community_name": "Tasks",
+      "norm_label": "task 3: update & add startup benchmarks / tests"
+    },
+    {
+      "label": "Task 4: Validation & Quality Gate",
+      "file_type": "document",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "plans_startup_splash_performance_spec_task_4_validation_quality_gate",
+      "community": 81,
+      "community_name": "Tasks",
+      "norm_label": "task 4: validation & quality gate"
+    },
+    {
       "label": "top_5_donut_chart_layout_refinement_spec.md",
       "file_type": "document",
       "source_file": "plans/top_5_donut_chart_layout_refinement_spec.md",
@@ -13098,8 +13208,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "graphify",
       "_origin": "semantic",
       "id": "agents_rules_graphify_doc"
@@ -13113,8 +13223,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "graphify",
       "_origin": "semantic",
       "id": "agents_rules_graphify_graphify"
@@ -13278,7 +13388,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "building dart cli applications",
       "_origin": "semantic",
@@ -13293,7 +13403,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "contents",
       "_origin": "semantic",
@@ -13308,7 +13418,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "project setup & architecture",
       "_origin": "semantic",
@@ -13323,7 +13433,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "argument parsing & command routing",
       "_origin": "semantic",
@@ -13338,7 +13448,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "execution & error handling",
       "_origin": "semantic",
@@ -13353,7 +13463,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "testing cli applications",
       "_origin": "semantic",
@@ -13368,7 +13478,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "compilation & distribution",
       "_origin": "semantic",
@@ -13383,7 +13493,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "workflows",
       "_origin": "semantic",
@@ -13398,7 +13508,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "examples",
       "_origin": "semantic",
@@ -13413,7 +13523,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 75,
       "community_name": "Building Dart CLI Applications",
       "norm_label": "example: commandrunner implementation",
       "_origin": "semantic",
@@ -13623,8 +13733,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "resolving dart static analysis errors",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_doc"
@@ -13638,8 +13748,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "contents",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_contents"
@@ -13653,8 +13763,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "core concepts & guidelines",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_core_concepts_guidelines"
@@ -13668,8 +13778,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "type system & soundness",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_type_system_soundness"
@@ -13683,8 +13793,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "null safety",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_null_safety"
@@ -13698,8 +13808,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "error handling",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_error_handling"
@@ -13713,8 +13823,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "workflows",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_workflows"
@@ -13728,8 +13838,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "workflow: static analysis resolution",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_workflow_static_analysis_resolution"
@@ -13743,8 +13853,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "examples",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_examples"
@@ -13758,8 +13868,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "example: fixing dynamic list assignments",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_example_fixing_dynamic_list_assignments"
@@ -13773,8 +13883,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
-      "community_name": "Migrating Dart Tests to Package Checks",
+      "community": 37,
+      "community_name": "description",
       "norm_label": "example: fixing null safety with `late`",
       "_origin": "semantic",
       "id": "agents_skills_dart_fix_runtime_errors_skill_example_fixing_null_safety_with_late"
@@ -15183,8 +15293,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "implementing dart patterns",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_doc"
@@ -15198,8 +15308,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "contents",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_contents"
@@ -15213,8 +15323,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "pattern selection strategy",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_pattern_selection_strategy"
@@ -15228,8 +15338,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "switch statements vs. expressions",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_switch_statements_vs_expressions"
@@ -15243,8 +15353,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "core pattern implementations",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_core_pattern_implementations"
@@ -15258,8 +15368,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "workflows",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_workflows"
@@ -15273,8 +15383,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "feedback loop: exhaustiveness checking",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_feedback_loop_exhaustiveness_checking"
@@ -15288,8 +15398,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "examples",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_examples"
@@ -15303,8 +15413,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "json validation and destructuring",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_json_validation_and_destructuring"
@@ -15318,8 +15428,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "algebraic data types (sealed classes)",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_algebraic_data_types_sealed_classes"
@@ -15333,8 +15443,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "variable swapping and destructuring",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_variable_swapping_and_destructuring"
@@ -15348,8 +15458,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "guard clauses and logical-or",
       "_origin": "semantic",
       "id": "agents_skills_dart_use_pattern_matching_skill_guard_clauses_and_logical_or"
@@ -15633,8 +15743,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "implementing flutter integration tests",
       "_origin": "semantic",
       "id": "agents_skills_flutter_add_integration_test_skill_doc"
@@ -15648,8 +15758,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "contents",
       "_origin": "semantic",
       "id": "agents_skills_flutter_add_integration_test_skill_contents"
@@ -15663,8 +15773,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "project setup and dependencies",
       "_origin": "semantic",
       "id": "agents_skills_flutter_add_integration_test_skill_project_setup_and_dependencies"
@@ -15678,8 +15788,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "interactive exploration via mcp",
       "_origin": "semantic",
       "id": "agents_skills_flutter_add_integration_test_skill_interactive_exploration_via_mcp"
@@ -15693,8 +15803,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "test authoring guidelines",
       "_origin": "semantic",
       "id": "agents_skills_flutter_add_integration_test_skill_test_authoring_guidelines"
@@ -15708,8 +15818,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "execution and profiling",
       "_origin": "semantic",
       "id": "agents_skills_flutter_add_integration_test_skill_execution_and_profiling"
@@ -15723,8 +15833,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "workflow: end-to-end integration testing",
       "_origin": "semantic",
       "id": "agents_skills_flutter_add_integration_test_skill_workflow_end_to_end_integration_testing"
@@ -15738,8 +15848,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 75,
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "examples",
       "_origin": "semantic",
       "id": "agents_skills_flutter_add_integration_test_skill_examples"
@@ -16023,8 +16133,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "architecting flutter applications",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_doc"
@@ -16038,8 +16148,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "contents",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_contents"
@@ -16053,8 +16163,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "architectural layers",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_architectural_layers"
@@ -16068,8 +16178,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "ui layer (presentation)",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_ui_layer_presentation"
@@ -16083,8 +16193,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "data layer",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_data_layer"
@@ -16098,8 +16208,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "logic layer (domain - optional)",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_logic_layer_domain_optional"
@@ -16113,8 +16223,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "project structure",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_project_structure"
@@ -16128,8 +16238,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "workflow: implementing a new feature",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_workflow_implementing_a_new_feature"
@@ -16143,8 +16253,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "task progress",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_task_progress"
@@ -16158,8 +16268,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "examples",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_examples"
@@ -16173,8 +16283,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "data layer: service and repository",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_data_layer_service_and_repository"
@@ -16188,8 +16298,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "community_name": "product_breakdown_benchmark_test.dart",
+      "community": 46,
+      "community_name": "Architecting Flutter Applications",
       "norm_label": "ui layer: viewmodel and view",
       "_origin": "semantic",
       "id": "agents_skills_flutter_apply_architecture_best_practices_skill_ui_layer_viewmodel_and_view"
@@ -16203,8 +16313,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "implementing adaptive layouts",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_doc"
@@ -16218,8 +16328,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "contents",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_contents"
@@ -16233,8 +16343,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "space measurement guidelines",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_space_measurement_guidelines"
@@ -16248,8 +16358,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "widget sizing and constraints",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_widget_sizing_and_constraints"
@@ -16263,8 +16373,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "device and orientation behaviors",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_device_and_orientation_behaviors"
@@ -16278,8 +16388,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "workflow: optimizing for large screens",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_workflow_optimizing_for_large_screens"
@@ -16293,8 +16403,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "examples",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_examples"
@@ -16308,8 +16418,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "adaptive layout using layoutbuilder",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_adaptive_layout_using_layoutbuilder"
@@ -16323,8 +16433,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 70,
+      "community_name": "Implementing Adaptive Layouts",
       "norm_label": "constraining width on large screens",
       "_origin": "semantic",
       "id": "agents_skills_flutter_build_responsive_layout_skill_constraining_width_on_large_screens"
@@ -16578,8 +16688,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "implementing routing and deep linking",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_doc"
@@ -16593,8 +16703,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "contents",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_contents"
@@ -16608,8 +16718,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "core concepts",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_core_concepts"
@@ -16623,8 +16733,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "task progress",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_task_progress"
@@ -16638,8 +16748,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "1. scaffold the application",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_1_scaffold_the_application"
@@ -16653,8 +16763,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "2. configure the router",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_2_configure_the_router"
@@ -16668,8 +16778,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "if configuring for android:",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_if_configuring_for_android"
@@ -16683,8 +16793,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "if configuring for ios:",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_if_configuring_for_ios"
@@ -16698,8 +16808,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "validation loop",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_validation_loop"
@@ -16713,8 +16823,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "workflow: implementing nested navigation",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_workflow_implementing_nested_navigation"
@@ -16728,8 +16838,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "examples",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_examples"
@@ -16743,8 +16853,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "community_name": "report_controller.dart",
+      "community": 57,
+      "community_name": "Implementing Routing and Deep Linking",
       "norm_label": "programmatic navigation",
       "_origin": "semantic",
       "id": "agents_skills_flutter_setup_declarative_routing_skill_programmatic_navigation"
@@ -17043,7 +17153,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 70,
+      "community": 17,
       "community_name": "Implementing Flutter Networking",
       "norm_label": "implementing flutter networking",
       "_origin": "semantic",
@@ -17058,7 +17168,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 70,
+      "community": 17,
       "community_name": "Implementing Flutter Networking",
       "norm_label": "contents",
       "_origin": "semantic",
@@ -17073,7 +17183,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 70,
+      "community": 17,
       "community_name": "Implementing Flutter Networking",
       "norm_label": "configuration & permissions",
       "_origin": "semantic",
@@ -17088,7 +17198,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 70,
+      "community": 17,
       "community_name": "Implementing Flutter Networking",
       "norm_label": "request execution & response handling",
       "_origin": "semantic",
@@ -17103,7 +17213,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 70,
+      "community": 17,
       "community_name": "Implementing Flutter Networking",
       "norm_label": "background parsing",
       "_origin": "semantic",
@@ -17118,7 +17228,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 70,
+      "community": 17,
       "community_name": "Implementing Flutter Networking",
       "norm_label": "workflow: executing network operations",
       "_origin": "semantic",
@@ -17133,7 +17243,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 70,
+      "community": 17,
       "community_name": "Implementing Flutter Networking",
       "norm_label": "examples",
       "_origin": "semantic",
@@ -17373,8 +17483,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 40,
+      "community_name": "graphify reference: extra exports and benchmark",
       "norm_label": "graphify reference: extra exports and benchmark",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_exports_doc"
@@ -17388,8 +17498,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 40,
+      "community_name": "graphify reference: extra exports and benchmark",
       "norm_label": "step 6b - wiki (only if --wiki flag)",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_exports_step_6b_wiki_only_if_wiki_flag"
@@ -17403,8 +17513,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 40,
+      "community_name": "graphify reference: extra exports and benchmark",
       "norm_label": "step 7b - svg export (only if --svg flag)",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_exports_step_7b_svg_export_only_if_svg_flag"
@@ -17418,8 +17528,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 50,
-      "community_name": "/graphify",
+      "community": 40,
+      "community_name": "graphify reference: extra exports and benchmark",
       "norm_label": "step 7d - mcp server (only if --mcp flag)",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_exports_step_7d_mcp_server_only_if_mcp_flag"
@@ -17433,8 +17543,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
-      "community_name": "Dart Primary Constructors & New Constructor Syntax Skill",
+      "community": 14,
+      "community_name": "Implementing Dart Patterns",
       "norm_label": "graphify reference: extraction subagent prompt",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_extraction_spec_doc"
@@ -17463,8 +17573,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
-      "community_name": "Building Dart CLI Applications",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "graphify reference: commit hook and native claude.md integration",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_hooks_doc"
@@ -17478,8 +17588,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
-      "community_name": "Building Dart CLI Applications",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "for git commit hook",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_hooks_for_git_commit_hook"
@@ -17493,8 +17603,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
-      "community_name": "Building Dart CLI Applications",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "for native claude.md integration",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_hooks_for_native_claude_md_integration"
@@ -17508,8 +17618,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 140,
-      "community_name": "graphify reference: query, path, explain",
+      "community": 61,
+      "community_name": "performance_benchmark_test.dart",
       "norm_label": "graphify reference: query, path, explain",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_query_doc"
@@ -17523,8 +17633,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 140,
-      "community_name": "graphify reference: query, path, explain",
+      "community": 61,
+      "community_name": "performance_benchmark_test.dart",
       "norm_label": "step 1 \u2014 traversal",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_query_step_1_traversal"
@@ -17538,8 +17648,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 140,
-      "community_name": "graphify reference: query, path, explain",
+      "community": 61,
+      "community_name": "performance_benchmark_test.dart",
       "norm_label": "for /graphify path",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_query_for_graphify_path"
@@ -17553,8 +17663,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 140,
-      "community_name": "graphify reference: query, path, explain",
+      "community": 61,
+      "community_name": "performance_benchmark_test.dart",
       "norm_label": "for /graphify explain",
       "_origin": "semantic",
       "id": "agents_skills_graphify_references_query_for_graphify_explain"
@@ -17628,7 +17738,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 83,
+      "community": 37,
       "community_name": "description",
       "norm_label": "workflow: graphify",
       "_origin": "semantic",
@@ -17688,8 +17798,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 140,
+      "community_name": "Agent Guidelines for Dashboard Project",
       "norm_label": "agent guidelines for dashboard project",
       "_origin": "semantic",
       "id": "agents_doc"
@@ -17703,8 +17813,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 140,
+      "community_name": "Agent Guidelines for Dashboard Project",
       "norm_label": "working with this codebase",
       "_origin": "semantic",
       "id": "agents_working_with_this_codebase"
@@ -17718,8 +17828,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 86,
-      "community_name": "Project Rules & Architectural Guidelines",
+      "community": 48,
+      "community_name": "Serializing JSON Manually in Flutter",
       "norm_label": "project rules & architectural guidelines",
       "_origin": "semantic",
       "id": "gemini_doc"
@@ -17733,8 +17843,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 86,
-      "community_name": "Project Rules & Architectural Guidelines",
+      "community": 48,
+      "community_name": "Serializing JSON Manually in Flutter",
       "norm_label": "1. core architectural principles",
       "_origin": "semantic",
       "id": "gemini_1_core_architectural_principles"
@@ -17748,8 +17858,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 86,
-      "community_name": "Project Rules & Architectural Guidelines",
+      "community": 48,
+      "community_name": "Serializing JSON Manually in Flutter",
       "norm_label": "2. spec-driven development workflow",
       "_origin": "semantic",
       "id": "gemini_2_spec_driven_development_workflow"
@@ -17763,8 +17873,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 86,
-      "community_name": "Project Rules & Architectural Guidelines",
+      "community": 48,
+      "community_name": "Serializing JSON Manually in Flutter",
       "norm_label": "3. tooling & mcp integration rules",
       "_origin": "semantic",
       "id": "gemini_3_tooling_mcp_integration_rules"
@@ -17778,8 +17888,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "dashboard",
       "_origin": "semantic",
       "id": "readme_doc"
@@ -17793,8 +17903,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
-      "community_name": "Implementing Flutter Integration Tests",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "getting started",
       "_origin": "semantic",
       "id": "readme_getting_started"
@@ -17824,7 +17934,7 @@
       "author": null,
       "contributor": null,
       "community": 83,
-      "community_name": "description",
+      "community_name": "my_application.h",
       "norm_label": "hapus git lama dan build cache",
       "_origin": "semantic",
       "id": "docs_cloning_guide_doc"
@@ -17853,8 +17963,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 69,
+      "community_name": "Analyzing and Fixing Dart Code",
       "norm_label": "launch screen assets",
       "_origin": "semantic",
       "id": "ios_runner_assets_xcassets_launchimage_imageset_readme_doc"
@@ -17868,8 +17978,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "project-level configuration.",
       "_origin": "semantic",
       "id": "linux_cmakelists_doc"
@@ -17913,8 +18023,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "system architecture & layering design",
       "_origin": "semantic",
       "id": "plans_architecture_doc"
@@ -17928,8 +18038,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "1. architectural layers",
       "_origin": "semantic",
       "id": "plans_architecture_1_architectural_layers"
@@ -17943,8 +18053,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "community_name": "api_client.dart",
+      "community": 59,
+      "community_name": "System Architecture & Layering Design",
       "norm_label": "2. layer contracts & dependency rules",
       "_origin": "semantic",
       "id": "plans_architecture_2_layer_contracts_dependency_rules"
@@ -17959,7 +18069,7 @@
       "author": null,
       "contributor": null,
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "spec: pendapatan perbandingan kantor cabang berdasarkan jenis pinjaman",
       "_origin": "semantic",
       "id": "plans_branch_product_comparison_spec_doc"
@@ -17974,7 +18084,7 @@
       "author": null,
       "contributor": null,
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "1. overview",
       "_origin": "semantic",
       "id": "plans_branch_product_comparison_spec_1_overview"
@@ -17989,7 +18099,7 @@
       "author": null,
       "contributor": null,
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "2. requirements & user flow",
       "_origin": "semantic",
       "id": "plans_branch_product_comparison_spec_2_requirements_user_flow"
@@ -18004,7 +18114,7 @@
       "author": null,
       "contributor": null,
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "3. architecture & layering",
       "_origin": "semantic",
       "id": "plans_branch_product_comparison_spec_3_architecture_layering"
@@ -18019,7 +18129,7 @@
       "author": null,
       "contributor": null,
       "community": 75,
-      "community_name": "interest_record.dart",
+      "community_name": "Building Dart CLI Applications",
       "norm_label": "4. quality gate",
       "_origin": "semantic",
       "id": "plans_branch_product_comparison_spec_4_quality_gate"
@@ -18183,8 +18293,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "login screen revamp plan (anti-ai slop & high performance)",
       "_origin": "semantic",
       "id": "plans_login_revamp_doc"
@@ -18198,8 +18308,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "1. objectives",
       "_origin": "semantic",
       "id": "plans_login_revamp_1_objectives"
@@ -18213,8 +18323,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "2. component structure",
       "_origin": "semantic",
       "id": "plans_login_revamp_2_component_structure"
@@ -18228,8 +18338,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "3. design engineering spec",
       "_origin": "semantic",
       "id": "plans_login_revamp_3_design_engineering_spec"
@@ -18243,8 +18353,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "4. verification plan",
       "_origin": "semantic",
       "id": "plans_login_revamp_4_verification_plan"
@@ -18259,7 +18369,7 @@
       "author": null,
       "contributor": null,
       "community": 30,
-      "community_name": "StatelessWidget",
+      "community_name": "login_screen.dart",
       "norm_label": "spesifikasi perbaikan penyesuaian data riil",
       "_origin": "semantic",
       "id": "plans_real_data_improvements_spec_doc"
@@ -18273,8 +18383,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "project requirements & specifications",
       "_origin": "semantic",
       "id": "plans_requirements_doc"
@@ -18288,8 +18398,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "1. overview",
       "_origin": "semantic",
       "id": "plans_requirements_1_overview"
@@ -18303,8 +18413,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "2. core functional requirements",
       "_origin": "semantic",
       "id": "plans_requirements_2_core_functional_requirements"
@@ -18318,8 +18428,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "2.1 authentication (`lib/auth`)",
       "_origin": "semantic",
       "id": "plans_requirements_2_1_authentication_lib_auth"
@@ -18333,8 +18443,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "2.2 dashboard & overview",
       "_origin": "semantic",
       "id": "plans_requirements_2_2_dashboard_overview"
@@ -18348,8 +18458,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "2.3 ai assistant & chat",
       "_origin": "semantic",
       "id": "plans_requirements_2_3_ai_assistant_chat"
@@ -18363,8 +18473,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
-      "community_name": "interest_record.dart",
+      "community": 42,
+      "community_name": "Project Requirements & Specifications",
       "norm_label": "3. non-functional requirements",
       "_origin": "semantic",
       "id": "plans_requirements_3_non_functional_requirements"
@@ -18378,8 +18488,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 83,
-      "community_name": "description",
+      "community": 24,
+      "community_name": "Flutter",
       "norm_label": "the following line prevents the package from being accidentally published to",
       "_origin": "semantic",
       "id": "pubspec_doc"
@@ -18393,8 +18503,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 63,
-      "community_name": "Testing Dart and Flutter Applications",
+      "community": 50,
+      "community_name": "/graphify",
       "norm_label": "index",
       "_origin": "semantic",
       "id": "web_index_doc"
@@ -18408,8 +18518,8 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
-      "community_name": "Flutter",
+      "community": 83,
+      "community_name": "my_application.h",
       "norm_label": "project-level configuration.",
       "_origin": "semantic",
       "id": "windows_cmakelists_doc"
@@ -22032,6 +22142,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "test_auth_login_screen_test",
+      "target": "package_flutter_material_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/auth/splash_screen_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_auth_splash_screen_test",
       "target": "package_flutter_material_dart"
     },
     {
@@ -26819,6 +26940,17 @@
       "weight": 1.0,
       "_origin": "ast",
       "source": "lib_feature_home_services_dashboard_service",
+      "target": "dart_async"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/auth/startup_benchmark_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_auth_startup_benchmark_test",
       "target": "dart_async"
     },
     {
@@ -36859,6 +36991,17 @@
       "relation": "imports",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "test/auth/startup_benchmark_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_auth_startup_benchmark_test",
+      "target": "package_flutter_test_flutter_test_dart"
+    },
+    {
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "test/core/initial_binding_test.dart",
       "source_location": null,
       "weight": 1.0,
@@ -37096,6 +37239,17 @@
       "_origin": "ast",
       "source": "test_auth_splash_screen_test",
       "target": "test_auth_splash_screen_test_main"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "test/auth/startup_benchmark_test.dart",
+      "source_location": null,
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "test_auth_startup_benchmark_test",
+      "target": "test_auth_startup_benchmark_test_main"
     },
     {
       "relation": "imports",
@@ -40811,6 +40965,83 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "plans_startup_splash_performance_spec",
+      "target": "plans_startup_splash_performance_spec_app_startup_splash_screen_performance_optimization_plan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "plans_startup_splash_performance_spec_app_startup_splash_screen_performance_optimization_plan",
+      "target": "plans_startup_splash_performance_spec_global_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "plans_startup_splash_performance_spec_app_startup_splash_screen_performance_optimization_plan",
+      "target": "plans_startup_splash_performance_spec_tasks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "plans_startup_splash_performance_spec_tasks",
+      "target": "plans_startup_splash_performance_spec_task_1_optimize_authservice_initsession_non_blocking_network_sync",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "plans_startup_splash_performance_spec_tasks",
+      "target": "plans_startup_splash_performance_spec_task_2_optimize_splashscreen_latency_transitions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "plans_startup_splash_performance_spec_tasks",
+      "target": "plans_startup_splash_performance_spec_task_3_update_add_startup_benchmarks_tests",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "plans/startup_splash_performance_spec.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "plans_startup_splash_performance_spec_tasks",
+      "target": "plans_startup_splash_performance_spec_task_4_validation_quality_gate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "plans/top_5_donut_chart_layout_refinement_spec.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -44253,5 +44484,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f2bcc21e345d86edb7d4342eea87e4f78cc5c8d1"
+  "built_at_commit": "0d7e8840dcf2d1fcc6b64e2a5136a0c55c440b6d"
 }
