@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -176,6 +177,9 @@ class NotificationService extends GetxService {
         ?.createNotificationChannel(androidChannel);
   }
 
+  static const MethodChannel _apnsDiagnosticChannel =
+      MethodChannel('com.bprsupra.dashboard/apns_diagnostics');
+
   Future<void> fetchToken({bool isRetry = false}) async {
     isFetchingToken.value = true;
     tokenError.value = null;
@@ -190,25 +194,63 @@ class NotificationService extends GetxService {
         }
       }
 
-      // On iOS, Firebase requires an APNs token from Apple before generating an FCM token.
-      // APNs token generation is asynchronous and may take several seconds.
+      // On iOS, check permission and request APNs token
       if (defaultTargetPlatform == TargetPlatform.iOS) {
+        final settings = await FirebaseMessaging.instance.getNotificationSettings();
+        debugPrint('[NotificationService] iOS Notification Permission: ${settings.authorizationStatus}');
+        if (settings.authorizationStatus == AuthorizationStatus.denied) {
+          tokenError.value =
+              'Izin Notifikasi ditolak di iPhone. Buka Pengaturan iPhone > Pemberitahuan > BPR SUPRA > aktifkan "Izinkan Pemberitahuan".';
+          isFetchingToken.value = false;
+          return;
+        } else if (settings.authorizationStatus == AuthorizationStatus.notDetermined) {
+          await _requestPermissions();
+        }
+
+        // Trigger native registration
+        try {
+          await _apnsDiagnosticChannel.invokeMethod('requestRegister');
+        } catch (_) {}
+
         String? apnsToken;
         int attempts = 0;
         const maxAttempts = 10;
 
         while (apnsToken == null && attempts < maxAttempts) {
           apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-          if (apnsToken == null) {
-            debugPrint('[NotificationService] Waiting for APNs token (attempt ${attempts + 1}/$maxAttempts)...');
-            await Future.delayed(const Duration(milliseconds: 1500));
-            attempts++;
-          }
+          if (apnsToken != null) break;
+
+          // Check if native iOS caught an explicit error from Apple
+          try {
+            final diag = await _apnsDiagnosticChannel.invokeMethod<Map>('getApnsDiagnostic');
+            final nativeError = diag?['error'] as String?;
+            if (nativeError != null && nativeError.isNotEmpty) {
+              tokenError.value = 'Apple APNs Error: $nativeError';
+              debugPrint('[NotificationService] Apple APNs native error: $nativeError');
+              isFetchingToken.value = false;
+              return;
+            }
+          } catch (_) {}
+
+          debugPrint('[NotificationService] Waiting for APNs token (attempt ${attempts + 1}/$maxAttempts)...');
+          await Future.delayed(const Duration(milliseconds: 1500));
+          attempts++;
         }
 
         if (apnsToken == null) {
+          // Last check for native error
+          try {
+            final diag = await _apnsDiagnosticChannel.invokeMethod<Map>('getApnsDiagnostic');
+            final nativeError = diag?['error'] as String?;
+            if (nativeError != null && nativeError.isNotEmpty) {
+              tokenError.value = 'Apple APNs Error: $nativeError';
+              isFetchingToken.value = false;
+              return;
+            }
+          } catch (_) {}
+
           final errorMsg =
-              'APNs Token belum diterima dari Apple (timeout). Pastikan: 1) Akun Apple Dev mengaktifkan Push Notifications untuk App ID ini, 2) Entitlements aps-environment terpasang, 3) Bukan dijalankan di simulator non-APNs.';
+              'APNs Token timeout dari Apple. Pastikan koneksi internet aktif dan perangkat terhubung ke APNs.';
           tokenError.value = errorMsg;
           debugPrint('[NotificationService] $errorMsg');
           isFetchingToken.value = false;
