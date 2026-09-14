@@ -43,6 +43,8 @@ class NotificationService extends GetxService {
       FlutterLocalNotificationsPlugin();
 
   final RxnString fcmToken = RxnString();
+  final RxnString tokenError = RxnString();
+  final RxBool isFetchingToken = false.obs;
   final RxInt unreadCount = 0.obs;
   final RxList<AppNotificationItem> notificationHistory =
       <AppNotificationItem>[].obs;
@@ -76,11 +78,18 @@ class NotificationService extends GetxService {
             sound: true,
           );
 
-      // 6. Fetch & monitor FCM Token
-      await _setupToken();
-
-      // 7. Setup message listeners
+      // 6. Setup message listeners
       _setupMessageListeners();
+
+      // 7. Fetch & monitor FCM Token (runs asynchronously so it doesn't block startup)
+      fetchToken();
+
+      // Listen for token refresh
+      FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
+        fcmToken.value = newToken;
+        tokenError.value = null;
+        debugPrint('[NotificationService] FCM Token refreshed: $newToken');
+      });
 
       isInitialized.value = true;
       debugPrint('[NotificationService] Initialized successfully');
@@ -152,29 +161,55 @@ class NotificationService extends GetxService {
         ?.createNotificationChannel(androidChannel);
   }
 
-  Future<void> _setupToken() async {
+  Future<void> fetchToken({bool isRetry = false}) async {
+    isFetchingToken.value = true;
+    tokenError.value = null;
+
     try {
-      // On iOS, checking APNs token first can prevent errors
+      // On iOS, Firebase requires an APNs token from Apple before generating an FCM token.
+      // APNs token generation is asynchronous and may take several seconds.
       if (defaultTargetPlatform == TargetPlatform.iOS) {
-        final apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-        debugPrint('[NotificationService] iOS APNs Token: $apnsToken');
+        String? apnsToken;
+        int attempts = 0;
+        const maxAttempts = 10;
+
+        while (apnsToken == null && attempts < maxAttempts) {
+          apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+          if (apnsToken == null) {
+            debugPrint('[NotificationService] Waiting for APNs token (attempt ${attempts + 1}/$maxAttempts)...');
+            await Future.delayed(const Duration(milliseconds: 1500));
+            attempts++;
+          }
+        }
+
+        if (apnsToken == null) {
+          final errorMsg =
+              'APNs Token belum diterima dari Apple (timeout). Pastikan: 1) Akun Apple Dev mengaktifkan Push Notifications untuk App ID ini, 2) Entitlements aps-environment terpasang, 3) Bukan dijalankan di simulator non-APNs.';
+          tokenError.value = errorMsg;
+          debugPrint('[NotificationService] $errorMsg');
+          isFetchingToken.value = false;
+          return;
+        }
+
+        debugPrint('[NotificationService] APNs Token ready: $apnsToken');
       }
 
       final token = await FirebaseMessaging.instance.getToken();
-      fcmToken.value = token;
-      debugPrint('=============================================');
-      debugPrint('🔥 FCM DEVICE TOKEN:');
-      debugPrint(token ?? 'Token null');
-      debugPrint('=============================================');
-
-      // Listen for token refresh
-      FirebaseMessaging.instance.onTokenRefresh.listen((newToken) {
-        fcmToken.value = newToken;
-        debugPrint('[NotificationService] FCM Token refreshed: $newToken');
-        // TODO: Send updated token to your backend API
-      });
+      if (token != null && token.isNotEmpty) {
+        fcmToken.value = token;
+        tokenError.value = null;
+        debugPrint('=============================================');
+        debugPrint('🔥 FCM DEVICE TOKEN:');
+        debugPrint(token);
+        debugPrint('=============================================');
+      } else {
+        tokenError.value = 'FCM Token bernilai null dari Firebase';
+      }
     } catch (e) {
+      tokenError.value = 'Gagal memuat token: $e';
       debugPrint('[NotificationService] Error retrieving FCM token: $e');
+    } finally {
+      isFetchingToken.value = false;
     }
   }
 

@@ -109,56 +109,106 @@ class NotificationBellButton extends StatelessWidget {
               ),
             ),
 
-            // FCM Token copy section for testing
+            // FCM Token section with loading, retry & copy features
             Obx(() {
               final token = _service.fcmToken.value;
+              final error = _service.tokenError.value;
+              final isLoading = _service.isFetchingToken.value;
+
               return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF1F5F9),
+                  color: error != null
+                      ? const Color(0xFFFEF2F2)
+                      : const Color(0xFFF1F5F9),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey.shade200),
+                  border: Border.all(
+                    color: error != null
+                        ? const Color(0xFFFECACA)
+                        : Colors.grey.shade200,
+                  ),
                 ),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(
-                      Icons.key_rounded,
-                      size: 18,
-                      color: Color(0xFF64748B),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'FCM Device Token (Testing)',
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF64748B),
-                            ),
+                    Row(
+                      children: [
+                        Icon(
+                          error != null
+                              ? Icons.error_outline_rounded
+                              : (token != null
+                                  ? Icons.check_circle_rounded
+                                  : Icons.key_rounded),
+                          size: 18,
+                          color: error != null
+                              ? AppTheme.primaryColor
+                              : (token != null
+                                  ? const Color(0xFF16A34A)
+                                  : const Color(0xFF64748B)),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'FCM Device Token (Testing)',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF64748B),
+                                ),
+                              ),
+                              if (isLoading)
+                                Row(
+                                  children: const [
+                                    SizedBox(
+                                      width: 12,
+                                      height: 12,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        valueColor: AlwaysStoppedAnimation(
+                                          AppTheme.primaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 6),
+                                    Text(
+                                      'Menunggu izin & APNs Apple...',
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        color: Color(0xFF64748B),
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              else if (token != null)
+                                Text(
+                                  '${token.substring(0, token.length > 28 ? 28 : token.length)}...',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: 'monospace',
+                                    color: Color(0xFF334155),
+                                  ),
+                                )
+                              else
+                                const Text(
+                                  'Token belum tersedia',
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    color: Color(0xFFDC2626),
+                                  ),
+                                ),
+                            ],
                           ),
-                          Text(
-                            token != null
-                                ? '${token.substring(0, token.length > 28 ? 28 : token.length)}...'
-                                : 'Memuat token...',
-                            style: const TextStyle(
-                              fontSize: 11,
-                              fontFamily: 'monospace',
-                              color: Color(0xFF334155),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.copy_rounded, size: 18),
-                      tooltip: 'Salin Token',
-                      onPressed: token == null
-                          ? null
-                          : () {
+                        ),
+                        if (token != null)
+                          IconButton(
+                            icon: const Icon(Icons.copy_rounded, size: 18),
+                            tooltip: 'Salin Token',
+                            onPressed: () {
                               Clipboard.setData(ClipboardData(text: token));
                               Get.snackbar(
                                 'Token Tersalin',
@@ -168,7 +218,28 @@ class NotificationBellButton extends StatelessWidget {
                                 duration: const Duration(seconds: 2),
                               );
                             },
+                          )
+                        else
+                          IconButton(
+                            icon: const Icon(Icons.refresh_rounded, size: 20),
+                            tooltip: 'Muat Ulang Token',
+                            onPressed: isLoading
+                                ? null
+                                : () => _service.fetchToken(isRetry: true),
+                          ),
+                      ],
                     ),
+                    if (error != null) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        error,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFFB91C1C),
+                          height: 1.3,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               );
