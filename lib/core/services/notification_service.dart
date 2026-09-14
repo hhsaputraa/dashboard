@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,9 +43,15 @@ class AppNotificationItem {
 }
 
 class NotificationService extends GetxService {
+  static final NotificationService _instance = NotificationService._internal();
+  factory NotificationService() => Get.isRegistered<NotificationService>()
+      ? Get.find<NotificationService>()
+      : _instance;
+  NotificationService._internal();
+
   static NotificationService get to => Get.isRegistered<NotificationService>()
       ? Get.find<NotificationService>()
-      : Get.put(NotificationService());
+      : Get.put(NotificationService(), permanent: true);
 
   final FlutterLocalNotificationsPlugin _localNotifications =
       FlutterLocalNotificationsPlugin();
@@ -58,6 +63,7 @@ class NotificationService extends GetxService {
   final RxList<AppNotificationItem> notificationHistory =
       <AppNotificationItem>[].obs;
   final RxBool isInitialized = false.obs;
+  bool _isListening = false;
 
   static const String _channelId = 'high_importance_channel';
   static const String _channelName = 'High Importance Notifications';
@@ -280,6 +286,12 @@ class NotificationService extends GetxService {
   }
 
   void _setupMessageListeners() {
+    if (_isListening) {
+      debugPrint('[NotificationService] Message listeners already set up, skipping.');
+      return;
+    }
+    _isListening = true;
+
     // 1. FOREGROUND: App is actively open on screen
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint('[NotificationService] Foreground message received: ${message.messageId}');
@@ -304,12 +316,18 @@ class NotificationService extends GetxService {
   }
 
   void _handleIncomingMessage(RemoteMessage message, {required bool isForeground}) {
+    final messageId = message.messageId;
+    if (messageId != null && notificationHistory.any((e) => e.id == messageId)) {
+      debugPrint('[NotificationService] Duplicate message ignored: $messageId');
+      return;
+    }
+
     final title = message.notification?.title ?? message.data['title'] ?? 'Notifikasi Baru';
     final body = message.notification?.body ?? message.data['body'] ?? '';
 
     // Add to local in-memory history
     final item = AppNotificationItem(
-      id: message.messageId ?? DateTime.now().millisecondsSinceEpoch.toString(),
+      id: messageId ?? DateTime.now().millisecondsSinceEpoch.toString(),
       title: title,
       body: body,
       receivedAt: DateTime.now(),
@@ -320,9 +338,15 @@ class NotificationService extends GetxService {
     unreadCount.value++;
 
     if (isForeground) {
-      // Show native heads-up notification and in-app snackbar
-      _showLocalNotification(item);
-      _showInAppSnackbar(item);
+      // On iOS: FirebaseMessaging foreground presentation options (alert: true)
+      // already instructs Apple UNUserNotificationCenter to display the native
+      // system banner at the top of the screen. Triggering a local notification
+      // here on iOS creates a duplicate system banner!
+      // On Android: Android does NOT display heads-up notifications automatically
+      // when in foreground, so we use local notifications only on Android.
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        _showLocalNotification(item);
+      }
     }
   }
 
@@ -353,46 +377,6 @@ class NotificationService extends GetxService {
       body: item.body,
       notificationDetails: notificationDetails,
       payload: item.id,
-    );
-  }
-
-  void _showInAppSnackbar(AppNotificationItem item) {
-    if (Get.context == null) return;
-
-    Get.snackbar(
-      item.title,
-      item.body,
-      snackPosition: SnackPosition.TOP,
-      backgroundColor: Colors.white,
-      colorText: const Color(0xFF0F172A),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      borderRadius: 12,
-      icon: Container(
-        padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.only(left: 4),
-        decoration: BoxDecoration(
-          color: AppTheme.primaryColor.withValues(alpha: 0.1),
-          shape: BoxShape.circle,
-        ),
-        child: const Icon(
-          Icons.notifications_active_rounded,
-          color: AppTheme.primaryColor,
-          size: 22,
-        ),
-      ),
-      boxShadows: [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.08),
-          blurRadius: 16,
-          offset: const Offset(0, 4),
-        ),
-      ],
-      duration: const Duration(seconds: 4),
-      onTap: (_) {
-        item.isRead = true;
-        if (unreadCount.value > 0) unreadCount.value--;
-        _navigateToDestination(item.data);
-      },
     );
   }
 
