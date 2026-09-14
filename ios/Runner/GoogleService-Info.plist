@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.dashboard</string>
+	<string>com.bprsupra.dashboard</string>
 	<key>PROJECT_ID</key>
 	<string>dashboard-notif</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:832959215934:ios:f00327179f85ee69f1146f</string>
+	<string>1:832959215934:ios:930320f66faa1d49f1146f</string>
 </dict>
 </plist>
