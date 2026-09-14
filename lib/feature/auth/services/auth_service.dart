@@ -76,8 +76,8 @@ class AuthService extends GetxService {
           } catch (_) {}
         }
 
-        // Sinkronisasi data user terbaru dengan backend di background
-        await fetchProfile();
+        // Sinkronisasi data user terbaru dengan backend di background tanpa memblokir startup
+        unawaited(fetchProfile());
       }
     } catch (_) {
       // Jika terjadi error lokal, biarkan user tetap di halaman login

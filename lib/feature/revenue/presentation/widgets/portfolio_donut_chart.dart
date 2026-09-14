@@ -113,7 +113,7 @@ class _PortfolioDonutChartState extends State<PortfolioDonutChart> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Top 5 Produk Pinjaman',
+                'Top 5 Portofolio Produk',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,

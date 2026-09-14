@@ -225,9 +225,9 @@
     "semantic_hash": "79b4e923898b1de715f3dd7c11bf79b8"
   },
   "lib/feature/auth/services/auth_service.dart": {
-    "mtime": 1789349710.5822687,
-    "ast_hash": "1c308fb5525289fd2889079074d3054d",
-    "semantic_hash": ""
+    "mtime": 1788494947.0200515,
+    "ast_hash": "f4953707a159d0f8dcb9863159e74ebd",
+    "semantic_hash": "f4953707a159d0f8dcb9863159e74ebd"
   },
   "lib/feature/home/model/dashboard_data.dart": {
     "mtime": 1787879951.884894,
@@ -380,9 +380,9 @@
     "semantic_hash": "d81c5bf74553500ecfbda229fabff33d"
   },
   "lib/feature/auth/presentation/splash_screen.dart": {
-    "mtime": 1789349717.168292,
-    "ast_hash": "00fc81eaff46d9a8bde5491d815077d0",
-    "semantic_hash": ""
+    "mtime": 1788491808.5461724,
+    "ast_hash": "a49bbae706ab37812d9035024181b2a7",
+    "semantic_hash": "a49bbae706ab37812d9035024181b2a7"
   },
   "lib/feature/home/bindings/home_binding.dart": {
     "mtime": 1788494112.3036444,
@@ -465,13 +465,13 @@
     "semantic_hash": "d997a8956d43c21c138c6a8ad51382f8"
   },
   "lib/feature/revenue/presentation/widgets/branch_product_comparison_card.dart": {
-    "mtime": 1789349744.2031538,
-    "ast_hash": "9cffcb12dadfa46afa828fb2ee2ffa3f",
+    "mtime": 1788863460.1147704,
+    "ast_hash": "b68459ada314a0d9dfecb47185840d81",
     "semantic_hash": ""
   },
   "lib/feature/revenue/presentation/widgets/portfolio_donut_chart.dart": {
-    "mtime": 1789349848.9269843,
-    "ast_hash": "7f9167276380df2cf0e0895a75befbcb",
+    "mtime": 1789032214.9784007,
+    "ast_hash": "fe79231cbfc154e2b4a526435271d33b",
     "semantic_hash": ""
   },
   "lib/feature/revenue/presentation/widgets/quarterly_growth_chart.dart": {
@@ -485,9 +485,9 @@
     "semantic_hash": "307b62494542a240f6f4fc176ee82101"
   },
   "test/auth/splash_screen_test.dart": {
-    "mtime": 1789349721.9905846,
-    "ast_hash": "b15a746248aac77224a22970735102f1",
-    "semantic_hash": ""
+    "mtime": 1788486165.5882976,
+    "ast_hash": "d7a79ef968437d539f416943432bf44e",
+    "semantic_hash": "d7a79ef968437d539f416943432bf44e"
   },
   "test/core/initial_binding_test.dart": {
     "mtime": 1788491495.9423187,
@@ -1157,16 +1157,6 @@
   "plans/top_5_donut_chart_layout_refinement_spec.md": {
     "mtime": 1789032198.8564062,
     "ast_hash": "0809f89eb9f5f7036ff4e8940432ca65",
-    "semantic_hash": ""
-  },
-  "test/auth/startup_benchmark_test.dart": {
-    "mtime": 1789349747.4582582,
-    "ast_hash": "667fb5739ec60b1f47dedec81817879e",
-    "semantic_hash": ""
-  },
-  "plans/startup_splash_performance_spec.md": {
-    "mtime": 1789349706.1002994,
-    "ast_hash": "cf74f6dba151c5bd56d13fedf734aa69",
     "semantic_hash": ""
   }
 }

@@ -845,10 +845,12 @@ class _BranchProductComparisonCardState
                     vertical: 8,
                   ),
                   getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                    if (groupIndex < 0 || groupIndex >= branches.length)
+                    if (groupIndex < 0 || groupIndex >= branches.length) {
                       return null;
-                    if (rodIndex < 0 || rodIndex >= products.length)
+                    }
+                    if (rodIndex < 0 || rodIndex >= products.length) {
                       return null;
+                    }
 
                     final branch = branches[groupIndex];
                     final prod = products[rodIndex];

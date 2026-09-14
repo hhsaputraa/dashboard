@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:dashboard/feature/auth/presentation/splash_screen.dart';
@@ -34,9 +34,9 @@ void main() {
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
     expect(find.text('v1.0.0'), findsOneWidget);
 
-    // Advance clock past the 2000ms delay to resolve timer and navigate away
-    await tester.pump(const Duration(milliseconds: 2500));
-    // Advance transition duration (600ms)
-    await tester.pump(const Duration(milliseconds: 600));
+    // Advance clock past the 800ms delay to resolve timer and navigate away
+    await tester.pump(const Duration(milliseconds: 1000));
+    // Advance transition duration (300ms)
+    await tester.pump(const Duration(milliseconds: 300));
   });
 }
