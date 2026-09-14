@@ -367,13 +367,10 @@ class _LoginFooter extends StatelessWidget {
   }
 }
 
-/// Widget background gambar terisolasi dengan RepaintBoundary & Overlay tipis.
+/// Widget background dekoratif native (Zero-Network) terisolasi dengan RepaintBoundary.
+/// Menggantikan pemanggilan gambar online eksternal agar 100% offline-ready, hemat bandwidth & RAM.
 class _LoginBackground extends StatelessWidget {
   const _LoginBackground();
-
-  // URL gambar latar berformat WebP ringan & optimal dari Unsplash (Arsitektur / Gedung)
-  static const String _imageUrl =
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1080&q=80';
 
   @override
   Widget build(BuildContext context) {
@@ -381,24 +378,58 @@ class _LoginBackground extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // Gambar background online dengan animasi fade-in halus
-          Image.network(
-            _imageUrl,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) =>
-                const SizedBox.expand(),
-            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-              if (wasSynchronouslyLoaded) return child;
-              return AnimatedOpacity(
-                opacity: frame == null ? 0 : 1,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-                child: child,
-              );
-            },
+          // 1. Dasar warna gradien bersih profesional khas FinTech / Perbankan
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFFFFFFFF),
+                  Color(0xFFF8FAFC),
+                  Color(0xFFF1F5F9),
+                ],
+              ),
+            ),
           ),
-          // Overlay warna putih murni dengan transparansi 92% agar teks tetap kontras & sangat jelas
-          Container(color: Colors.white.withValues(alpha: 0.92)),
+
+          // 2. Aksen ambient glow halus di pojok kanan atas (BPR Supra Crimson)
+          Positioned(
+            top: -100,
+            right: -100,
+            child: Container(
+              width: 320,
+              height: 320,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    AppTheme.primaryColor.withValues(alpha: 0.05),
+                    AppTheme.primaryColor.withValues(alpha: 0.0),
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          // 3. Aksen ambient glow halus di pojok kiri bawah
+          Positioned(
+            bottom: -80,
+            left: -80,
+            child: Container(
+              width: 280,
+              height: 280,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    const Color(0xFF2563EB).withValues(alpha: 0.03),
+                    const Color(0xFF2563EB).withValues(alpha: 0.0),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

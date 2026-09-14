@@ -126,7 +126,7 @@ class ProfileController extends GetxController {
         ],
       ),
       content: const Text(
-        'Apakah Anda yakin ingin keluar dari akun ini? Sesi Anda akan diakhiri secara aman.',
+        'Apakah Anda yakin ingin keluar dari akun ini?',
         style: TextStyle(fontSize: 13, color: Color(0xFF64748B), height: 1.4),
       ),
       actions: [

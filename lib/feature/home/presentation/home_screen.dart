@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:dashboard/core/presentation/server_config_dialog.dart';
+import 'package:dashboard/core/presentation/widgets/notification_bell_button.dart';
 import 'package:dashboard/core/presentation/widgets/sync_status_indicator.dart';
 import 'package:dashboard/feature/home/controllers/home_controller.dart';
 import 'package:dashboard/feature/home/model/dashboard_data.dart';
@@ -53,6 +54,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         actions: [
+          const NotificationBellButton(),
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             tooltip: 'Pengaturan Server',

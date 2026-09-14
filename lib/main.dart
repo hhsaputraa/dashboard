@@ -5,6 +5,7 @@ import 'core/bindings/initial_binding.dart';
 import 'core/constants/app_constants.dart';
 import 'core/network/api_client.dart';
 import 'core/routes/app_pages.dart';
+import 'core/services/notification_service.dart';
 import 'core/theme/app_theme.dart';
 import 'feature/auth/services/auth_service.dart';
 
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ApiClient().init();
   await AuthService().initSession();
+  await NotificationService().init();
   runApp(const BankDashboardApp());
 }
 
