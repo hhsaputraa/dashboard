@@ -5,13 +5,21 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:dashboard/firebase_options.dart';
 import '../theme/app_theme.dart';
 
 /// Top-level background message handler for FCM.
 /// Must be top-level and decorated with @pragma('vm:entry-point')
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  if (Firebase.apps.isEmpty) {
+    final options = DefaultFirebaseOptions.currentPlatform;
+    if (options != null) {
+      await Firebase.initializeApp(options: options);
+    } else {
+      await Firebase.initializeApp();
+    }
+  }
   debugPrint('Handling a background message: ${message.messageId}');
 }
 
@@ -59,7 +67,14 @@ class NotificationService extends GetxService {
   Future<NotificationService> init() async {
     try {
       // 1. Initialize Firebase Core
-      await Firebase.initializeApp();
+      if (Firebase.apps.isEmpty) {
+        final options = DefaultFirebaseOptions.currentPlatform;
+        if (options != null) {
+          await Firebase.initializeApp(options: options);
+        } else {
+          await Firebase.initializeApp();
+        }
+      }
 
       // 2. Set background messaging handler
       FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -166,6 +181,15 @@ class NotificationService extends GetxService {
     tokenError.value = null;
 
     try {
+      if (Firebase.apps.isEmpty) {
+        final options = DefaultFirebaseOptions.currentPlatform;
+        if (options != null) {
+          await Firebase.initializeApp(options: options);
+        } else {
+          await Firebase.initializeApp();
+        }
+      }
+
       // On iOS, Firebase requires an APNs token from Apple before generating an FCM token.
       // APNs token generation is asynchronous and may take several seconds.
       if (defaultTargetPlatform == TargetPlatform.iOS) {
