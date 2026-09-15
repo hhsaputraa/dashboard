@@ -6,6 +6,10 @@
 -keep class io.flutter.**  { *; }
 -keep class io.flutter.plugins.**  { *; }
 
+# Flutter deferred components (Google Play Core is optional when deferred components are not used)
+-dontwarn com.google.android.play.core.**
+-dontwarn io.flutter.embedding.engine.deferredcomponents.**
+
 # Keep native methods and JNI callbacks
 -keepclasseswithmembernames class * {
     native <methods>;
