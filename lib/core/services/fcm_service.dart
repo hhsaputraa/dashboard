@@ -31,6 +31,13 @@ class FcmService {
         name: 'FCM',
       );
 
+      // Aktifkan banner pop-up saat aplikasi sedang dibuka (Foreground) di iOS
+      await _fcm.setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+
       // 2. Pada iOS, cek ketersediaan APNs token terlebih dahulu dengan timeout.
       // Sideloaded IPA tanpa sertifikat Apple Push Notifications tidak akan menerima APNs token.
       if (defaultTargetPlatform == TargetPlatform.iOS) {

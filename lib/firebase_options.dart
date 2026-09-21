@@ -66,10 +66,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDYu0V37xdQZiLwzr-u9f819pA6duUdtkY',
-    appId: '1:832959215934:ios:f00327179f85ee69f1146f',
+    appId: '1:832959215934:ios:930320f66faa1d49f1146f',
     messagingSenderId: '832959215934',
     projectId: 'dashboard-notif',
     storageBucket: 'dashboard-notif.firebasestorage.app',
-    iosBundleId: 'com.example.dashboard',
+    iosBundleId: 'com.bprsupra.dashboard',
   );
 }
