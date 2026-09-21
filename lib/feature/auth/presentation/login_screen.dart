@@ -367,13 +367,10 @@ class _LoginFooter extends StatelessWidget {
   }
 }
 
-/// Widget background gambar terisolasi dengan RepaintBoundary & Overlay tipis.
+/// Widget background berkinerja tinggi: 100% offline native decoration
+/// tanpa network request blocking, terisolasi dengan RepaintBoundary.
 class _LoginBackground extends StatelessWidget {
   const _LoginBackground();
-
-  // URL gambar latar berformat WebP ringan & optimal dari Unsplash (Arsitektur / Gedung)
-  static const String _imageUrl =
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1080&q=80';
 
   @override
   Widget build(BuildContext context) {
@@ -381,24 +378,61 @@ class _LoginBackground extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // Gambar background online dengan animasi fade-in halus
-          Image.network(
-            _imageUrl,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) =>
-                const SizedBox.expand(),
-            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-              if (wasSynchronouslyLoaded) return child;
-              return AnimatedOpacity(
-                opacity: frame == null ? 0 : 1,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOut,
-                child: child,
-              );
-            },
+          // Base background: gradien halus slate-white modern
+          const DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.white,
+                  Color(0xFFF8FAFC),
+                  Color(0xFFF1F5F9),
+                ],
+                stops: [0.0, 0.5, 1.0],
+              ),
+            ),
           ),
-          // Overlay warna putih murni dengan transparansi 92% agar teks tetap kontras & sangat jelas
-          Container(color: Colors.white.withValues(alpha: 0.92)),
+          // Accent glow atas kanan: Brand Primary Color
+          Positioned(
+            top: -120,
+            right: -100,
+            child: IgnorePointer(
+              child: Container(
+                width: 320,
+                height: 320,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      AppTheme.primaryColor.withValues(alpha: 0.08),
+                      AppTheme.primaryColor.withValues(alpha: 0.0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Accent glow bawah kiri: Deep Blue Accent
+          Positioned(
+            bottom: -100,
+            left: -80,
+            child: IgnorePointer(
+              child: Container(
+                width: 280,
+                height: 280,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFF2563EB).withValues(alpha: 0.05),
+                      const Color(0xFF2563EB).withValues(alpha: 0.0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

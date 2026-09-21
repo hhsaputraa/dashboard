@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "832959215934",
+    "project_id": "dashboard-notif",
+    "storage_bucket": "dashboard-notif.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832959215934:android:21929a237ae73693f1146f",
+        "android_client_info": {
+          "package_name": "com.example.dashboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZxLTWGU7PWyuXQaChm-bTqB_5uFrPYII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

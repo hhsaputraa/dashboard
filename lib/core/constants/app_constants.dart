@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class AppConstants {
   AppConstants._();
 
@@ -18,7 +16,7 @@ class AppConstants {
 
   static const String aesKey = String.fromEnvironment(
     'AES_KEY',
-    defaultValue: kDebugMode ? 'f17ba46472fa64e40ca496d1b4c91e8f' : '',
+    defaultValue: '',
   );
   static const String keyAuthToken = 'auth_token';
   static const String keyUserData = 'user_data';

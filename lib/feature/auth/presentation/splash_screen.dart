@@ -42,8 +42,9 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> _checkSessionAndNavigate() async {
     // Beri jeda minimal 800ms agar animasi splash terlihat mulus tanpa membuat startup terasa berat
     final minDelay = Future.delayed(const Duration(milliseconds: 800));
-    final authService =
-        Get.isRegistered<AuthService>() ? Get.find<AuthService>() : AuthService();
+    final authService = Get.isRegistered<AuthService>()
+        ? Get.find<AuthService>()
+        : AuthService();
     // Hanya inisialisasi jika belum pernah diinisialisasi di main()
     final initAuth = authService.rxIsCheckingAuth.value
         ? authService.initSession()
@@ -61,7 +62,8 @@ class _SplashScreenState extends State<SplashScreen>
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           transitionDuration: const Duration(milliseconds: 300),
-          pageBuilder: (context, animation, secondaryAnimation) => isAuthenticated
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              isAuthenticated
               ? const MainNavigationScreen()
               : const LoginScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -141,7 +143,7 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                   const SizedBox(height: 12),
                   const Text(
-                    'v1.0.0',
+                    'v1.0.2',
                     style: TextStyle(
                       fontSize: 11,
                       color: Color(0xFF94A3B8),

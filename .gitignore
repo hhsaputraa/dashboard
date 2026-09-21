@@ -46,3 +46,8 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Environment variables - NEVER commit these files
+.env.json
+.env
+*.env
