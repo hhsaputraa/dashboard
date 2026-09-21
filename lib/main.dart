@@ -27,14 +27,18 @@ void main() async {
     return true;
   };
 
-  // 3. Daftarkan background handler & inisialisasi FCM
+  // 3. Daftarkan background handler FCM
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-  await FcmService.instance.init();
 
   // 4. Inisialisasi service internal aplikasi
   await ApiClient().init();
   await AuthService().initSession();
+
+  // 5. Jalankan UI aplikasi TERLEBIH DAHULU agar layar langsung tampil (tidak blank hitam)
   runApp(const BankDashboardApp());
+
+  // 6. Inisialisasi FCM secara non-blocking di background setelah UI ter-render
+  FcmService.instance.init();
 }
 
 class BankDashboardApp extends StatelessWidget {
