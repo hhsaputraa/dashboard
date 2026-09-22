@@ -129,12 +129,14 @@ jobs:
               done
             fi
 
-            codesign --force --generate-entitlement-der \
+            codesign --force --deep --generate-entitlement-der \
               --sign "$SIGNING_IDENTITY" \
               --entitlements "$GITHUB_WORKSPACE/ios/Runner/Runner.entitlements" \
               --keychain "$KEYCHAIN_PATH" \
               Runner.app
 
+            echo "=== Verifying Code Signature ==="
+            codesign -dvvvv Runner.app
             echo "Codesign completed successfully!"
           else
             echo "Secrets not provided, packaging unsigned IPA."
