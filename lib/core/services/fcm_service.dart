@@ -21,7 +21,15 @@ class FcmService {
   final FirebaseMessaging _fcm = FirebaseMessaging.instance;
   String? currentToken;
 
-  Future<void> init() async {
+  final RxnString tokenRx = RxnString();
+  final RxnString apnsTokenRx = RxnString();
+  final RxnString apnsErrorRx = RxnString();
+  final RxBool isLoading = false.obs;
+  final RxString statusMessage = 'Belum terhubung'.obs;
+
+  Future<void> init({bool isManualRetry = false}) async {
+    isLoading.value = true;
+    statusMessage.value = 'Menghubungkan ke FCM & APNs...';
     try {
       // 1. Minta izin ke pengguna (Penting untuk Android 13+ & iOS)
       NotificationSettings settings = await _fcm.requestPermission(
@@ -56,12 +64,16 @@ class FcmService {
         }
 
         if (apnsToken != null) {
+          apnsTokenRx.value = apnsToken;
+          apnsErrorRx.value = null;
           developer.log('APNs Token: $apnsToken', name: 'FCM');
         } else {
           try {
             final prefs = await SharedPreferences.getInstance();
             final nativeToken = prefs.getString('apns_device_token');
             final nativeError = prefs.getString('apns_error');
+            apnsTokenRx.value = nativeToken;
+            apnsErrorRx.value = nativeError;
             developer.log(
               'getAPNSToken() null. Native Token: $nativeToken, Native Error: $nativeError',
               name: 'FCM',
@@ -75,15 +87,22 @@ class FcmService {
       String? token = await _fcm.getToken();
       developer.log('FCM Token: $token', name: 'FCM');
       currentToken = token;
+      tokenRx.value = token;
 
       if (token != null) {
-        _showTokenSnackbar(token);
+        statusMessage.value = 'Terhubung';
+        if (isManualRetry) {
+          Get.snackbar(
+            'FCM Berhasil Diperbarui',
+            'Token berhasil diambil ulang dari server.',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: const Color(0xFF0F172A),
+            colorText: Colors.white,
+            duration: const Duration(seconds: 2),
+          );
+        }
       } else {
-        _showStatusSnackbar(
-          title: 'FCM Token Kosong',
-          message: 'FCM Token belum didapat dari server.',
-          isError: true,
-        );
+        statusMessage.value = 'FCM Token belum didapat dari server.';
       }
 
       _setupListeners();
@@ -94,62 +113,29 @@ class FcmService {
         final prefs = await SharedPreferences.getInstance();
         final nativeError = prefs.getString('apns_error');
         if (nativeError != null && nativeError.isNotEmpty) {
+          apnsErrorRx.value = nativeError;
           detail += ' (iOS APNs: $nativeError)';
         }
       } catch (_) {}
 
-      _showStatusSnackbar(
-        title: 'FCM Error',
-        message: 'Gagal inisialisasi: $detail',
-        isError: true,
-      );
+      statusMessage.value = detail;
+      if (isManualRetry) {
+        Get.snackbar(
+          'Gagal Mengambil Token',
+          detail,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: const Color(0xFF991B1B),
+          colorText: Colors.white,
+          duration: const Duration(seconds: 4),
+        );
+      }
+    } finally {
+      isLoading.value = false;
     }
   }
 
-  void _showTokenSnackbar(String token) {
-    Future.delayed(const Duration(milliseconds: 600), () {
-      if (Get.context != null) {
-        Get.snackbar(
-          'FCM Berhasil Terhubung',
-          'Token: ${token.substring(0, token.length > 20 ? 20 : token.length)}... (Ketuk SALIN untuk kirim test)',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: const Color(0xFF0F172A),
-          colorText: Colors.white,
-          duration: const Duration(seconds: 15),
-          mainButton: TextButton(
-            onPressed: () {
-              Clipboard.setData(ClipboardData(text: token));
-              Get.rawSnackbar(
-                message: 'FCM Token berhasil disalin ke clipboard!',
-                duration: const Duration(seconds: 2),
-              );
-            },
-            child: const Text(
-              'SALIN TOKEN',
-              style: TextStyle(
-                color: Color(0xFF38BDF8),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        );
-      }
-    });
-  }
-
-  void _showStatusSnackbar({required String title, required String message, bool isError = false}) {
-    Future.delayed(const Duration(milliseconds: 600), () {
-      if (Get.context != null) {
-        Get.snackbar(
-          title,
-          message,
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: isError ? const Color(0xFF991B1B) : const Color(0xFF0F172A),
-          colorText: Colors.white,
-          duration: const Duration(seconds: 8),
-        );
-      }
-    });
+  Future<void> retryRegistration() async {
+    await init(isManualRetry: true);
   }
 
   void _setupListeners() {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import 'package:dashboard/core/services/fcm_service.dart';
 import 'package:dashboard/feature/auth/models/user_model.dart';
 import 'package:dashboard/feature/profile/controllers/profile_controller.dart';
 
@@ -351,9 +353,14 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 28),
+          const SizedBox(height: 20),
 
-          // 3. Tombol Logout (Clean & Elegant Action via Controller)
+          // 3. Kartu Status Push Notifikasi & FCM Token
+          _buildFcmTokenCard(context),
+
+          const SizedBox(height: 24),
+
+          // 4. Tombol Logout (Clean & Elegant Action via Controller)
           SizedBox(
             width: double.infinity,
             height: 48,
@@ -387,6 +394,238 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildFcmTokenCard(BuildContext context) {
+    final fcm = FcmService.instance;
+
+    return Obx(() {
+      final token = fcm.tokenRx.value;
+      final apnsError = fcm.apnsErrorRx.value;
+      final isLoading = fcm.isLoading.value;
+      final isConnected = token != null && token.isNotEmpty;
+
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isConnected ? const Color(0xFFE2E8F0) : const Color(0xFFFCA5A5),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF0F172A).withValues(alpha: 0.03),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header Baris Notifikasi
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: isConnected
+                        ? const Color(0xFFECFDF5)
+                        : (isLoading ? const Color(0xFFEFF6FF) : const Color(0xFFFEF2F2)),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(
+                    isConnected
+                        ? Icons.notifications_active_rounded
+                        : (isLoading ? Icons.sync_rounded : Icons.notifications_off_rounded),
+                    size: 20,
+                    color: isConnected
+                        ? const Color(0xFF059669)
+                        : (isLoading ? const Color(0xFF2563EB) : const Color(0xFFDC2626)),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Push Notification (FCM)',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF0F172A),
+                        ),
+                      ),
+                      Text(
+                        isConnected
+                            ? 'Siap menerima notifikasi'
+                            : (isLoading ? 'Menghubungkan ke APNs / FCM...' : 'Belum terhubung'),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: isConnected ? const Color(0xFF059669) : const Color(0xFF64748B),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Status Chip
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: isConnected
+                        ? const Color(0xFFD1FAE5)
+                        : (isLoading ? const Color(0xFFDBEAFE) : const Color(0xFFFEE2E2)),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    isConnected ? 'Aktif' : (isLoading ? 'Memuat' : 'Offline'),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      color: isConnected
+                          ? const Color(0xFF047857)
+                          : (isLoading ? const Color(0xFF1D4ED8) : const Color(0xFFB91C1C)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            if (apnsError != null && apnsError.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFEF2F2),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: const Color(0xFFFECACA)),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(Icons.error_outline_rounded, size: 16, color: Color(0xFFDC2626)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'iOS APNs: $apnsError',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Color(0xFF991B1B),
+                          height: 1.3,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+
+            const SizedBox(height: 14),
+
+            // Token Container
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFF8FAFC),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: const Color(0xFFE2E8F0)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'TOKEN PERANGKAT (FCM TOKEN):',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF64748B),
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  SelectableText(
+                    token ?? 'Token belum tersedia. Tekan tombol Ambil Ulang di bawah.',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'monospace',
+                      color: isConnected ? const Color(0xFF1E293B) : const Color(0xFF94A3B8),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 14),
+
+            // Tombol Aksi: Salin & Muat Ulang
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    onPressed: isConnected
+                        ? () {
+                            Clipboard.setData(ClipboardData(text: token));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('FCM Token berhasil disalin ke clipboard!'),
+                                duration: Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          }
+                        : null,
+                    icon: const Icon(Icons.copy_rounded, size: 16),
+                    label: const Text(
+                      'Salin Token',
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF0F172A),
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                OutlinedButton.icon(
+                  onPressed: isLoading ? null : () => fcm.retryRegistration(),
+                  icon: isLoading
+                      ? const SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.refresh_rounded, size: 16),
+                  label: Text(
+                    isLoading ? 'Memuat...' : 'Ambil Ulang',
+                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: const Color(0xFF2563EB),
+                    side: const BorderSide(color: Color(0xFFBFDBFE)),
+                    backgroundColor: const Color(0xFFEFF6FF),
+                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _buildInfoRow({
