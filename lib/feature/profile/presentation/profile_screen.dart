@@ -401,6 +401,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Obx(() {
       final token = fcm.tokenRx.value;
+      final apnsToken = fcm.apnsTokenRx.value;
       final apnsError = fcm.apnsErrorRx.value;
       final isLoading = fcm.isLoading.value;
       final isConnected = token != null && token.isNotEmpty;
@@ -526,7 +527,79 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 14),
 
-            // Token Container
+            if (apnsToken != null && apnsToken.isNotEmpty) ...[
+              // APNs Token Container (Apple Native)
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF0FDF4),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: const Color(0xFFBBF7D0)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'TOKEN APNS (APPLE NATIVE 64-HEX):',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF166534),
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Clipboard.setData(ClipboardData(text: apnsToken));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('APNs Token berhasil disalin ke clipboard!'),
+                                duration: Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF15803D),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: const Row(
+                              children: [
+                                Icon(Icons.copy_rounded, size: 12, color: Colors.white),
+                                SizedBox(width: 4),
+                                Text(
+                                  'Salin APNs',
+                                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    SelectableText(
+                      apnsToken,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'monospace',
+                        color: Color(0xFF14532D),
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+            ],
+
+            // Token Container (FCM)
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
@@ -538,14 +611,49 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'TOKEN PERANGKAT (FCM TOKEN):',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF64748B),
-                      letterSpacing: 0.5,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'TOKEN FCM (FIREBASE):',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF64748B),
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      if (token != null && token.isNotEmpty)
+                        InkWell(
+                          onTap: () {
+                            Clipboard.setData(ClipboardData(text: token));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('FCM Token berhasil disalin ke clipboard!'),
+                                duration: Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF0F172A),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: const Row(
+                              children: [
+                                Icon(Icons.copy_rounded, size: 12, color: Colors.white),
+                                SizedBox(width: 4),
+                                Text(
+                                  'Salin FCM',
+                                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   const SizedBox(height: 6),
                   SelectableText(
@@ -563,64 +671,32 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 14),
 
-            // Tombol Aksi: Salin & Muat Ulang
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton.icon(
-                    onPressed: isConnected
-                        ? () {
-                            Clipboard.setData(ClipboardData(text: token));
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('FCM Token berhasil disalin ke clipboard!'),
-                                duration: Duration(seconds: 2),
-                                behavior: SnackBarBehavior.floating,
-                              ),
-                            );
-                          }
-                        : null,
-                    icon: const Icon(Icons.copy_rounded, size: 16),
-                    label: const Text(
-                      'Salin Token',
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0F172A),
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
+            // Tombol Muat Ulang
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: isLoading ? null : () => fcm.retryRegistration(),
+                icon: isLoading
+                    ? const SizedBox(
+                        width: 14,
+                        height: 14,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.refresh_rounded, size: 16),
+                label: Text(
+                  isLoading ? 'Memuat Token...' : 'Ambil Ulang Semua Token',
+                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                ),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: const Color(0xFF2563EB),
+                  side: const BorderSide(color: Color(0xFFBFDBFE)),
+                  backgroundColor: const Color(0xFFEFF6FF),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                const SizedBox(width: 10),
-                OutlinedButton.icon(
-                  onPressed: isLoading ? null : () => fcm.retryRegistration(),
-                  icon: isLoading
-                      ? const SizedBox(
-                          width: 14,
-                          height: 14,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(Icons.refresh_rounded, size: 16),
-                  label: Text(
-                    isLoading ? 'Memuat...' : 'Ambil Ulang',
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF2563EB),
-                    side: const BorderSide(color: Color(0xFFBFDBFE)),
-                    backgroundColor: const Color(0xFFEFF6FF),
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),
