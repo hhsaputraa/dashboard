@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -42,11 +43,10 @@ class FcmService {
         sound: true,
       );
 
-      // 2. Pada iOS, tunggu APNs token dengan polling loop (hingga 25 detik)
-      // Apple butuh waktu beberapa detik untuk koneksi ke APNs server
+      // 2. Pada iOS, tunggu APNs token dengan polling loop (hingga 15 detik)
       if (defaultTargetPlatform == TargetPlatform.iOS) {
         String? apnsToken;
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 15; i++) {
           apnsToken = await _fcm.getAPNSToken();
           if (apnsToken != null) {
             developer.log('APNs Token didapat pada detik ke-$i: $apnsToken', name: 'FCM');
@@ -55,18 +55,19 @@ class FcmService {
           await Future.delayed(const Duration(seconds: 1));
         }
 
-        if (apnsToken == null) {
-          developer.log(
-            'APNs token belum siap setelah 25 detik. Kemungkinan profil provisioning belum memuat entitlement push notification.',
-            name: 'FCM',
-          );
-          _showStatusSnackbar(
-            title: 'APNs Belum Siap',
-            message: 'APNs token belum diberikan oleh iOS. Pastikan sertifikat memuat Push Notifications.',
-            isError: true,
-          );
-          _setupListeners();
-          return;
+        if (apnsToken != null) {
+          developer.log('APNs Token: $apnsToken', name: 'FCM');
+        } else {
+          try {
+            final prefs = await SharedPreferences.getInstance();
+            final nativeToken = prefs.getString('apns_device_token');
+            final nativeError = prefs.getString('apns_error');
+            developer.log(
+              'getAPNSToken() null. Native Token: $nativeToken, Native Error: $nativeError',
+              name: 'FCM',
+            );
+          } catch (_) {}
+          developer.log('APNs token belum siap dari getAPNSToken, mencoba _fcm.getToken()...', name: 'FCM');
         }
       }
 
@@ -77,14 +78,29 @@ class FcmService {
 
       if (token != null) {
         _showTokenSnackbar(token);
+      } else {
+        _showStatusSnackbar(
+          title: 'FCM Token Kosong',
+          message: 'FCM Token belum didapat dari server.',
+          isError: true,
+        );
       }
 
       _setupListeners();
     } catch (e, st) {
       developer.log('Error saat inisialisasi FCM: $e', name: 'FCM', error: e, stackTrace: st);
+      String detail = e.toString();
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        final nativeError = prefs.getString('apns_error');
+        if (nativeError != null && nativeError.isNotEmpty) {
+          detail += ' (iOS APNs: $nativeError)';
+        }
+      } catch (_) {}
+
       _showStatusSnackbar(
         title: 'FCM Error',
-        message: 'Gagal inisialisasi: $e',
+        message: 'Gagal inisialisasi: $detail',
         isError: true,
       );
     }

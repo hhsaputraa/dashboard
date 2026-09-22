@@ -95,6 +95,7 @@ jobs:
       - name: Package into .IPA (Payload structure)
         run: |
           cd build/ios/iphoneos
+          cp -f "$GITHUB_WORKSPACE/ios/Runner/GoogleService-Info.plist" Runner.app/GoogleService-Info.plist || true
           mkdir Payload
           cp -r Runner.app Payload/
           zip -r BPR-SUPRA-iOS.ipa Payload/
