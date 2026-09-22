@@ -2,7 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>application-identifier</key>
+	<string>498FWMAZW3.com.bprsupra.dashboard</string>
 	<key>aps-environment</key>
 	<string>development</string>
+	<key>com.apple.developer.team-identifier</key>
+	<string>498FWMAZW3</string>
+	<key>get-task-allow</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>498FWMAZW3.*</string>
+		<string>com.apple.token</string>
+	</array>
 </dict>
 </plist>

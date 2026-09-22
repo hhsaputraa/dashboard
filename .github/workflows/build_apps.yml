@@ -121,22 +121,37 @@ jobs:
             echo "$PROVISION_BASE64" | base64 --decode > ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision
             cp ~/Library/MobileDevice/Provisioning\ Profiles/profile.mobileprovision Runner.app/embedded.mobileprovision
 
+            echo "=== Extracting Entitlements from Provisioning Profile ==="
+            security cms -D -i Runner.app/embedded.mobileprovision > provision.plist || true
+            if [ -f "provision.plist" ]; then
+              /usr/libexec/PlistBuddy -x -c 'Print :Entitlements' provision.plist > entitlements.plist || true
+            fi
+
+            ENTITLEMENTS_FILE="entitlements.plist"
+            if [ ! -s "$ENTITLEMENTS_FILE" ]; then
+              echo "Using repository Runner.entitlements fallback"
+              ENTITLEMENTS_FILE="$GITHUB_WORKSPACE/ios/Runner/Runner.entitlements"
+            fi
+            echo "Using Entitlements:"
+            cat "$ENTITLEMENTS_FILE"
+
             if [ -d "Runner.app/Frameworks" ]; then
               for f in Runner.app/Frameworks/*; do
                 if [ -e "$f" ]; then
-                  codesign --force --sign "$SIGNING_IDENTITY" --keychain "$KEYCHAIN_PATH" "$f" || true
+                  codesign --force --sign "$SIGNING_IDENTITY" --keychain "$KEYCHAIN_PATH" --generate-entitlement-der "$f" || true
                 fi
               done
             fi
 
-            codesign --force --deep --generate-entitlement-der \
+            codesign --force --generate-entitlement-der \
               --sign "$SIGNING_IDENTITY" \
-              --entitlements "$GITHUB_WORKSPACE/ios/Runner/Runner.entitlements" \
+              --entitlements "$ENTITLEMENTS_FILE" \
               --keychain "$KEYCHAIN_PATH" \
               Runner.app
 
             echo "=== Verifying Code Signature ==="
             codesign -dvvvv Runner.app
+            codesign --verify --deep --strict --verbose=2 Runner.app
             echo "Codesign completed successfully!"
           else
             echo "Secrets not provided, packaging unsigned IPA."
