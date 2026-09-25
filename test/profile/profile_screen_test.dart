@@ -99,7 +99,9 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Tap logout button
+      // Scroll and tap logout button
+      await tester.ensureVisible(find.text('Keluar dari Akun'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Keluar dari Akun'));
       await tester.pumpAndSettle();
 
@@ -188,7 +190,9 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Tap logout button
+      // Scroll and tap logout button
+      await tester.ensureVisible(find.text('Keluar dari Akun'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Keluar dari Akun'));
       await tester.pumpAndSettle();
 

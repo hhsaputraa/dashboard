@@ -153,4 +153,27 @@ class ApiClient extends GetxService {
         )
         .timeout(timeout);
   }
+
+  /// Send standard DELETE request
+  Future<http.Response> delete(
+    String endpoint, {
+    Map<String, dynamic>? body,
+    String? token,
+    Duration timeout = const Duration(seconds: 15),
+  }) async {
+    final uri = Uri.parse('$baseUrl$endpoint');
+    final headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
+    };
+
+    return await _httpClient
+        .delete(
+          uri,
+          headers: headers,
+          body: body != null ? jsonEncode(body) : null,
+        )
+        .timeout(timeout);
+  }
 }

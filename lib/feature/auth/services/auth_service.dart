@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:dashboard/core/constants/app_constants.dart';
 import 'package:dashboard/core/network/api_client.dart';
 import 'package:dashboard/core/security/aes_encryption.dart';
+import 'package:dashboard/core/services/native_push_service.dart';
 import '../models/auth_result.dart';
 import '../models/user_model.dart';
 
@@ -123,6 +124,9 @@ class AuthService extends GetxService {
           // Sinkronkan profil lengkap di background agar tidak menghalangi navigasi UI (1 RTT vs 2 RTT)
           unawaited(fetchProfile());
 
+          // Sinkronkan token perangkat native ke database Oracle secara seamless di background
+          unawaited(NativePushService.instance.syncDeviceToken(authToken: token));
+
           return AuthResult.success(
             message: 'Login berhasil.',
             user: rxUser.value,
@@ -239,6 +243,7 @@ class AuthService extends GetxService {
     final activeToken = token;
     if (activeToken != null && activeToken.isNotEmpty) {
       try {
+        await NativePushService.instance.unregisterDeviceToken(authToken: activeToken);
         await _apiClient.post('/api/auth/logout', token: activeToken);
       } catch (_) {}
     }

@@ -32,7 +32,7 @@ void main() {
 
     // Verify loader and version
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    expect(find.text('v1.0.2'), findsOneWidget);
+    expect(find.text('v1.0.3'), findsOneWidget);
 
     // Advance clock past the 800ms delay to resolve timer and navigate away
     await tester.pump(const Duration(milliseconds: 1000));

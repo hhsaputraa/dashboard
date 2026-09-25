@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'package:dashboard/core/services/fcm_service.dart';
+import 'package:dashboard/core/services/native_push_service.dart';
 import 'package:dashboard/feature/auth/models/user_model.dart';
 import 'package:dashboard/feature/profile/controllers/profile_controller.dart';
 
@@ -355,8 +355,8 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // 3. Kartu Status Push Notifikasi & FCM Token
-          _buildFcmTokenCard(context),
+          // 3. Kartu Status Push Notifikasi & APNs Token (Self-Hosted Gorush)
+          _buildNativePushCard(context),
 
           const SizedBox(height: 24),
 
@@ -396,14 +396,13 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFcmTokenCard(BuildContext context) {
-    final fcm = FcmService.instance;
+  Widget _buildNativePushCard(BuildContext context) {
+    final nativePush = NativePushService.instance;
 
     return Obx(() {
-      final token = fcm.tokenRx.value;
-      final apnsToken = fcm.apnsTokenRx.value;
-      final apnsError = fcm.apnsErrorRx.value;
-      final isLoading = fcm.isLoading.value;
+      final token = nativePush.deviceTokenRx.value;
+      final error = nativePush.errorRx.value;
+      final isLoading = nativePush.isLoading.value;
       final isConnected = token != null && token.isNotEmpty;
 
       return Container(
@@ -453,7 +452,7 @@ class ProfileScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Push Notification (FCM)',
+                        'Push Notification (Gorush Self-Host)',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -462,8 +461,8 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       Text(
                         isConnected
-                            ? 'Siap menerima notifikasi'
-                            : (isLoading ? 'Menghubungkan ke APNs / FCM...' : 'Belum terhubung'),
+                            ? 'Siap menerima notifikasi native'
+                            : (isLoading ? 'Mendeteksi device token...' : 'Belum terhubung'),
                         style: TextStyle(
                           fontSize: 12,
                           color: isConnected ? const Color(0xFF059669) : const Color(0xFF64748B),
@@ -495,7 +494,7 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
 
-            if (apnsError != null && apnsError.isNotEmpty) ...[
+            if (error != null && error.isNotEmpty) ...[
               const SizedBox(height: 12),
               Container(
                 width: double.infinity,
@@ -512,7 +511,7 @@ class ProfileScreen extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'iOS APNs: $apnsError',
+                        'iOS APNs Info: $error',
                         style: const TextStyle(
                           fontSize: 11,
                           color: Color(0xFF991B1B),
@@ -527,37 +526,39 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 14),
 
-            if (apnsToken != null && apnsToken.isNotEmpty) ...[
-              // APNs Token Container (Apple Native)
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF0FDF4),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: const Color(0xFFBBF7D0)),
+            // Token Container (Native APNs)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: isConnected ? const Color(0xFFF0FDF4) : const Color(0xFFF8FAFC),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: isConnected ? const Color(0xFFBBF7D0) : const Color(0xFFE2E8F0),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'TOKEN APNS (APPLE NATIVE 64-HEX):',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF166534),
-                            letterSpacing: 0.5,
-                          ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'DEVICE TOKEN NATIVE (APNS 64-HEX):',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF166534),
+                          letterSpacing: 0.5,
                         ),
+                      ),
+                      if (isConnected)
                         InkWell(
                           onTap: () {
-                            Clipboard.setData(ClipboardData(text: apnsToken));
+                            Clipboard.setData(ClipboardData(text: token));
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('APNs Token berhasil disalin ke clipboard!'),
+                                content: Text('Device Token berhasil disalin ke clipboard!'),
                                 duration: Duration(seconds: 2),
                                 behavior: SnackBarBehavior.floating,
                               ),
@@ -574,79 +575,7 @@ class ProfileScreen extends StatelessWidget {
                                 Icon(Icons.copy_rounded, size: 12, color: Colors.white),
                                 SizedBox(width: 4),
                                 Text(
-                                  'Salin APNs',
-                                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 6),
-                    SelectableText(
-                      apnsToken,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontFamily: 'monospace',
-                        color: Color(0xFF14532D),
-                        height: 1.4,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-            ],
-
-            // Token Container (FCM)
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFC),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'TOKEN FCM (FIREBASE):',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF64748B),
-                          letterSpacing: 0.5,
-                        ),
-                      ),
-                      if (token != null && token.isNotEmpty)
-                        InkWell(
-                          onTap: () {
-                            Clipboard.setData(ClipboardData(text: token));
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('FCM Token berhasil disalin ke clipboard!'),
-                                duration: Duration(seconds: 2),
-                                behavior: SnackBarBehavior.floating,
-                              ),
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF0F172A),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: const Row(
-                              children: [
-                                Icon(Icons.copy_rounded, size: 12, color: Colors.white),
-                                SizedBox(width: 4),
-                                Text(
-                                  'Salin FCM',
+                                  'Salin Token',
                                   style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.white),
                                 ),
                               ],
@@ -657,11 +586,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   SelectableText(
-                    token ?? 'Token belum tersedia. Tekan tombol Ambil Ulang di bawah.',
+                    token ?? 'Token perangkat belum terdeteksi dari OS.',
                     style: TextStyle(
                       fontSize: 12,
                       fontFamily: 'monospace',
-                      color: isConnected ? const Color(0xFF1E293B) : const Color(0xFF94A3B8),
+                      color: isConnected ? const Color(0xFF14532D) : const Color(0xFF94A3B8),
                       height: 1.4,
                     ),
                   ),
@@ -671,11 +600,16 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 14),
 
-            // Tombol Muat Ulang
+            // Tombol Muat Ulang & Sinkronisasi
             SizedBox(
               width: double.infinity,
               child: OutlinedButton.icon(
-                onPressed: isLoading ? null : () => fcm.retryRegistration(),
+                onPressed: isLoading
+                    ? null
+                    : () async {
+                        await nativePush.init(isManualRetry: true);
+                        await nativePush.syncDeviceToken();
+                      },
                 icon: isLoading
                     ? const SizedBox(
                         width: 14,
@@ -684,7 +618,7 @@ class ProfileScreen extends StatelessWidget {
                       )
                     : const Icon(Icons.refresh_rounded, size: 16),
                 label: Text(
-                  isLoading ? 'Memuat Token...' : 'Ambil Ulang Semua Token',
+                  isLoading ? 'Memuat Token...' : 'Ambil Ulang & Sinkronkan ke Database',
                   style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                 ),
                 style: OutlinedButton.styleFrom(
