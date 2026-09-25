@@ -1,8 +1,12 @@
 - menjalankan dev mode di browser dengan port tertentu
-flutter run -d web-server --web-port=8080
-- test nampilin lewat browser dan bisa diakses lewat internet
-flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0
+flutter run -d web-server --web-port=8080 --dart-define-from-file=.env.json
+
+- test nampilin lewat browser dan bisa diakses lewat internet (IP LAN / WiFi)
+flutter run -d web-server --web-port=8080 --web-hostname=0.0.0.0 --dart-define-from-file=.env.json
+
+- cloudflare tunnel
 cloudflared tunnel --protocol http2 --url http://127.0.0.1:8080
 cloudflared tunnel --url http://localhost:8097
+
 
 

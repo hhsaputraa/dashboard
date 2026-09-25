@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -33,28 +32,9 @@ class AuthService extends GetxService {
   UserModel? get user => rxUser.value;
   String? get token => rxToken.value;
 
-  /// ValueNotifier bridge untuk kompatibilitas mundur dengan widget existing
-  @Deprecated('Gunakan rxUser atau getter user di AuthService')
-  final ValueNotifier<UserModel?> currentUser = ValueNotifier<UserModel?>(null);
-  @Deprecated('Gunakan rxToken atau getter token di AuthService')
-  final ValueNotifier<String?> currentToken = ValueNotifier<String?>(null);
-  @Deprecated('Gunakan rxIsCheckingAuth di AuthService')
-  final ValueNotifier<bool> isCheckingAuth = ValueNotifier<bool>(true);
-
-  void _setUser(UserModel? u) {
-    rxUser.value = u;
-    currentUser.value = u;
-  }
-
-  void _setToken(String? t) {
-    rxToken.value = t;
-    currentToken.value = t;
-  }
-
-  void _setCheckingAuth(bool checking) {
-    rxIsCheckingAuth.value = checking;
-    isCheckingAuth.value = checking;
-  }
+  void _setUser(UserModel? u) => rxUser.value = u;
+  void _setToken(String? t) => rxToken.value = t;
+  void _setCheckingAuth(bool checking) => rxIsCheckingAuth.value = checking;
 
   /// Status apakah user sedang login
   bool get isAuthenticated => rxToken.value != null && rxToken.value!.isNotEmpty;
@@ -145,7 +125,7 @@ class AuthService extends GetxService {
 
           return AuthResult.success(
             message: 'Login berhasil.',
-            user: currentUser.value,
+            user: rxUser.value,
           );
         }
       }

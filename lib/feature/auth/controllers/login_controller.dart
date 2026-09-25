@@ -14,8 +14,7 @@ class LoginController extends GetxController {
   final RxBool isLoading = false.obs;
   final RxnString errorMessage = RxnString();
 
-  AuthService get _authService =>
-      Get.isRegistered<AuthService>() ? Get.find<AuthService>() : AuthService();
+  AuthService get _authService => AuthService.to;
 
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;

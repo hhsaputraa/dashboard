@@ -1200,8 +1200,8 @@
     "semantic_hash": ""
   },
   "lib/core/services/fcm_service.dart": {
-    "mtime": 1790127422.8104548,
-    "ast_hash": "395978a5b27d5ac225ac0fe996a09a82",
+    "mtime": 1790127297.265734,
+    "ast_hash": "81f0687d4becf875265ffa5df30a1c7a",
     "semantic_hash": ""
   },
   "lib/firebase_options.dart": {
@@ -1215,8 +1215,8 @@
     "semantic_hash": ""
   },
   "plans/fcm_service_improvements_spec.md": {
-    "mtime": 1790127402.9191964,
-    "ast_hash": "36ba173fe14adfaf2c27e75707506172",
+    "mtime": 1790127274.8744788,
+    "ast_hash": "eaf4934e4d1c292941fd40a5543b92cc",
     "semantic_hash": ""
   }
 }

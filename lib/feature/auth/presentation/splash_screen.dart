@@ -56,6 +56,8 @@ class _SplashScreenState extends State<SplashScreen>
 
     final isAuthenticated = authService.isAuthenticated;
 
+    // Di aplikasi nyata (GetMaterialApp), navigasi menggunakan rute GetX.
+    // Percabangan else adalah fallback aman saat widget diuji dalam isolated test (MaterialApp polos tanpa Get routes).
     if (Get.routeTree.routes.isNotEmpty) {
       Get.offNamed(isAuthenticated ? AppRoutes.main : AppRoutes.login);
     } else {
@@ -143,7 +145,7 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                   const SizedBox(height: 12),
                   const Text(
-                    'v1.0.2',
+                    'v1.0.3',
                     style: TextStyle(
                       fontSize: 11,
                       color: Color(0xFF94A3B8),

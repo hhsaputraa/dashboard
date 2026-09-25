@@ -1,3 +1,5 @@
+import 'package:dashboard/core/constants/app_constants.dart';
+
 class UserModel {
   final int id;
   final String username;
@@ -25,7 +27,8 @@ class UserModel {
       username: json['username']?.toString() ?? '',
       fullName: json['full_name']?.toString() ?? '',
       email: json['email']?.toString() ?? '',
-      isAdmin: json['is_admin'] == true || json['is_admin'] == 7,
+      isAdmin: json['is_admin'] == true ||
+          json['is_admin'] == AppConstants.roleAdminNumericFlag,
       isActive: json['is_active'] == true || json['is_active'] == 1,
       lastLoginAt: json['last_login_at']?.toString(),
     );

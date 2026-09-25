@@ -32,14 +32,14 @@ void main() {
     expect(AuthService.to, same(authService));
   });
 
-  test('AuthService reactive properties and backwards-compatible ValueNotifiers sync', () {
+  test('AuthService initializes with clean reactive properties', () {
     InitialBinding().dependencies();
     final auth = AuthService.to;
 
     expect(auth.isAuthenticated, isFalse);
     expect(auth.rxToken.value, isNull);
-    expect(auth.currentToken.value, isNull);
+    expect(auth.token, isNull);
     expect(auth.rxUser.value, isNull);
-    expect(auth.currentUser.value, isNull);
+    expect(auth.user, isNull);
   });
 }

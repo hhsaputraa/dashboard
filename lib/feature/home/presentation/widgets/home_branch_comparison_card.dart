@@ -445,19 +445,6 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
                   Expanded(
                     child: Row(
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF2563EB)
-                                .withValues(alpha: 0.1),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.insights_rounded,
-                            size: 16,
-                            color: Color(0xFF2563EB),
-                          ),
-                        ),
                         const SizedBox(width: 8),
                         const Expanded(
                           child: Text(
@@ -837,4 +824,3 @@ class _HomeBranchComparisonCardState extends State<HomeBranchComparisonCard> {
     );
   }
 }
-

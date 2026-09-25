@@ -7,7 +7,7 @@ enum HhiRiskLevel {
 }
 
 class HhiResult {
-  final double score; // Skala 0 - 10.000
+  final double score;
   final HhiRiskLevel riskLevel;
   final String label;
   final String dominantProduct;
@@ -89,8 +89,7 @@ class ExecutiveAnalyticsHelper {
     if (hhiSum < 1500) {
       riskLevel = HhiRiskLevel.healthy;
       label = 'Terdiversifikasi Sehat';
-      description =
-          'Penyebaran portofolio seimbang antar produk, risiko konsentrasi rendah.';
+      description = 'Penyebaran portofolio seimbang antar produk, risiko konsentrasi rendah.';
     } else if (hhiSum <= 2500) {
       riskLevel = HhiRiskLevel.moderate;
       label = 'Konsentrasi Sedang';
@@ -119,7 +118,10 @@ class ExecutiveAnalyticsHelper {
     for (final r in data.records) {
       if (r.idKantor <= 0) continue;
       double rowTotal = 0.0;
-      final monthly = branchMonthly[r.idKantor] ??= List<double>.filled(12, 0.0);
+      final monthly = branchMonthly[r.idKantor] ??= List<double>.filled(
+        12,
+        0.0,
+      );
       for (int i = 0; i < 12 && i < r.bulanan.length; i++) {
         final val = r.bulanan[i];
         rowTotal += val;
@@ -151,8 +153,7 @@ class ExecutiveAnalyticsHelper {
         topBranch = item;
       }
       return item;
-    }).toList()
-      ..sort((a, b) => a.idKantor.compareTo(b.idKantor));
+    }).toList()..sort((a, b) => a.idKantor.compareTo(b.idKantor));
 
     // 3. Hitung Rata-Rata Seluruh Bank (Benchmark Average)
     final branchCount = branchList.isNotEmpty ? branchList.length : 1;

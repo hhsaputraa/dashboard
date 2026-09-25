@@ -26,6 +26,9 @@ class FcmService {
   final RxBool isLoading = false.obs;
   final RxString statusMessage = 'Belum terhubung'.obs;
 
+  /// Guard flag untuk mencegah duplikasi StreamSubscription saat init() dipanggil ulang
+  bool _listenersConfigured = false;
+
   Future<void> init({bool isManualRetry = false}) async {
     isLoading.value = true;
     statusMessage.value = 'Menghubungkan ke FCM & APNs...';
@@ -138,6 +141,11 @@ class FcmService {
   }
 
   void _setupListeners() {
+    // Pastikan listener hanya didaftarkan sekali sepanjang siklus hidup aplikasi
+    // untuk mencegah kebocoran memori atau eksekusi duplikat saat retryRegistration().
+    if (_listenersConfigured) return;
+    _listenersConfigured = true;
+
     // Listener jika token diperbarui oleh Firebase
     _fcm.onTokenRefresh.listen((newToken) {
       developer.log('FCM Token Refresh: $newToken', name: 'FCM');
@@ -149,6 +157,7 @@ class FcmService {
         'Notifikasi Foreground: ${message.notification?.title} - ${message.notification?.body}',
         name: 'FCM',
       );
+      _showForegroundNotification(message);
     });
 
     // Tangani saat notifikasi DIKLIK oleh user (Aplikasi di background)
@@ -170,5 +179,27 @@ class FcmService {
     }).catchError((e) {
       developer.log('Gagal memuat initialMessage: $e', name: 'FCM');
     });
+  }
+
+  /// Menampilkan in-app banner notifikasi saat aplikasi sedang aktif di layar (Foreground)
+  void _showForegroundNotification(RemoteMessage message) {
+    final title = message.notification?.title ?? message.data['title']?.toString() ?? 'Pemberitahuan';
+    final body = message.notification?.body ?? message.data['body']?.toString() ?? '';
+
+    if (title.isEmpty && body.isEmpty) return;
+
+    Get.snackbar(
+      title,
+      body,
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: const Color(0xFF0F172A).withValues(alpha: 0.95),
+      colorText: Colors.white,
+      icon: const Icon(Icons.notifications_active_rounded, color: Color(0xFF38BDF8), size: 22),
+      duration: const Duration(seconds: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      borderRadius: 12,
+      isDismissible: true,
+      dismissDirection: DismissDirection.horizontal,
+    );
   }
 }
