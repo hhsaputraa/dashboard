@@ -1,16 +1,16 @@
-# Graph Report - dashboard  (2026-09-25)
+# Graph Report - dashboard  (2026-09-23)
 
 ## Corpus Check
-- 176 files · ~256,255 words
+- 176 files · ~255,589 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1703 nodes · 2350 edges · 163 communities (111 shown, 52 thin omitted)
+- 1698 nodes · 2336 edges · 156 communities (107 shown, 49 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 29 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c2644657`
+- Built from commit: `8a7220c1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -28,27 +28,27 @@
 - report_controller.dart
 - home_controller.dart
 - package:get/get.dart
-- native_push_service.dart
+- fcm_service.dart
 - 🔐 Security Setup Guide
 - Compiling C Code into Code Assets with Native Assets Hooks
 - Internationalizing Flutter Applications
-- ios/Runner/AppDelegate.swift
+- FlutterMacOS
 - executive_analytics_helper.dart
 - product_breakdown_card.dart
 - Dart Primary Constructors & New Constructor Syntax Skill
 - server_config_dialog.dart
 - profile_controller.dart
 - Generating FFI Bindings using package:ffigen
-- graphify reference: commit hook and native CLAUDE.md integration
+- static final
 - app_theme.dart
 - login_controller.dart
 - product_breakdown_benchmark_test.dart
 - api_client.dart
 - item_picker_bottom_sheet.dart
-- sync_status_indicator.dart
+- dashboard_data.dart
 - quarterly_growth_chart.dart
 - main.dart
-- dashboard_service.dart
+- AuthService
 - splash_screen.dart
 - revenue_controller.dart
 - portfolio_donut_chart.dart
@@ -59,42 +59,42 @@
 - home_widgets_test.dart
 - Project Requirements & Specifications
 - revenue_screen.dart
-- List
+- monthly_trend_calculator.dart
 - kpi_stat_card.dart
 - Architecting Flutter Applications
-- hhi_concentration_card.dart
+- dashboard_service.dart
 - Managing Dart Dependencies
 - profile_screen.dart
-- /graphify
+- my_application.cc
 - State
-- app_pages.dart
+- user_model.dart
 - branch_bar_chart.dart
 - Tasklist Refactoring: Dekomposisi God Nodes & Bridges
-- main.cc
+- my_application.h
 - Implementing Dart and Flutter Test Coverage
 - app_constants.dart
-- main_navigation_screen.dart
-- auth_result.dart
+- app_pages.dart
+- System Architecture & Layering Design
 - Previewing Flutter Widgets
 - kpi_summary_section.dart
 - Resolving Flutter Layout Errors
 - Testing Dart and Flutter Applications
-- AppDelegate
+- .application
 - string
-- Implementing Dart Patterns
+- /graphify
 - url_security_validator.dart
-- home_binding.dart
+- PRD & Arsitektur Refactoring GetX (Looping Workflow)
 - Analyzing and Fixing Dart Code
-- StatelessWidget
+- Spec: Pendapatan Perbandingan Kantor Cabang Berdasarkan Jenis Pinjaman
 - quarterly_growth_calculator.dart
 - Tasklist Security Hardening: Paket 1 (Network & Platform Hardening)
 - ProductBreakdownCard Search, Bounded Height, and Scrollbar Implementation Plan
-- user_model.dart
+- Serializing JSON Manually in Flutter
 - aes_encryption.dart
-- report_screen.dart
+- List
 - dashboard_state_views.dart
-- package:dashboard/feature/home/model/dashboard_data.dart
-- package:flutter/material.dart
+- package:flutter_test/flutter_test.dart
+- package:dashboard/feature/auth/presentation/login_screen.dart
 - Tasks
 - Tasks
 - Tasks
@@ -104,7 +104,7 @@
 - static const List
 - belajar_screen.dart
 - MainActivity
-- profile_screen_test.dart
+- package:flutter/material.dart
 - Tasks
 - Splash Background (Background)
 - Splash Background (Background)
@@ -153,29 +153,22 @@
 - Visual Asset (Icon 512)
 - Visual Asset (Icon Maskable 192)
 - Visual Asset (Icon Maskable 512)
-- Implementing Routing and Deep Linking
+- graphify reference: incremental update and cluster-only
 - Tasks
-- login_screen.dart
-- static final
-- AppDelegate
 - GeneratedPluginRegistrant.swift
+- Project Rules & Architectural Guidelines
+- AppDelegate
+- RegisterGeneratedPlugins
 - Login Screen Revamp Plan (Anti-AI Slop & High Performance)
-- graphify reference: query, path, explain
-- performance_benchmark_test.dart
+- ios/Runner/AppDelegate.swift
+- manifest.json
 - description
-- PRD & Arsitektur Refactoring GetX (Looping Workflow)
+- firebase_options.dart
 - Tasklist Refactoring & Improvement Fase 2
-- System Architecture & Layering Design
-- Komponen & File yang Terlibat
+- package:intl/intl.dart
 - Step 2 - Menampilkan In-App Notification saat Foreground (Sedang Dikerjakan)
 - Spec: Refactoring Fitur Auth untuk Clean Architecture & Kemudahan Junior
-- navigation_controller.dart
 - Flutter
-- auth_binding.dart
-- .userNotificationCenter
-- graphify reference: add a URL and watch a folder
-- HomeBranchComparisonCard
-- BranchProductComparisonCard
 
 ## God Nodes (most connected - your core abstractions)
 1. `Migrating Dart Tests to Package Checks` - 35 edges
@@ -190,33 +183,33 @@
 10. `Implementing Dart and Flutter Test Coverage` - 19 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Implementing Routing and Deep Linking` --references--> `currentIndex`  [EXTRACTED]
-  .agents/skills/flutter-setup-declarative-routing/SKILL.md → lib/feature/home/controllers/navigation_controller.dart
+- `Spec: Pendapatan Perbandingan Kantor Cabang Berdasarkan Jenis Pinjaman` --references--> `InterestRecord`  [EXTRACTED]
+  plans/branch_product_comparison_spec.md → lib/feature/home/model/interest_record.dart
 - `Architecting Flutter Applications` --references--> `_apiClient`  [EXTRACTED]
   .agents/skills/flutter-apply-architecture-best-practices/SKILL.md → lib/feature/home/services/dashboard_service.dart
+- `/graphify` --references--> `dart_entrypoint_arguments`  [EXTRACTED]
+  .agents/skills/graphify/SKILL.md → linux/runner/my_application.cc
 - `Implementing Flutter Networking` --references--> `shared_preferences_foundation`  [EXTRACTED]
   .agents/skills/flutter-use-http-package/SKILL.md → macos/Flutter/GeneratedPluginRegistrant.swift
-- `Migrating Dart Tests to Package Checks` --references--> `quit_on_close_`  [EXTRACTED]
-  .agents/skills/dart-migrate-to-checks-package/SKILL.md → windows/runner/win32_window.h
 - `Agent Guidelines for Dashboard Project` --references--> `Flutter`  [EXTRACTED]
   AGENTS.md → ios/Runner/SceneDelegate.swift
 
 ## Import Cycles
 - None detected.
 
-## Communities (163 total, 52 thin omitted)
+## Communities (156 total, 49 thin omitted)
 
 ### Community 0 - "Create"
 Cohesion: 0.07
-Nodes (49): PluginRegistry, RECT, Size, unique_ptr, RegisterPlugins(), DartProject, HWND, LPARAM (+41 more)
+Nodes (47): PluginRegistry, RECT, Size, unique_ptr, RegisterPlugins(), DartProject, HWND, LPARAM (+39 more)
 
 ### Community 1 - "branch_product_comparison_helper.dart"
-Cohesion: 0.12
-Nodes (15): addMonthly, BranchInfo, branchLabel, BranchProductComparisonHelper, BranchProductSeries, buildSeriesMap, getAvailableBranches, getAvailableProducts (+7 more)
+Cohesion: 0.05
+Nodes (44): ../controllers/login_controller.dart, AuthBinding, dependencies, LoginController, build, _buildInputDecoration, _controller, _defaultBorder (+36 more)
 
 ### Community 2 - "branch_product_comparison_card.dart"
 Cohesion: 0.06
-Nodes (34): ComparisonViewMode, _availableBranches, _availableProducts, build, _buildBarChart, _buildLineBranchFocusChip, _buildLineChart, _buildModeButton (+26 more)
+Nodes (36): ComparisonViewMode, _availableBranches, _availableProducts, BranchProductComparisonCard, _BranchProductComparisonCardState, build, _buildBarChart, _buildLineBranchFocusChip (+28 more)
 
 ### Community 3 - "branch_product_comparison_controller.dart"
 Cohesion: 0.07
@@ -227,12 +220,12 @@ Cohesion: 0.05
 Nodes (37): _applyPreset, bankAverageMonthlyTrend, bankAverageTotal, _benchmarkColor, branches, BranchViewMode, build, _buildLegendBadge (+29 more)
 
 ### Community 5 - "analytics_helper.dart"
-Cohesion: 0.05
-Nodes (35): interest_record.dart, DashboardData, fromJson, month, monthlyAverage, monthlyTrend, MonthlyTrendItem, name (+27 more)
+Cohesion: 0.10
+Nodes (19): AnalyticsHelper, branches, BranchPerformance, computeAnalytics, idKantor, label, monthsLabel, percentage (+11 more)
 
 ### Community 6 - "Migrating Dart Tests to Package Checks"
 Cohesion: 0.07
-Nodes (28): 10. Dynamic Map / JSON Lookup Casting, 1. Dependency Setup, 1. Specific Error Matchers, 2. Identify and Plan Target Files, 2. The `anything` Matcher, 2. The `reason` Parameter is now `because`, 3. Asynchronous Custom Expectations, 3. Migrating a File (Incremental or Full) (+20 more)
+Nodes (29): 10. Dynamic Map / JSON Lookup Casting, 1. Dependency Setup, 1. Specific Error Matchers, 2. Identify and Plan Target Files, 2. The `anything` Matcher, 2. The `reason` Parameter is now `because`, 3. Asynchronous Custom Expectations, 3. Migrating a File (Incremental or Full) (+21 more)
 
 ### Community 7 - "all_loan_products_screen.dart"
 Cohesion: 0.14
@@ -240,15 +233,15 @@ Nodes (14): AllLoanProductsScreen, _AllLoanProductsScreenState, build, createSta
 
 ### Community 8 - "auth_service.dart"
 Cohesion: 0.08
-Nodes (24): ApiClient get, FlutterSecureStorage, _apiClient, fetchProfile, initSession, _instance, isAuthenticated, logout (+16 more)
+Nodes (25): ApiClient get, bool get, FlutterSecureStorage, _apiClient, fetchProfile, initSession, _instance, isAuthenticated (+17 more)
 
 ### Community 9 - "monthly_trend_chart.dart"
 Cohesion: 0.08
 Nodes (24): int?, _belowBarGradient, build, _calculationResult, _cardDecoration, createState, currencyFormat, didUpdateWidget (+16 more)
 
 ### Community 10 - "report_controller.dart"
-Cohesion: 0.10
-Nodes (19): actionGuidance, color, defaultCategories, dpdRange, isLoading, isNpl, kol, KolCategory (+11 more)
+Cohesion: 0.05
+Nodes (36): 1. Scaffold the Application, 2. Configure the Router, Contents, Core Concepts, Implementing Routing and Deep Linking, Examples, If configuring for Android:, If configuring for iOS: (+28 more)
 
 ### Community 11 - "home_controller.dart"
 Cohesion: 0.07
@@ -258,9 +251,9 @@ Nodes (26): activeTrend, availableOffices, _calculateActiveTrend, changeKantor, 
 Cohesion: 0.22
 Nodes (7): package:dashboard/feature/auth/controllers/login_controller.dart, package:dashboard/feature/report/controllers/report_controller.dart, package:dashboard/feature/report/presentation/report_screen.dart, package:get/get.dart, main, main, main
 
-### Community 13 - "native_push_service.dart"
-Cohesion: 0.09
-Nodes (22): bool get, dart:developer, feature/auth/services/auth_service.dart, dependencies, activeToken, _channel, deviceTokenRx, errorRx (+14 more)
+### Community 13 - "fcm_service.dart"
+Cohesion: 0.10
+Nodes (19): @pragma, dart:developer, FirebaseMessaging, apnsErrorRx, apnsTokenRx, currentToken, _fcm, FcmService (+11 more)
 
 ### Community 14 - "🔐 Security Setup Guide"
 Cohesion: 0.08
@@ -274,25 +267,25 @@ Nodes (20): 1. Local Execution Sandbox, 2. Verify Target Outputs, 3. Verify Tree
 Cohesion: 0.10
 Nodes (19): 1. Add Dependencies, 1. Define ARB Files, 2. Enable Code Generation, 2. Generate Localization Classes, 3. Consume Localized Strings, 3. Create Configuration File, 4. Configure the App Entry Point, Advanced Formatting (+11 more)
 
-### Community 17 - "ios/Runner/AppDelegate.swift"
-Cohesion: 0.15
-Nodes (8): FlutterSceneDelegate, SceneDelegate, RunnerTests, RunnerTests, UIKit, UserNotifications, XCTest, XCTestCase
+### Community 17 - "FlutterMacOS"
+Cohesion: 0.21
+Nodes (6): Cocoa, FlutterMacOS, RunnerTests, RunnerTests, XCTest, XCTestCase
 
 ### Community 18 - "executive_analytics_helper.dart"
 Cohesion: 0.11
 Nodes (18): bankAverageMonthlyTrend, bankAverageTotal, branches, description, dominantPercentage, dominantProduct, ExecutiveAnalyticsHelper, ExecutiveAnalyticsResult (+10 more)
 
 ### Community 19 - "product_breakdown_card.dart"
-Cohesion: 0.06
-Nodes (31): backgroundColor, breakdown, build, _buildListContainer, _cachedLowerNames, _cachedSource, _cardDecoration, _cardHeaderStyle (+23 more)
+Cohesion: 0.07
+Nodes (29): backgroundColor, breakdown, build, _buildListContainer, _cachedLowerNames, _cachedSource, _cardDecoration, _cardHeaderStyle (+21 more)
 
 ### Community 20 - "Dart Primary Constructors & New Constructor Syntax Skill"
-Cohesion: 0.11
-Nodes (18): 1. Overview, 2.1 Basic Class Header Syntax, 2.3 Constant Primary Constructors, 2.4 Extension Types, 2.5 Empty Body Semicolon Shorthand (`;`), 2. Syntax Reference, 3.1 Primary Initializer Scope, 3.2 Late Instance Variables Restriction (+10 more)
+Cohesion: 0.05
+Nodes (44): Algebraic Data Types (Sealed Classes), Contents, Core Pattern Implementations, Implementing Dart Patterns, Examples, Feedback Loop: Exhaustiveness Checking, Guard Clauses and Logical-or, JSON Validation and Destructuring (+36 more)
 
 ### Community 21 - "server_config_dialog.dart"
 Cohesion: 0.12
-Nodes (15): _apiClient, build, createState, dispose, initState, _isTesting, _resetUrl, _saveUrl (+7 more)
+Nodes (17): _apiClient, build, createState, dispose, initState, _isTesting, _resetUrl, _saveUrl (+9 more)
 
 ### Community 22 - "profile_controller.dart"
 Cohesion: 0.11
@@ -302,61 +295,61 @@ Nodes (17): _authService, customUser, formatLastLogin, formattedLastLogin, getIn
 Cohesion: 0.06
 Nodes (30): 1. `FfiGenerator`, 2. `Headers`, 3. `Functions`, 4. `Output`, Concrete Example: Binding a C Library, Constraints, Contents, Generating FFI Bindings using package:ffigen (+22 more)
 
-### Community 24 - "graphify reference: commit hook and native CLAUDE.md integration"
-Cohesion: 0.50
-Nodes (4): graphify reference: commit hook and native CLAUDE.md integration, For git commit hook, For native CLAUDE.md integration, status
+### Community 24 - "static final"
+Cohesion: 0.11
+Nodes (20): Contents, Implementing Flutter Integration Tests, Examples, Execution and Profiling, Interactive Exploration via MCP, Project Setup and Dependencies, Test Authoring Guidelines, Workflow: End-to-End Integration Testing (+12 more)
 
 ### Community 25 - "app_theme.dart"
-Cohesion: 0.12
-Nodes (16): App Icon (App Icon), Branding Graphic (Bpr Emblem Red), Branding Graphic (Bpr Emblem White), Branding Graphic (Logo), accentColor, AppTheme, backgroundColor, secondaryColor (+8 more)
+Cohesion: 0.04
+Nodes (46): App Icon (App Icon), Branding Graphic (Bpr Emblem Red), Branding Graphic (Bpr Emblem White), Branding Graphic (Logo), DateFormat?, DateTime, build, dateFormat (+38 more)
 
 ### Community 26 - "login_controller.dart"
 Cohesion: 0.12
 Nodes (16): AuthService get, FormState, GlobalKey, _authService, clearError, errorMessage, formKey, isLoading (+8 more)
 
 ### Community 27 - "product_breakdown_benchmark_test.dart"
-Cohesion: 0.11
-Nodes (17): BorderRadius, backgroundColor, borderRadius, build, currencyFormat, filter, foregroundColor, height (+9 more)
+Cohesion: 0.05
+Nodes (40): Graphify, graphify, graphify reference: extra exports and benchmark, Step 6b - Wiki (only if --wiki flag), Step 7b - SVG export (only if --svg flag), Step 7d - MCP server (only if --mcp flag), graphify reference: query, path, explain, For /graphify explain (+32 more)
 
 ### Community 28 - "api_client.dart"
-Cohesion: 0.10
-Nodes (19): authHeaders, checkHealth, _cleanUrl, _customBaseUrl, delete, _httpClient, init, _instance (+11 more)
+Cohesion: 0.11
+Nodes (17): authHeaders, checkHealth, _cleanUrl, _customBaseUrl, _httpClient, init, _instance, post (+9 more)
 
 ### Community 29 - "item_picker_bottom_sheet.dart"
 Cohesion: 0.10
 Nodes (20): activeColor, applySuffix, build, createState, emptyMessage, _handleQuickSelect, initiallySelected, initState (+12 more)
 
-### Community 30 - "sync_status_indicator.dart"
+### Community 30 - "dashboard_data.dart"
 Cohesion: 0.12
-Nodes (15): DateFormat?, DateTime, build, dateFormat, defaultDateFormat, errorColor, errorMessage, errorText (+7 more)
+Nodes (16): interest_record.dart, DashboardData, fromJson, month, monthlyAverage, monthlyTrend, MonthlyTrendItem, name (+8 more)
 
 ### Community 31 - "quarterly_growth_chart.dart"
 Cohesion: 0.11
 Nodes (18): _baseRadiusMap, build, _buildQuarterCard, _buildSections, _chartColors, _computeRadiiAndTotal, createState, currencyFormat (+10 more)
 
 ### Community 32 - "main.dart"
-Cohesion: 0.18
-Nodes (10): core/bindings/initial_binding.dart, core/constants/app_constants.dart, core/network/api_client.dart, core/routes/app_pages.dart, core/services/native_push_service.dart, core/theme/app_theme.dart, BankDashboardApp, home (+2 more)
+Cohesion: 0.14
+Nodes (13): core/bindings/initial_binding.dart, core/constants/app_constants.dart, core/network/api_client.dart, core/routes/app_pages.dart, core/services/fcm_service.dart, core/theme/app_theme.dart, firebase_options.dart, home (+5 more)
 
-### Community 33 - "dashboard_service.dart"
-Cohesion: 0.13
-Nodes (15): dart:async, dart:io, GetxService, ApiClient, AuthService, _apiClient, _authService, DashboardService (+7 more)
+### Community 33 - "AuthService"
+Cohesion: 0.18
+Nodes (11): feature/auth/services/auth_service.dart, GetxService, dependencies, ApiClient, AuthService, ../network/api_client.dart, package:dashboard/core/bindings/initial_binding.dart, package:dashboard/core/network/api_client.dart (+3 more)
 
 ### Community 34 - "splash_screen.dart"
-Cohesion: 0.15
-Nodes (13): AnimationController, build, _checkSessionAndNavigate, _controller, createState, dispose, _fadeAnimation, initState (+5 more)
+Cohesion: 0.17
+Nodes (12): AnimationController, build, _checkSessionAndNavigate, _controller, createState, dispose, _fadeAnimation, initState (+4 more)
 
 ### Community 35 - "revenue_controller.dart"
 Cohesion: 0.13
 Nodes (14): analyticsResult, currencyFormat, dashboardService, dateTimeFormat, errorMessage, isLoading, lastFetched, loadData (+6 more)
 
 ### Community 36 - "portfolio_donut_chart.dart"
-Cohesion: 0.15
-Nodes (13): allProducts, breakdown, build, _chartColors, createState, currencyFormat, grandTotal, _navigateToAllProducts (+5 more)
+Cohesion: 0.14
+Nodes (14): allProducts, breakdown, build, _chartColors, createState, currencyFormat, grandTotal, _navigateToAllProducts (+6 more)
 
 ### Community 37 - "Building Dart CLI Applications"
-Cohesion: 0.06
-Nodes (34): Argument Parsing & Command Routing, Compilation & Distribution, Contents, Building Dart CLI Applications, Example: CommandRunner Implementation, Examples, Execution & Error Handling, Project Setup & Architecture (+26 more)
+Cohesion: 0.20
+Nodes (10): Argument Parsing & Command Routing, Compilation & Distribution, Contents, Building Dart CLI Applications, Example: CommandRunner Implementation, Examples, Execution & Error Handling, Project Setup & Architecture (+2 more)
 
 ### Community 38 - "kantor_filter_chips.dart"
 Cohesion: 0.13
@@ -367,8 +360,8 @@ Cohesion: 0.15
 Nodes (12): HomeController get, build, _buildDashboardContent, _buildStatusIndicator, _controller, package:dashboard/core/presentation/widgets/sync_status_indicator.dart, widgets/dashboard_state_views.dart, widgets/home_branch_comparison_card.dart (+4 more)
 
 ### Community 40 - "Writing Flutter Widget Tests"
-Cohesion: 0.22
-Nodes (9): Contents, Core Components, Writing Flutter Widget Tests, Examples, Interaction & State Management, Setup & Configuration, Task Progress, Workflow: Implementing a Widget Test (+1 more)
+Cohesion: 0.20
+Nodes (10): Contents, Core Components, Writing Flutter Widget Tests, Examples, Interaction & State Management, Setup & Configuration, Task Progress, Workflow: Implementing a Widget Test (+2 more)
 
 ### Community 41 - "home_widgets_test.dart"
 Cohesion: 0.14
@@ -379,52 +372,56 @@ Cohesion: 0.22
 Nodes (9): username, total, 1. Overview, 2.1 Authentication (`lib/auth`), 2.2 Dashboard & Overview, 2.3 AI Assistant & Chat, 2. Core Functional Requirements, 3. Non-Functional Requirements (+1 more)
 
 ### Community 43 - "revenue_screen.dart"
-Cohesion: 0.17
-Nodes (11): build, _buildAnalyticsContent, _buildStatusIndicator, _controller, isActive, RevenueController get, widgets/analytics_leaderboard_card.dart, widgets/branch_bar_chart.dart (+3 more)
+Cohesion: 0.15
+Nodes (12): build, _buildAnalyticsContent, _buildStatusIndicator, _controller, isActive, package:dashboard/core/presentation/server_config_dialog.dart, RevenueController get, widgets/analytics_leaderboard_card.dart (+4 more)
 
-### Community 44 - "List"
-Cohesion: 0.20
-Nodes (9): dashboard_data.dart, chartMaxY, compute, formatCompactValue, MonthlyTrendCalculationResult, spots, totalBunga, yInterval (+1 more)
+### Community 44 - "monthly_trend_calculator.dart"
+Cohesion: 0.22
+Nodes (8): dashboard_data.dart, chartMaxY, compute, formatCompactValue, MonthlyTrendCalculationResult, spots, totalBunga, yInterval
 
 ### Community 45 - "kpi_stat_card.dart"
-Cohesion: 0.18
-Nodes (10): IconData, build, _cardDecoration, icon, _iconBorderRadius, iconColor, title, _titleStyle (+2 more)
+Cohesion: 0.15
+Nodes (12): IconData, build, _cardDecoration, icon, _iconBorderRadius, iconColor, title, _titleStyle (+4 more)
 
 ### Community 46 - "Architecting Flutter Applications"
 Cohesion: 0.17
 Nodes (12): Architectural Layers, Contents, Data Layer, Data Layer: Service and Repository, Architecting Flutter Applications, Examples, Logic Layer (Domain - Optional), Project Structure (+4 more)
 
-### Community 47 - "hhi_concentration_card.dart"
-Cohesion: 0.13
-Nodes (15): HhiResult, build, createState, _healthyColor, hhi, HhiConcentrationCard, _HhiConcentrationCardState, _highRiskColor (+7 more)
+### Community 47 - "dashboard_service.dart"
+Cohesion: 0.22
+Nodes (7): dart:async, dart:io, _apiClient, _authService, DashboardService, package:http/http.dart, main
 
 ### Community 48 - "Managing Dart Dependencies"
 Cohesion: 0.20
 Nodes (10): Contents, Core Concepts, Managing Dart Dependencies, Examples, Surgical Lockfile Removal, Tightening Constraints, Version Constraints, Workflow: Auditing Dependencies (+2 more)
 
 ### Community 49 - "profile_screen.dart"
-Cohesion: 0.15
-Nodes (12): build, _buildEmptyState, _buildInfoRow, _buildNativePushCard, _buildProfileContent, _buildScaffold, controller, ProfileScreen (+4 more)
+Cohesion: 0.10
+Nodes (19): build, _buildEmptyState, _buildFcmTokenCard, _buildInfoRow, _buildProfileContent, _buildScaffold, controller, ProfileScreen (+11 more)
 
-### Community 50 - "/graphify"
-Cohesion: 0.05
-Nodes (44): graphify reference: incremental update and cluster-only, For --cluster-only, For --update (incremental re-extraction), /graphify, For /graphify add and --watch, For /graphify query, For --update and --cluster-only, Honesty Rules (+36 more)
+### Community 50 - "my_application.cc"
+Cohesion: 0.13
+Nodes (19): FlView, GApplication, gboolean, gchar, GObject, GtkApplication, first_frame_cb(), my_application_activate() (+11 more)
 
 ### Community 51 - "State"
 Cohesion: 0.27
-Nodes (10): ServerConfigDialog, _ServerConfigDialogState, ItemPickerBottomSheet, _ItemPickerBottomSheetState, MonthlyTrendChart, _MonthlyTrendChartState, BranchBarChart, _BranchBarChartState (+2 more)
+Nodes (10): ItemPickerBottomSheet, _ItemPickerBottomSheetState, HomeBranchComparisonCard, _HomeBranchComparisonCardState, MonthlyTrendChart, _MonthlyTrendChartState, ProductBreakdownCard, _ProductBreakdownCardState (+2 more)
 
-### Community 52 - "app_pages.dart"
-Cohesion: 0.15
-Nodes (12): graphify reference: transcribe video and audio, AppPages, initial, routes, package:dashboard/core/routes/app_routes.dart, package:dashboard/feature/auth/bindings/auth_binding.dart, package:dashboard/feature/auth/presentation/splash_screen.dart, package:dashboard/feature/home/bindings/home_binding.dart (+4 more)
+### Community 52 - "user_model.dart"
+Cohesion: 0.20
+Nodes (9): graphify reference: transcribe video and audio, initial, fromJson, fullName, id, isActive, isAdmin, lastLoginAt (+1 more)
 
 ### Community 53 - "branch_bar_chart.dart"
-Cohesion: 0.11
-Nodes (17): _branchGradients, build, _chartMaxY, _computeChartMaxY, createState, currencyFormat, didUpdateWidget, _formatCompactCurrency (+9 more)
+Cohesion: 0.15
+Nodes (13): BranchBarChart, _BranchBarChartState, _branchGradients, build, _chartMaxY, _computeChartMaxY, createState, currencyFormat (+5 more)
 
 ### Community 54 - "Tasklist Refactoring: Dekomposisi God Nodes & Bridges"
 Cohesion: 0.50
 Nodes (3): Daftar Tugas (Tasklist), Prinsip Kerja & Batasan Refactoring, Tasklist Refactoring: Dekomposisi God Nodes & Bridges
+
+### Community 55 - "my_application.h"
+Cohesion: 0.24
+Nodes (6): FlPluginRegistry, profile, Project-level configuration., fl_register_plugins(), main(), Project-level configuration.
 
 ### Community 56 - "Implementing Dart and Flutter Test Coverage"
 Cohesion: 0.15
@@ -434,21 +431,21 @@ Nodes (13): 1. Add Dependencies, 1. Run Tests with VM Service, 2. Collect Covera
 Cohesion: 0.17
 Nodes (11): aesKey, AppConstants, appTagline, baseUrlAndroidEmulator, baseUrlLocal, keyAuthToken, keyCustomBaseUrl, keyUserData (+3 more)
 
-### Community 58 - "main_navigation_screen.dart"
-Cohesion: 0.17
-Nodes (10): build, _controller, _destinations, MainNavigationScreen, NavigationController get, package:dashboard/feature/home/controllers/navigation_controller.dart, package:dashboard/feature/home/presentation/home_screen.dart, package:dashboard/feature/home/presentation/main_navigation_screen.dart (+2 more)
+### Community 58 - "app_pages.dart"
+Cohesion: 0.10
+Nodes (19): AppPages, routes, build, _controller, _destinations, MainNavigationScreen, NavigationController get, package:dashboard/core/routes/app_routes.dart (+11 more)
 
-### Community 59 - "auth_result.dart"
-Cohesion: 0.29
-Nodes (6): failure, isSuccess, message, success, user, user_model.dart
+### Community 59 - "System Architecture & Layering Design"
+Cohesion: 0.17
+Nodes (12): AuthResult, failure, isSuccess, message, success, user, UserModel, LoginScreen (+4 more)
 
 ### Community 60 - "Previewing Flutter Widgets"
 Cohesion: 0.20
 Nodes (10): Basic Preview, Contents, Creating a Widget Preview, Previewing Flutter Widgets, Examples, Handling Limitations, Interacting with Previews, MultiPreview Implementation (+2 more)
 
 ### Community 61 - "kpi_summary_section.dart"
-Cohesion: 0.18
-Nodes (10): kpi_stat_card.dart, DashboardSummary, _averageTextStyle, build, currencyFormat, _headerTitleStyle, _mainCardDecoration, _totalAmountStyle (+2 more)
+Cohesion: 0.20
+Nodes (9): kpi_stat_card.dart, DashboardSummary, _averageTextStyle, build, currencyFormat, _headerTitleStyle, KpiSummarySection, _mainCardDecoration (+1 more)
 
 ### Community 62 - "Resolving Flutter Layout Errors"
 Cohesion: 0.22
@@ -458,33 +455,33 @@ Nodes (9): Constraint Violation Diagnostics, Contents, Resolving Flutter Layout 
 Cohesion: 0.20
 Nodes (10): Contents, Testing Dart and Flutter Applications, Examples, Executing Tests, Mocking with Mockito, Standard Unit Test Suite, Structuring Test Files, Task Progress (+2 more)
 
-### Community 64 - "AppDelegate"
-Cohesion: 0.17
-Nodes (11): Any, Data, Error, FlutterImplicitEngineBridge, FlutterImplicitEngineDelegate, FlutterMethodChannel, AppDelegate, Bool (+3 more)
+### Community 64 - ".application"
+Cohesion: 0.20
+Nodes (8): Any, Data, Error, FlutterImplicitEngineBridge, FlutterImplicitEngineDelegate, AppDelegate, Bool, UIApplication
 
 ### Community 65 - "string"
-Cohesion: 0.25
+Cohesion: 0.24
 Nodes (9): _In_, _In_opt_, vector, wWinMain(), string, wchar_t, CreateAndAttachConsole(), GetCommandLineArguments() (+1 more)
 
-### Community 66 - "Implementing Dart Patterns"
-Cohesion: 0.14
-Nodes (15): Algebraic Data Types (Sealed Classes), Contents, Core Pattern Implementations, Implementing Dart Patterns, Examples, Feedback Loop: Exhaustiveness Checking, Guard Clauses and Logical-or, JSON Validation and Destructuring (+7 more)
+### Community 66 - "/graphify"
+Cohesion: 0.17
+Nodes (12): /graphify, For /graphify add and --watch, For /graphify query, For --update and --cluster-only, Honesty Rules, Interpreter guard for subcommands, Step 1 - Ensure graphify is installed, Step 2 - Detect files (+4 more)
 
 ### Community 67 - "url_security_validator.dart"
 Cohesion: 0.18
 Nodes (10): errorMessage, isLocalHost, isSecureHttps, isValid, localHosts, UrlSecurityValidationResult, UrlSecurityValidator, validate (+2 more)
 
-### Community 68 - "home_binding.dart"
-Cohesion: 0.11
-Nodes (19): Bindings, ../controllers/branch_product_comparison_controller.dart, ../controllers/home_controller.dart, ../controllers/navigation_controller.dart, ../controllers/profile_controller.dart, ../controllers/revenue_controller.dart, GetxController, InitialBinding (+11 more)
+### Community 68 - "PRD & Arsitektur Refactoring GetX (Looping Workflow)"
+Cohesion: 0.05
+Nodes (40): Bindings, ../controllers/branch_product_comparison_controller.dart, ../controllers/home_controller.dart, ../controllers/navigation_controller.dart, ../controllers/profile_controller.dart, ../controllers/report_controller.dart, ../controllers/revenue_controller.dart, GetxController (+32 more)
 
 ### Community 69 - "Analyzing and Fixing Dart Code"
 Cohesion: 0.22
 Nodes (9): Analysis Configuration, Comprehensive `analysis_options.yaml`, Contents, Diagnostic Suppression, Analyzing and Fixing Dart Code, Examples, Inline Diagnostic Suppression, Workflow: Applying Automated Fixes (+1 more)
 
-### Community 70 - "StatelessWidget"
-Cohesion: 0.15
-Nodes (15): _LoginFooter, _LoginHeader, HomeScreen, DashboardErrorView, KantorFilterChips, KpiStatCard, KpiSummarySection, _FastProgressBar (+7 more)
+### Community 70 - "Spec: Pendapatan Perbandingan Kantor Cabang Berdasarkan Jenis Pinjaman"
+Cohesion: 0.22
+Nodes (9): bulanan, fetchDashboardData, dashboardData, RevenueScreen, 1. Overview, 2. Requirements & User Flow, 3. Architecture & Layering, 4. Quality Gate (+1 more)
 
 ### Community 71 - "quarterly_growth_calculator.dart"
 Cohesion: 0.20
@@ -494,29 +491,29 @@ Nodes (9): baseRadiusMap, computeRadiiAndTotal, defaultTierRadii, fallbackRadius
 Cohesion: 0.50
 Nodes (3): 1. Sasaran & Lingkup Perubahan, 2. Daftar Tugas (Tasklist), Tasklist Security Hardening: Paket 1 (Network & Platform Hardening)
 
-### Community 74 - "user_model.dart"
-Cohesion: 0.09
-Nodes (23): Background Parsing (Large Payload), Contents, Core Guidelines, Serializing JSON Manually in Flutter, Examples, High-Fidelity Model Implementation, Synchronous Parsing (Small Payload), Workflow: Fetching and Parsing JSON (+15 more)
+### Community 74 - "Serializing JSON Manually in Flutter"
+Cohesion: 0.22
+Nodes (9): Background Parsing (Large Payload), Contents, Core Guidelines, Serializing JSON Manually in Flutter, Examples, High-Fidelity Model Implementation, Synchronous Parsing (Small Payload), Workflow: Fetching and Parsing JSON (+1 more)
 
 ### Community 75 - "aes_encryption.dart"
-Cohesion: 0.25
-Nodes (7): ../constants/app_constants.dart, dart:math, dart:typed_data, AesEncryption, decrypt, package:convert/convert.dart, package:encrypt/encrypt.dart
+Cohesion: 0.18
+Nodes (10): Agent Guidelines for Dashboard Project, Working with this Codebase, Client, ../constants/app_constants.dart, dart:math, dart:typed_data, AesEncryption, decrypt (+2 more)
 
-### Community 76 - "report_screen.dart"
-Cohesion: 0.17
-Nodes (11): ../controllers/report_controller.dart, dependencies, ReportController, build, _buildCardInfoRow, _buildFilterChips, _buildKolCard, _buildSummaryHeader (+3 more)
+### Community 76 - "List"
+Cohesion: 0.25
+Nodes (7): idKantor, idPinjaman, idTrxBunga, InterestRecord, jenisPinjaman, _monthKeys, List
 
 ### Community 77 - "dashboard_state_views.dart"
 Cohesion: 0.18
-Nodes (10): Color, build, _configButtonStyle, DashboardLoadingView, errorMessage, onRetry, _retryButtonStyle, package:dashboard/core/presentation/server_config_dialog.dart (+2 more)
+Nodes (10): Color, build, _configButtonStyle, DashboardLoadingView, errorMessage, onRetry, _retryButtonStyle, package:dashboard/core/theme/app_theme.dart (+2 more)
 
-### Community 78 - "package:dashboard/feature/home/model/dashboard_data.dart"
-Cohesion: 0.13
-Nodes (11): package:dashboard/feature/home/controllers/home_controller.dart, package:dashboard/feature/home/model/dashboard_data.dart, package:dashboard/feature/home/model/home_product_trend_helper.dart, package:dashboard/feature/home/model/interest_record.dart, package:dashboard/feature/home/model/monthly_trend_calculator.dart, package:dashboard/feature/revenue/controllers/branch_product_comparison_controller.dart, package:dashboard/feature/revenue/controllers/revenue_controller.dart, main (+3 more)
+### Community 78 - "package:flutter_test/flutter_test.dart"
+Cohesion: 0.12
+Nodes (14): package:dashboard/core/security/url_security_validator.dart, package:dashboard/feature/home/controllers/home_controller.dart, package:dashboard/feature/home/model/dashboard_data.dart, package:dashboard/feature/home/model/home_product_trend_helper.dart, package:dashboard/feature/home/model/interest_record.dart, package:dashboard/feature/home/model/monthly_trend_calculator.dart, package:dashboard/feature/revenue/controllers/branch_product_comparison_controller.dart, package:dashboard/feature/revenue/controllers/revenue_controller.dart (+6 more)
 
-### Community 79 - "package:flutter/material.dart"
-Cohesion: 0.16
-Nodes (10): package:dashboard/core/security/url_security_validator.dart, package:dashboard/feature/auth/presentation/login_screen.dart, package:dashboard/main.dart, package:flutter/material.dart, package:flutter_test/flutter_test.dart, createWidgetUnderTest, main, main (+2 more)
+### Community 79 - "package:dashboard/feature/auth/presentation/login_screen.dart"
+Cohesion: 0.29
+Nodes (5): package:dashboard/feature/auth/presentation/login_screen.dart, package:dashboard/main.dart, createWidgetUnderTest, main, main
 
 ### Community 80 - "Tasks"
 Cohesion: 0.29
@@ -550,69 +547,65 @@ Nodes (5): calculateActiveTrend, defaultMonthNames, HomeProductTrendHelper, ../m
 Cohesion: 0.33
 Nodes (6): BelajarScreen, _BelajarScreenState, build, createState, _nominalSaldo, _tampilkanSaldo
 
-### Community 89 - "profile_screen_test.dart"
-Cohesion: 0.15
-Nodes (11): package:dashboard/feature/auth/models/auth_result.dart, package:dashboard/feature/auth/models/user_model.dart, package:dashboard/feature/profile/controllers/profile_controller.dart, package:dashboard/feature/profile/presentation/profile_screen.dart, main, main, testAdminUser, testStandardUser (+3 more)
+### Community 89 - "package:flutter/material.dart"
+Cohesion: 0.22
+Nodes (7): package:dashboard/feature/auth/presentation/splash_screen.dart, package:dashboard/feature/profile/presentation/profile_screen.dart, package:flutter/material.dart, main, main, testStandardUser, testUser
 
 ### Community 90 - "Tasks"
 Cohesion: 0.29
 Nodes (6): Global Constraints, Task 1: Update `PortfolioDonutChart` Layout & Presentation, Task 2: Update Widget Tests, Task 3: Validation, Hot Reload, & Graphify Update, Tasks, Top 5 Portfolio Donut Chart Layout Refinement Plan
 
-### Community 140 - "Implementing Routing and Deep Linking"
-Cohesion: 0.17
-Nodes (12): 1. Scaffold the Application, 2. Configure the Router, Contents, Core Concepts, Implementing Routing and Deep Linking, Examples, If configuring for Android:, If configuring for iOS: (+4 more)
+### Community 140 - "graphify reference: incremental update and cluster-only"
+Cohesion: 0.29
+Nodes (7): graphify reference: incremental update and cluster-only, For --cluster-only, For --update (incremental re-extraction), summary, Index, display, child_content_
 
 ### Community 141 - "Tasks"
 Cohesion: 0.29
 Nodes (6): Global Constraints, Strict Banking In-Memory Session (Auto-Logout on App Close) Implementation Plan, Task 1: Update `AuthService` for In-Memory Session, Task 2: Update Tests for In-Memory Session & Splash Navigation, Task 3: Validation, Hot Reload, & Graphify Update, Tasks
 
-### Community 142 - "login_screen.dart"
-Cohesion: 0.17
-Nodes (11): build, _buildInputDecoration, _controller, _defaultBorder, _enabledBorder, _errorBorder, _focusedBorder, _focusedErrorBorder (+3 more)
+### Community 142 - "GeneratedPluginRegistrant.swift"
+Cohesion: 0.29
+Nodes (6): firebase_analytics, firebase_core, firebase_crashlytics, firebase_messaging, Foundation, shared_preferences_foundation
 
-### Community 143 - "static final"
-Cohesion: 0.18
-Nodes (11): Contents, Testing and Mocking Dart Applications, Examples, Feedback Loop: Test Failures, Generating Mocks, Implementing Unit Tests, Managing Dependencies, Structuring Code for Testability (+3 more)
+### Community 143 - "Project Rules & Architectural Guidelines"
+Cohesion: 0.29
+Nodes (7): @Deprecated, 1. Core Architectural Principles, 2. Spec-Driven Development Workflow, 3. Tooling & MCP Integration Rules, Project Rules & Architectural Guidelines, toJson, Widget?
 
 ### Community 144 - "AppDelegate"
 Cohesion: 0.47
 Nodes (4): FlutterAppDelegate, AppDelegate, Bool, NSApplication
 
-### Community 145 - "GeneratedPluginRegistrant.swift"
-Cohesion: 0.18
-Nodes (9): Cocoa, FlutterMacOS, FlutterViewController, Foundation, RegisterGeneratedPlugins(), FlutterPluginRegistry, MainFlutterWindow, NSWindow (+1 more)
+### Community 145 - "RegisterGeneratedPlugins"
+Cohesion: 0.33
+Nodes (5): FlutterPluginRegistry, FlutterViewController, RegisterGeneratedPlugins(), MainFlutterWindow, NSWindow
 
 ### Community 146 - "Login Screen Revamp Plan (Anti-AI Slop & High Performance)"
-Cohesion: 0.17
-Nodes (10): Hapus git lama dan build cache, appName, primaryColor, login, 1. Objectives, 2. Component Structure, 3. Design Engineering Spec, 4. Verification Plan (+2 more)
+Cohesion: 0.29
+Nodes (6): login, 1. Objectives, 2. Component Structure, 3. Design Engineering Spec, 4. Verification Plan, Login Screen Revamp Plan (Anti-AI Slop & High Performance)
 
-### Community 147 - "graphify reference: query, path, explain"
-Cohesion: 0.18
-Nodes (11): graphify reference: extra exports and benchmark, Step 6b - Wiki (only if --wiki flag), Step 7b - SVG export (only if --svg flag), Step 7d - MCP server (only if --mcp flag), graphify reference: query, path, explain, For /graphify explain, For /graphify path, Step 1 — Traversal (+3 more)
+### Community 147 - "ios/Runner/AppDelegate.swift"
+Cohesion: 0.40
+Nodes (3): FlutterSceneDelegate, SceneDelegate, UIKit
 
-### Community 148 - "performance_benchmark_test.dart"
-Cohesion: 0.20
-Nodes (9): package:dashboard/feature/revenue/model/branch_product_comparison_helper.dart, branchIds, main, mockRecords, oldBuildSeriesMap, productNames, recordId, selectedBranches (+1 more)
+### Community 148 - "manifest.json"
+Cohesion: 0.29
+Nodes (6): background_color, icons, name, orientation, short_name, start_url
 
 ### Community 149 - "description"
-Cohesion: 0.13
-Nodes (16): Graphify, graphify, Adaptive Layout using LayoutBuilder, Constraining Width on Large Screens, Contents, Device and Orientation Behaviors, Implementing Adaptive Layouts, Examples (+8 more)
+Cohesion: 0.25
+Nodes (8): Workflow: graphify, Hapus git lama dan build cache, appName, encrypt, primaryColor, The following line prevents the package from being accidentally published to, description, theme_color
 
-### Community 150 - "PRD & Arsitektur Refactoring GetX (Looping Workflow)"
-Cohesion: 0.20
-Nodes (10): 1. Executive Summary & Philosophy, 2.1 Arsitektur Saat Ini, 3. Master Task List (Fase & Task Rinci), PRD & Arsitektur Refactoring GetX (Looping Workflow), FASE 1: Foundation & Dependencies Setup, FASE 2: Core & Service Layer Refactor, FASE 3: Authentication Feature Refactor, FASE 4: Main Navigation & Shell Refactor (+2 more)
+### Community 150 - "firebase_options.dart"
+Cohesion: 0.25
+Nodes (7): android, DefaultFirebaseOptions, ios, web, package:firebase_core/firebase_core.dart, package:flutter/foundation.dart, static const FirebaseOptions
 
 ### Community 151 - "Tasklist Refactoring & Improvement Fase 2"
 Cohesion: 0.50
 Nodes (3): Daftar Tugas (Tasklist), Prinsip & Standar Kualitas, Tasklist Refactoring & Improvement Fase 2
 
-### Community 152 - "System Architecture & Layering Design"
-Cohesion: 0.22
-Nodes (9): Agent Guidelines for Dashboard Project, Working with this Codebase, Client, AuthResult, UserModel, LoginScreen, 1. Architectural Layers, 2. Layer Contracts & Dependency Rules (+1 more)
-
-### Community 153 - "Komponen & File yang Terlibat"
-Cohesion: 0.25
-Nodes (7): 1. Database (Oracle), 2. Backend (Go - `D:\app\ai\go-bank-api`), 3. Mobile Frontend (Flutter - `D:\app\ai\dashboard`), Arsitektur & Alur Kerja, Komponen & File yang Terlibat, Rencana Implementasi: Pendaftaran Device Token Otomatis & Seamless (Self-Hosted Push via Gorush, Bebas Firebase), Rincian Task List
+### Community 152 - "package:intl/intl.dart"
+Cohesion: 0.29
+Nodes (6): package:dashboard/feature/revenue/presentation/widgets/branch_product_comparison_card.dart, package:fl_chart/fl_chart.dart, package:intl/intl.dart, currencyFormat, main, testRecords
 
 ### Community 154 - "Step 2 - Menampilkan In-App Notification saat Foreground (Sedang Dikerjakan)"
 Cohesion: 0.29
@@ -622,45 +615,29 @@ Nodes (6): Masalah:, Solusi:, Spec: Perbaikan FcmService, Step 1 - Mencegah Dupl
 Cohesion: 0.40
 Nodes (4): 1. Latar Belakang & Tujuan, 2. Rincian Perubahan, 3. Kriteria Validasi, Spec: Refactoring Fitur Auth untuk Clean Architecture & Kemudahan Junior
 
-### Community 156 - "navigation_controller.dart"
-Cohesion: 0.33
-Nodes (5): int get, changePage, currentIndex, selectedIndex, RxInt
-
 ### Community 157 - "Flutter"
-Cohesion: 0.14
-Nodes (26): This file configures the analyzer, which statically analyzes Dart code to, Dokumentasi Command, FlPluginRegistry, Flutter, flutter_secure_storage_macos, Build Apps, Launch Screen Assets, profile (+18 more)
-
-### Community 158 - "auth_binding.dart"
-Cohesion: 0.40
-Nodes (4): ../controllers/login_controller.dart, AuthBinding, dependencies, LoginController
-
-### Community 159 - ".userNotificationCenter"
-Cohesion: 0.40
-Nodes (4): UNNotification, UNNotificationPresentationOptions, UNUserNotificationCenter, Void
-
-### Community 160 - "graphify reference: add a URL and watch a folder"
-Cohesion: 0.67
-Nodes (3): graphify reference: add a URL and watch a folder, For /graphify add, For --watch
+Cohesion: 0.11
+Nodes (26): Contents, Testing and Mocking Dart Applications, Examples, Feedback Loop: Test Failures, Generating Mocks, Implementing Unit Tests, Managing Dependencies, Structuring Code for Testability (+18 more)
 
 ## Knowledge Gaps
-- **1057 isolated node(s):** `UserNotifications`, `dependencies`, `AppConstants`, `appTagline`, `baseUrlLocal` (+1052 more)
+- **1058 isolated node(s):** `dependencies`, `AppConstants`, `appTagline`, `baseUrlLocal`, `baseUrlAndroidEmulator` (+1053 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **52 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **49 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Migrating Dart Tests to Package Checks` connect `Migrating Dart Tests to Package Checks` to `Create`, `branch_product_comparison_helper.dart`, `string`, `static final`, `description`, `Generating FFI Bindings using package:ffigen`, `auth_result.dart`?**
-  _High betweenness centrality (0.041) - this node is a cross-community bridge._
-- **Why does `description` connect `description` to `Migrating Dart Tests to Package Checks`, `Implementing Routing and Deep Linking`, `static final`, `Compiling C Code into Code Assets with Native Assets Hooks`, `Internationalizing Flutter Applications`, `Login Screen Revamp Plan (Anti-AI Slop & High Performance)`, `Dart Primary Constructors & New Constructor Syntax Skill`, `Generating FFI Bindings using package:ffigen`, `Flutter`, `Building Dart CLI Applications`, `Managing Dart Dependencies`, `/graphify`, `Implementing Dart and Flutter Test Coverage`, `Previewing Flutter Widgets`, `Resolving Flutter Layout Errors`, `Testing Dart and Flutter Applications`, `Implementing Dart Patterns`, `Analyzing and Fixing Dart Code`, `user_model.dart`, `Resolving Dart Static Analysis Errors`?**
-  _High betweenness centrality (0.037) - this node is a cross-community bridge._
-- **Why does `Flutter` connect `Flutter` to `Analyzing and Fixing Dart Code`, `user_model.dart`, `Project Requirements & Specifications`, `ios/Runner/AppDelegate.swift`, `Login Screen Revamp Plan (Anti-AI Slop & High Performance)`, `/graphify`, `System Architecture & Layering Design`, `Implementing Dart and Flutter Test Coverage`, `Resolving Flutter Layout Errors`, `Testing Dart and Flutter Applications`?**
-  _High betweenness centrality (0.037) - this node is a cross-community bridge._
-- **What connects `UserNotifications`, `dependencies`, `AppConstants` to the rest of the system?**
-  _1057 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `description` connect `description` to `Migrating Dart Tests to Package Checks`, `report_controller.dart`, `graphify reference: incremental update and cluster-only`, `Compiling C Code into Code Assets with Native Assets Hooks`, `Internationalizing Flutter Applications`, `Dart Primary Constructors & New Constructor Syntax Skill`, `manifest.json`, `Generating FFI Bindings using package:ffigen`, `static final`, `product_breakdown_benchmark_test.dart`, `Flutter`, `Building Dart CLI Applications`, `Managing Dart Dependencies`, `Implementing Dart and Flutter Test Coverage`, `Previewing Flutter Widgets`, `Resolving Flutter Layout Errors`, `Testing Dart and Flutter Applications`, `Analyzing and Fixing Dart Code`, `Serializing JSON Manually in Flutter`, `Resolving Dart Static Analysis Errors`?**
+  _High betweenness centrality (0.047) - this node is a cross-community bridge._
+- **Why does `Migrating Dart Tests to Package Checks` connect `Migrating Dart Tests to Package Checks` to `branch_product_comparison_helper.dart`, `string`, `description`, `Generating FFI Bindings using package:ffigen`, `static final`, `System Architecture & Layering Design`?**
+  _High betweenness centrality (0.034) - this node is a cross-community bridge._
+- **Why does `Dart Primary Constructors & New Constructor Syntax Skill` connect `Dart Primary Constructors & New Constructor Syntax Skill` to `static final`, `string`, `description`, `Create`?**
+  _High betweenness centrality (0.032) - this node is a cross-community bridge._
+- **What connects `dependencies`, `AppConstants`, `appTagline` to the rest of the system?**
+  _1058 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Create` be split into smaller, more focused modules?**
-  _Cohesion score 0.06594071385359952 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07138047138047138 - nodes in this community are weakly interconnected._
 - **Should `branch_product_comparison_helper.dart` be split into smaller, more focused modules?**
-  _Cohesion score 0.125 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.04810360777058279 - nodes in this community are weakly interconnected._
 - **Should `branch_product_comparison_card.dart` be split into smaller, more focused modules?**
-  _Cohesion score 0.05714285714285714 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05555555555555555 - nodes in this community are weakly interconnected._
