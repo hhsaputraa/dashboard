@@ -39,7 +39,7 @@ import UserNotifications
 
   private func setupNativePushChannel(registry: FlutterPluginRegistry) {
     guard nativePushChannel == nil else { return }
-    let registrar = registry.registrar(forPlugin: "NativePushChannelPlugin")
+    guard let registrar = registry.registrar(forPlugin: "NativePushChannelPlugin") else { return }
     let channel = FlutterMethodChannel(
       name: "com.bprsupra.dashboard/native_push",
       binaryMessenger: registrar.messenger()
@@ -95,7 +95,7 @@ import UserNotifications
     UserDefaults.standard.removeObject(forKey: "flutter.apns_error")
     UserDefaults.standard.synchronize()
 
-    self.nativePushChannel?.invokeMethod("onDeviceToken", token)
+    self.nativePushChannel?.invokeMethod("onDeviceToken", arguments: token)
     super.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
   }
 
@@ -111,7 +111,7 @@ import UserNotifications
     self.cachedDeviceError = errorMsg
     UserDefaults.standard.set(errorMsg, forKey: "flutter.apns_error")
     UserDefaults.standard.synchronize()
-    self.nativePushChannel?.invokeMethod("onDeviceTokenError", errorMsg)
+    self.nativePushChannel?.invokeMethod("onDeviceTokenError", arguments: errorMsg)
   }
 
   override func userNotificationCenter(
